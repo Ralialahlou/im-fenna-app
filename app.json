@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "I'm Fenna",
+    "slug": "fenna-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#F4F0EE"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.imfenna.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F0EE"
+      },
+      "package": "com.imfenna.app"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-asset"
+    ]
+  }
+}
