@@ -1,37 +1,648 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>I'm Fenna</title>
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
-    <style id="expo-reset">
-      /* These styles make the body full-height */
-      html,
-      body {
-        height: 100%;
-      }
-      /* These styles disable body scrolling if you are using <ScrollView> */
-      body {
-        overflow: hidden;
-      }
-      /* These styles make the root element full-height */
-      #root {
-        display: flex;
-        height: 100%;
-        flex: 1;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>I'm Fenna — Premium Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ivory: #F4F0EE; --ivory-d: #EDE8E5;
+      --rose: #E2C4BA; --rose-l: rgba(226,196,186,.22);
+      --cinnamon: #7D463C; --maroon: #761415; --maroon-d: #5A0F10;
+      --gold: #BFA07A; --gold-l: rgba(191,160,122,.18);
+      --white: #FFFFFF; --text: #2D2020; --muted: #A08880; --border: #E2C4BA;
+      --serif: 'Abhaya Libre', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--ivory); color: var(--text); -webkit-font-smoothing: antialiased; }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
 
-  <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <!-- The root element for your Expo app. -->
-    <div id="root"></div>
-  <script src="/im-fenna-app/_expo/static/js/web/AppEntry-68f22e07c0f94abaf7b336bc9709e47a.js" defer></script>
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244,240,238,.96); border-bottom: 1px solid var(--rose-l);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: 60px; backdrop-filter: blur(12px);
+    }
+    .nav__logo { font-family: var(--serif); font-size: 18px; font-weight: 700; letter-spacing: 5px; }
+    .nav__actions { display: flex; align-items: center; gap: 18px; }
+    .nav__btn { position: relative; line-height: 0; padding: 6px; }
+    .nav__btn svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .cart-badge {
+      position: absolute; top: 0; right: 0;
+      width: 17px; height: 17px; border-radius: 50%;
+      background: var(--maroon); color: #fff;
+      font-size: 9px; font-weight: 700;
+      display: none; align-items: center; justify-content: center;
+    }
+
+    /* HERO */
+    .hero { position: relative; overflow: hidden; }
+    .hero__track { display: flex; transition: transform .55s cubic-bezier(.4,0,.2,1); }
+    .hero__slide { min-width: 100%; position: relative; height: min(90vw, 520px); }
+    .hero__slide img { height: 100%; object-fit: cover; }
+    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,10,10,.78) 0%, transparent 55%); }
+    .hero__content { position: absolute; bottom: 52px; left: 24px; right: 24px; }
+    .hero__eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; }
+    .hero__title { font-family: var(--serif); font-size: clamp(36px,9vw,52px); color: #fff; line-height: 1.05; margin-bottom: 10px; }
+    .hero__sub { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 22px; }
+    .hero__cta { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 11px; letter-spacing: 2.5px; color: #fff; text-transform: uppercase; }
+    .hero__cta-line { width: 36px; height: 1px; background: var(--gold); }
+    .hero__dots { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+    .hero__dot { width: 16px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); transition: all .3s; }
+    .hero__dot.on { width: 28px; background: var(--gold); }
+    .hero__arr {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; z-index: 2;
+    }
+    .hero__arr--l { left: 12px; } .hero__arr--r { right: 12px; }
+
+    /* PILLS */
+    .pills { display: flex; gap: 8px; overflow-x: auto; padding: 16px 20px 8px; scrollbar-width: none; }
+    .pills::-webkit-scrollbar { display: none; }
+    .pill { flex-shrink: 0; padding: 8px 18px; border-radius: 999px; border: 1px solid var(--border); background: var(--white); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; white-space: nowrap; }
+    .pill.on, .pill:hover { background: var(--maroon); border-color: var(--maroon); color: #fff; }
+
+    /* SECTION */
+    .sec { padding: 28px 0; }
+    .sec-hd { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 20px; margin-bottom: 16px; }
+    .sec-title { font-family: var(--serif); font-size: 26px; }
+    .sec-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .see-all { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--cinnamon); text-transform: uppercase; border-bottom: 1px solid var(--rose); }
+
+    /* SCROLL ROW */
+    .hscroll { display: flex; gap: 12px; overflow-x: auto; padding: 0 20px; scrollbar-width: none; }
+    .hscroll::-webkit-scrollbar { display: none; }
+
+    /* GRID */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 900px) { .grid { grid-template-columns: repeat(4,1fr); } }
+
+    /* CARD */
+    .card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(125,70,60,.07); cursor: pointer; transition: transform .2s, box-shadow .2s; flex-shrink: 0; }
+    .hscroll .card { width: 176px; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(125,70,60,.13); }
+    .card:active { transform: scale(.97); }
+    .card__imgw { position: relative; background: var(--ivory-d); }
+    .card__imgw img { height: 195px; object-fit: cover; }
+    .card__badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 4px; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 9px; font-weight: 700; letter-spacing: .8px; color: #fff; text-transform: uppercase; }
+    .badge-n { background: var(--cinnamon); } .badge-b { background: var(--gold); } .badge-s { background: var(--maroon); }
+    .card__w { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.88); display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+    .card__w:hover { transform: scale(1.15); }
+    .card__w svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .card__w.on svg { stroke: var(--maroon); fill: var(--maroon); }
+    .card__body { padding: 12px; }
+    .card__name { font-size: 13px; font-weight: 500; line-height: 1.35; margin-bottom: 5px; }
+    .card__stars { display: flex; gap: 2px; margin-bottom: 5px; }
+    .star { width: 11px; height: 11px; }
+    .card__prices { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .card__price { font-size: 15px; font-weight: 600; }
+    .card__orig { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+    .card__add { width: 100%; padding: 9px; border-radius: 999px; background: var(--maroon); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; transition: background .2s; }
+    .card__add:hover { background: var(--maroon-d); }
+
+    /* RANGES */
+    .range-c { flex-shrink: 0; width: min(72vw, 300px); height: 200px; border-radius: 18px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 5px 18px rgba(125,70,60,.11); transition: transform .2s; }
+    .range-c:hover { transform: translateY(-3px); }
+    .range-c img { height: 100%; object-fit: cover; }
+    .range-c__ov { position: absolute; inset: 0; }
+    .range-c__cnt { position: absolute; bottom: 16px; left: 16px; right: 16px; }
+    .range-c__title { font-family: var(--serif); font-size: 22px; color: #fff; }
+    .range-c__sub { font-size: 12px; color: rgba(255,255,255,.8); margin-top: 3px; }
+
+    /* BRAND STORY */
+    .story { background: var(--ivory-d); padding: 48px 24px; text-align: center; margin: 28px 0; }
+    .story__line { width: 44px; height: 1px; background: var(--gold); margin: 16px auto; }
+    .story__ey { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase; }
+    .story__title { font-family: var(--serif); font-size: clamp(24px,6vw,38px); line-height: 1.2; margin: 12px 0; }
+    .story__body { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 340px; margin: 0 auto; }
+
+    /* RITUAL */
+    .ritual { margin: 0 20px 28px; height: 220px; border-radius: 18px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 5px 18px rgba(125,70,60,.11); }
+    .ritual img { height: 100%; }
+    .ritual__ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(118,20,21,.88) 0%, transparent 60%); }
+    .ritual__cnt { position: absolute; bottom: 24px; left: 24px; right: 24px; }
+    .ritual__ey { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; }
+    .ritual__title { font-family: var(--serif); font-size: 26px; color: #fff; line-height: 1.1; margin-bottom: 12px; }
+    .ritual__cta { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+
+    /* SHIP BAR */
+    .ship-bar { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 0 0 28px; }
+    .ship-bar span { font-size: 13px; font-weight: 500; color: var(--cinnamon); }
+
+    /* SEARCH STRIP */
+    .search-strip { margin: 12px 20px 0; display: flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 0 16px; height: 44px; }
+    .search-strip svg { width: 16px; height: 16px; stroke: var(--muted); fill: none; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+    .search-strip input { flex: 1; border: none; outline: none; background: none; font-family: var(--sans); font-size: 14px; color: var(--text); }
+    .search-strip input::placeholder { color: var(--muted); }
+
+    /* BOTTOM NAV */
+    .bnav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--white); border-top: 1px solid var(--border); display: flex; height: 64px; z-index: 100; padding-bottom: env(safe-area-inset-bottom,0px); }
+    .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; }
+    .tab svg { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
+    .tab__lbl { font-size: 10px; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .tab.on svg { stroke: var(--maroon); } .tab.on .tab__lbl { color: var(--maroon); font-weight: 700; }
+
+    /* OVERLAY + DRAWER */
+    .ov { position: fixed; inset: 0; z-index: 200; background: rgba(15,10,10,.48); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .3s; }
+    .ov.on { opacity: 1; pointer-events: all; }
+    .drawer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%); width: 100%; max-width: 480px; background: var(--ivory); border-radius: 24px 24px 0 0; max-height: 92vh; overflow-y: auto; transition: transform .35s cubic-bezier(.4,0,.2,1); z-index: 201; }
+    .drawer.on { transform: translateX(-50%) translateY(0); }
+    .drawer__handle { width: 40px; height: 4px; border-radius: 2px; background: var(--border); margin: 14px auto 0; }
+    .drawer__x { position: absolute; top: 16px; right: 20px; width: 36px; height: 36px; border-radius: 50%; background: var(--ivory-d); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .drawer__x svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
+    .drawer__img { height: min(55vw, 280px); object-fit: cover; width: 100%; background: var(--ivory-d); }
+    .drawer__body { padding: 20px 20px 110px; }
+    .drawer__ey { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; }
+    .drawer__name { font-family: var(--serif); font-size: 26px; line-height: 1.15; margin-bottom: 6px; }
+    .drawer__stars { display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+    .drawer__rc { font-size: 12px; color: var(--muted); margin-left: 6px; }
+    .drawer__price { font-family: var(--serif); font-size: 30px; margin-bottom: 4px; }
+    .drawer__sz { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+    .drawer__lbl { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+    .shades { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .shade { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: border-color .2s; }
+    .shade.on { border-color: var(--cinnamon); }
+    .drawer__desc { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 20px; }
+    .ing { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .ing__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+    .ing__name { font-size: 14px; font-weight: 600; } .ing__benefit { font-size: 12px; color: var(--muted); }
+    .drawer__add { width: 100%; padding: 18px; border-radius: 999px; background: var(--maroon); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(191,160,122,.3); }
+    .drawer__add:hover { background: var(--maroon-d); }
+    .drawer__add svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; }
+
+    /* CART PANEL */
+    .cart-panel { position: fixed; inset: 0; z-index: 300; display: flex; flex-direction: column; background: var(--ivory); transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); }
+    .cart-panel.on { transform: translateX(0); }
+    .cart-panel__hd { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(226,196,186,.4); }
+    .cart-panel__title { font-family: var(--serif); font-size: 22px; letter-spacing: 3px; }
+    .cart-panel__body { flex: 1; overflow-y: auto; padding: 20px; }
+    .cart-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(226,196,186,.35); }
+    .cart-item img { width: 80px; height: 95px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: var(--ivory-d); }
+    .ci-info { flex: 1; }
+    .ci-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.3; }
+    .ci-price { font-size: 16px; font-weight: 600; }
+    .ci-rm { font-size: 10px; color: var(--muted); cursor: pointer; margin-top: 4px; display: inline-block; letter-spacing: .5px; }
+    .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; gap: 14px; text-align: center; }
+    .ce-icon { font-size: 52px; opacity: .25; }
+    .ce-title { font-family: var(--serif); font-size: 24px; }
+    .ce-sub { font-size: 14px; color: var(--muted); max-width: 220px; line-height: 1.6; }
+    .cart-panel__ft { padding: 16px 20px; border-top: 1px solid var(--border); background: var(--white); }
+    .cart-total { display: flex; justify-content: space-between; margin-bottom: 14px; }
+    .cart-total__lbl { font-family: var(--serif); font-size: 18px; }
+    .cart-total__val { font-family: var(--serif); font-size: 22px; }
+    .checkout-btn { width: 100%; padding: 18px; border-radius: 999px; background: var(--maroon); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: background .2s; box-shadow: 0 4px 12px rgba(191,160,122,.3); }
+    .checkout-btn:hover { background: var(--maroon-d); }
+    .free-ship { background: var(--ivory-d); padding: 10px 20px; text-align: center; font-size: 12px; color: var(--cinnamon); font-weight: 500; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--text); color: #fff; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-weight: 500; opacity: 0; transition: all .3s; pointer-events: none; z-index: 400; white-space: nowrap; }
+    .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* DESKTOP FRAME */
+    @media (min-width: 481px) {
+      body { background: #DDD8D5; }
+      .page { max-width: 480px; margin: 0 auto; box-shadow: 0 0 60px rgba(0,0,0,.12); min-height: 100vh; background: var(--ivory); position: relative; }
+      .bnav { max-width: 480px; }
+      .cart-panel { max-width: 480px; left: 50%; transform: translateX(-50%) translateX(100%); }
+      .cart-panel.on { transform: translateX(-50%); }
+      .drawer { max-width: 480px; }
+    }
+
+    .pb { height: 78px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav__btn" onclick="toggleSearch()" aria-label="Search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
+  <div class="nav__logo">I'M FENNA</div>
+  <div class="nav__actions">
+    <button class="nav__btn" onclick="openCart()" aria-label="Open bag">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- SEARCH -->
+<div id="searchStrip" style="display:none">
+  <div class="search-strip">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="searchInput" placeholder="Search I'm Fenna…" oninput="filterQ(this.value)" />
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__track" id="heroTrack">
+    <div class="hero__slide">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=80" alt="Be the Muse" loading="eager" />
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <div class="hero__eyebrow">Beauty is Art</div>
+        <h1 class="hero__title">Be the<br>Muse.</h1>
+        <p class="hero__sub">New arrivals in Moroccan Skincare</p>
+        <div class="hero__cta">Shop Now <span class="hero__cta-line"></span></div>
+      </div>
+    </div>
+    <div class="hero__slide">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=80" alt="K-Beauty" loading="lazy" />
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <div class="hero__eyebrow">K-Beauty Precision</div>
+        <h1 class="hero__title">Glass Skin<br>Awakened.</h1>
+        <p class="hero__sub">Advanced Korean skincare formulas</p>
+        <div class="hero__cta">Explore <span class="hero__cta-line"></span></div>
+      </div>
+    </div>
+    <div class="hero__slide">
+      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=80" alt="Makeup" loading="lazy" />
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <div class="hero__eyebrow">Confident Colour</div>
+        <h1 class="hero__title">Makeup<br>That Speaks.</h1>
+        <p class="hero__sub">The Velvet Eye Palette — Dusk Edition</p>
+        <div class="hero__cta">Discover <span class="hero__cta-line"></span></div>
+      </div>
+    </div>
+  </div>
+  <button class="hero__arr hero__arr--l" onclick="slide(-1)" aria-label="Previous">&#8592;</button>
+  <button class="hero__arr hero__arr--r" onclick="slide(1)" aria-label="Next">&#8594;</button>
+  <div class="hero__dots" id="heroDots">
+    <div class="hero__dot on"></div>
+    <div class="hero__dot"></div>
+    <div class="hero__dot"></div>
+  </div>
+</section>
+
+<!-- PILLS -->
+<div class="pills" id="pillsRow">
+  <button class="pill on" onclick="setF('all',this)">All</button>
+  <button class="pill" onclick="setF('skincare',this)">Skincare</button>
+  <button class="pill" onclick="setF('makeup',this)">Makeup</button>
+  <button class="pill" onclick="setF('moroccan',this)">Moroccan</button>
+  <button class="pill" onclick="setF('kbeauty',this)">K-Beauty</button>
+  <button class="pill" onclick="setF('sets',this)">Gift Sets</button>
+</div>
+
+<!-- NEW ARRIVALS -->
+<section class="sec" id="newSec">
+  <div class="sec-hd">
+    <div><div class="sec-title">New Arrivals</div><div class="sec-sub">Fresh from the lab</div></div>
+    <button class="see-all" onclick="setF('new',null)">SEE ALL</button>
+  </div>
+  <div class="hscroll" id="newRow"></div>
+</section>
+
+<!-- RANGES -->
+<section class="sec">
+  <div class="sec-hd"><div class="sec-title">Our Ranges</div></div>
+  <div class="hscroll">
+    <div class="range-c" onclick="setF('moroccan',null)">
+      <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80" alt="Moroccan" loading="lazy" />
+      <div class="range-c__ov" style="background:linear-gradient(to top,rgba(125,70,60,.85),transparent)"></div>
+      <div class="range-c__cnt"><div class="range-c__title">Moroccan Heritage</div><div class="range-c__sub">Rooted in ancient beauty rituals</div></div>
+    </div>
+    <div class="range-c" onclick="setF('kbeauty',null)">
+      <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80" alt="K-Beauty" loading="lazy" />
+      <div class="range-c__ov" style="background:linear-gradient(to top,rgba(74,85,104,.85),transparent)"></div>
+      <div class="range-c__cnt"><div class="range-c__title">K-Beauty Precision</div><div class="range-c__sub">Advanced Korean skincare science</div></div>
+    </div>
+    <div class="range-c" onclick="setF('makeup',null)">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Makeup" loading="lazy" />
+      <div class="range-c__ov" style="background:linear-gradient(to top,rgba(118,20,21,.85),transparent)"></div>
+      <div class="range-c__cnt"><div class="range-c__title">Confident Colour</div><div class="range-c__sub">Makeup that celebrates you</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<div class="story">
+  <div class="story__ey">Beauty is Art</div>
+  <div class="story__line"></div>
+  <h2 class="story__title">Rooted in Confidence,<br>Crafted with Care.</h2>
+  <p class="story__body">I'm Fenna is a premium beauty brand uniting skincare and make-up through clean formulation, unique ingredients and refined design.</p>
+  <div class="story__line"></div>
+</div>
+
+<!-- BESTSELLERS -->
+<section class="sec">
+  <div class="sec-hd"><div class="sec-title" id="gridTitle">Bestsellers</div></div>
+  <div class="grid" id="prodGrid"></div>
+</section>
+
+<!-- RITUAL -->
+<div class="ritual">
+  <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700&q=80" alt="Build your ritual" loading="lazy" />
+  <div class="ritual__ov"></div>
+  <div class="ritual__cnt">
+    <div class="ritual__ey">Build your ritual</div>
+    <div class="ritual__title">If Beauty Were<br>Your Power…</div>
+    <div class="ritual__cta">Explore Routines <span style="font-size:14px">→</span></div>
+  </div>
+</div>
+
+<!-- SHIP BAR -->
+<div class="ship-bar">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BFA07A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+  <span>Free delivery on orders over £80</span>
+</div>
+
+<div class="pb"></div>
+</div><!-- /page -->
+
+<!-- DRAWER OVERLAY -->
+<div class="ov" id="ov" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer__handle"></div>
+  <button class="drawer__x" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img class="drawer__img" id="dImg" src="" alt="" />
+  <div class="drawer__body">
+    <div class="drawer__ey" id="dRange"></div>
+    <div class="drawer__name" id="dName"></div>
+    <div class="drawer__stars" id="dStars"></div>
+    <div class="drawer__price" id="dPrice"></div>
+    <div class="drawer__sz" id="dSz"></div>
+    <div id="dShadesSec" style="display:none">
+      <div class="drawer__lbl">Shade: <strong id="dShadeName" style="color:var(--cinnamon)"></strong></div>
+      <div class="shades" id="dShadesRow"></div>
+    </div>
+    <div class="drawer__lbl">Description</div>
+    <p class="drawer__desc" id="dDesc"></p>
+    <div id="dIngs"></div>
+    <button class="drawer__add" onclick="addFromDrawer()">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      ADD TO BAG
+    </button>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-panel__hd">
+    <div class="cart-panel__title">MY BAG</div>
+    <button onclick="closeCart()" aria-label="Close bag">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="free-ship" id="shipMsg">Add £80.00 more for free delivery</div>
+  <div class="cart-panel__body" id="cartBody"></div>
+  <div class="cart-panel__ft">
+    <div class="cart-total">
+      <span class="cart-total__lbl">Total</span>
+      <span class="cart-total__val" id="cartTotal">£0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <div class="tab on" id="tab0" onclick="activateTab(0);scrollToTop()">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="tab__lbl">Home</span>
+  </div>
+  <div class="tab" id="tab1" onclick="activateTab(1);setF('all',null)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <span class="tab__lbl">Explore</span>
+  </div>
+  <div class="tab" id="tab2" onclick="activateTab(2);toggleSearch()">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span class="tab__lbl">Search</span>
+  </div>
+  <div class="tab" id="tab3" onclick="activateTab(3);openCart()">
+    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <span class="tab__lbl">Bag</span>
+  </div>
+  <div class="tab" id="tab4" onclick="activateTab(4);showToast('Sign in to access your account')">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="tab__lbl">Profile</span>
+  </div>
+</div>
+
+<script>
+/* DATA */
+const P = [
+  {id:1,name:'Instant Glow Serum',range:'Moroccan Heritage',cat:'skincare',price:68,r:4.8,rv:247,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80',sz:'30ml',desc:'Our hero serum combines pure Moroccan argan oil with brightening actives to deliver an instant luminous glow. Lightweight yet intensely nourishing.',ings:[{n:'Argan Oil',b:'Deep nourishment & radiance'},{n:'Vitamin C',b:'Brightens & evens skin tone'},{n:'Hyaluronic Acid',b:'Plumps & hydrates'}],shades:null},
+  {id:2,name:'Flawless Foundation',range:'Confident Colour',cat:'makeup',price:52,r:4.7,rv:189,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',sz:'30ml',desc:'A buildable, skin-like foundation infused with Moroccan rose water for breathable, comfortable wear all day.',ings:[{n:'Rose Water',b:'Soothes & hydrates'},{n:'SPF 20',b:'Daily UV protection'}],shades:[{n:'Porcelain',c:'#F8E8D8'},{n:'Nude Beige',c:'#EDD4B2'},{n:'Golden Sand',c:'#D4A878'},{n:'Warm Honey',c:'#C48B4A'},{n:'Deep Caramel',c:'#8B5E38'},{n:'Rich Espresso',c:'#5C3420'}]},
+  {id:3,name:'Moroccan Rose Face Oil',range:'Moroccan Heritage',cat:'moroccan',price:58,origPrice:72,r:4.9,rv:312,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80',sz:'30ml',desc:'A luxurious face oil rich in pure Moroccan rose extract. Silky elixir deeply nourishes and imparts a dewy, lit-from-within glow.',ings:[{n:'Rosa Damascena',b:'Antioxidant protection'},{n:'Prickly Pear Oil',b:'Anti-ageing & brightening'},{n:'Marula Oil',b:'Ultra-nourishing'}],shades:null},
+  {id:4,name:'Glass Skin Essence',range:'K-Beauty Precision',cat:'kbeauty',price:44,r:4.6,rv:156,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',sz:'150ml',desc:'Inspired by Korean glass skin rituals — 72-hour hydration with fermented ingredients and 10 molecular sizes of hyaluronic acid.',ings:[{n:'10HA Complex',b:'72-hour deep hydration'},{n:'Fermented Rice',b:'Brightens & refines'},{n:'Centella Asiatica',b:'Calms & repairs'}],shades:null},
+  {id:5,name:'Velvet Lip Colour',range:'Confident Colour',cat:'makeup',price:32,r:4.5,rv:203,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',sz:'3.5g',desc:'A richly pigmented velvet lip colour infused with Moroccan rose oil. Stays comfortable all day.',ings:[{n:'Moroccan Rose Oil',b:'Nourishes & conditions'},{n:'Vitamin E',b:'Protects & softens'}],shades:[{n:'If Bold',c:'#761415'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]},
+  {id:6,name:'Ghassoul Clay Mask',range:'Moroccan Heritage',cat:'moroccan',price:38,r:4.7,rv:178,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',sz:'100ml',desc:'Authentic Moroccan Ghassoul clay from the Atlas Mountains. Deeply purifies pores while maintaining the skin\'s natural moisture balance.',ings:[{n:'Ghassoul Clay',b:'Deep pore cleansing'},{n:'Argan Oil',b:'Restores moisture'},{n:'Moroccan Rose',b:'Soothes & tones'}],shades:null},
+  {id:7,name:'Velvet Eye Palette — Dusk',range:'Confident Colour',cat:'makeup',price:62,origPrice:78,r:4.8,rv:134,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',sz:'9 × 1.2g',desc:'Nine curated shades inspired by Moroccan sunsets. Velvet-soft mattes, golden shimmers and rich metallics.',ings:[],shades:null},
+  {id:8,name:'Vitamin C Brightening Serum',range:'K-Beauty Precision',cat:'kbeauty',price:56,r:4.6,rv:98,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&q=80',sz:'30ml',desc:'High-potency 20% Vitamin C serum with Korean niacinamide technology. Visibly brighter, more even skin in 4 weeks.',ings:[{n:'Vitamin C 20%',b:'Brightens & protects'},{n:'Niacinamide',b:'Evens skin tone'},{n:'Ferulic Acid',b:'Stabilises Vitamin C'}],shades:null},
+  {id:9,name:'Ritual Glow Gift Set',range:'Moroccan Heritage',cat:'sets',price:110,origPrice:140,r:5.0,rv:67,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',sz:'Set of 3',desc:'Our most beloved Moroccan skincare trio. Glow Serum, Rose Face Oil and Ghassoul Clay Mask in a signature gift box.',ings:[],shades:null},
+  {id:10,name:'Silk Setting Powder',range:'Confident Colour',cat:'makeup',price:36,r:4.4,rv:88,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=600&q=80',sz:'10g',desc:'An ultra-fine, weightless setting powder with a satin finish. Blurs pores and extends foundation wear all day.',ings:[{n:'Silk Powder',b:'Smooths & blurs'},{n:'Argan Oil',b:'Prevents drying'}],shades:[{n:'Translucent',c:'#F5E8DA'},{n:'Warm Peach',c:'#E8C9A0'}]},
+];
+
+/* STATE */
+let cart = [], wished = new Set(), curP = null, curShade = null;
+let hi = 0, hTimer;
+
+/* HERO */
+function slide(d){ hi=(hi+d+3)%3; applyHero(); }
+function applyHero(){
+  document.getElementById('heroTrack').style.transform=`translateX(-${hi*100}%)`;
+  document.querySelectorAll('.hero__dot').forEach((dot,i)=>dot.classList.toggle('on',i===hi));
+}
+function startHero(){ hTimer=setInterval(()=>slide(1),4500); }
+document.getElementById('heroTrack').addEventListener('touchstart',()=>clearInterval(hTimer),{passive:true});
+startHero();
+
+/* SEARCH */
+function toggleSearch(){
+  const s=document.getElementById('searchStrip');
+  const vis=s.style.display!=='none';
+  s.style.display=vis?'none':'block';
+  if(!vis) setTimeout(()=>document.getElementById('searchInput').focus(),60);
+  else filterQ('');
+}
+function filterQ(q){
+  const list=q?P.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.range.toLowerCase().includes(q.toLowerCase())):P;
+  renderGrid(list);
+  document.getElementById('gridTitle').textContent=q?`Results for "${q}"`:'All Products';
+  document.getElementById('prodGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* FILTER */
+function setF(f,btn){
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  document.getElementById('searchInput').value='';
+  const list=f==='all'?P:f==='new'?P.filter(p=>p.isNew):P.filter(p=>p.cat===f);
+  renderGrid(list);
+  document.getElementById('gridTitle').textContent=f==='all'?'All Products':f==='new'?'New Arrivals':f.charAt(0).toUpperCase()+f.slice(1);
+  document.getElementById('prodGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* STARS */
+const SVG_STAR='<svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="__" stroke="none"/></svg>';
+function stars(r){return Array.from({length:5},(_,i)=>SVG_STAR.replace('__',i<Math.floor(r)?'#BFA07A':'#DDD')).join('');}
+
+/* CARD */
+function cardHTML(p,scroll){
+  const disc=p.origPrice?Math.round((p.origPrice-p.price)/p.origPrice*100):0;
+  return `<div class="card" onclick="openDrawer(${p.id})" ${scroll?'style="width:176px"':''}>
+    <div class="card__imgw">
+      <img src="${p.img}" alt="${p.name}" loading="lazy" />
+      <div class="card__badges">
+        ${p.isNew?'<span class="badge badge-n">NEW</span>':''}
+        ${p.isBest&&!p.isNew?'<span class="badge badge-b">BESTSELLER</span>':''}
+        ${disc?`<span class="badge badge-s">-${disc}%</span>`:''}
+      </div>
+      <button class="card__w" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+    </div>
+    <div class="card__body">
+      <div class="card__name">${p.name}</div>
+      <div class="card__stars">${stars(p.r)}</div>
+      <div class="card__prices">
+        <span class="card__price">£${p.price}</span>
+        ${p.origPrice?`<span class="card__orig">£${p.origPrice}</span>`:''}
+      </div>
+      <button class="card__add" onclick="event.stopPropagation();quickAdd(${p.id})">ADD TO BAG</button>
+    </div>
+  </div>`;
+}
+function renderGrid(list){
+  document.getElementById('prodGrid').innerHTML=list.length
+    ?list.map(p=>cardHTML(p,false)).join('')
+    :'<p style="padding:40px 20px;color:var(--muted);font-size:14px;grid-column:1/-1;text-align:center">No products found.</p>';
+}
+function renderNew(){
+  document.getElementById('newRow').innerHTML=P.filter(p=>p.isNew).map(p=>cardHTML(p,true)).join('');
+}
+renderGrid(P);
+renderNew();
+
+/* WISHLIST */
+function toggleWish(id){
+  const btn=document.getElementById(`w${id}`);
+  if(wished.has(id)){wished.delete(id);btn.classList.remove('on');showToast('Removed from wishlist');}
+  else{wished.add(id);btn.classList.add('on');showToast('Added to wishlist ♥');}
+}
+
+/* DRAWER */
+function openDrawer(id){
+  const p=P.find(x=>x.id===id); if(!p) return;
+  curP=p; curShade=p.shades?p.shades[0]:null;
+  document.getElementById('dImg').src=p.img;
+  document.getElementById('dImg').alt=p.name;
+  document.getElementById('dRange').textContent=p.range;
+  document.getElementById('dName').textContent=p.name;
+  document.getElementById('dStars').innerHTML=stars(p.r)+`<span class="drawer__rc">(${p.rv} reviews)</span>`;
+  document.getElementById('dPrice').textContent=`£${p.price}`;
+  document.getElementById('dSz').textContent=p.sz;
+  document.getElementById('dDesc').textContent=p.desc;
+  document.getElementById('dIngs').innerHTML=p.ings.length
+    ?'<div class="drawer__lbl" style="margin-bottom:10px">Key Ingredients</div>'+p.ings.map(k=>`<div class="ing"><div class="ing__dot"></div><div><div class="ing__name">${k.n}</div><div class="ing__benefit">${k.b}</div></div></div>`).join('')
+    :'';
+  if(p.shades){
+    document.getElementById('dShadesSec').style.display='block';
+    document.getElementById('dShadeName').textContent=curShade.n;
+    document.getElementById('dShadesRow').innerHTML=p.shades.map((s,i)=>
+      `<div class="shade${i===0?' on':''}" style="background:${s.c}" title="${s.n}" onclick="pickShade(${i})" aria-label="${s.n}"></div>`).join('');
+  } else {
+    document.getElementById('dShadesSec').style.display='none';
+  }
+  document.getElementById('ov').classList.add('on');
+  document.getElementById('drawer').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function pickShade(i){
+  if(!curP||!curP.shades) return;
+  curShade=curP.shades[i];
+  document.getElementById('dShadeName').textContent=curShade.n;
+  document.querySelectorAll('.shade').forEach((s,j)=>s.classList.toggle('on',j===i));
+}
+function closeDrawer(){
+  document.getElementById('ov').classList.remove('on');
+  document.getElementById('drawer').classList.remove('on');
+  document.body.style.overflow='';
+}
+function addFromDrawer(){ if(curP){ addToCart(curP,curShade); closeDrawer(); } }
+
+/* CART */
+function quickAdd(id){ const p=P.find(x=>x.id===id); if(p) addToCart(p,null); }
+function addToCart(p,shade){
+  const key=shade?`${p.id}-${shade.n}`:`${p.id}`;
+  const ex=cart.find(i=>i.key===key);
+  if(ex) ex.qty++; else cart.push({key,p,shade,qty:1});
+  updateCartUI();
+  showToast(`${p.name.split(' ').slice(0,3).join(' ')} added to bag`);
+}
+function removeItem(key){ cart=cart.filter(i=>i.key!==key); updateCartUI(); }
+function updateCartUI(){
+  const total=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  const badge=document.getElementById('cartBadge');
+  badge.style.display=count>0?'flex':'none';
+  badge.textContent=count>9?'9+':count;
+  document.getElementById('cartTotal').textContent=`£${total.toFixed(2)}`;
+  const rem=80-total;
+  const sm=document.getElementById('shipMsg');
+  sm.textContent=total>=80?'You\'ve unlocked free delivery! 🎉':`Add £${Math.max(0,rem).toFixed(2)} more for free delivery`;
+  sm.style.color=total>=80?'#4A7C59':'var(--cinnamon)';
+  document.getElementById('cartBody').innerHTML=cart.length
+    ?cart.map(i=>`<div class="cart-item">
+        <img src="${i.p.img}" alt="${i.p.name}" />
+        <div class="ci-info">
+          <div class="ci-name">${i.p.name}</div>
+          ${i.shade?`<div style="font-size:12px;color:var(--gold);margin-bottom:4px">${i.shade.n}</div>`:''}
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">${i.p.sz} · Qty ${i.qty}</div>
+          <div class="ci-price">£${(i.p.price*i.qty).toFixed(2)}</div>
+          <span class="ci-rm" onclick="removeItem('${i.key}')">REMOVE</span>
+        </div>
+      </div>`).join('')
+    :`<div class="cart-empty">
+        <div class="ce-icon">🛍️</div>
+        <div class="ce-title">Your bag is empty</div>
+        <div class="ce-sub">Discover our premium beauty collection.</div>
+      </div>`;
+}
+function openCart(){ updateCartUI(); document.getElementById('cartPanel').classList.add('on'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('cartPanel').classList.remove('on'); document.body.style.overflow=''; }
+function checkout(){
+  if(!cart.length){ showToast('Your bag is empty'); return; }
+  cart=[]; updateCartUI(); closeCart(); showToast('Order placed! Thank you 🎉');
+}
+
+/* TOAST */
+let tTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('on');
+  clearTimeout(tTimer); tTimer=setTimeout(()=>t.classList.remove('on'),2400);
+}
+
+/* TABS */
+function activateTab(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===n));
+}
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+</script>
 </body>
 </html>
