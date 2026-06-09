@@ -1,0 +1,5 @@
+node_modules/
+dist/
+src/
+*.js.map
+babel.config.js
