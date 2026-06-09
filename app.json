@@ -22,6 +22,9 @@
     "plugins": [
       "expo-font",
       "expo-asset"
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/im-fenna-app"
+    }
   }
 }
