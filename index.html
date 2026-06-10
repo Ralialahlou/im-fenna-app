@@ -6,525 +6,828 @@
   <title>I'm Fenna — Premium Beauty</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Raleway:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ivory: #F4F0EE;
-      --ivory-d: #EDE8E5;
-      --rose: #E2C4BA;
-      --rose-l: rgba(226,196,186,.25);
-      --cinnamon: #7D463C;
-      --maroon: #761415;
-      --maroon-d: #5A0F10;
-      --gold: #BFA07A;
-      --white: #FFFFFF;
-      --text: #2D2020;
-      --muted: #A08880;
-      --border: #E0CEC7;
-      --serif: 'Abhaya Libre', Georgia, serif;
-      --sans: 'Raleway', system-ui, sans-serif;
-      --wrap: 1340px;
-      --px: clamp(16px, 4vw, 80px);
-    }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--sans); background: var(--ivory); color: var(--text); -webkit-font-smoothing: antialiased; }
-    img { display: block; width: 100%; object-fit: cover; }
-    a { text-decoration: none; color: inherit; }
-    button { cursor: pointer; border: none; background: none; font: inherit; }
+/* ─────────────────────────────────────────────────────────
+   DESIGN TOKENS — Luxury Beauty / Liquid Glass / Aurora UI
+───────────────────────────────────────────────────────── */
+:root {
+  --ivory:      #F5F0EC;
+  --ivory-2:    #EDE7E0;
+  --ivory-3:    #E3DAD0;
+  --rose:       #E8CBBE;
+  --rose-2:     #D4A898;
+  --cinnamon:   #7D4637;
+  --maroon:     #711313;
+  --maroon-2:   #590F0F;
+  --maroon-3:   #8B1A1A;
+  --gold:       #C4A97A;
+  --gold-2:     #A8905E;
+  --gold-l:     rgba(196,169,122,.18);
+  --text:       #1E1010;
+  --text-2:     #3D2B2B;
+  --muted:      #9B7E74;
+  --border:     rgba(196,169,122,.25);
+  --glass-bg:   rgba(245,240,236,.72);
+  --glass-dark: rgba(30,16,16,.65);
+  --serif:      'Cormorant Garamond', 'Georgia', serif;
+  --serif-alt:  'Cormorant', 'Georgia', serif;
+  --sans:       'Raleway', system-ui, sans-serif;
+  --ease-out:   cubic-bezier(.22,1,.36,1);
+  --ease-in-out:cubic-bezier(.4,0,.2,1);
+  --wrap:       1380px;
+  --gutter:     clamp(20px, 5vw, 88px);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--ivory);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; width: 100%; object-fit: cover; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
 
-    /* ── CONTAINER ── */
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px); }
+/* ─── NOISE TEXTURE OVERLAY (luxury grain) ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  opacity: .028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
 
-    /* ══════════════════════════════════════════════
-       NAV — desktop: 3-zone (links / logo / icons)
-       mobile:  hamburger / logo / icons
-    ══════════════════════════════════════════════ */
-    .nav-top {
-      background: var(--ivory);
-      border-bottom: 1px solid var(--rose-l);
-      position: sticky; top: 0; z-index: 200;
-      backdrop-filter: blur(14px);
-    }
-    .nav-inner {
-      max-width: var(--wrap); margin: 0 auto;
-      padding: 0 var(--px);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      height: 70px;
-    }
-    /* LEFT: nav links (desktop) / hamburger (mobile) */
-    .nav-left { display: flex; align-items: center; gap: 32px; }
-    .nav-link {
-      font-size: 12px; font-weight: 600; letter-spacing: 1.8px;
-      color: var(--text); text-transform: uppercase;
-      position: relative; padding-bottom: 2px;
-    }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
-      height: 1px; background: var(--maroon); transform: scaleX(0);
-      transition: transform .25s;
-    }
-    .nav-link:hover::after { transform: scaleX(1); }
-    .nav-link:hover { color: var(--maroon); }
-    /* CENTER: logo */
-    .nav-logo {
-      font-family: var(--serif); font-size: 22px; font-weight: 700;
-      letter-spacing: 6px; color: var(--text); text-align: center;
-      cursor: pointer; white-space: nowrap;
-    }
-    /* RIGHT: icons */
-    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-    .nav-icon { position: relative; padding: 6px; line-height: 0; }
-    .nav-icon svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-    .nav-icon:hover svg { stroke: var(--maroon); }
-    .cart-badge {
-      position: absolute; top: 1px; right: 1px;
-      width: 17px; height: 17px; border-radius: 50%;
-      background: var(--maroon); color: #fff;
-      font-size: 9px; font-weight: 700;
-      display: none; align-items: center; justify-content: center;
-    }
-    /* Secondary nav strip (categories) */
-    .nav-cats {
-      border-top: 1px solid var(--rose-l);
-      background: var(--ivory);
-    }
-    .nav-cats-inner {
-      max-width: var(--wrap); margin: 0 auto;
-      padding: 0 var(--px);
-      display: flex; align-items: center; gap: 0;
-      overflow-x: auto; scrollbar-width: none;
-    }
-    .nav-cats-inner::-webkit-scrollbar { display: none; }
-    .cat-link {
-      flex-shrink: 0;
-      padding: 12px 22px;
-      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-      color: var(--muted); text-transform: uppercase;
-      border-bottom: 2px solid transparent;
-      transition: all .2s; white-space: nowrap;
-    }
-    .cat-link:hover, .cat-link.on { color: var(--maroon); border-bottom-color: var(--maroon); }
-    /* Hamburger (mobile only) */
-    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
-    .hamburger span { width: 22px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .75s var(--ease-out), transform .75s var(--ease-out);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-l { opacity: 0; transform: translateX(-32px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal-r { opacity: 0; transform: translateX(32px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal-l.in, .reveal-r.in { opacity: 1; transform: translateX(0); }
+.delay-1 { transition-delay: .1s !important; }
+.delay-2 { transition-delay: .2s !important; }
+.delay-3 { transition-delay: .3s !important; }
+.delay-4 { transition-delay: .4s !important; }
 
-    /* ══════════════════════════════════════════════
-       HERO CAROUSEL — full width, tall on desktop
-    ══════════════════════════════════════════════ */
-    .hero { position: relative; overflow: hidden; }
-    .hero__track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
-    .hero__slide { min-width: 100%; position: relative; height: clamp(400px, 55vw, 760px); }
-    .hero__slide img { height: 100%; object-fit: cover; }
-    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,10,10,.75) 0%, rgba(15,10,10,.25) 50%, transparent 100%); }
-    .hero__content {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      left: clamp(28px, 8vw, 120px); max-width: 520px;
-    }
-    .hero__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
-    .hero__title { font-family: var(--serif); font-size: clamp(44px, 6.5vw, 88px); color: #fff; line-height: 1.0; margin-bottom: 16px; }
-    .hero__sub { font-size: clamp(13px, 1.2vw, 16px); color: rgba(255,255,255,.8); margin-bottom: 32px; line-height: 1.6; }
-    .hero__btns { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-block; padding: 15px 36px; border-radius: 2px;
-      background: var(--maroon); color: #fff;
-      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      transition: background .2s, transform .15s;
-    }
-    .btn-primary:hover { background: var(--maroon-d); transform: translateY(-1px); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: #fff; text-transform: uppercase;
-    }
-    .btn-ghost-line { width: 36px; height: 1px; background: var(--gold); }
-    .hero__dots { position: absolute; bottom: 28px; left: clamp(28px, 8vw, 120px); display: flex; gap: 8px; }
-    .hero__dot { width: 20px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); transition: all .3s; }
-    .hero__dot.on { width: 36px; background: var(--gold); }
-    .hero__arr {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 48px; height: 48px; border-radius: 50%;
-      background: rgba(255,255,255,.12); backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center;
-      color: #fff; font-size: 18px; z-index: 2; transition: background .2s;
-    }
-    .hero:hover .hero__arr { display: flex; }
-    .hero__arr:hover { background: rgba(255,255,255,.25); }
-    .hero__arr--l { left: 20px; } .hero__arr--r { right: 20px; }
+/* ════════════════════════════════════════════════════════
+   NAV — Liquid Glass sticky bar
+═══════════════════════════════════════════════════════ */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 400;
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s, box-shadow .3s;
+}
+.nav-wrap.scrolled {
+  background: rgba(245,240,236,.88);
+  box-shadow: 0 4px 40px rgba(113,19,19,.06);
+}
+.nav-inner {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 72px;
+}
+.nav-left { display: flex; align-items: center; gap: 36px; }
+.nav-link {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.2px;
+  color: var(--text-2); text-transform: uppercase;
+  position: relative; padding-bottom: 3px;
+  transition: color .2s;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 100%;
+  height: 1px; background: var(--gold);
+  transition: right .35s var(--ease-out);
+}
+.nav-link:hover { color: var(--maroon); }
+.nav-link:hover::after { right: 0; }
+.nav-logo {
+  font-family: var(--serif); font-size: 20px; font-weight: 400;
+  letter-spacing: 8px; color: var(--text);
+  text-align: center; cursor: pointer; white-space: nowrap;
+  text-transform: uppercase;
+}
+.nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.nav-icon {
+  position: relative; width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.nav-icon:hover { background: var(--gold-l); }
+.nav-icon svg { width: 19px; height: 19px; stroke: var(--text-2); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
+.nav-icon:hover svg { stroke: var(--maroon); }
+.cart-badge {
+  position: absolute; top: 6px; right: 6px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--maroon); color: #fff;
+  font-size: 9px; font-weight: 700;
+  display: none; align-items: center; justify-content: center;
+}
+/* Category sub-nav */
+.nav-cats {
+  border-top: 1px solid var(--border);
+  background: rgba(245,240,236,.55);
+  backdrop-filter: blur(12px);
+}
+.nav-cats-inner {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex; gap: 0;
+  overflow-x: auto; scrollbar-width: none;
+}
+.nav-cats-inner::-webkit-scrollbar { display: none; }
+.cat-btn {
+  flex-shrink: 0;
+  padding: 11px 20px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase;
+  border-bottom: 1.5px solid transparent;
+  transition: all .2s; white-space: nowrap; background: none; border-left: none; border-right: none; border-top: none;
+}
+.cat-btn:hover, .cat-btn.on { color: var(--maroon); border-bottom-color: var(--maroon); }
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+.hamburger span { width: 20px; height: 1.5px; background: var(--text); border-radius: 1px; }
 
-    /* ══════════════════════════════════════════════
-       USP STRIP
-    ══════════════════════════════════════════════ */
-    .usp-strip {
-      background: var(--text); color: var(--ivory);
-      display: flex; align-items: center; justify-content: center;
-      gap: clamp(24px, 5vw, 80px);
-      padding: 14px var(--px);
-      flex-wrap: wrap;
-    }
-    .usp-item { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; white-space: nowrap; }
-    .usp-item svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* ════════════════════════════════════════════════════════
+   HERO — Full-bleed, Aurora gradient, parallax depth
+═══════════════════════════════════════════════════════ */
+.hero {
+  position: relative; overflow: hidden;
+  height: clamp(460px, 60vw, 820px);
+}
+.hero__bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1E0E0E 0%, #3D1A1A 30%, #5A2020 55%, #2D1010 100%);
+}
+/* Aurora blobs */
+.hero__aurora {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.aurora-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); mix-blend-mode: screen;
+  animation: aurora-drift 12s ease-in-out infinite alternate;
+}
+.aurora-blob-1 { width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(196,169,122,.35) 0%, transparent 70%); top: -20%; left: -10%; animation-delay: 0s; }
+.aurora-blob-2 { width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(113,19,19,.4) 0%, transparent 70%); top: 20%; right: -15%; animation-delay: -4s; }
+.aurora-blob-3 { width: 35vw; height: 35vw; background: radial-gradient(circle, rgba(226,196,186,.2) 0%, transparent 70%); bottom: -10%; left: 30%; animation-delay: -8s; }
+@keyframes aurora-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(3%, 4%) scale(1.08); }
+}
+.hero__slides { display: flex; height: 100%; transition: transform .75s var(--ease-in-out); }
+.hero__slide { min-width: 100%; height: 100%; position: relative; }
+.hero__slide img { height: 100%; object-fit: cover; opacity: .42; transition: opacity .75s; }
+.hero__slide.active img { opacity: .48; }
+/* Gradient overlays */
+.hero__slide::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(20,8,8,.82) 0%, rgba(20,8,8,.38) 55%, transparent 100%);
+  z-index: 1;
+}
+.hero__slide::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,8,8,.6) 0%, transparent 50%);
+  z-index: 1;
+}
+.hero__content {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  left: var(--gutter); right: 50%;
+  z-index: 2; padding-right: 20px;
+}
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 4px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
+}
+.hero__eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+.hero__title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(52px, 7.5vw, 108px);
+  color: #fff; line-height: .95;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+}
+.hero__title em { font-style: italic; color: rgba(196,169,122,.9); }
+.hero__sub {
+  font-size: clamp(13px, 1.1vw, 15px); font-weight: 300;
+  color: rgba(255,255,255,.65); line-height: 1.75;
+  max-width: 380px; margin-bottom: 36px;
+}
+.hero__actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 15px 38px; background: var(--maroon);
+  color: #fff; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: all .3s var(--ease-out);
+  position: relative; overflow: hidden;
+}
+.btn-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(196,169,122,.2) 0%, transparent 60%);
+  opacity: 0; transition: opacity .3s;
+}
+.btn-cta:hover { background: transparent; border-color: rgba(255,255,255,.4); transform: translateY(-2px); }
+.btn-cta:hover::before { opacity: 1; }
+.btn-ghost-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px;
+  color: rgba(255,255,255,.7); text-transform: uppercase;
+  transition: color .2s;
+}
+.btn-ghost-cta:hover { color: var(--gold); }
+.btn-ghost-cta svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; transition: transform .3s; }
+.btn-ghost-cta:hover svg { transform: translateX(4px); }
+/* Hero dots */
+.hero__nav {
+  position: absolute; bottom: 32px; left: var(--gutter); z-index: 2;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero__dot {
+  width: 24px; height: 2px; border-radius: 1px;
+  background: rgba(255,255,255,.25); cursor: pointer;
+  transition: all .4s;
+}
+.hero__dot.on { width: 44px; background: var(--gold); }
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute; bottom: 34px; right: var(--gutter); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.35); font-size: 9px; letter-spacing: 2px;
+}
+.hero__scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, rgba(196,169,122,.7), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: .4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(.7); }
+}
+/* Prev/next arrows */
+.hero__arr {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(245,240,236,.1);
+  border: 1px solid rgba(196,169,122,.25);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.7); font-size: 16px;
+  opacity: 0; transition: all .3s;
+}
+.hero:hover .hero__arr { opacity: 1; }
+.hero__arr:hover { background: rgba(113,19,19,.5); border-color: var(--gold); color: var(--gold); }
+.hero__arr--l { left: 24px; } .hero__arr--r { right: 24px; }
 
-    /* ══════════════════════════════════════════════
-       SECTIONS
-    ══════════════════════════════════════════════ */
-    .sec { padding: clamp(36px, 5vw, 72px) 0; }
-    .sec-hd { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: clamp(20px, 2.5vw, 36px); }
-    .sec-title { font-family: var(--serif); font-size: clamp(26px, 3vw, 40px); }
-    .sec-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-    .see-all { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; color: var(--cinnamon); text-transform: uppercase; border-bottom: 1px solid var(--rose); padding-bottom: 2px; white-space: nowrap; flex-shrink: 0; }
-    .see-all:hover { color: var(--maroon); border-color: var(--maroon); }
+/* ════════════════════════════════════════════════════════
+   USP STRIP — premium ticker
+═══════════════════════════════════════════════════════ */
+.usp-strip {
+  background: var(--maroon);
+  overflow: hidden; position: relative;
+}
+.usp-strip::before, .usp-strip::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1;
+}
+.usp-strip::before { left: 0; background: linear-gradient(to right, var(--maroon), transparent); }
+.usp-strip::after { right: 0; background: linear-gradient(to left, var(--maroon), transparent); }
+.usp-ticker {
+  display: flex; width: max-content;
+  animation: ticker 28s linear infinite;
+  padding: 14px 0;
+}
+.usp-ticker:hover { animation-play-state: paused; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.usp-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 44px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  color: rgba(255,255,255,.85); text-transform: uppercase; white-space: nowrap;
+}
+.usp-item svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; flex-shrink: 0; }
+.usp-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(196,169,122,.5); }
 
-    /* ══════════════════════════════════════════════
-       PRODUCT GRID
-    ══════════════════════════════════════════════ */
-    .prod-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: clamp(12px, 1.5vw, 24px);
-    }
-    @media (min-width: 640px)  { .prod-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 900px)  { .prod-grid { grid-template-columns: repeat(4, 1fr); } }
-    @media (min-width: 1200px) { .prod-grid { grid-template-columns: repeat(5, 1fr); } }
+/* ════════════════════════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════════════════════ */
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.sec { padding: clamp(52px, 7vw, 100px) 0; }
+.sec-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 4px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+}
+.sec-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.sec-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 58px); font-weight: 400; line-height: 1.05; }
+.sec-hd { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: clamp(28px, 3.5vw, 52px); }
+.sec-hd-left { }
+.sec-link {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 2px;
+  color: var(--cinnamon); text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .3s, color .2s;
+}
+.sec-link:hover { color: var(--maroon); gap: 14px; }
+.sec-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* ── HORIZONTAL SCROLL (new arrivals, ranges) ── */
-    .hscroll-wrap { overflow-x: auto; scrollbar-width: none; padding: 0 var(--px); }
-    .hscroll-wrap::-webkit-scrollbar { display: none; }
-    .hscroll { display: flex; gap: clamp(10px, 1.5vw, 20px); }
-    /* On large screens, convert scroll to grid */
-    @media (min-width: 900px) {
-      .hscroll-wrap { overflow: visible; padding: 0; }
-      .hscroll.as-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      }
-    }
+/* ════════════════════════════════════════════════════════
+   PRODUCT CARDS — Glassmorphism + liquid hover
+═══════════════════════════════════════════════════════ */
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(10px, 1.5vw, 20px);
+}
+@media (min-width: 600px)  { .prod-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px)  { .prod-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1200px) { .prod-grid { grid-template-columns: repeat(5, 1fr); } }
 
-    /* ── CARD ── */
-    .card {
-      background: var(--white); border-radius: 4px;
-      overflow: hidden; cursor: pointer; flex-shrink: 0;
-      box-shadow: 0 2px 12px rgba(125,70,60,.06);
-      transition: transform .25s cubic-bezier(.4,0,.2,1), box-shadow .25s;
-    }
-    .hscroll .card { width: clamp(170px, 22vw, 240px); }
-    .hscroll.as-grid .card { width: auto; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(125,70,60,.13); }
-    .card:active { transform: scale(.98); }
-    .card__img { position: relative; background: var(--ivory-d); }
-    .card__img img { height: clamp(190px, 22vw, 280px); object-fit: cover; }
-    .card__badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 4px; }
-    .badge { display: inline-block; padding: 3px 9px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 1px; color: #fff; text-transform: uppercase; }
-    .badge-n { background: var(--cinnamon); }
-    .badge-b { background: var(--gold); }
-    .badge-s { background: var(--maroon); }
-    .card__w {
-      position: absolute; top: 10px; right: 10px;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,.9); display: flex; align-items: center; justify-content: center;
-      transition: transform .2s, background .2s;
-    }
-    .card__w:hover { transform: scale(1.15); background: #fff; }
-    .card__w svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .card__w.on svg { stroke: var(--maroon); fill: var(--maroon); }
-    .card__body { padding: clamp(12px, 1.2vw, 18px); }
-    .card__range { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
-    .card__name { font-size: clamp(13px, 1vw, 15px); font-weight: 500; line-height: 1.35; margin-bottom: 6px; }
-    .card__stars { display: flex; gap: 2px; margin-bottom: 6px; }
-    .star { width: 11px; height: 11px; }
-    .card__prices { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
-    .card__price { font-size: clamp(14px, 1.1vw, 17px); font-weight: 600; }
-    .card__orig { font-size: 12px; color: var(--muted); text-decoration: line-through; }
-    .card__add {
-      width: 100%; padding: clamp(9px, .8vw, 12px);
-      background: var(--maroon); color: #fff;
-      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-      border-radius: 2px; transition: background .2s;
-    }
-    .card__add:hover { background: var(--maroon-d); }
+/* Horizontal scroll row */
+.hrow-wrap { overflow-x: auto; scrollbar-width: none; padding: 0 var(--gutter) 12px; }
+.hrow-wrap::-webkit-scrollbar { display: none; }
+.hrow { display: flex; gap: clamp(10px, 1.5vw, 18px); }
+@media (min-width: 900px) {
+  .hrow-wrap { overflow: visible; padding: 0; }
+  .hrow.as-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+}
 
-    /* ══════════════════════════════════════════════
-       RANGE CARDS
-    ══════════════════════════════════════════════ */
-    .ranges-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(12px, 1.5vw, 24px);
-    }
-    @media (max-width: 640px) { .ranges-grid { grid-template-columns: 1fr; } }
-    .range-card {
-      position: relative; border-radius: 4px; overflow: hidden;
-      height: clamp(200px, 25vw, 380px); cursor: pointer;
-      box-shadow: 0 4px 20px rgba(125,70,60,.1);
-      transition: transform .25s;
-    }
-    .range-card:hover { transform: translateY(-4px); }
-    .range-card img { height: 100%; object-fit: cover; }
-    .range-card__ov { position: absolute; inset: 0; }
-    .range-card__cnt { position: absolute; bottom: clamp(16px, 3vw, 32px); left: clamp(16px, 3vw, 32px); right: 16px; }
-    .range-card__title { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 30px); color: #fff; margin-bottom: 4px; }
-    .range-card__sub { font-size: clamp(12px, 1vw, 14px); color: rgba(255,255,255,.8); }
-    .range-card__cta { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+.card {
+  background: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+}
+.hrow .card { width: clamp(168px, 22vw, 230px); }
+.hrow.as-grid .card { width: auto; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(113,19,19,.1), 0 4px 16px rgba(113,19,19,.07); }
+.card__img-wrap { position: relative; overflow: hidden; background: var(--ivory-2); }
+.card__img-wrap img { height: clamp(195px, 22vw, 290px); object-fit: cover; transition: transform .65s var(--ease-out); }
+.card:hover .card__img-wrap img { transform: scale(1.06); }
+/* Quick-add overlay on hover */
+.card__over {
+  position: absolute; inset: 0;
+  background: rgba(20,8,8,.42);
+  backdrop-filter: blur(2px);
+  display: flex; align-items: flex-end; padding: 20px;
+  opacity: 0; transition: opacity .35s;
+}
+.card:hover .card__over { opacity: 1; }
+.card__over-btn {
+  width: 100%; padding: 13px;
+  background: rgba(245,240,236,.95);
+  backdrop-filter: blur(10px);
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  color: var(--maroon); text-transform: uppercase;
+  transition: background .2s;
+}
+.card__over-btn:hover { background: var(--maroon); color: #fff; }
+.card__badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 4px; z-index: 2; }
+.badge {
+  display: inline-block; padding: 4px 10px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  color: #fff; text-transform: uppercase;
+}
+.badge-n { background: var(--cinnamon); }
+.badge-b { background: var(--gold); color: var(--text); }
+.badge-s { background: var(--maroon); }
+.card__wish {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .25s, background .2s;
+}
+.card__wish:hover { transform: scale(1.18); background: #fff; }
+.card__wish svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card__wish.on svg { stroke: var(--maroon); fill: var(--maroon); }
+.card__body { padding: clamp(12px, 1.2vw, 20px); }
+.card__range { font-size: 9.5px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
+.card__name { font-family: var(--serif); font-size: clamp(16px, 1.3vw, 19px); font-weight: 400; line-height: 1.25; margin-bottom: 7px; }
+.card__stars { display: flex; gap: 2px; margin-bottom: 8px; }
+.star { width: 11px; height: 11px; }
+.card__prices { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+.card__price { font-family: var(--serif); font-size: clamp(16px, 1.4vw, 20px); font-weight: 500; }
+.card__orig { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+.card__add {
+  width: 100%; padding: 11px;
+  border: 1px solid var(--border);
+  color: var(--maroon); background: transparent;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  transition: all .25s var(--ease-out);
+}
+.card__add:hover { background: var(--maroon); color: #fff; border-color: var(--maroon); }
 
-    /* ══════════════════════════════════════════════
-       EDITORIAL / SPLIT SECTIONS
-    ══════════════════════════════════════════════ */
-    .editorial {
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: clamp(280px, 35vw, 520px);
-    }
-    @media (max-width: 768px) { .editorial { grid-template-columns: 1fr; } }
-    .editorial__img img { height: 100%; min-height: 280px; }
-    .editorial__body {
-      background: var(--ivory-d);
-      display: flex; flex-direction: column; justify-content: center;
-      padding: clamp(32px, 6vw, 80px);
-    }
-    .editorial__eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
-    .editorial__title { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 52px); line-height: 1.1; margin-bottom: 18px; }
-    .editorial__body-text { font-size: clamp(13px, 1vw, 15px); color: var(--muted); line-height: 1.8; margin-bottom: 28px; max-width: 360px; }
-    .editorial--reverse { }
-    @media (min-width: 769px) { .editorial--reverse .editorial__img { order: 2; } }
+/* ════════════════════════════════════════════════════════
+   RANGES — Immersive editorial grid
+═══════════════════════════════════════════════════════ */
+.ranges-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 400px;
+  gap: clamp(10px, 1.5vw, 16px);
+}
+@media (max-width: 900px) { .ranges-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 300px; } }
+@media (max-width: 580px) { .ranges-grid { grid-template-columns: 1fr; grid-template-rows: auto; } }
+.range-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: transform .4s var(--ease-out);
+}
+.range-card:first-child { grid-row: span 1; }
+.range-card:hover { transform: scale(.99); }
+.range-card img { height: 100%; min-height: 280px; transition: transform .7s var(--ease-out); }
+.range-card:hover img { transform: scale(1.05); }
+.range-card__ov { position: absolute; inset: 0; transition: opacity .4s; }
+.range-card__cnt { position: absolute; bottom: 0; left: 0; right: 0; padding: clamp(20px, 3vw, 38px); }
+.range-card__eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+.range-card__title { font-family: var(--serif); font-size: clamp(22px, 2.5vw, 34px); color: #fff; font-weight: 400; margin-bottom: 6px; }
+.range-card__sub { font-size: 12px; color: rgba(255,255,255,.7); margin-bottom: 16px; }
+.range-card__link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase;
+  transform: translateY(8px); opacity: 0;
+  transition: all .35s var(--ease-out);
+}
+.range-card:hover .range-card__link { transform: translateY(0); opacity: 1; }
 
-    /* ══════════════════════════════════════════════
-       BRAND STORY (centred)
-    ══════════════════════════════════════════════ */
-    .story { background: var(--text); padding: clamp(52px, 8vw, 120px) var(--px); text-align: center; }
-    .story__line { width: 52px; height: 1px; background: var(--gold); margin: 20px auto; }
-    .story__ey { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
-    .story__title { font-family: var(--serif); font-size: clamp(30px, 5vw, 64px); color: var(--ivory); line-height: 1.1; }
-    .story__body { font-size: clamp(14px, 1.2vw, 17px); color: rgba(255,255,255,.6); line-height: 1.85; max-width: 540px; margin: 0 auto; }
+/* ════════════════════════════════════════════════════════
+   BRAND STORY — Dark editorial with gold accents
+═══════════════════════════════════════════════════════ */
+.story-section {
+  background: var(--text);
+  position: relative; overflow: hidden;
+  padding: clamp(72px, 10vw, 160px) var(--gutter);
+}
+.story-section::before {
+  content: '';
+  position: absolute; top: -30%; left: -20%;
+  width: 70vw; height: 70vw; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,169,122,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.story-inner { max-width: var(--wrap); margin: 0 auto; text-align: center; }
+.story-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 4.5px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 28px;
+}
+.story-eyebrow::before, .story-eyebrow::after { content: ''; width: 36px; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+.story-eyebrow::after { background: linear-gradient(to left, transparent, var(--gold)); }
+.story-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(38px, 6vw, 86px);
+  color: var(--ivory); line-height: 1.0;
+  margin-bottom: 28px; letter-spacing: -.5px;
+}
+.story-title em { font-style: italic; color: rgba(196,169,122,.85); }
+.story-body {
+  font-size: clamp(14px, 1.2vw, 17px); font-weight: 300;
+  color: rgba(245,240,236,.5); line-height: 1.9;
+  max-width: 560px; margin: 0 auto 44px;
+}
+.story-stats {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(28px, 6vw, 80px); margin-top: 52px;
+  flex-wrap: wrap;
+}
+.story-stat__num {
+  font-family: var(--serif); font-size: clamp(36px, 5vw, 60px); font-weight: 400;
+  color: var(--ivory); line-height: 1;
+}
+.story-stat__label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; margin-top: 6px; }
+.story-divider { width: 1px; height: 60px; background: rgba(196,169,122,.2); }
 
-    /* ══════════════════════════════════════════════
-       VALUES STRIP
-    ══════════════════════════════════════════════ */
-    .values { background: var(--ivory-d); padding: clamp(36px, 5vw, 72px) var(--px); }
-    .values__grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 48px); }
-    @media (max-width: 768px) { .values__grid { grid-template-columns: repeat(2, 1fr); } }
-    .value-item { text-align: center; }
-    .value-icon { width: 44px; height: 44px; margin: 0 auto 14px; }
-    .value-icon svg { width: 44px; height: 44px; stroke: var(--gold); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-    .value-title { font-family: var(--serif); font-size: clamp(16px, 1.5vw, 20px); margin-bottom: 8px; }
-    .value-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
+/* ════════════════════════════════════════════════════════
+   EDITORIAL SPLIT — magazine-style layouts
+═══════════════════════════════════════════════════════ */
+.editorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: clamp(400px, 45vw, 660px);
+}
+@media (max-width: 768px) { .editorial { grid-template-columns: 1fr; } }
+.editorial__img-wrap { position: relative; overflow: hidden; }
+.editorial__img-wrap img { height: 100%; min-height: 360px; transition: transform .8s var(--ease-out); }
+.editorial:hover .editorial__img-wrap img { transform: scale(1.03); }
+.editorial__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--ivory-2) 100%);
+  pointer-events: none;
+}
+.editorial--dark .editorial__overlay { background: linear-gradient(to left, transparent 60%, var(--text) 100%); }
+.editorial__body {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(36px, 6vw, 96px);
+  background: var(--ivory-2);
+}
+.editorial--dark .editorial__body { background: var(--text); }
+.editorial__eyebrow { font-size: 9.5px; font-weight: 700; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+.editorial__eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.editorial__title { font-family: var(--serif); font-weight: 300; font-size: clamp(32px, 3.5vw, 56px); line-height: 1.05; margin-bottom: 20px; }
+.editorial--dark .editorial__title { color: var(--ivory); }
+.editorial__body-text { font-size: clamp(13px, 1vw, 15px); font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 32px; max-width: 380px; }
+.editorial--dark .editorial__body-text { color: rgba(245,240,236,.5); }
+.editorial--flip .editorial__img-wrap { order: 2; }
+@media (max-width: 768px) { .editorial--flip .editorial__img-wrap { order: 0; } }
 
-    /* ══════════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════════ */
-    footer { background: var(--text); color: rgba(255,255,255,.65); padding: clamp(40px, 6vw, 80px) var(--px) 0; }
-    .footer-grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(20px, 3vw, 60px); padding-bottom: clamp(40px, 5vw, 60px); }
-    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
-    .footer-logo { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: 5px; color: var(--ivory); margin-bottom: 14px; }
-    .footer-tagline { font-size: 13px; line-height: 1.7; max-width: 260px; margin-bottom: 24px; }
-    .footer-social { display: flex; gap: 14px; }
-    .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; transition: border-color .2s; }
-    .footer-social a:hover { border-color: var(--gold); }
-    .footer-social svg { width: 15px; height: 15px; stroke: rgba(255,255,255,.7); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--ivory); text-transform: uppercase; margin-bottom: 16px; }
-    .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: 13px; color: rgba(255,255,255,.55); transition: color .2s; }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-bottom { max-width: var(--wrap); margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-    .footer-bottom p { font-size: 12px; }
+/* ════════════════════════════════════════════════════════
+   VALUES — dark cards with glow accents
+═══════════════════════════════════════════════════════ */
+.values-section { background: var(--ivory-2); padding: clamp(52px, 7vw, 96px) var(--gutter); }
+.values-grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 2vw, 24px); }
+@media (max-width: 768px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+.value-card {
+  background: var(--ivory); padding: clamp(24px, 3vw, 40px);
+  border: 1px solid var(--border);
+  transition: border-color .3s, box-shadow .3s;
+}
+.value-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(196,169,122,.12); }
+.value-icon { margin-bottom: 20px; }
+.value-icon svg { width: 32px; height: 32px; stroke: var(--gold); fill: none; stroke-width: 1.3; }
+.value-title { font-family: var(--serif); font-size: clamp(18px, 1.5vw, 22px); margin-bottom: 10px; font-weight: 400; }
+.value-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.75; }
 
-    /* ══════════════════════════════════════════════
-       MOBILE NAV (bottom)
-    ══════════════════════════════════════════════ */
-    .bnav {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: var(--white); border-top: 1px solid var(--border);
-      height: 62px; z-index: 200;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    .bnav-inner { display: flex; height: 100%; }
-    .btab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; }
-    .btab svg { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-    .btab__lbl { font-size: 10px; font-weight: 500; color: var(--muted); }
-    .btab.on svg { stroke: var(--maroon); } .btab.on .btab__lbl { color: var(--maroon); font-weight: 700; }
-    .pb-mobile { display: none; height: 70px; }
+/* ════════════════════════════════════════════════════════
+   FOOTER — luxury dark
+═══════════════════════════════════════════════════════ */
+footer { background: #100808; color: rgba(245,240,236,.5); }
+.footer-top { padding: clamp(52px, 7vw, 96px) var(--gutter) clamp(40px, 5vw, 72px); }
+.footer-grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(24px, 4vw, 72px); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: 7px; color: var(--ivory); margin-bottom: 16px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.8; max-width: 240px; margin-bottom: 28px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-soc-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid rgba(196,169,122,.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s;
+}
+.footer-soc-btn:hover { border-color: var(--gold); background: rgba(196,169,122,.08); }
+.footer-soc-btn svg { width: 15px; height: 15px; stroke: rgba(245,240,236,.6); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.footer-col-title { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: var(--ivory); text-transform: uppercase; margin-bottom: 20px; }
+.footer-links { display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 13px; font-weight: 300; color: rgba(245,240,236,.45); transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  max-width: var(--wrap); margin: 0 auto;
+  border-top: 1px solid rgba(196,169,122,.1);
+  padding: 22px var(--gutter);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-bottom p { font-size: 12px; font-weight: 300; }
+.footer-bottom a { color: rgba(245,240,236,.3); transition: color .2s; }
+.footer-bottom a:hover { color: var(--gold); }
 
-    @media (max-width: 900px) {
-      .nav-left .nav-link { display: none; }
-      .hamburger { display: flex; }
-      .nav-cats { display: none; }
-      .bnav { display: block; }
-      .pb-mobile { display: block; }
-    }
+/* ════════════════════════════════════════════════════════
+   MOBILE BOTTOM NAV
+═══════════════════════════════════════════════════════ */
+.bnav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(245,240,236,.92); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border); height: 64px; z-index: 300;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.bnav-inner { display: flex; height: 100%; }
+.btab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+.btab svg { width: 20px; height: 20px; stroke: var(--muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
+.btab__lbl { font-size: 9.5px; font-weight: 600; letter-spacing: .5px; color: var(--muted); transition: color .2s; }
+.btab.on svg { stroke: var(--maroon); } .btab.on .btab__lbl { color: var(--maroon); }
+.pb { display: none; height: 72px; }
+@media (max-width: 900px) {
+  .nav-left .nav-link { display: none; }
+  .hamburger { display: flex; }
+  .nav-cats { display: none; }
+  .bnav { display: block; }
+  .pb { display: block; }
+}
 
-    /* ══════════════════════════════════════════════
-       SEARCH OVERLAY
-    ══════════════════════════════════════════════ */
-    .search-ov {
-      position: fixed; inset: 0; z-index: 500;
-      background: rgba(15,10,10,.55); backdrop-filter: blur(6px);
-      opacity: 0; pointer-events: none; transition: opacity .3s;
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 80px;
-    }
-    .search-ov.on { opacity: 1; pointer-events: all; }
-    .search-box {
-      background: var(--white); width: 100%; max-width: 640px;
-      margin: 0 16px; border-radius: 4px; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.2);
-      transform: translateY(-16px); transition: transform .3s;
-    }
-    .search-ov.on .search-box { transform: translateY(0); }
-    .search-inner { display: flex; align-items: center; gap: 12px; padding: 0 20px; height: 60px; border-bottom: 1px solid var(--border); }
-    .search-inner svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
-    .search-inner input { flex: 1; border: none; outline: none; font-family: var(--sans); font-size: 16px; color: var(--text); background: none; }
-    .search-inner input::placeholder { color: var(--muted); }
-    .search-inner button { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--muted); }
-    .search-results { padding: 16px 20px; max-height: 350px; overflow-y: auto; }
-    .search-result-item { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; }
-    .search-result-item:last-child { border-bottom: none; }
-    .search-result-item:hover { opacity: .75; }
-    .search-result-img { width: 44px; height: 44px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: var(--ivory-d); }
-    .search-result-name { font-size: 14px; font-weight: 500; }
-    .search-result-price { font-size: 13px; color: var(--muted); margin-top: 2px; }
+/* ════════════════════════════════════════════════════════
+   SEARCH OVERLAY — luxury dark modal
+═══════════════════════════════════════════════════════ */
+.search-modal {
+  position: fixed; inset: 0; z-index: 700;
+  background: rgba(16,8,8,.85); backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+  display: flex; align-items: flex-start; padding-top: clamp(60px, 10vh, 140px);
+  justify-content: center;
+}
+.search-modal.on { opacity: 1; pointer-events: all; }
+.search-panel {
+  width: 100%; max-width: 680px; margin: 0 20px;
+  transform: translateY(-20px) scale(.98);
+  transition: transform .4s var(--ease-out);
+}
+.search-modal.on .search-panel { transform: translateY(0) scale(1); }
+.search-bar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 0 24px; height: 64px;
+  background: var(--ivory); border: 1px solid var(--border);
+}
+.search-bar svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+.search-bar input {
+  flex: 1; border: none; outline: none; background: none;
+  font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--text);
+}
+.search-bar input::placeholder { color: var(--muted); }
+.search-bar button { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+.search-results {
+  background: var(--ivory); border: 1px solid var(--border); border-top: none;
+  max-height: 360px; overflow-y: auto;
+}
+.search-hint { padding: 20px 24px; font-size: 12px; color: var(--muted); font-style: italic; }
+.s-result {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px; cursor: pointer; border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.s-result:last-child { border-bottom: none; }
+.s-result:hover { background: var(--ivory-2); }
+.s-result img { width: 48px; height: 54px; object-fit: cover; flex-shrink: 0; }
+.s-result-name { font-family: var(--serif); font-size: 15px; font-weight: 400; }
+.s-result-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-    /* ══════════════════════════════════════════════
-       PRODUCT DRAWER
-    ══════════════════════════════════════════════ */
-    .drawer-ov {
-      position: fixed; inset: 0; z-index: 300;
-      background: rgba(15,10,10,.45); backdrop-filter: blur(4px);
-      opacity: 0; pointer-events: none; transition: opacity .3s;
-    }
-    .drawer-ov.on { opacity: 1; pointer-events: all; }
-    /* Mobile: bottom sheet | Desktop: right panel */
-    .drawer {
-      position: fixed; z-index: 301;
-      background: var(--ivory);
-      transition: transform .38s cubic-bezier(.4,0,.2,1);
-    }
-    /* Mobile */
-    .drawer {
-      bottom: 0; left: 0; right: 0;
-      border-radius: 20px 20px 0 0;
-      max-height: 92vh; overflow-y: auto;
-      transform: translateY(100%);
-    }
-    .drawer.on { transform: translateY(0); }
-    /* Desktop */
-    @media (min-width: 901px) {
-      .drawer {
-        top: 0; bottom: 0; right: 0; left: auto;
-        width: min(480px, 38vw);
-        border-radius: 0; max-height: 100vh;
-        transform: translateX(100%);
-      }
-      .drawer.on { transform: translateX(0); }
-    }
-    .drawer__handle { width: 40px; height: 4px; border-radius: 2px; background: var(--border); margin: 14px auto 0; }
-    @media (min-width: 901px) { .drawer__handle { display: none; } }
-    .drawer__header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--rose-l); }
-    .drawer__header-logo { font-family: var(--serif); font-size: 15px; letter-spacing: 3px; color: var(--muted); }
-    .drawer__x { width: 36px; height: 36px; border-radius: 50%; background: var(--ivory-d); display: flex; align-items: center; justify-content: center; }
-    .drawer__x svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
-    .drawer__img { height: min(55vw, 340px); object-fit: cover; width: 100%; background: var(--ivory-d); }
-    @media (min-width: 901px) { .drawer__img { height: 340px; } }
-    .drawer__body { padding: 24px 24px 100px; }
-    .drawer__ey { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; }
-    .drawer__name { font-family: var(--serif); font-size: clamp(22px, 2.5vw, 30px); line-height: 1.15; margin-bottom: 8px; }
-    .drawer__stars { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
-    .drawer__rc { font-size: 12px; color: var(--muted); margin-left: 6px; }
-    .drawer__price { font-family: var(--serif); font-size: clamp(26px, 2.5vw, 34px); margin-bottom: 4px; }
-    .drawer__sz { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
-    .drawer__lbl { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; color: var(--text); }
-    .shades { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
-    .shade { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: border-color .2s; }
-    .shade.on { border-color: var(--cinnamon); }
-    .drawer__desc { font-size: 14px; line-height: 1.8; color: var(--muted); margin-bottom: 22px; }
-    .ing { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
-    .ing__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
-    .ing__name { font-size: 14px; font-weight: 600; }
-    .ing__benefit { font-size: 12px; color: var(--muted); }
-    .drawer__add {
-      width: 100%; padding: 18px; background: var(--maroon); color: #fff;
-      font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      border-radius: 2px; transition: background .2s;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
-    .drawer__add:hover { background: var(--maroon-d); }
-    .drawer__add svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.8; }
+/* ════════════════════════════════════════════════════════
+   PRODUCT DRAWER — side panel / bottom sheet
+═══════════════════════════════════════════════════════ */
+.drawer-mask {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(16,8,8,.55); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.drawer-mask.on { opacity: 1; pointer-events: all; }
+.drawer {
+  position: fixed; z-index: 501;
+  background: var(--ivory); overflow-y: auto;
+  transition: transform .4s var(--ease-out);
+  /* Mobile: bottom sheet */
+  bottom: 0; left: 0; right: 0;
+  max-height: 93vh; border-radius: 18px 18px 0 0;
+  transform: translateY(100%);
+}
+.drawer.on { transform: translateY(0); }
+/* Desktop: right panel */
+@media (min-width: 901px) {
+  .drawer {
+    top: 0; bottom: 0; right: 0; left: auto;
+    width: clamp(400px, 35vw, 520px);
+    border-radius: 0; max-height: 100vh;
+    transform: translateX(105%);
+    box-shadow: -20px 0 60px rgba(16,8,8,.12);
+  }
+  .drawer.on { transform: translateX(0); }
+}
+.drawer-grip { width: 38px; height: 3px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
+@media (min-width: 901px) { .drawer-grip { display: none; } }
+.drawer-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 26px; border-bottom: 1px solid var(--border);
+}
+.drawer-brand { font-family: var(--serif); font-size: 13px; letter-spacing: 4px; color: var(--muted); }
+.drawer-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ivory-2); display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.drawer-close:hover { background: var(--ivory-3); }
+.drawer-close svg { width: 15px; height: 15px; stroke: var(--text); fill: none; stroke-width: 1.8; }
+.drawer-img { height: clamp(240px, 35vw, 360px); object-fit: cover; width: 100%; background: var(--ivory-2); }
+.drawer-body { padding: 24px 26px 100px; }
+.d-range { font-size: 9.5px; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+.d-name { font-family: var(--serif); font-size: clamp(24px, 2.8vw, 34px); font-weight: 400; line-height: 1.1; margin-bottom: 10px; }
+.d-stars { display: flex; align-items: center; gap: 5px; margin-bottom: 14px; }
+.d-rc { font-size: 12px; color: var(--muted); margin-left: 4px; }
+.d-price { font-family: var(--serif); font-size: clamp(28px, 3vw, 38px); font-weight: 400; margin-bottom: 4px; }
+.d-sz { font-size: 12px; color: var(--muted); margin-bottom: 22px; }
+.d-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-2); margin-bottom: 10px; }
+.d-shades { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.d-shade { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color .2s; }
+.d-shade.on { border-color: var(--cinnamon); }
+.d-desc { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--muted); margin-bottom: 24px; }
+.d-ings { margin-bottom: 28px; }
+.d-ing { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.d-ing-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.d-ing-name { font-size: 13px; font-weight: 600; }
+.d-ing-benefit { font-size: 12px; color: var(--muted); }
+.d-add {
+  width: 100%; padding: 19px;
+  background: var(--maroon); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  transition: background .25s;
+}
+.d-add:hover { background: var(--maroon-2); }
+.d-add svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
 
-    /* ══════════════════════════════════════════════
-       CART PANEL
-    ══════════════════════════════════════════════ */
-    .cart-panel {
-      position: fixed; top: 0; right: 0; bottom: 0;
-      width: min(460px, 100vw);
-      background: var(--ivory); z-index: 400;
-      display: flex; flex-direction: column;
-      transform: translateX(100%); transition: transform .38s cubic-bezier(.4,0,.2,1);
-      box-shadow: -10px 0 40px rgba(0,0,0,.1);
-    }
-    .cart-panel.on { transform: translateX(0); }
-    .cart-panel__hd { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--rose-l); }
-    .cart-panel__title { font-family: var(--serif); font-size: 20px; letter-spacing: 4px; }
-    .cart-panel__body { flex: 1; overflow-y: auto; padding: 16px 24px; }
-    .ship-progress { padding: 12px 24px; background: var(--ivory-d); }
-    .ship-progress__track { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 8px; }
-    .ship-progress__fill { height: 100%; background: var(--maroon); border-radius: 2px; transition: width .4s; }
-    .ship-progress__label { font-size: 12px; color: var(--cinnamon); font-weight: 500; }
-    .cart-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--rose-l); }
-    .cart-item img { width: 76px; height: 90px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: var(--ivory-d); }
-    .ci-info { flex: 1; }
-    .ci-range { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
-    .ci-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.3; }
-    .ci-shade { font-size: 12px; color: var(--gold); margin-bottom: 6px; }
-    .ci-sz { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-    .ci-bottom { display: flex; align-items: center; justify-content: space-between; }
-    .ci-price { font-size: 15px; font-weight: 600; }
-    .ci-rm { font-size: 10px; color: var(--muted); letter-spacing: .5px; cursor: pointer; }
-    .ci-rm:hover { color: var(--maroon); }
-    .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60%; gap: 14px; text-align: center; }
-    .cart-panel__ft { padding: 16px 24px 24px; border-top: 1px solid var(--border); }
-    .cart-panel__rows { margin-bottom: 16px; }
-    .cart-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
-    .cart-row.total { font-family: var(--serif); font-size: 20px; padding-top: 10px; border-top: 1px solid var(--border); margin-top: 10px; }
-    .checkout-btn { width: 100%; padding: 18px; background: var(--maroon); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 2px; transition: background .2s; }
-    .checkout-btn:hover { background: var(--maroon-d); }
-    .cart-panel-ov { position: fixed; inset: 0; z-index: 399; background: rgba(15,10,10,.35); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .3s; }
-    .cart-panel-ov.on { opacity: 1; pointer-events: all; }
+/* ════════════════════════════════════════════════════════
+   CART PANEL
+═══════════════════════════════════════════════════════ */
+.cart-mask {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(16,8,8,.5); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.cart-mask.on { opacity: 1; pointer-events: all; }
+.cart-panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(440px, 100vw); z-index: 601;
+  background: var(--ivory); display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .4s var(--ease-out);
+  box-shadow: -20px 0 60px rgba(16,8,8,.12);
+}
+.cart-panel.on { transform: translateX(0); }
+.cp-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 26px; border-bottom: 1px solid var(--border);
+}
+.cp-title { font-family: var(--serif); font-size: 19px; letter-spacing: 4px; }
+.cp-body { flex: 1; overflow-y: auto; padding: 0; }
+.ship-bar { padding: 12px 26px; background: var(--ivory-2); border-bottom: 1px solid var(--border); }
+.ship-track { height: 2px; background: var(--border); border-radius: 1px; margin-bottom: 8px; }
+.ship-fill { height: 100%; background: linear-gradient(to right, var(--gold), var(--maroon)); border-radius: 1px; transition: width .5s var(--ease-out); }
+.ship-label { font-size: 11px; font-weight: 500; color: var(--cinnamon); letter-spacing: .5px; }
+.cart-items { padding: 0 26px; }
+.ci { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(196,169,122,.15); }
+.ci img { width: 74px; height: 88px; object-fit: cover; flex-shrink: 0; }
+.ci-info { flex: 1; }
+.ci-range { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+.ci-name { font-family: var(--serif); font-size: 15px; font-weight: 400; margin-bottom: 4px; line-height: 1.25; }
+.ci-shade-lbl { font-size: 11px; color: var(--gold); margin-bottom: 8px; }
+.ci-meta { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+.ci-row { display: flex; align-items: center; justify-content: space-between; }
+.ci-price { font-family: var(--serif); font-size: 16px; font-weight: 400; }
+.ci-rm { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; cursor: pointer; transition: color .2s; }
+.ci-rm:hover { color: var(--maroon); }
+.cart-empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 55vh; gap: 16px; text-align: center; padding: 0 40px;
+}
+.cart-empty-state svg { opacity: .18; }
+.cp-ft { padding: 18px 26px 26px; border-top: 1px solid var(--border); background: var(--ivory); }
+.cp-rows { margin-bottom: 18px; }
+.cp-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 300; margin-bottom: 8px; color: var(--muted); }
+.cp-row.total { font-family: var(--serif); font-size: 20px; color: var(--text); font-weight: 400; padding-top: 12px; border-top: 1px solid var(--border); margin-top: 12px; margin-bottom: 0; }
+.cp-checkout {
+  width: 100%; padding: 19px;
+  background: var(--maroon); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  transition: background .25s;
+}
+.cp-checkout:hover { background: var(--maroon-2); }
 
-    /* ══════════════════════════════════════════════
-       TOAST
-    ══════════════════════════════════════════════ */
-    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--text); color: #fff; border-radius: 4px; padding: 12px 28px; font-size: 13px; font-weight: 500; opacity: 0; transition: all .3s; pointer-events: none; z-index: 600; white-space: nowrap; }
-    .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
-    @media (max-width: 900px) { .toast { bottom: 76px; } }
-
-    /* ══════════════════════════════════════════════
-       UTILITY
-    ══════════════════════════════════════════════ */
-    .serif { font-family: var(--serif); }
-    .gold { color: var(--gold); }
-    .divider { height: 1px; background: var(--border); margin: 0; }
+/* ════════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(14px);
+  background: var(--text); color: rgba(245,240,236,.9);
+  padding: 13px 30px; font-size: 12px; font-weight: 500; letter-spacing: .5px;
+  opacity: 0; pointer-events: none; z-index: 800;
+  transition: all .35s var(--ease-out); white-space: nowrap;
+  border-left: 2px solid var(--gold);
+}
+.toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (max-width: 900px) { .toast { bottom: 76px; } }
   </style>
 </head>
 <body>
 
-<!-- ══ NAVIGATION ══════════════════════════════════ -->
-<header class="nav-top">
-  <nav class="nav-inner">
-    <!-- LEFT -->
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<header class="nav-wrap" id="navWrap">
+  <div class="nav-inner">
     <div class="nav-left">
-      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <button class="hamburger" onclick="showToast('Menu coming soon')" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <a class="nav-link" href="#" onclick="setF('skincare',null)">Skincare</a>
-      <a class="nav-link" href="#" onclick="setF('makeup',null)">Makeup</a>
-      <a class="nav-link" href="#" onclick="setF('moroccan',null)">Moroccan</a>
-      <a class="nav-link" href="#" onclick="setF('kbeauty',null)">K-Beauty</a>
-      <a class="nav-link" href="#" onclick="setF('sets',null)">Gift Sets</a>
+      <a class="nav-link" href="#" onclick="return setF('skincare',null)">Skincare</a>
+      <a class="nav-link" href="#" onclick="return setF('makeup',null)">Makeup</a>
+      <a class="nav-link" href="#" onclick="return setF('moroccan',null)">Moroccan</a>
+      <a class="nav-link" href="#" onclick="return setF('kbeauty',null)">K-Beauty</a>
+      <a class="nav-link" href="#" onclick="return setF('sets',null)">Gift Sets</a>
     </div>
-    <!-- CENTER -->
-    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">I'M FENNA</div>
-    <!-- RIGHT -->
+    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">I'm Fenna</div>
     <div class="nav-right">
       <button class="nav-icon" onclick="openSearch()" aria-label="Search">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -532,7 +835,7 @@
       <button class="nav-icon" onclick="showToast('Sign in to your account')" aria-label="Account">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
-      <button class="nav-icon" onclick="showToast('Your wishlist is empty')" aria-label="Wishlist">
+      <button class="nav-icon" onclick="showToast('Your wishlist')" aria-label="Wishlist">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
       <button class="nav-icon" onclick="openCart()" aria-label="Bag">
@@ -540,279 +843,320 @@
         <span class="cart-badge" id="cartBadge">0</span>
       </button>
     </div>
-  </nav>
-  <!-- SECONDARY CATEGORY NAV (desktop only) -->
-  <div class="nav-cats">
-    <div class="nav-cats-inner">
-      <a class="cat-link on" href="#" onclick="setF('all',this)">All Products</a>
-      <a class="cat-link" href="#" onclick="setF('skincare',this)">Skincare</a>
-      <a class="cat-link" href="#" onclick="setF('makeup',this)">Makeup</a>
-      <a class="cat-link" href="#" onclick="setF('moroccan',this)">Moroccan Heritage</a>
-      <a class="cat-link" href="#" onclick="setF('kbeauty',this)">K-Beauty Precision</a>
-      <a class="cat-link" href="#" onclick="setF('sets',this)">Gift Sets</a>
-      <a class="cat-link" href="#" onclick="setF('new',this)">New Arrivals</a>
-    </div>
   </div>
+  <nav class="nav-cats">
+    <div class="nav-cats-inner">
+      <button class="cat-btn on" onclick="setF('all',this)">All</button>
+      <button class="cat-btn" onclick="setF('skincare',this)">Skincare</button>
+      <button class="cat-btn" onclick="setF('makeup',this)">Makeup</button>
+      <button class="cat-btn" onclick="setF('moroccan',this)">Moroccan Heritage</button>
+      <button class="cat-btn" onclick="setF('kbeauty',this)">K-Beauty Precision</button>
+      <button class="cat-btn" onclick="setF('sets',this)">Gift Sets</button>
+      <button class="cat-btn" onclick="setF('new',this)">New Arrivals</button>
+    </div>
+  </nav>
 </header>
 
-<!-- ══ HERO CAROUSEL ════════════════════════════════ -->
-<section class="hero">
-  <div class="hero__track" id="heroTrack">
-    <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1800&q=85" alt="Be the Muse" loading="eager" />
-      <div class="hero__overlay"></div>
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__aurora">
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+  </div>
+  <div class="hero__slides" id="heroSlides">
+    <div class="hero__slide active">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1800&q=85" alt="" loading="eager" />
       <div class="hero__content">
         <div class="hero__eyebrow">New Collection</div>
-        <h1 class="hero__title">Be the<br>Muse.</h1>
-        <p class="hero__sub">Discover our new Moroccan Skincare Collection — rare ingredients, transformative results.</p>
-        <div class="hero__btns">
-          <a class="btn-primary" href="#" onclick="setF('moroccan',null)">Shop Now</a>
-          <span class="btn-ghost">Learn more <span class="btn-ghost-line"></span></span>
+        <h1 class="hero__title">Be the<br><em>Muse.</em></h1>
+        <p class="hero__sub">Discover our Moroccan Skincare Collection — rare ingredients, transformative results.</p>
+        <div class="hero__actions">
+          <a class="btn-cta" href="#" onclick="return setF('moroccan',null)">Shop Now</a>
+          <a class="btn-ghost-cta" href="#" onclick="return setF('all',null)">
+            Explore all
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
     <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1800&q=85" alt="K-Beauty Precision" loading="lazy" />
-      <div class="hero__overlay"></div>
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1800&q=85" alt="" loading="lazy" />
       <div class="hero__content">
         <div class="hero__eyebrow">K-Beauty Precision</div>
-        <h1 class="hero__title">Glass Skin<br>Awakened.</h1>
-        <p class="hero__sub">Advanced Korean skincare science meets Moroccan heritage. The best of both worlds.</p>
-        <div class="hero__btns">
-          <a class="btn-primary" href="#" onclick="setF('kbeauty',null)">Explore Range</a>
+        <h1 class="hero__title">Glass Skin<br><em>Awakened.</em></h1>
+        <p class="hero__sub">Advanced Korean skincare science meets Moroccan heritage.</p>
+        <div class="hero__actions">
+          <a class="btn-cta" href="#" onclick="return setF('kbeauty',null)">Explore Range</a>
         </div>
       </div>
     </div>
     <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1800&q=85" alt="Confident Colour" loading="lazy" />
-      <div class="hero__overlay"></div>
+      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1800&q=85" alt="" loading="lazy" />
       <div class="hero__content">
         <div class="hero__eyebrow">Confident Colour</div>
-        <h1 class="hero__title">Makeup<br>That Speaks.</h1>
-        <p class="hero__sub">The Velvet Eye Palette — Dusk Edition. Nine shades inspired by Moroccan sunsets.</p>
-        <div class="hero__btns">
-          <a class="btn-primary" href="#" onclick="openDrawer(7)">Shop Palette</a>
+        <h1 class="hero__title">Colour that<br><em>Speaks.</em></h1>
+        <p class="hero__sub">The Velvet Eye Palette — Dusk Edition. Nine shades of Moroccan sunset.</p>
+        <div class="hero__actions">
+          <a class="btn-cta" href="#" onclick="openDrawer(7);return false">Shop Palette</a>
         </div>
       </div>
     </div>
   </div>
-  <button class="hero__arr hero__arr--l" onclick="slide(-1)" aria-label="Previous">&#8592;</button>
-  <button class="hero__arr hero__arr--r" onclick="slide(1)" aria-label="Next">&#8594;</button>
-  <div class="hero__dots" id="heroDots">
-    <div class="hero__dot on"></div><div class="hero__dot"></div><div class="hero__dot"></div>
+  <button class="hero__arr hero__arr--l" onclick="slide(-1)">&#8592;</button>
+  <button class="hero__arr hero__arr--r" onclick="slide(1)">&#8594;</button>
+  <div class="hero__nav" id="heroDots">
+    <div class="hero__dot on" onclick="goSlide(0)"></div>
+    <div class="hero__dot" onclick="goSlide(1)"></div>
+    <div class="hero__dot" onclick="goSlide(2)"></div>
+  </div>
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+    <span style="writing-mode:vertical-rl;font-size:9px;font-weight:600;letter-spacing:3px">SCROLL</span>
   </div>
 </section>
 
-<!-- ══ USP STRIP ════════════════════════════════════ -->
+<!-- ══ USP TICKER ════════════════════════════════════════ -->
 <div class="usp-strip">
-  <div class="usp-item">
-    <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    Free delivery over £80
-  </div>
-  <div class="usp-item">
-    <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-    Free returns within 30 days
-  </div>
-  <div class="usp-item">
-    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Clean & cruelty free
-  </div>
-  <div class="usp-item">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Same-day dispatch before 2pm
+  <div class="usp-ticker" id="uspTicker">
+    <!-- duplicated for seamless loop -->
   </div>
 </div>
 
-<!-- ══ NEW ARRIVALS ══════════════════════════════════ -->
-<section class="sec">
+<!-- ══ NEW ARRIVALS ══════════════════════════════════════ -->
+<section class="sec reveal">
   <div class="wrap">
     <div class="sec-hd">
       <div>
-        <div class="sec-title">New Arrivals</div>
-        <div class="sec-sub">Fresh from the lab</div>
+        <div class="sec-eyebrow">Just landed</div>
+        <h2 class="sec-title">New Arrivals</h2>
       </div>
-      <a class="see-all" href="#" onclick="setF('new',null)">View All New →</a>
+      <a class="sec-link" href="#" onclick="return setF('new',null)">View all new
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
   </div>
-  <div class="hscroll-wrap">
-    <div class="hscroll as-grid" id="newRow" style="padding-right: var(--px);"></div>
+  <div class="hrow-wrap">
+    <div class="hrow as-grid" id="newRow"></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══ RANGES ════════════════════════════════════════ -->
-<section class="sec">
+<!-- ══ RANGES ════════════════════════════════════════════ -->
+<section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-hd">
-      <div class="sec-title">Our Ranges</div>
+    <div class="sec-hd reveal">
+      <div>
+        <div class="sec-eyebrow">Collections</div>
+        <h2 class="sec-title">Our Ranges</h2>
+      </div>
     </div>
     <div class="ranges-grid">
-      <div class="range-card" onclick="setF('moroccan',null)">
-        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=800&q=80" alt="Moroccan Heritage" loading="lazy" />
-        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(125,70,60,.9) 0%,transparent 60%)"></div>
+      <div class="range-card reveal delay-1" onclick="setF('moroccan',null)">
+        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=80" alt="Moroccan Heritage" loading="lazy" />
+        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(20,8,8,.92) 0%,rgba(20,8,8,.2) 60%,transparent 100%)"></div>
         <div class="range-card__cnt">
+          <div class="range-card__eyebrow">Range 01</div>
           <div class="range-card__title">Moroccan Heritage</div>
-          <div class="range-card__sub">Rooted in ancient beauty rituals</div>
-          <div class="range-card__cta">Explore range <span>→</span></div>
+          <div class="range-card__sub">Ancient rituals, modern science</div>
+          <div class="range-card__link">Explore <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
       </div>
-      <div class="range-card" onclick="setF('kbeauty',null)">
-        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80" alt="K-Beauty" loading="lazy" />
-        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(50,60,90,.9) 0%,transparent 60%)"></div>
+      <div class="range-card reveal delay-2" onclick="setF('kbeauty',null)">
+        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80" alt="K-Beauty" loading="lazy" />
+        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(20,8,8,.92) 0%,rgba(20,8,8,.2) 60%,transparent 100%)"></div>
         <div class="range-card__cnt">
+          <div class="range-card__eyebrow">Range 02</div>
           <div class="range-card__title">K-Beauty Precision</div>
-          <div class="range-card__sub">Advanced Korean skincare science</div>
-          <div class="range-card__cta">Explore range <span>→</span></div>
+          <div class="range-card__sub">Korean glass-skin science</div>
+          <div class="range-card__link">Explore <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
       </div>
-      <div class="range-card" onclick="setF('makeup',null)">
-        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Makeup" loading="lazy" />
-        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(118,20,21,.9) 0%,transparent 60%)"></div>
+      <div class="range-card reveal delay-3" onclick="setF('makeup',null)">
+        <img src="https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=700&q=80" alt="Confident Colour" loading="lazy" />
+        <div class="range-card__ov" style="background:linear-gradient(to top,rgba(20,8,8,.92) 0%,rgba(20,8,8,.2) 60%,transparent 100%)"></div>
         <div class="range-card__cnt">
+          <div class="range-card__eyebrow">Range 03</div>
           <div class="range-card__title">Confident Colour</div>
-          <div class="range-card__sub">Makeup that celebrates your beauty</div>
-          <div class="range-card__cta">Explore range <span>→</span></div>
+          <div class="range-card__sub">Makeup that celebrates you</div>
+          <div class="range-card__link">Explore <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ BRAND STORY ════════════════════════════════ -->
-<div class="story">
-  <div class="wrap">
-    <div class="story__ey">Beauty is Art</div>
-    <div class="story__line"></div>
-    <h2 class="story__title">Rooted in Confidence,<br>Crafted with Care.</h2>
-    <div class="story__line"></div>
-    <p class="story__body">I'm Fenna is a premium beauty brand uniting skincare and make-up through clean formulation, unique ingredients and refined design. Every product is a celebration of the woman who wears it.</p>
+<!-- ══ BRAND STORY ════════════════════════════════════════ -->
+<div class="story-section">
+  <div class="story-inner reveal">
+    <div class="story-eyebrow">Our Philosophy</div>
+    <h2 class="story-title">Beauty is<br><em>not a standard.</em><br>It's an art.</h2>
+    <p class="story-body">I'm Fenna is a premium beauty brand uniting skincare and make-up through clean formulation, unique ingredients and refined design. Every product is a celebration of the woman who wears it.</p>
+    <a class="btn-cta" href="#" onclick="return setF('all',null)" style="display:inline-flex">Discover the Collection</a>
+    <div class="story-stats">
+      <div class="reveal delay-1">
+        <div class="story-stat__num">10</div>
+        <div class="story-stat__label">Hero Products</div>
+      </div>
+      <div class="story-divider"></div>
+      <div class="reveal delay-2">
+        <div class="story-stat__num">3</div>
+        <div class="story-stat__label">Collections</div>
+      </div>
+      <div class="story-divider"></div>
+      <div class="reveal delay-3">
+        <div class="story-stat__num">100%</div>
+        <div class="story-stat__label">Clean Beauty</div>
+      </div>
+      <div class="story-divider"></div>
+      <div class="reveal delay-4">
+        <div class="story-stat__num">4.8★</div>
+        <div class="story-stat__label">Average Rating</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ══ EDITORIAL SPLIT ════════════════════════════ -->
+<!-- ══ EDITORIAL SPLITS ═══════════════════════════════════ -->
 <div class="editorial">
-  <div class="editorial__img">
+  <div class="editorial__img-wrap reveal-l">
     <img src="https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=80" alt="Moroccan Rose" loading="lazy" />
+    <div class="editorial__overlay"></div>
   </div>
-  <div class="editorial__body">
+  <div class="editorial__body reveal-r">
     <div class="editorial__eyebrow">Hero Ingredient</div>
     <h2 class="editorial__title">The Power of<br>Moroccan Rose.</h2>
     <p class="editorial__body-text">Harvested at dawn in the Dadès Valley, Moroccan rose has been prized for centuries for its brightening, soothing and rejuvenating properties. It is the heart of our Heritage range.</p>
-    <a class="btn-primary" href="#" onclick="setF('moroccan',null)" style="display:inline-block">Discover Moroccan Heritage</a>
+    <a class="btn-cta" href="#" onclick="return setF('moroccan',null)">Discover Moroccan Heritage</a>
   </div>
 </div>
 
-<div class="editorial editorial--reverse">
-  <div class="editorial__img">
+<div class="editorial editorial--flip editorial--dark">
+  <div class="editorial__img-wrap reveal-r">
     <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=80" alt="K-Beauty" loading="lazy" />
+    <div class="editorial__overlay"></div>
   </div>
-  <div class="editorial__body">
+  <div class="editorial__body reveal-l">
     <div class="editorial__eyebrow">K-Beauty Precision</div>
-    <h2 class="editorial__title">Science Meets<br>Ritual.</h2>
+    <h2 class="editorial__title">Science<br>meets Ritual.</h2>
     <p class="editorial__body-text">Drawing on Korean skincare technology and the latest in fermentation science, our K-Beauty range delivers glass skin results with every application.</p>
-    <a class="btn-primary" href="#" onclick="setF('kbeauty',null)" style="display:inline-block">Discover K-Beauty</a>
+    <a class="btn-cta" href="#" onclick="return setF('kbeauty',null)">Discover K-Beauty</a>
   </div>
 </div>
 
-<!-- ══ ALL PRODUCTS ════════════════════════════════ -->
+<!-- ══ ALL PRODUCTS ═══════════════════════════════════════ -->
 <section class="sec" id="shopSection">
   <div class="wrap">
-    <div class="sec-hd">
+    <div class="sec-hd reveal">
       <div>
-        <div class="sec-title" id="gridTitle">All Products</div>
-        <div class="sec-sub" id="gridSub">10 products</div>
+        <div class="sec-eyebrow" id="gridEye">The Full Collection</div>
+        <h2 class="sec-title" id="gridTitle">All Products</h2>
       </div>
+      <span style="font-size:12px;color:var(--muted)" id="gridCount">10 products</span>
     </div>
     <div class="prod-grid" id="prodGrid"></div>
   </div>
 </section>
 
-<!-- ══ VALUES ═════════════════════════════════════ -->
-<div class="values">
-  <div class="values__grid">
-    <div class="value-item">
-      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="value-title">Clean Formulas</div>
-      <p class="value-body">Free from parabens, sulphates and synthetic fragrances. Always.</p>
+<!-- ══ VALUES ═════════════════════════════════════════════ -->
+<div class="values-section">
+  <div class="wrap">
+    <div class="sec-hd reveal" style="margin-bottom:clamp(28px,4vw,52px)">
+      <div>
+        <div class="sec-eyebrow">Our Commitment</div>
+        <h2 class="sec-title">Beauty You Can<br>Trust.</h2>
+      </div>
     </div>
-    <div class="value-item">
-      <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div>
-      <div class="value-title">Sustainably Sourced</div>
-      <p class="value-body">Ingredients ethically sourced from Morocco and Korea.</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-      <div class="value-title">Cruelty Free</div>
-      <p class="value-body">Never tested on animals. Certified by Leaping Bunny.</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
-      <div class="value-title">Luxury Gifting</div>
-      <p class="value-body">All orders arrive in our signature ivory gift box.</p>
+    <div class="values-grid">
+      <div class="value-card reveal delay-1">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="value-title">Clean Formulas</div>
+        <p class="value-body">Free from parabens, sulphates and synthetic fragrances. Always. Every product is dermatologist-tested.</p>
+      </div>
+      <div class="value-card reveal delay-2">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg></div>
+        <div class="value-title">Ethically Sourced</div>
+        <p class="value-body">Ingredients sourced in partnership with women-led cooperatives in Morocco and responsible farms in Korea.</p>
+      </div>
+      <div class="value-card reveal delay-3">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="value-title">Cruelty Free</div>
+        <p class="value-body">Never tested on animals. Certified by Leaping Bunny. Vegan formulations across our core collection.</p>
+      </div>
+      <div class="value-card reveal delay-4">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
+        <div class="value-title">Luxury Gifting</div>
+        <p class="value-body">Every order arrives in our signature ivory gift box with gold ribbon — ready to gift, always.</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ FOOTER ══════════════════════════════════════ -->
+<!-- ══ FOOTER ═════════════════════════════════════════════ -->
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">I'M FENNA</div>
-      <p class="footer-tagline">Premium beauty rooted in confidence, crafted with rare ingredients from Morocco and Korea.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="#" aria-label="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-        </a>
-        <a href="#" aria-label="Pinterest">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.03-2.83.19-.77 1.26-5.33 1.26-5.33s-.32-.64-.32-1.59c0-1.49.86-2.6 1.93-2.6.91 0 1.35.68 1.35 1.5 0 .91-.58 2.28-.88 3.55-.25 1.06.53 1.92 1.57 1.92 1.88 0 3.15-2.4 3.15-5.23 0-2.16-1.47-3.77-4.11-3.77a4.64 4.64 0 0 0-4.83 4.69c0 .9.26 1.53.67 2.02.19.22.22.31.15.57-.05.18-.16.63-.21.81-.07.26-.28.35-.52.26-1.47-.6-2.16-2.22-2.16-4.04 0-2.99 2.52-6.57 7.54-6.57 4.02 0 6.67 2.91 6.67 6.03 0 4.13-2.3 7.21-5.7 7.21-1.14 0-2.21-.62-2.58-1.32l-.7 2.72c-.26.97-.93 2.19-1.41 2.95.85.26 1.75.4 2.68.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-        </a>
+  <div class="footer-top">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">I'm Fenna</div>
+        <p class="footer-tagline">Premium beauty rooted in confidence, crafted with rare ingredients from Morocco and Korea.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-soc-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="footer-soc-btn" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+          <a href="#" class="footer-soc-btn" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 10.13c3.72 4.35 8.94 5.66 16.88 5.85"/></svg>
+          </a>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <div class="footer-links">
-        <a href="#" onclick="setF('skincare',null)">Skincare</a>
-        <a href="#" onclick="setF('makeup',null)">Makeup</a>
-        <a href="#" onclick="setF('moroccan',null)">Moroccan Heritage</a>
-        <a href="#" onclick="setF('kbeauty',null)">K-Beauty Precision</a>
-        <a href="#" onclick="setF('sets',null)">Gift Sets</a>
-        <a href="#" onclick="setF('new',null)">New Arrivals</a>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <div class="footer-links">
+          <a href="#" onclick="setF('skincare',null)">Skincare</a>
+          <a href="#" onclick="setF('makeup',null)">Makeup</a>
+          <a href="#" onclick="setF('moroccan',null)">Moroccan Heritage</a>
+          <a href="#" onclick="setF('kbeauty',null)">K-Beauty</a>
+          <a href="#" onclick="setF('sets',null)">Gift Sets</a>
+          <a href="#" onclick="setF('new',null)">New Arrivals</a>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Help</div>
-      <div class="footer-links">
-        <a href="#">Track Your Order</a>
-        <a href="#">Delivery & Returns</a>
-        <a href="#">FAQ</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Store Locator</a>
+      <div>
+        <div class="footer-col-title">Help</div>
+        <div class="footer-links">
+          <a href="#">Track Your Order</a>
+          <a href="#">Delivery & Returns</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Store Locator</a>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="footer-col-title">About</div>
-      <div class="footer-links">
-        <a href="#">Our Story</a>
-        <a href="#">Ingredients</a>
-        <a href="#">Sustainability</a>
-        <a href="#">Press</a>
-        <a href="#">Careers</a>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a href="#">Our Story</a>
+          <a href="#">Ingredients</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Press</a>
+          <a href="#">Careers</a>
+        </div>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2025 I'm Fenna. All rights reserved.</p>
-    <p><a href="#" style="color:rgba(255,255,255,.4)">Privacy</a> · <a href="#" style="color:rgba(255,255,255,.4)">Terms</a> · <a href="#" style="color:rgba(255,255,255,.4)">Cookies</a></p>
+    <p>
+      <a href="#">Privacy Policy</a> ·
+      <a href="#">Terms</a> ·
+      <a href="#">Cookies</a>
+    </p>
   </div>
 </footer>
 
-<div class="pb-mobile"></div>
+<div class="pb"></div>
 
-<!-- ══ MOBILE BOTTOM NAV ═══════════════════════════ -->
+<!-- MOBILE BOTTOM NAV -->
 <nav class="bnav">
   <div class="bnav-inner">
     <div class="btab on" onclick="activateTab(0);window.scrollTo({top:0,behavior:'smooth'})">
@@ -838,79 +1182,80 @@
   </div>
 </nav>
 
-<!-- ══ SEARCH OVERLAY ═══════════════════════════════ -->
-<div class="search-ov" id="searchOv" onclick="closeSearch(event)">
-  <div class="search-box" onclick="event.stopPropagation()">
-    <div class="search-inner">
+<!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal" onclick="if(event.target===this)closeSearch()">
+  <div class="search-panel">
+    <div class="search-bar">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="search" id="searchInput" placeholder="Search products, ranges…" oninput="liveSearch(this.value)" autocomplete="off" />
       <button onclick="closeSearch()">Close</button>
     </div>
     <div class="search-results" id="searchResults">
-      <p style="font-size:13px;color:var(--muted);padding:8px 0">Start typing to search…</p>
+      <p class="search-hint">Trending: Glow Serum, Rose Oil, Velvet Lip…</p>
     </div>
   </div>
 </div>
 
-<!-- ══ PRODUCT DRAWER ═══════════════════════════════ -->
-<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
+<!-- DRAWER MASK -->
+<div class="drawer-mask" id="drawerMask" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
-  <div class="drawer__handle"></div>
-  <div class="drawer__header">
-    <span class="drawer__header-logo">I'M FENNA</span>
-    <button class="drawer__x" onclick="closeDrawer()" aria-label="Close">
+  <div class="drawer-grip"></div>
+  <div class="drawer-hd">
+    <span class="drawer-brand">I'm Fenna</span>
+    <button class="drawer-close" onclick="closeDrawer()">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
-  <img class="drawer__img" id="dImg" src="" alt="" />
-  <div class="drawer__body">
-    <div class="drawer__ey" id="dRange"></div>
-    <div class="drawer__name" id="dName"></div>
-    <div class="drawer__stars" id="dStars"></div>
-    <div class="drawer__price" id="dPrice"></div>
-    <div class="drawer__sz" id="dSz"></div>
+  <img class="drawer-img" id="dImg" src="" alt="" />
+  <div class="drawer-body">
+    <div class="d-range" id="dRange"></div>
+    <div class="d-name" id="dName"></div>
+    <div class="d-stars" id="dStars"></div>
+    <div class="d-price" id="dPrice"></div>
+    <div class="d-sz" id="dSz"></div>
     <div id="dShadesSec" style="display:none">
-      <div class="drawer__lbl">Shade: <span id="dShadeName" style="color:var(--cinnamon);font-weight:600;text-transform:none;letter-spacing:0"></span></div>
-      <div class="shades" id="dShadesRow"></div>
+      <div class="d-lbl">Shade — <span id="dShadeName" style="color:var(--cinnamon);text-transform:none;letter-spacing:0;font-weight:400"></span></div>
+      <div class="d-shades" id="dShadesRow"></div>
     </div>
-    <div class="drawer__lbl" style="margin-top:8px">Description</div>
-    <p class="drawer__desc" id="dDesc"></p>
-    <div id="dIngs"></div>
-    <button class="drawer__add" onclick="addFromDrawer()">
+    <div class="d-lbl">Description</div>
+    <p class="d-desc" id="dDesc"></p>
+    <div class="d-ings" id="dIngs"></div>
+    <button class="d-add" onclick="addFromDrawer()">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       Add to Bag
     </button>
   </div>
 </div>
 
-<!-- ══ CART PANEL ════════════════════════════════════ -->
-<div class="cart-panel-ov" id="cartOv" onclick="closeCart()"></div>
+<!-- CART MASK + PANEL -->
+<div class="cart-mask" id="cartMask" onclick="closeCart()"></div>
 <div class="cart-panel" id="cartPanel">
-  <div class="cart-panel__hd">
-    <div class="cart-panel__title">My Bag</div>
-    <button onclick="closeCart()" aria-label="Close bag">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <div class="cp-hd">
+    <div class="cp-title">My Bag</div>
+    <button onclick="closeCart()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
-  <div class="ship-progress">
-    <div class="ship-progress__track"><div class="ship-progress__fill" id="shipFill" style="width:0%"></div></div>
-    <div class="ship-progress__label" id="shipMsg">Add £80.00 more for free delivery</div>
+  <div class="ship-bar">
+    <div class="ship-track"><div class="ship-fill" id="shipFill" style="width:0%"></div></div>
+    <div class="ship-label" id="shipLabel">Add £80 more for free delivery</div>
   </div>
-  <div class="cart-panel__body" id="cartBody"></div>
-  <div class="cart-panel__ft">
-    <div class="cart-panel__rows">
-      <div class="cart-row"><span>Subtotal</span><span id="cartSub">£0.00</span></div>
-      <div class="cart-row"><span>Delivery</span><span id="cartDel">£4.99</span></div>
-      <div class="cart-row total"><span>Total</span><span id="cartTotal">£0.00</span></div>
+  <div class="cp-body">
+    <div class="cart-items" id="cartItems"></div>
+  </div>
+  <div class="cp-ft">
+    <div class="cp-rows">
+      <div class="cp-row"><span>Subtotal</span><span id="cpSub">£0.00</span></div>
+      <div class="cp-row"><span>Delivery</span><span id="cpDel">—</span></div>
+      <div class="cp-row total"><span>Total</span><span id="cpTotal">£0.00</span></div>
     </div>
-    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    <button class="cp-checkout" onclick="checkout()">Proceed to Checkout</button>
   </div>
 </div>
 
-<!-- ══ TOAST ════════════════════════════════════════ -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ══ JAVASCRIPT ════════════════════════════════════ -->
 <script>
 /* ── DATA ── */
 const P = [
@@ -918,7 +1263,7 @@ const P = [
   {id:2,name:'Flawless Foundation',range:'Confident Colour',cat:'makeup',price:52,r:4.7,rv:189,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',sz:'30ml',desc:'A buildable, skin-like foundation infused with Moroccan rose water for breathable, comfortable wear all day.',ings:[{n:'Rose Water',b:'Soothes & hydrates'},{n:'SPF 20',b:'Daily UV protection'}],shades:[{n:'Porcelain',c:'#F8E8D8'},{n:'Nude Beige',c:'#EDD4B2'},{n:'Golden Sand',c:'#D4A878'},{n:'Warm Honey',c:'#C48B4A'},{n:'Deep Caramel',c:'#8B5E38'},{n:'Rich Espresso',c:'#5C3420'}]},
   {id:3,name:'Moroccan Rose Face Oil',range:'Moroccan Heritage',cat:'moroccan',price:58,origPrice:72,r:4.9,rv:312,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80',sz:'30ml',desc:'A luxurious face oil rich in pure Moroccan rose extract. Silky elixir deeply nourishes and imparts a dewy, lit-from-within glow.',ings:[{n:'Rosa Damascena',b:'Antioxidant protection'},{n:'Prickly Pear Oil',b:'Anti-ageing & brightening'},{n:'Marula Oil',b:'Ultra-nourishing'}],shades:null},
   {id:4,name:'Glass Skin Essence',range:'K-Beauty Precision',cat:'kbeauty',price:44,r:4.6,rv:156,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',sz:'150ml',desc:'Inspired by Korean glass skin rituals — 72-hour hydration with fermented ingredients and 10 molecular sizes of hyaluronic acid.',ings:[{n:'10HA Complex',b:'72-hour deep hydration'},{n:'Fermented Rice',b:'Brightens & refines'},{n:'Centella Asiatica',b:'Calms & repairs'}],shades:null},
-  {id:5,name:'Velvet Lip Colour',range:'Confident Colour',cat:'makeup',price:32,r:4.5,rv:203,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',sz:'3.5g',desc:'A richly pigmented velvet lip colour infused with Moroccan rose oil. Comfortable all-day wear.',ings:[{n:'Moroccan Rose Oil',b:'Nourishes & conditions'},{n:'Vitamin E',b:'Protects & softens'}],shades:[{n:'If Bold',c:'#761415'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]},
+  {id:5,name:'Velvet Lip Colour',range:'Confident Colour',cat:'makeup',price:32,r:4.5,rv:203,isNew:false,isBest:true,img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',sz:'3.5g',desc:'A richly pigmented velvet lip colour infused with Moroccan rose oil. Comfortable all-day wear.',ings:[{n:'Moroccan Rose Oil',b:'Nourishes & conditions'},{n:'Vitamin E',b:'Protects & softens'}],shades:[{n:'If Bold',c:'#711313'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]},
   {id:6,name:'Ghassoul Clay Mask',range:'Moroccan Heritage',cat:'moroccan',price:38,r:4.7,rv:178,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',sz:'100ml',desc:'Authentic Moroccan Ghassoul clay from the Atlas Mountains. Deeply purifies pores while maintaining the skin\'s natural moisture balance.',ings:[{n:'Ghassoul Clay',b:'Deep pore cleansing'},{n:'Argan Oil',b:'Restores moisture'},{n:'Moroccan Rose',b:'Soothes & tones'}],shades:null},
   {id:7,name:'Velvet Eye Palette — Dusk',range:'Confident Colour',cat:'makeup',price:62,origPrice:78,r:4.8,rv:134,isNew:true,isBest:false,img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',sz:'9 × 1.2g',desc:'Nine curated shades inspired by Moroccan sunsets. Velvet-soft mattes, golden shimmers and rich metallics for endless artistry.',ings:[],shades:null},
   {id:8,name:'Vitamin C Brightening Serum',range:'K-Beauty Precision',cat:'kbeauty',price:56,r:4.6,rv:98,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&q=80',sz:'30ml',desc:'High-potency 20% Vitamin C serum with Korean niacinamide technology. Visibly brighter, more even skin in 4 weeks.',ings:[{n:'Vitamin C 20%',b:'Brightens & protects'},{n:'Niacinamide',b:'Evens skin tone'},{n:'Ferulic Acid',b:'Stabilises Vitamin C'}],shades:null},
@@ -926,41 +1271,71 @@ const P = [
   {id:10,name:'Silk Setting Powder',range:'Confident Colour',cat:'makeup',price:36,r:4.4,rv:88,isNew:false,isBest:false,img:'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=600&q=80',sz:'10g',desc:'An ultra-fine, weightless setting powder with a satin finish. Blurs pores and extends foundation wear all day.',ings:[{n:'Silk Powder',b:'Smooths & blurs'},{n:'Argan Oil',b:'Prevents drying'}],shades:[{n:'Translucent',c:'#F5E8DA'},{n:'Warm Peach',c:'#E8C9A0'}]},
 ];
 
-/* ── STATE ── */
-let cart = [], wished = new Set(), curP = null, curShade = null;
-let hi = 0, hTimer;
+/* ── USP TICKER ── */
+const USPS = [
+  ['Free delivery on orders over £80','M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM18.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z'],
+  ['Free returns within 30 days','M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'],
+  ['Clean & cruelty free certified','M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+  ['Same-day dispatch before 2pm','M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
+  ['Luxury packaging on every order','M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'],
+];
+const ticker = document.getElementById('uspTicker');
+const items = [...USPS,...USPS].map(([t,d])=>`
+  <div class="usp-item">
+    <svg viewBox="0 0 24 24"><path d="${d}"/></svg>${t}
+  </div>
+  <div class="usp-dot"></div>
+`).join('');
+ticker.innerHTML = items;
+
+/* ── SCROLL-TRIGGERED REVEAL ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+/* ── NAV SCROLL STATE ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navWrap').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
 /* ── HERO ── */
+let hi = 0, hTimer;
+function goSlide(i) { hi = i; applyHero(); }
 function slide(d) { hi = (hi + d + 3) % 3; applyHero(); }
 function applyHero() {
-  document.getElementById('heroTrack').style.transform = `translateX(-${hi * 100}%)`;
-  document.querySelectorAll('.hero__dot').forEach((dot, i) => dot.classList.toggle('on', i === hi));
+  document.getElementById('heroSlides').style.transform = `translateX(-${hi*100}%)`;
+  document.querySelectorAll('.hero__dot').forEach((d,i) => d.classList.toggle('on', i===hi));
+  document.querySelectorAll('.hero__slide').forEach((s,i) => s.classList.toggle('active', i===hi));
 }
-function startHero() { hTimer = setInterval(() => slide(1), 5000); }
-document.getElementById('heroTrack').addEventListener('touchstart', () => clearInterval(hTimer), { passive: true });
+function startHero() { hTimer = setInterval(() => slide(1), 5500); }
+document.getElementById('heroSlides').addEventListener('touchstart', () => clearInterval(hTimer), {passive:true});
 startHero();
 
 /* ── STARS ── */
 function stars(r) {
-  return Array.from({ length: 5 }, (_, i) =>
-    `<svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="${i < Math.floor(r) ? '#BFA07A' : '#DDD'}" stroke="none"/></svg>`
+  return Array.from({length:5},(_,i)=>
+    `<svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="${i<Math.floor(r)?'#C4A97A':'#E0D4C8'}" stroke="none"/></svg>`
   ).join('');
 }
 
-/* ── CARD HTML ── */
+/* ── CARD ── */
 function cardHTML(p) {
-  const disc = p.origPrice ? Math.round((p.origPrice - p.price) / p.origPrice * 100) : 0;
-  return `<div class="card" onclick="openDrawer(${p.id})">
-    <div class="card__img">
+  const disc = p.origPrice ? Math.round((p.origPrice-p.price)/p.origPrice*100) : 0;
+  return `<div class="card reveal" onclick="openDrawer(${p.id})">
+    <div class="card__img-wrap">
       <img src="${p.img}" alt="${p.name}" loading="lazy" />
       <div class="card__badges">
-        ${p.isNew ? '<span class="badge badge-n">New</span>' : ''}
-        ${p.isBest && !p.isNew ? '<span class="badge badge-b">Bestseller</span>' : ''}
-        ${disc ? `<span class="badge badge-s">−${disc}%</span>` : ''}
+        ${p.isNew?'<span class="badge badge-n">New</span>':''}
+        ${p.isBest&&!p.isNew?'<span class="badge badge-b">Bestseller</span>':''}
+        ${disc?`<span class="badge badge-s">−${disc}%</span>`:''}
       </div>
-      <button class="card__w" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Wishlist">
+      <button class="card__wish" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Wishlist">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
+      <div class="card__over">
+        <button class="card__over-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Quick Add to Bag</button>
+      </div>
     </div>
     <div class="card__body">
       <div class="card__range">${p.range}</div>
@@ -968,195 +1343,177 @@ function cardHTML(p) {
       <div class="card__stars">${stars(p.r)}</div>
       <div class="card__prices">
         <span class="card__price">£${p.price}</span>
-        ${p.origPrice ? `<span class="card__orig">£${p.origPrice}</span>` : ''}
+        ${p.origPrice?`<span class="card__orig">£${p.origPrice}</span>`:''}
       </div>
       <button class="card__add" onclick="event.stopPropagation();quickAdd(${p.id})">Add to Bag</button>
     </div>
   </div>`;
 }
 
-/* ── RENDER ── */
 function renderGrid(list) {
   document.getElementById('prodGrid').innerHTML = list.length
-    ? list.map(p => cardHTML(p)).join('')
-    : '<p style="padding:60px 0;color:var(--muted);grid-column:1/-1;text-align:center;font-size:15px">No products found.</p>';
-  document.getElementById('gridSub').textContent = `${list.length} product${list.length !== 1 ? 's' : ''}`;
+    ? list.map(p=>cardHTML(p)).join('')
+    : '<p style="padding:60px 0;color:var(--muted);grid-column:1/-1;text-align:center;font-family:var(--serif);font-size:18px;font-weight:300">No products found.</p>';
+  document.getElementById('gridCount').textContent = `${list.length} product${list.length!==1?'s':''}`;
+  // Re-observe new cards
+  document.querySelectorAll('#prodGrid .reveal').forEach(el => io.observe(el));
 }
+
 function renderNew() {
-  const newP = P.filter(p => p.isNew);
-  document.getElementById('newRow').innerHTML = newP.map(p => cardHTML(p)).join('');
+  document.getElementById('newRow').innerHTML = P.filter(p=>p.isNew).map(p=>cardHTML(p)).join('');
+  document.querySelectorAll('#newRow .reveal').forEach(el => io.observe(el));
 }
 renderGrid(P);
 renderNew();
 
 /* ── FILTER ── */
 function setF(f, btn) {
-  document.querySelectorAll('.cat-link').forEach(l => l.classList.remove('on'));
-  if (btn && btn.classList.contains('cat-link')) btn.classList.add('on');
-  document.getElementById('searchInput').value = '';
-  const map = { all: P, new: P.filter(p => p.isNew) };
-  const list = map[f] || P.filter(p => p.cat === f);
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('on'));
+  if (btn && btn.classList && btn.classList.contains('cat-btn')) btn.classList.add('on');
+  const map = {all:P, new:P.filter(p=>p.isNew)};
+  const list = map[f] || P.filter(p=>p.cat===f);
+  const labels = {all:'All Products',new:'New Arrivals',skincare:'Skincare',makeup:'Makeup',moroccan:'Moroccan Heritage',kbeauty:'K-Beauty Precision',sets:'Gift Sets'};
   renderGrid(list);
-  const labels = { all:'All Products', new:'New Arrivals', skincare:'Skincare', makeup:'Makeup', moroccan:'Moroccan Heritage', kbeauty:'K-Beauty Precision', sets:'Gift Sets' };
-  document.getElementById('gridTitle').textContent = labels[f] || f;
-  document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('gridTitle').textContent = labels[f]||f;
+  document.getElementById('gridEye').textContent = {all:'The Full Collection',new:'Just Arrived',skincare:'Skincare',makeup:'Colour',moroccan:'Heritage Range',kbeauty:'K-Beauty Range',sets:'Gift Sets'}[f]||'';
+  document.getElementById('shopSection').scrollIntoView({behavior:'smooth',block:'start'});
   return false;
+}
+
+/* ── WISHLIST ── */
+const wished = new Set();
+function toggleWish(id) {
+  const btn = document.getElementById(`w${id}`);
+  if (wished.has(id)) { wished.delete(id); btn.classList.remove('on'); showToast('Removed from wishlist'); }
+  else { wished.add(id); btn.classList.add('on'); showToast('Added to wishlist'); }
 }
 
 /* ── SEARCH ── */
 function openSearch() {
-  document.getElementById('searchOv').classList.add('on');
+  document.getElementById('searchModal').classList.add('on');
   document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('searchInput').focus(), 60);
+  setTimeout(() => document.getElementById('searchInput').focus(), 80);
 }
-function closeSearch(e) {
-  if (!e || e.target === document.getElementById('searchOv')) {
-    document.getElementById('searchOv').classList.remove('on');
-    document.body.style.overflow = '';
-  }
+function closeSearch() {
+  document.getElementById('searchModal').classList.remove('on');
+  document.body.style.overflow = '';
 }
 function liveSearch(q) {
   const el = document.getElementById('searchResults');
-  if (!q) { el.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0">Start typing to search…</p>'; return; }
+  if (!q) { el.innerHTML = '<p class="search-hint">Trending: Glow Serum, Rose Oil, Velvet Lip…</p>'; return; }
   const res = P.filter(p => p.name.toLowerCase().includes(q.toLowerCase()) || p.range.toLowerCase().includes(q.toLowerCase()));
   el.innerHTML = res.length
-    ? res.map(p => `<div class="search-result-item" onclick="closeSearch();openDrawer(${p.id})">
-        <img class="search-result-img" src="${p.img}" alt="${p.name}" />
-        <div><div class="search-result-name">${p.name}</div><div class="search-result-price">£${p.price} · ${p.range}</div></div>
+    ? res.map(p=>`<div class="s-result" onclick="closeSearch();openDrawer(${p.id})">
+        <img src="${p.img}" alt="${p.name}" />
+        <div><div class="s-result-name">${p.name}</div><div class="s-result-meta">£${p.price} · ${p.range}</div></div>
       </div>`).join('')
-    : '<p style="font-size:13px;color:var(--muted);padding:8px 0">No results found.</p>';
+    : '<p class="search-hint">No results found.</p>';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSearch(); closeDrawer(); closeCart(); } });
-
-/* ── WISHLIST ── */
-function toggleWish(id) {
-  const btn = document.getElementById(`w${id}`);
-  if (wished.has(id)) { wished.delete(id); btn.classList.remove('on'); showToast('Removed from wishlist'); }
-  else { wished.add(id); btn.classList.add('on'); showToast('Added to wishlist ♥'); }
-}
+document.addEventListener('keydown', e => { if(e.key==='Escape'){closeSearch();closeDrawer();closeCart();} });
 
 /* ── DRAWER ── */
+let curP=null, curShade=null;
 function openDrawer(id) {
-  const p = P.find(x => x.id === id); if (!p) return;
-  curP = p; curShade = p.shades ? p.shades[0] : null;
+  const p = P.find(x=>x.id===id); if(!p) return;
+  curP=p; curShade=p.shades?p.shades[0]:null;
   document.getElementById('dImg').src = p.img;
-  document.getElementById('dImg').alt = p.name;
   document.getElementById('dRange').textContent = p.range;
   document.getElementById('dName').textContent = p.name;
-  document.getElementById('dStars').innerHTML = stars(p.r) + `<span class="drawer__rc">(${p.rv} reviews)</span>`;
+  document.getElementById('dStars').innerHTML = stars(p.r)+`<span class="d-rc">(${p.rv} reviews)</span>`;
   document.getElementById('dPrice').textContent = `£${p.price}`;
   document.getElementById('dSz').textContent = p.sz;
   document.getElementById('dDesc').textContent = p.desc;
   document.getElementById('dIngs').innerHTML = p.ings.length
-    ? '<div class="drawer__lbl" style="margin-bottom:10px">Key Ingredients</div>' + p.ings.map(k =>
-        `<div class="ing"><div class="ing__dot"></div><div><div class="ing__name">${k.n}</div><div class="ing__benefit">${k.b}</div></div></div>`).join('')
+    ? '<div class="d-lbl" style="margin-bottom:10px">Key Ingredients</div>'+p.ings.map(k=>
+        `<div class="d-ing"><div class="d-ing-dot"></div><div><div class="d-ing-name">${k.n}</div><div class="d-ing-benefit">${k.b}</div></div></div>`
+      ).join('')
     : '';
-  if (p.shades) {
-    document.getElementById('dShadesSec').style.display = 'block';
-    document.getElementById('dShadeName').textContent = curShade.n;
-    document.getElementById('dShadesRow').innerHTML = p.shades.map((s, i) =>
-      `<div class="shade${i === 0 ? ' on' : ''}" style="background:${s.c}" title="${s.n}" onclick="pickShade(${i})" aria-label="${s.n}"></div>`).join('');
+  if(p.shades){
+    document.getElementById('dShadesSec').style.display='block';
+    document.getElementById('dShadeName').textContent=curShade.n;
+    document.getElementById('dShadesRow').innerHTML=p.shades.map((s,i)=>
+      `<div class="d-shade${i===0?' on':''}" style="background:${s.c}" onclick="pickShade(${i})" title="${s.n}"></div>`).join('');
   } else {
-    document.getElementById('dShadesSec').style.display = 'none';
+    document.getElementById('dShadesSec').style.display='none';
   }
-  document.getElementById('drawerOv').classList.add('on');
+  document.getElementById('drawerMask').classList.add('on');
   document.getElementById('drawer').classList.add('on');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function pickShade(i) {
-  if (!curP || !curP.shades) return;
-  curShade = curP.shades[i];
-  document.getElementById('dShadeName').textContent = curShade.n;
-  document.querySelectorAll('.shade').forEach((s, j) => s.classList.toggle('on', j === i));
+function pickShade(i){
+  if(!curP||!curP.shades)return;
+  curShade=curP.shades[i];
+  document.getElementById('dShadeName').textContent=curShade.n;
+  document.querySelectorAll('.d-shade').forEach((s,j)=>s.classList.toggle('on',j===i));
 }
-function closeDrawer() {
-  document.getElementById('drawerOv').classList.remove('on');
+function closeDrawer(){
+  document.getElementById('drawerMask').classList.remove('on');
   document.getElementById('drawer').classList.remove('on');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 }
-function addFromDrawer() { if (curP) { addToCart(curP, curShade); closeDrawer(); } }
+function addFromDrawer(){if(curP){addToCart(curP,curShade);closeDrawer();}}
 
 /* ── CART ── */
-function quickAdd(id) { const p = P.find(x => x.id === id); if (p) addToCart(p, null); }
-function addToCart(p, shade) {
-  const key = shade ? `${p.id}-${shade.n}` : `${p.id}`;
-  const ex = cart.find(i => i.key === key);
-  if (ex) ex.qty++; else cart.push({ key, p, shade, qty: 1 });
-  updateCartUI();
+let cart=[];
+function quickAdd(id){const p=P.find(x=>x.id===id);if(p)addToCart(p,null);}
+function addToCart(p,shade){
+  const key=shade?`${p.id}-${shade.n}`:`${p.id}`;
+  const ex=cart.find(i=>i.key===key);
+  if(ex)ex.qty++;else cart.push({key,p,shade,qty:1});
+  updateCart();
   showToast(`${p.name} added to bag`);
 }
-function removeItem(key) { cart = cart.filter(i => i.key !== key); updateCartUI(); }
-function updateCartUI() {
-  const sub = cart.reduce((s, i) => s + i.p.price * i.qty, 0);
-  const count = cart.reduce((s, i) => s + i.qty, 0);
-  const del = sub >= 80 ? 0 : sub > 0 ? 4.99 : 0;
-  const total = sub + del;
-
-  const badge = document.getElementById('cartBadge');
-  badge.style.display = count > 0 ? 'flex' : 'none';
-  badge.textContent = count > 9 ? '9+' : count;
-
-  document.getElementById('cartSub').textContent = `£${sub.toFixed(2)}`;
-  document.getElementById('cartDel').textContent = sub === 0 ? '—' : del === 0 ? 'FREE' : `£${del.toFixed(2)}`;
-  document.getElementById('cartTotal').textContent = `£${total.toFixed(2)}`;
-
-  const pct = Math.min(100, (sub / 80) * 100);
-  document.getElementById('shipFill').style.width = `${pct}%`;
-  const sm = document.getElementById('shipMsg');
-  sm.textContent = sub >= 80 ? 'You\'ve unlocked free delivery!' : `Add £${(80 - sub).toFixed(2)} more for free delivery`;
-  sm.style.color = sub >= 80 ? '#4A7C59' : 'var(--cinnamon)';
-
-  document.getElementById('cartBody').innerHTML = cart.length
-    ? cart.map(i => `<div class="cart-item">
-        <img src="${i.p.img}" alt="${i.p.name}" />
+function removeItem(key){cart=cart.filter(i=>i.key!==key);updateCart();}
+function updateCart(){
+  const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const cnt=cart.reduce((s,i)=>s+i.qty,0);
+  const del=sub>=80?0:sub>0?4.99:0;
+  const total=sub+del;
+  const badge=document.getElementById('cartBadge');
+  badge.style.display=cnt>0?'flex':'none';
+  badge.textContent=cnt>9?'9+':cnt;
+  document.getElementById('cpSub').textContent=`£${sub.toFixed(2)}`;
+  document.getElementById('cpDel').textContent=sub===0?'—':del===0?'Free':`£${del.toFixed(2)}`;
+  document.getElementById('cpTotal').textContent=`£${total.toFixed(2)}`;
+  const pct=Math.min(100,(sub/80)*100);
+  document.getElementById('shipFill').style.width=`${pct}%`;
+  const lbl=document.getElementById('shipLabel');
+  lbl.textContent=sub>=80?'Free delivery unlocked!':sub===0?'Spend £80 for free delivery':`Add £${(80-sub).toFixed(2)} more for free delivery`;
+  lbl.style.color=sub>=80?'#4A7C59':'var(--cinnamon)';
+  document.getElementById('cartItems').innerHTML=cart.length
+    ?cart.map(i=>`<div class="ci">
+        <img src="${i.p.img}" alt="${i.p.name}"/>
         <div class="ci-info">
           <div class="ci-range">${i.p.range}</div>
           <div class="ci-name">${i.p.name}</div>
-          ${i.shade ? `<div class="ci-shade">${i.shade.n}</div>` : ''}
-          <div class="ci-sz">${i.p.sz} · Qty ${i.qty}</div>
-          <div class="ci-bottom">
-            <span class="ci-price">£${(i.p.price * i.qty).toFixed(2)}</span>
+          ${i.shade?`<div class="ci-shade-lbl">${i.shade.n}</div>`:''}
+          <div class="ci-meta">${i.p.sz} · Qty ${i.qty}</div>
+          <div class="ci-row">
+            <span class="ci-price">£${(i.p.price*i.qty).toFixed(2)}</span>
             <span class="ci-rm" onclick="removeItem('${i.key}')">Remove</span>
           </div>
         </div>
       </div>`).join('')
-    : `<div class="cart-empty">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <div style="font-family:var(--serif);font-size:22px">Your bag is empty</div>
-        <div style="font-size:14px;color:var(--muted);max-width:200px;line-height:1.6">Discover our premium beauty collection.</div>
+    :`<div class="cart-empty-state">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--rose-2)" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <div style="font-family:var(--serif);font-size:20px;font-weight:400">Your bag is empty</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.7">Discover premium beauty crafted with rare Moroccan and Korean ingredients.</div>
       </div>`;
 }
-function openCart() {
-  updateCartUI();
-  document.getElementById('cartPanel').classList.add('on');
-  document.getElementById('cartOv').classList.add('on');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  document.getElementById('cartPanel').classList.remove('on');
-  document.getElementById('cartOv').classList.remove('on');
-  document.body.style.overflow = '';
-}
-function checkout() {
-  if (!cart.length) { showToast('Your bag is empty'); return; }
-  cart = []; updateCartUI(); closeCart(); showToast('Order placed! Thank you 🎉');
-}
+function openCart(){updateCart();document.getElementById('cartPanel').classList.add('on');document.getElementById('cartMask').classList.add('on');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartPanel').classList.remove('on');document.getElementById('cartMask').classList.remove('on');document.body.style.overflow='';}
+function checkout(){if(!cart.length){showToast('Your bag is empty');return;}cart=[];updateCart();closeCart();showToast('Order placed — thank you!');}
 
 /* ── TOAST ── */
 let tTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('on');
-  clearTimeout(tTimer); tTimer = setTimeout(() => t.classList.remove('on'), 2600);
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('on'),2800);
 }
 
-/* ── MOBILE TABS ── */
-function activateTab(n) {
-  document.querySelectorAll('.btab').forEach((t, i) => t.classList.toggle('on', i === n));
-}
-
-/* ── MOBILE MENU ── */
-function toggleMobileMenu() { showToast('Navigation coming soon'); }
+/* ── TABS ── */
+function activateTab(n){document.querySelectorAll('.btab').forEach((t,i)=>t.classList.toggle('on',i===n));}
 </script>
 </body>
 </html>
