@@ -356,6 +356,13 @@ body::after {
 @media(min-width:900px) { .prod-grid { grid-template-columns:repeat(4,1fr); } }
 @media(min-width:1200px){ .prod-grid { grid-template-columns:repeat(5,1fr); } }
 
+/* Category page grid: capped at 4 columns for a more generous, luxurious layout */
+#cpGrid { grid-template-columns:repeat(2,1fr); gap:clamp(14px,2vw,24px); }
+@media(min-width:600px) { #cpGrid { grid-template-columns:repeat(2,1fr); } }
+@media(min-width:760px) { #cpGrid { grid-template-columns:repeat(3,1fr); } }
+@media(min-width:1060px){ #cpGrid { grid-template-columns:repeat(4,1fr); } }
+#cpGrid .card-img img { height:clamp(220px,24vw,310px); }
+
 /* Scroll row */
 .hrow-outer { overflow-x:auto; scrollbar-width:none; padding:0 var(--px) 8px; }
 .hrow-outer::-webkit-scrollbar { display:none; }
