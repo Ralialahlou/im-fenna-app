@@ -644,7 +644,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
    CATEGORY PAGE — full-screen layered over content
 ═══════════════════════════════════════════════ */
 .cat-page {
-  display: none; position: fixed; inset: 0; z-index: 380;
+  display: none; position: fixed; inset: 0; z-index: 410;
   background: var(--ivory); overflow-y: auto;
   animation: cpIn .3s var(--ease) both;
 }
@@ -679,11 +679,11 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 
 .cp-layout {
   max-width: var(--wrap); margin: 0 auto;
-  padding: 32px var(--px) 80px;
+  padding: 40px var(--px) 80px;
   display: grid; grid-template-columns: 256px 1fr;
   gap: 36px;
 }
-@media(max-width:900px) { .cp-layout { grid-template-columns: 1fr; padding-top: 18px; } }
+@media(max-width:900px) { .cp-layout { grid-template-columns: 1fr; padding-top: 24px; } }
 
 /* Filter sidebar */
 .fs {
@@ -827,7 +827,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
    PDP — Full Product Detail Page
 ═══════════════════════════════════════════════ */
 .pdp-page {
-  display: none; position: fixed; inset: 0; z-index: 390;
+  display: none; position: fixed; inset: 0; z-index: 420;
   background: var(--ivory); overflow-y: auto;
   animation: cpIn .3s var(--ease) both;
 }
@@ -1125,13 +1125,17 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 }
 .c-mask.on { opacity:1; pointer-events:all; }
 .cart-panel {
-  position:fixed; top:0; right:0; bottom:0;
+  position:fixed; top:0; left:0; bottom:0;
   width:min(440px,100vw); z-index:601;
   background:var(--ivory); display:flex; flex-direction:column;
-  transform:translateX(100%); transition:transform .4s var(--ease);
-  box-shadow:-16px 0 48px rgba(12,6,6,.1);
+  transform:translateX(-100%); transition:transform .4s var(--ease);
+  box-shadow:16px 0 48px rgba(12,6,6,.1);
 }
 .cart-panel.on { transform:translateX(0); }
+.ci-qty { display:flex; align-items:center; gap:8px; }
+.ci-q-btn { width:26px; height:26px; border-radius:50%; border:1px solid rgba(118,20,21,.25); background:transparent; font-size:15px; line-height:1; color:var(--maroon); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.ci-q-btn:hover { background:var(--maroon); color:var(--ivory); border-color:var(--maroon); }
+.ci-q-n { font-family:var(--sans); font-size:13px; font-weight:600; min-width:18px; text-align:center; }
 .cp-hd {
   display:flex; align-items:center; justify-content:space-between;
   padding:18px 24px; border-bottom:1px solid var(--border);
@@ -1180,6 +1184,72 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 }
 .toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
 @media(max-width:900px) { .toast { bottom:74px; } }
+
+/* ── LOGIN MODAL ── */
+.login-mask { position:fixed; inset:0; background:rgba(28,14,14,.55); z-index:700; opacity:0; pointer-events:none; transition:opacity .3s; }
+.login-mask.on { opacity:1; pointer-events:all; }
+.login-modal {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-48%) scale(.97);
+  width:min(460px,calc(100vw - 32px)); background:var(--ivory);
+  z-index:701; padding:48px 40px 40px; transition:transform .35s var(--ease),opacity .35s;
+  opacity:0; pointer-events:none;
+}
+.login-mask.on .login-modal { transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:all; }
+.login-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; padding:8px; }
+.login-close svg { width:18px; height:18px; stroke:var(--muted); fill:none; stroke-width:2; stroke-linecap:round; }
+.login-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:28px; }
+.login-tab { flex:1; padding:12px; text-align:center; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .2s,border-color .2s; }
+.login-tab.on { color:var(--maroon); border-color:var(--maroon); }
+.login-form { display:none; }
+.login-form.on { display:block; }
+.lf-field { margin-bottom:16px; }
+.lf-label { display:block; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.lf-input { width:100%; padding:12px 16px; border:1px solid var(--border-2); background:var(--white); font-family:var(--sans); font-size:14px; color:var(--text); outline:none; transition:border-color .2s; box-sizing:border-box; }
+.lf-input:focus { border-color:var(--gold); }
+.lf-submit { width:100%; padding:16px; background:var(--maroon); color:var(--ivory); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer; border:none; margin-top:8px; transition:background .25s; }
+.lf-submit:hover { background:var(--maroon-2); }
+.lf-sep { font-family:var(--sans); font-size:11px; color:var(--muted); text-align:center; margin:16px 0; }
+.login-title { font-family:var(--serif); font-size:22px; font-weight:700; text-align:center; margin-bottom:6px; }
+.login-sub { font-family:var(--sans); font-size:12px; color:var(--muted); text-align:center; margin-bottom:24px; }
+
+/* ── INFO PAGES (About, FAQ, CGU, Privacy) ── */
+.info-page {
+  display:none; position:fixed; inset:0; z-index:430;
+  background:var(--ivory); overflow-y:auto;
+  animation:cpIn .3s var(--ease) both;
+}
+.info-page.open { display:block; }
+.info-topbar { background:var(--glass); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; }
+.info-topbar-inner { max-width:var(--wrap); margin:0 auto; padding:12px var(--px); display:flex; align-items:center; justify-content:space-between; }
+.info-content { max-width:820px; margin:0 auto; padding:clamp(40px,6vw,80px) var(--px) 100px; }
+.info-eyebrow { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.info-eyebrow span { width:24px; height:1px; background:var(--gold); display:inline-block; }
+.info-h1 { font-family:var(--serif); font-size:clamp(28px,4vw,48px); font-weight:700; line-height:1.1; margin-bottom:clamp(24px,4vw,48px); }
+.info-h1 em { font-style:italic; font-weight:400; color:var(--cinnamon); }
+.info-body { font-family:var(--sans); font-size:15px; line-height:1.8; color:var(--text-2); }
+.info-body h3 { font-family:var(--serif); font-size:20px; font-weight:700; color:var(--text); margin:36px 0 10px; }
+.info-body p { margin-bottom:16px; }
+.info-body ul { padding-left:20px; margin-bottom:16px; }
+.info-body ul li { margin-bottom:8px; }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q { display:flex; align-items:center; justify-content:space-between; padding:18px 0; cursor:pointer; font-family:var(--serif); font-size:17px; font-weight:600; gap:16px; }
+.faq-q svg { width:18px; height:18px; stroke:var(--muted); fill:none; stroke-width:2; stroke-linecap:round; flex-shrink:0; transition:transform .25s; }
+.faq-item.open .faq-q svg { transform:rotate(45deg); }
+.faq-a { font-family:var(--sans); font-size:14px; line-height:1.75; color:var(--text-2); max-height:0; overflow:hidden; transition:max-height .35s var(--ease), padding .35s; }
+.faq-item.open .faq-a { max-height:400px; padding-bottom:18px; }
+
+/* ── AS SEEN ON SOCIAL ── */
+.social-sec { padding:clamp(60px,8vw,100px) 0; background:var(--white); }
+.social-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:3px; margin-top:clamp(28px,3vw,40px); }
+@media(max-width:768px) { .social-grid { grid-template-columns:repeat(3,1fr); } }
+.social-cell { position:relative; overflow:hidden; aspect-ratio:1; cursor:pointer; }
+.social-cell img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.social-cell:hover img { transform:scale(1.08); }
+.social-cell-ov { position:absolute; inset:0; background:rgba(28,14,14,.4); opacity:0; transition:opacity .3s; display:flex; align-items:center; justify-content:center; }
+.social-cell:hover .social-cell-ov { opacity:1; }
+.social-cell-ov svg { width:28px; height:28px; stroke:var(--ivory); fill:none; stroke-width:1.5; }
+.social-handle { font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-align:center; margin-top:20px; }
+.social-handle a { color:var(--maroon); }
   </style>
 </head>
 <body>
@@ -1195,17 +1265,17 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           <span></span><span></span><span></span>
         </button>
       </div>
-      <div class="nav-logo" onclick="closeCatPage()" role="banner">
+      <div class="nav-logo" onclick="goHome()" role="banner">
         <img src="images/logo.png" alt="I'm Fenna" class="nav-logo-img" />
       </div>
       <div class="nav-right">
         <button class="nav-btn" onclick="openSearch()" aria-label="Search">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
-        <button class="nav-btn" onclick="showToast('Sign in to your account')" aria-label="Account">
+        <button class="nav-btn" onclick="openLogin('login')" aria-label="Mon compte">
           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
-        <button class="nav-btn" onclick="showToast('Your wishlist')" aria-label="Wishlist">
+        <button class="nav-btn" onclick="openLogin('login')" aria-label="Favoris">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         <button class="nav-btn" onclick="openCart()" aria-label="Bag">
@@ -1702,14 +1772,14 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           <span class="fg-hd-lbl">Price</span><span class="fg-chev"></span>
         </div>
         <div class="fg-body">
-          <div class="fo" data-filter="price" data-val="0-30" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Under £30</span></div>
-          <div class="fo" data-filter="price" data-val="30-60" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£30 – £60</span></div>
-          <div class="fo" data-filter="price" data-val="60-100" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£60 – £100</span></div>
-          <div class="fo" data-filter="price" data-val="100+" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£100+</span></div>
+          <div class="fo" data-filter="price" data-val="0-300" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Moins de 300 DH</span></div>
+          <div class="fo" data-filter="price" data-val="300-600" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">300 – 600 DH</span></div>
+          <div class="fo" data-filter="price" data-val="600-1000" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">600 – 1000 DH</span></div>
+          <div class="fo" data-filter="price" data-val="1000+" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">1000 DH +</span></div>
           <div class="price-rng" style="margin-top:10px">
-            <input class="pr-input" type="number" id="prMin" placeholder="£ Min" min="0" max="500" />
+            <input class="pr-input" type="number" id="prMin" placeholder="DH Min" min="0" max="5000" />
             <span class="pr-dash">—</span>
-            <input class="pr-input" type="number" id="prMax" placeholder="£ Max" min="0" max="500" />
+            <input class="pr-input" type="number" id="prMax" placeholder="DH Max" min="0" max="5000" />
             <button class="pr-go" onclick="applyPriceRange()">Go</button>
           </div>
         </div>
@@ -1833,6 +1903,31 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <!-- Filter sidebar mask (mobile) -->
 <div class="fs-mask" id="fsMask" onclick="closeMobileFilters()"></div>
 
+<!-- ══ AS SEEN ON SOCIAL ════════════════════════════════ -->
+<section class="social-sec">
+  <div class="wrap">
+    <div class="sec-hd fade-up">
+      <div>
+        <div class="sec-eye">Community</div>
+        <h2 class="sec-title">As Seen on <em>Social</em></h2>
+      </div>
+      <a class="sec-more" href="https://www.instagram.com" target="_blank" rel="noopener">
+        @imfenna
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="social-grid">
+    <div class="social-cell"><img src="images/face/portrait-glow.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+    <div class="social-cell"><img src="images/face/portrait-lips.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+    <div class="social-cell"><img src="images/products/lipstick-compact.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+    <div class="social-cell"><img src="images/face/portrait-chignon.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+    <div class="social-cell"><img src="images/products/blush-compact.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+    <div class="social-cell"><img src="images/face/if-dream.png" alt="" loading="lazy"/><div class="social-cell-ov"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div></div>
+  </div>
+  <p class="social-handle">Follow us <a href="https://www.instagram.com" target="_blank" rel="noopener">@imfenna</a> — tag us to be featured</p>
+</section>
+
 <!-- ══ FOOTER ══════════════════════════════════════════ -->
 <footer>
   <div class="ft-main">
@@ -1866,29 +1961,28 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         </div>
       </div>
       <div>
-        <div class="ft-col-title">Help</div>
+        <div class="ft-col-title">Aide</div>
         <div class="ft-links">
-          <a href="#">Track My Order</a>
-          <a href="#">Delivery & Returns</a>
-          <a href="#">FAQ</a>
-          <a href="#">Contact Us</a>
+          <a href="#" onclick="openInfoPage('faqPage');return false">FAQ</a>
+          <a href="#" onclick="openInfoPage('cguPage');return false">CGU</a>
+          <a href="#" onclick="openInfoPage('privPage');return false">Politique de confidentialité</a>
+          <a href="#">Contact</a>
         </div>
       </div>
       <div>
-        <div class="ft-col-title">About</div>
+        <div class="ft-col-title">À Propos</div>
         <div class="ft-links">
-          <a href="#">Our Story</a>
-          <a href="#">Ingredients</a>
-          <a href="#">Sustainability</a>
-          <a href="#">Press</a>
-          <a href="#">Careers</a>
+          <a href="#" onclick="openInfoPage('aboutPage');return false">Notre Histoire</a>
+          <a href="#" onclick="openInfoPage('faqPage');return false">Questions Fréquentes</a>
+          <a href="#">Nos Ingrédients</a>
+          <a href="#">Presse</a>
         </div>
       </div>
     </div>
   </div>
   <div class="ft-bottom">
     <p>© 2025 I'm Fenna. All rights reserved.</p>
-    <p><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a></p>
+    <p><a href="#" onclick="openInfoPage('privPage');return false">Confidentialité</a> · <a href="#" onclick="openInfoPage('cguPage');return false">CGU</a> · <a href="#">Cookies</a></p>
   </div>
 </footer>
 
@@ -2110,6 +2204,199 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   </div>
 </div>
 
+<!-- LOGIN MODAL -->
+<div class="login-mask" id="loginMask" onclick="closeLogin(event)">
+  <div class="login-modal">
+    <button class="login-close" onclick="closeLogin(null,true)" aria-label="Fermer">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="login-title">Bienvenue chez I'm Fenna</div>
+    <div class="login-sub">Connectez-vous ou créez un compte pour continuer</div>
+    <div class="login-tabs">
+      <div class="login-tab on" id="ltab-login" onclick="switchLoginTab('login')">Se connecter</div>
+      <div class="login-tab" id="ltab-register" onclick="switchLoginTab('register')">Créer un compte</div>
+    </div>
+    <div class="login-form on" id="lform-login">
+      <div class="lf-field"><label class="lf-label">Email</label><input class="lf-input" type="email" placeholder="votre@email.com" /></div>
+      <div class="lf-field"><label class="lf-label">Mot de passe</label><input class="lf-input" type="password" placeholder="••••••••" /></div>
+      <button class="lf-submit" onclick="showToast('Connexion en cours…')">Se connecter</button>
+      <div class="lf-sep">Mot de passe oublié ?</div>
+    </div>
+    <div class="login-form" id="lform-register">
+      <div class="lf-field"><label class="lf-label">Prénom</label><input class="lf-input" type="text" placeholder="Votre prénom" /></div>
+      <div class="lf-field"><label class="lf-label">Email</label><input class="lf-input" type="email" placeholder="votre@email.com" /></div>
+      <div class="lf-field"><label class="lf-label">Mot de passe</label><input class="lf-input" type="password" placeholder="Minimum 8 caractères" /></div>
+      <button class="lf-submit" onclick="showToast('Compte créé — bienvenue !')">Créer mon compte</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="info-page" id="aboutPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeInfoPage('aboutPage')">Accueil</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc">Notre Histoire</span>
+      </div>
+      <button class="cp-close" onclick="closeInfoPage('aboutPage')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+  <div class="info-content">
+    <div class="info-eyebrow"><span></span>Notre Histoire</div>
+    <h1 class="info-h1">Rooted in <em>Confidence,</em><br>Crafted with Care.</h1>
+    <div class="info-body">
+      <p>I'm Fenna est née d'une conviction simple : la beauté authentique mérite des soins exceptionnels. Fondée au Maroc, notre marque puise ses racines dans les traditions millénaires de la beauté marocaine — l'huile d'argan, l'eau de rose de Dadès, l'argile ghassoul de l'Atlas — tout en embrassant les innovations de la K-beauty coréenne.</p>
+      <h3>Notre Vision</h3>
+      <p>Nous croyons que chaque femme porte en elle une beauté singulière, unique et puissante. I'm Fenna est un espace de célébration de cette beauté — pas de transformation, pas de masque, mais une révélation. Nos formules nourrissent, protègent et révèlent la meilleure version de votre peau.</p>
+      <h3>Nos Valeurs</h3>
+      <ul>
+        <li><strong>Authenticité</strong> — Des ingrédients vrais, tracés et certifiés, issus de coopératives féminines marocaines.</li>
+        <li><strong>Innovation</strong> — Fusion de la sagesse traditionnelle et de la science cosmétique contemporaine.</li>
+        <li><strong>Inclusivité</strong> — Des soins pensés pour toutes les peaux, toutes les carnations, toutes les femmes.</li>
+        <li><strong>Éthique</strong> — Jamais testé sur les animaux. Sans parabènes, sans sulfates, sans compromis.</li>
+      </ul>
+      <h3>Nos Ingrédients Héros</h3>
+      <p>Chaque produit I'm Fenna est formulé autour d'ingrédients d'exception : l'huile d'argan pure du Souss, la rose damascena de la Vallée des Dadès, l'argile ghassoul des montagnes du Moyen Atlas, et les actifs fermentés de la K-beauty. Ces ingrédients ne sont pas de simples ajouts — ils sont l'âme de notre marque.</p>
+      <h3>Notre Engagement</h3>
+      <p>I'm Fenna s'engage à proposer une beauté propre, responsable et luxueuse. Tous nos emballages sont conçus pour être recyclables. Nous travaillons directement avec les productrices locales pour garantir un commerce équitable et des pratiques durables.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ PAGE -->
+<div class="info-page" id="faqPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeInfoPage('faqPage')">Accueil</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc">FAQ</span>
+      </div>
+      <button class="cp-close" onclick="closeInfoPage('faqPage')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+  <div class="info-content">
+    <div class="info-eyebrow"><span></span>Questions Fréquentes</div>
+    <h1 class="info-h1">Tout ce que vous<br><em>voulez savoir.</em></h1>
+    <div class="info-body">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quels sont les délais de livraison ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">La livraison standard est effectuée sous 3 à 5 jours ouvrés. La livraison express (24h) est disponible pour les commandes passées avant 14h. La livraison est offerte dès 800 DH d'achat.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Puis-je retourner un produit ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Oui, les retours sont acceptés dans les 30 jours suivant la réception, pour tout produit non ouvert et dans son emballage d'origine. Pour initier un retour, contactez notre service client à contact@imfenna.ma.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils adaptés aux peaux sensibles ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">La majorité de nos formules sont conçues pour toutes les peaux, y compris les peaux sensibles. Chaque fiche produit indique les types de peau recommandés. En cas de doute, effectuez toujours un test sur une petite zone.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils cruelty-free et vegan ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Tous nos produits sont certifiés cruelty-free et ne sont jamais testés sur les animaux. Notre gamme principale est 100% vegan. Quelques produits de maquillage contiennent des dérivés d'abeille — vérifiez la liste INCI pour plus de détails.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Comment suivre ma commande ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Un email de confirmation avec un numéro de suivi vous sera envoyé dès l'expédition de votre commande. Vous pouvez suivre votre colis directement via le lien fourni dans l'email.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Proposez-vous un programme de fidélité ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Notre programme Fenna Loyauté est en cours de lancement. Inscrivez-vous à notre newsletter pour être informée en avant-première et bénéficier d'avantages exclusifs dès l'ouverture.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quelle est la durée de conservation des produits ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">La durée de conservation est indiquée sur chaque produit (symbole PAO — période après ouverture). En général, nos sérums se conservent 12 mois après ouverture, nos crèmes 6 à 12 mois, et nos produits de maquillage 12 à 24 mois.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CGU PAGE -->
+<div class="info-page" id="cguPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeInfoPage('cguPage')">Accueil</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc">CGU</span>
+      </div>
+      <button class="cp-close" onclick="closeInfoPage('cguPage')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+  <div class="info-content">
+    <div class="info-eyebrow"><span></span>Conditions Générales</div>
+    <h1 class="info-h1">Conditions Générales<br><em>d'Utilisation</em></h1>
+    <div class="info-body">
+      <p><em>Dernière mise à jour : juin 2026</em></p>
+      <h3>1. Objet</h3>
+      <p>Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation du site internet I'm Fenna (ci-après « le Site »). En accédant au Site, vous acceptez sans réserve les présentes CGU.</p>
+      <h3>2. Accès au site</h3>
+      <p>Le Site est accessible gratuitement à tout utilisateur disposant d'un accès à Internet. I'm Fenna se réserve le droit de modifier, interrompre ou supprimer tout ou partie du Site sans préavis.</p>
+      <h3>3. Commandes et paiement</h3>
+      <p>Toute commande passée sur le Site constitue un contrat de vente entre I'm Fenna et l'acheteur. Les prix sont indiqués en Dirhams marocains (DH) toutes taxes comprises. Le paiement est sécurisé par nos partenaires de paiement certifiés.</p>
+      <h3>4. Livraison</h3>
+      <p>I'm Fenna s'engage à expédier les commandes dans les délais indiqués. En cas de retard imprévu, le client sera informé par email. La livraison est offerte pour toute commande supérieure à 800 DH.</p>
+      <h3>5. Retours et remboursements</h3>
+      <p>Tout produit non ouvert peut être retourné dans les 30 jours suivant la réception. Les frais de retour sont à la charge du client sauf en cas de produit défectueux. Le remboursement sera effectué sous 14 jours ouvrés.</p>
+      <h3>6. Propriété intellectuelle</h3>
+      <p>L'ensemble des contenus du Site (textes, images, logos, marques) est la propriété exclusive de I'm Fenna et est protégé par le droit de la propriété intellectuelle. Toute reproduction sans autorisation est interdite.</p>
+      <h3>7. Responsabilité</h3>
+      <p>I'm Fenna ne saurait être tenue responsable des dommages directs ou indirects résultant de l'utilisation du Site. L'utilisation des produits doit respecter les recommandations indiquées sur chaque fiche produit.</p>
+      <h3>8. Droit applicable</h3>
+      <p>Les présentes CGU sont soumises au droit marocain. Tout litige sera soumis aux tribunaux compétents de Casablanca.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY PAGE -->
+<div class="info-page" id="privPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeInfoPage('privPage')">Accueil</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc">Confidentialité</span>
+      </div>
+      <button class="cp-close" onclick="closeInfoPage('privPage')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+  <div class="info-content">
+    <div class="info-eyebrow"><span></span>Vie Privée</div>
+    <h1 class="info-h1">Politique de<br><em>Confidentialité</em></h1>
+    <div class="info-body">
+      <p><em>Dernière mise à jour : juin 2026</em></p>
+      <h3>1. Collecte des données</h3>
+      <p>I'm Fenna collecte uniquement les données personnelles nécessaires au traitement de vos commandes et à l'amélioration de votre expérience : nom, adresse email, adresse de livraison, et données de navigation anonymisées.</p>
+      <h3>2. Utilisation des données</h3>
+      <p>Vos données sont utilisées pour : traiter et livrer vos commandes, vous envoyer des confirmations et mises à jour de livraison, vous proposer des communications personnalisées (avec votre consentement), améliorer nos services et notre site.</p>
+      <h3>3. Partage des données</h3>
+      <p>I'm Fenna ne vend ni ne loue vos données personnelles à des tiers. Vos données peuvent être partagées uniquement avec nos prestataires de services (logistique, paiement) dans le strict cadre de l'exécution de votre commande.</p>
+      <h3>4. Cookies</h3>
+      <p>Le Site utilise des cookies pour améliorer votre expérience de navigation. Vous pouvez à tout moment paramétrer votre navigateur pour refuser les cookies, ce qui peut affecter certaines fonctionnalités du Site.</p>
+      <h3>5. Vos droits</h3>
+      <p>Conformément à la législation marocaine (loi 09-08 relative à la protection des personnes physiques), vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour exercer ces droits, contactez-nous à : privacy@imfenna.ma</p>
+      <h3>6. Sécurité</h3>
+      <p>Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données contre tout accès non autorisé, perte ou divulgation.</p>
+      <h3>7. Contact</h3>
+      <p>Pour toute question relative à notre politique de confidentialité : privacy@imfenna.ma</p>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -2300,11 +2587,11 @@ const P = [
 
 /* ── USP TICKER ── */
 const USPS = [
-  ['Free delivery on orders over £80',   'M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM18.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z'],
-  ['Free returns within 30 days',        'M16 17l5-5-5-5M2 12h18M9 7l-5 5 5 5'],
-  ['Clean & cruelty free certified',     'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
-  ['Same-day dispatch before 2pm',       'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
-  ['Gold foil packaging on every order', 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'],
+  ['Livraison gratuite dès 800 DH',       'M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM18.5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z'],
+  ['Retours gratuits sous 30 jours',      'M16 17l5-5-5-5M2 12h18M9 7l-5 5 5 5'],
+  ['Certifié Clean & Cruelty-Free',       'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+  ['Expédition le jour même avant 14h',   'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
+  ['Packaging dorure or sur chaque commande', 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'],
 ];
 const TICK = [...USPS,...USPS].map(([t,d])=>`
   <div class="usp-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>${t}</div>
@@ -2546,7 +2833,7 @@ function renderChips(){
   const row=document.getElementById('chipsRow');
   const chips=[];
   const O=cpState.filters;
-  const priceLabels={'0-30':'Under £30','30-60':'£30–£60','60-100':'£60–£100','100+':'£100+'};
+  const priceLabels={'0-300':'Moins de 300 DH','300-600':'300–600 DH','600-1000':'600–1000 DH','1000+':'1000 DH+'};
   const rangeLabels={'moroccan':'Moroccan Heritage','kbeauty':'K-Beauty Precision','colour':'Confident Colour'};
 
   if(O.price) [...O.price].forEach(v=>chips.push({label:priceLabels[v]||v,rm:()=>{O.price.delete(v);if(!O.price.size)delete O.price;document.querySelectorAll(`.fo[data-filter="price"][data-val="${v}"]`).forEach(f=>f.classList.remove('on'));renderCatPage();}}));
@@ -2599,9 +2886,6 @@ function cardHTML(p){
       <button class="card-wish" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Ajouter aux favoris">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
-      <div class="card-ov">
-        <button class="card-ov-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Ajouter au Panier</button>
-      </div>
     </div>
     <div class="card-body">
       <div class="card-range">${p.range}</div>
@@ -2756,7 +3040,7 @@ function pdpQty(d){
 function pdpAddToBag(){
   if(!curP) return;
   for(let i=0;i<pdpQtyN;i++) addToCart(curP,curShade);
-  showToast(`${curP.name.split(' ').slice(0,3).join(' ')} ajouté au panier`);
+  openCart();
 }
 
 function pdpToggleWish(){
@@ -2778,7 +3062,7 @@ function closeDrawer(){ closePDP(); }
 
 /* ── CART ── */
 let cart=[];
-function quickAdd(id){const p=P.find(x=>x.id===id);if(p)addToCart(p,null);}
+function quickAdd(id){const p=P.find(x=>x.id===id);if(p){addToCart(p,null);openCart();}}
 function addToCart(p,shade){
   const key=shade?`${p.id}-${shade.n}`:`${p.id}`;
   const ex=cart.find(i=>i.key===key);
@@ -2807,8 +3091,13 @@ function updateCart(){
           <div class="ci-range">${i.p.range}</div>
           <div class="ci-name">${i.p.name}</div>
           ${i.shade?`<div class="ci-shade">${i.shade.n}</div>`:''}
-          <div class="ci-meta">${i.p.sz} · Qté ${i.qty}</div>
+          <div class="ci-meta">${i.p.sz}</div>
           <div class="ci-bot">
+            <div class="ci-qty">
+              <button class="ci-q-btn" onclick="cartQty('${i.key}',-1)">−</button>
+              <span class="ci-q-n">${i.qty}</span>
+              <button class="ci-q-btn" onclick="cartQty('${i.key}',1)">+</button>
+            </div>
             <span class="ci-price">${mad(i.p.price*i.qty)}</span>
             <span class="ci-rm" onclick="removeItem('${i.key}')">Retirer</span>
           </div>
@@ -2831,6 +3120,52 @@ function showToast(msg){
   t.textContent=msg;t.classList.add('on');
   clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2800);
 }
+
+/* ── CART QTY ── */
+function cartQty(key,d){const item=cart.find(i=>i.key===key);if(!item)return;item.qty=Math.max(1,item.qty+d);updateCart();}
+
+/* ── GO HOME ── */
+function goHome(){
+  document.querySelectorAll('.info-page').forEach(p=>p.classList.remove('open'));
+  if(document.getElementById('pdpPage').classList.contains('open')) closePDP();
+  if(document.getElementById('catPage').classList.contains('open')){
+    document.getElementById('catPage').classList.remove('open');
+  }
+  document.body.style.overflow='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── LOGIN MODAL ── */
+function openLogin(tab){
+  document.getElementById('loginMask').classList.add('on');
+  document.body.style.overflow='hidden';
+  if(tab) switchLoginTab(tab);
+}
+function closeLogin(e,force){
+  if(force||!e||e.target===document.getElementById('loginMask')){
+    document.getElementById('loginMask').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+function switchLoginTab(tab){
+  document.querySelectorAll('.login-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.login-form').forEach(f=>f.classList.remove('on'));
+  document.getElementById('ltab-'+tab).classList.add('on');
+  document.getElementById('lform-'+tab).classList.add('on');
+}
+
+/* ── INFO PAGES ── */
+function openInfoPage(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeInfoPage(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── FAQ ACCORDION ── */
+function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}
 
 /* ── MOBILE TABS ── */
 function activateTab(n){document.querySelectorAll('.btab').forEach((t,i)=>t.classList.toggle('on',i===n));}
