@@ -1186,31 +1186,130 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 @media(max-width:900px) { .toast { bottom:74px; } }
 
 /* ── LOGIN MODAL ── */
-.login-mask { position:fixed; inset:0; background:rgba(28,14,14,.55); z-index:700; opacity:0; pointer-events:none; transition:opacity .3s; }
-.login-mask.on { opacity:1; pointer-events:all; }
-.login-modal {
-  position:fixed; top:50%; left:50%; transform:translate(-50%,-48%) scale(.97);
-  width:min(460px,calc(100vw - 32px)); background:var(--ivory);
-  z-index:701; padding:48px 40px 40px; transition:transform .35s var(--ease),opacity .35s;
-  opacity:0; pointer-events:none;
+.login-mask {
+  position:fixed; inset:0; background:rgba(28,14,14,.55); z-index:700;
+  display:none; align-items:center; justify-content:center;
 }
-.login-mask.on .login-modal { transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:all; }
-.login-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; padding:8px; }
+.login-mask.on { display:flex; }
+.login-modal {
+  position:relative; width:min(480px,calc(100vw - 32px)); background:var(--ivory);
+  padding:48px 40px 40px; animation:cpIn .3s var(--ease) both;
+}
+@media(max-width:500px){ .login-modal { padding:40px 22px 32px; } }
+.login-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; padding:8px; z-index:1; }
 .login-close svg { width:18px; height:18px; stroke:var(--muted); fill:none; stroke-width:2; stroke-linecap:round; }
-.login-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:28px; }
+.login-tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:28px; }
 .login-tab { flex:1; padding:12px; text-align:center; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .2s,border-color .2s; }
 .login-tab.on { color:var(--maroon); border-color:var(--maroon); }
 .login-form { display:none; }
 .login-form.on { display:block; }
+.lf-row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .lf-field { margin-bottom:16px; }
 .lf-label { display:block; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
 .lf-input { width:100%; padding:12px 16px; border:1px solid var(--border-2); background:var(--white); font-family:var(--sans); font-size:14px; color:var(--text); outline:none; transition:border-color .2s; box-sizing:border-box; }
 .lf-input:focus { border-color:var(--gold); }
+.lf-err { font-family:var(--sans); font-size:11px; color:var(--maroon); margin-top:6px; display:none; }
+.lf-err.on { display:block; }
 .lf-submit { width:100%; padding:16px; background:var(--maroon); color:var(--ivory); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer; border:none; margin-top:8px; transition:background .25s; }
 .lf-submit:hover { background:var(--maroon-2); }
 .lf-sep { font-family:var(--sans); font-size:11px; color:var(--muted); text-align:center; margin:16px 0; }
 .login-title { font-family:var(--serif); font-size:22px; font-weight:700; text-align:center; margin-bottom:6px; }
 .login-sub { font-family:var(--sans); font-size:12px; color:var(--muted); text-align:center; margin-bottom:24px; }
+
+/* ── CHECKOUT PAGE ── */
+.checkout-page {
+  display:none; position:fixed; inset:0; z-index:450;
+  background:var(--ivory); overflow-y:auto;
+  animation:cpIn .3s var(--ease) both;
+}
+.checkout-page.open { display:block; }
+.co-body { max-width:1060px; margin:0 auto; padding:40px var(--px) 100px; display:grid; grid-template-columns:1fr 360px; gap:clamp(32px,5vw,72px); }
+@media(max-width:860px) { .co-body { grid-template-columns:1fr; } }
+.co-steps { display:flex; align-items:center; margin-bottom:36px; }
+.co-step { display:flex; align-items:center; gap:8px; font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+.co-step.on { color:var(--maroon); }
+.co-step.done { color:var(--gold); }
+.co-step-n { width:26px; height:26px; border-radius:50%; border:1.5px solid currentColor; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; }
+.co-step.done .co-step-n { background:var(--gold); border-color:var(--gold); color:var(--ivory); }
+.co-sep { flex:1; height:1px; background:var(--border-2); margin:0 10px; }
+.co-panel { display:none; }
+.co-panel.on { display:block; }
+.co-h2 { font-family:var(--serif); font-size:clamp(20px,2.5vw,26px); font-weight:700; margin-bottom:24px; }
+.co-row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media(max-width:520px) { .co-row2 { grid-template-columns:1fr; } }
+.co-field { margin-bottom:16px; }
+.co-label { display:block; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.co-input, .co-select { width:100%; padding:13px 16px; border:1px solid var(--border-2); background:var(--white); font-family:var(--sans); font-size:14px; color:var(--text); outline:none; transition:border-color .2s; box-sizing:border-box; }
+.co-input:focus, .co-select:focus { border-color:var(--gold); }
+.co-select { appearance:none; -webkit-appearance:none; cursor:pointer; }
+.co-actions { display:flex; gap:14px; margin-top:28px; }
+.co-btn-next { flex:1; padding:18px; background:var(--maroon); color:var(--ivory); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer; border:none; transition:background .25s; }
+.co-btn-next:hover { background:var(--maroon-2); }
+.co-btn-back { padding:18px 20px; background:transparent; border:1px solid var(--border-2); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; white-space:nowrap; }
+.co-btn-back:hover { border-color:var(--maroon); color:var(--maroon); }
+.co-divider { height:1px; background:var(--border); margin:20px 0; }
+/* Summary sidebar */
+.co-summary { position:sticky; top:24px; }
+.co-sum-title { font-family:var(--serif); font-size:17px; font-weight:700; padding-bottom:14px; border-bottom:1px solid var(--border); margin-bottom:16px; }
+.co-sum-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid rgba(226,196,186,.2); }
+.co-sum-img-wrap { position:relative; flex-shrink:0; }
+.co-sum-img { width:54px; height:62px; object-fit:cover; background:var(--ivory-2); display:block; }
+.co-sum-qty-badge { position:absolute; top:-7px; right:-7px; width:18px; height:18px; border-radius:50%; background:var(--maroon); color:var(--ivory); font-family:var(--sans); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.co-sum-info { flex:1; }
+.co-sum-range { font-family:var(--sans); font-size:9px; color:var(--gold); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:3px; }
+.co-sum-name { font-family:var(--serif); font-size:13px; font-weight:600; line-height:1.2; margin-bottom:4px; }
+.co-sum-price { font-family:var(--serif); font-size:14px; font-weight:700; }
+.co-sum-totals { padding-top:16px; }
+.co-sum-row { display:flex; justify-content:space-between; font-family:var(--sans); font-size:12.5px; color:var(--muted); margin-bottom:7px; }
+.co-sum-row.total { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--text); padding-top:12px; border-top:1px solid var(--border); margin-top:8px; margin-bottom:0; }
+/* Review step */
+.co-review-block { background:var(--ivory-2); padding:18px 20px; margin-bottom:14px; }
+.co-review-hd { font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; }
+.co-review-edit { color:var(--muted); cursor:pointer; font-size:9px; transition:color .2s; }
+.co-review-edit:hover { color:var(--maroon); }
+.co-review-val { font-family:var(--sans); font-size:13.5px; color:var(--text); line-height:1.6; }
+/* Thank you step */
+.co-thanks { text-align:center; padding:20px 0; }
+.co-thanks-check { width:72px; height:72px; border-radius:50%; background:rgba(74,124,89,.12); display:flex; align-items:center; justify-content:center; margin:0 auto 28px; }
+.co-thanks-check svg { width:32px; height:32px; stroke:#4A7C59; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.co-thanks-h { font-family:var(--serif); font-size:clamp(22px,3vw,30px); font-weight:700; margin-bottom:10px; }
+.co-thanks-sub { font-family:var(--sans); font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:28px; max-width:380px; margin-left:auto; margin-right:auto; }
+.co-order-box { background:var(--ivory-2); padding:20px 24px; text-align:left; margin-bottom:28px; }
+.co-order-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); font-family:var(--sans); font-size:13px; }
+.co-order-row:last-child { border-bottom:none; }
+.co-order-key { color:var(--muted); }
+.co-order-val { font-weight:700; color:var(--text); font-size:13px; letter-spacing:.5px; }
+.co-tracking-val { font-family:var(--sans); font-weight:700; color:var(--maroon); letter-spacing:2px; font-size:13px; }
+
+/* ── PROFILE PAGE ── */
+.profile-page {
+  display:none; position:fixed; inset:0; z-index:440;
+  background:var(--ivory); overflow-y:auto;
+  animation:cpIn .3s var(--ease) both;
+}
+.profile-page.open { display:block; }
+.profile-hero { background:linear-gradient(135deg,var(--maroon) 0%,var(--cinnamon) 100%); padding:clamp(32px,5vw,60px) var(--px) clamp(28px,4vw,52px); }
+.profile-hero-inner { max-width:var(--wrap); margin:0 auto; display:flex; align-items:center; gap:24px; }
+.profile-avatar { width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.profile-avatar svg { width:28px; height:28px; stroke:var(--ivory); fill:none; stroke-width:1.5; }
+.profile-name { font-family:var(--serif); font-size:clamp(20px,3vw,28px); font-weight:700; color:var(--ivory); margin-bottom:4px; }
+.profile-email { font-family:var(--sans); font-size:12px; color:rgba(244,240,238,.7); letter-spacing:.5px; }
+.profile-content { max-width:var(--wrap); margin:0 auto; padding:clamp(32px,4vw,56px) var(--px) 100px; }
+.profile-sec-title { font-family:var(--serif); font-size:20px; font-weight:700; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+.order-card { border:1px solid var(--border); margin-bottom:16px; }
+.order-card-hd { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:var(--ivory-2); flex-wrap:wrap; gap:10px; }
+.order-card-meta { display:flex; gap:24px; flex-wrap:wrap; }
+.order-meta-item { }
+.order-meta-label { font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+.order-meta-val { font-family:var(--sans); font-size:13px; font-weight:600; color:var(--text); }
+.order-tracking { font-family:var(--sans); font-size:12px; font-weight:700; color:var(--maroon); letter-spacing:1.5px; }
+.order-status { display:inline-block; padding:4px 12px; font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; background:rgba(74,124,89,.12); color:#4A7C59; }
+.order-products { padding:16px 20px; display:flex; gap:12px; flex-wrap:wrap; }
+.order-prod-img { width:56px; height:64px; object-fit:cover; background:var(--ivory-2); }
+.profile-empty { text-align:center; padding:60px 20px; }
+.profile-empty-icon { font-family:var(--serif); font-size:48px; opacity:.3; margin-bottom:16px; }
+.profile-logout { margin-top:40px; padding:12px 28px; background:transparent; border:1px solid var(--border-2); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; }
+.profile-logout:hover { border-color:var(--maroon); color:var(--maroon); }
 
 /* ── INFO PAGES (About, FAQ, CGU, Privacy) ── */
 .info-page {
@@ -1272,7 +1371,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         <button class="nav-btn" onclick="openSearch()" aria-label="Search">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
-        <button class="nav-btn" onclick="openLogin('login')" aria-label="Mon compte">
+        <button class="nav-btn" id="navProfileBtn" onclick="openProfileOrLogin()" aria-label="Mon compte">
           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
         <button class="nav-btn" onclick="openLogin('login')" aria-label="Favoris">
@@ -2200,34 +2299,219 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       <div class="cp-row"><span>Livraison</span><span id="cpDel">—</span></div>
       <div class="cp-row total"><span>Total</span><span id="cpTotal">0 DH</span></div>
     </div>
-    <button class="cp-checkout" onclick="checkout()">Passer la Commande</button>
+    <button class="cp-checkout" onclick="openCheckout()">Passer la Commande</button>
   </div>
 </div>
 
 <!-- LOGIN MODAL -->
-<div class="login-mask" id="loginMask" onclick="closeLogin(event)">
-  <div class="login-modal">
-    <button class="login-close" onclick="closeLogin(null,true)" aria-label="Fermer">
+<div class="login-mask" id="loginMask" onclick="loginMaskClick(event)">
+  <div class="login-modal" onclick="event.stopPropagation()">
+    <button class="login-close" onclick="closeLogin()" aria-label="Fermer">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div class="login-title">Bienvenue chez I'm Fenna</div>
-    <div class="login-sub">Connectez-vous ou créez un compte pour continuer</div>
+    <div class="login-sub">Connectez-vous ou créez un compte</div>
     <div class="login-tabs">
       <div class="login-tab on" id="ltab-login" onclick="switchLoginTab('login')">Se connecter</div>
       <div class="login-tab" id="ltab-register" onclick="switchLoginTab('register')">Créer un compte</div>
     </div>
+    <!-- Login form -->
     <div class="login-form on" id="lform-login">
-      <div class="lf-field"><label class="lf-label">Email</label><input class="lf-input" type="email" placeholder="votre@email.com" /></div>
-      <div class="lf-field"><label class="lf-label">Mot de passe</label><input class="lf-input" type="password" placeholder="••••••••" /></div>
-      <button class="lf-submit" onclick="showToast('Connexion en cours…')">Se connecter</button>
-      <div class="lf-sep">Mot de passe oublié ?</div>
+      <div class="lf-field">
+        <label class="lf-label" for="li-email">Email</label>
+        <input class="lf-input" id="li-email" type="email" placeholder="votre@email.com" autocomplete="email" />
+      </div>
+      <div class="lf-field">
+        <label class="lf-label" for="li-pass">Mot de passe</label>
+        <input class="lf-input" id="li-pass" type="password" placeholder="Votre mot de passe" autocomplete="current-password" />
+        <div class="lf-err" id="li-err">Email ou mot de passe incorrect.</div>
+      </div>
+      <button class="lf-submit" onclick="doLogin()">Se connecter</button>
+      <div class="lf-sep">Pas encore de compte ? <span style="color:var(--maroon);cursor:pointer" onclick="switchLoginTab('register')">Créer un compte</span></div>
     </div>
+    <!-- Register form -->
     <div class="login-form" id="lform-register">
-      <div class="lf-field"><label class="lf-label">Prénom</label><input class="lf-input" type="text" placeholder="Votre prénom" /></div>
-      <div class="lf-field"><label class="lf-label">Email</label><input class="lf-input" type="email" placeholder="votre@email.com" /></div>
-      <div class="lf-field"><label class="lf-label">Mot de passe</label><input class="lf-input" type="password" placeholder="Minimum 8 caractères" /></div>
-      <button class="lf-submit" onclick="showToast('Compte créé — bienvenue !')">Créer mon compte</button>
+      <div class="lf-row2">
+        <div class="lf-field">
+          <label class="lf-label" for="re-prenom">Prénom</label>
+          <input class="lf-input" id="re-prenom" type="text" placeholder="Prénom" autocomplete="given-name" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="re-nom">Nom</label>
+          <input class="lf-input" id="re-nom" type="text" placeholder="Nom de famille" autocomplete="family-name" />
+        </div>
+      </div>
+      <div class="lf-field">
+        <label class="lf-label" for="re-email">Email</label>
+        <input class="lf-input" id="re-email" type="email" placeholder="votre@email.com" autocomplete="email" />
+      </div>
+      <div class="lf-field">
+        <label class="lf-label" for="re-pass">Mot de passe</label>
+        <input class="lf-input" id="re-pass" type="password" placeholder="Minimum 8 caractères" autocomplete="new-password" />
+        <div class="lf-err" id="re-err">Veuillez remplir tous les champs (mot de passe min. 8 caractères).</div>
+      </div>
+      <button class="lf-submit" onclick="doRegister()">Créer mon compte</button>
     </div>
+  </div>
+</div>
+
+<!-- CHECKOUT PAGE -->
+<div class="checkout-page" id="checkoutPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeCheckout()">Panier</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc" id="coTopLabel">Livraison</span>
+      </div>
+      <button class="cp-close" onclick="closeCheckout()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+
+  <div class="co-body">
+    <!-- Left: steps -->
+    <div>
+      <!-- Step indicator -->
+      <div class="co-steps" id="coStepIndicator">
+        <div class="co-step on" id="csi-1"><div class="co-step-n">1</div><span>Livraison</span></div>
+        <div class="co-sep"></div>
+        <div class="co-step" id="csi-2"><div class="co-step-n">2</div><span>Paiement</span></div>
+        <div class="co-sep"></div>
+        <div class="co-step" id="csi-3"><div class="co-step-n">3</div><span>Récapitulatif</span></div>
+      </div>
+
+      <!-- Step 1: Shipping -->
+      <div class="co-panel on" id="co-panel-1">
+        <div class="co-h2">Coordonnées & Livraison</div>
+        <div class="co-row2">
+          <div class="co-field"><label class="co-label" for="co-prenom">Prénom</label><input class="co-input" id="co-prenom" type="text" placeholder="Prénom" autocomplete="given-name"/></div>
+          <div class="co-field"><label class="co-label" for="co-nom">Nom</label><input class="co-input" id="co-nom" type="text" placeholder="Nom" autocomplete="family-name"/></div>
+        </div>
+        <div class="co-field"><label class="co-label" for="co-email">Email</label><input class="co-input" id="co-email" type="email" placeholder="votre@email.com" autocomplete="email"/></div>
+        <div class="co-field"><label class="co-label" for="co-tel">Téléphone</label><input class="co-input" id="co-tel" type="tel" placeholder="+212 6XX XX XX XX" autocomplete="tel"/></div>
+        <div class="co-divider"></div>
+        <div class="co-field"><label class="co-label" for="co-addr">Adresse</label><input class="co-input" id="co-addr" type="text" placeholder="Rue, numéro…" autocomplete="street-address"/></div>
+        <div class="co-field"><label class="co-label" for="co-addr2">Appartement / étage (optionnel)</label><input class="co-input" id="co-addr2" type="text" placeholder="Apt, étage…"/></div>
+        <div class="co-row2">
+          <div class="co-field"><label class="co-label" for="co-ville">Ville</label><input class="co-input" id="co-ville" type="text" placeholder="Casablanca" autocomplete="address-level2"/></div>
+          <div class="co-field"><label class="co-label" for="co-cp">Code postal</label><input class="co-input" id="co-cp" type="text" placeholder="20000" autocomplete="postal-code"/></div>
+        </div>
+        <div class="co-field">
+          <label class="co-label" for="co-pays">Pays</label>
+          <select class="co-input co-select" id="co-pays" autocomplete="country">
+            <option value="MA">Maroc</option>
+            <option value="FR">France</option>
+            <option value="BE">Belgique</option>
+            <option value="CH">Suisse</option>
+            <option value="CA">Canada</option>
+            <option value="US">États-Unis</option>
+          </select>
+        </div>
+        <div class="co-actions">
+          <button class="co-btn-next" onclick="coGoStep(2)">Continuer vers le paiement →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="co-panel" id="co-panel-2">
+        <div class="co-h2">Informations de Paiement</div>
+        <div class="co-field">
+          <label class="co-label" for="co-card">Numéro de carte</label>
+          <input class="co-input" id="co-card" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)" autocomplete="cc-number"/>
+        </div>
+        <div class="co-field">
+          <label class="co-label" for="co-cardholder">Nom sur la carte</label>
+          <input class="co-input" id="co-cardholder" type="text" placeholder="PRÉNOM NOM" autocomplete="cc-name"/>
+        </div>
+        <div class="co-row2">
+          <div class="co-field"><label class="co-label" for="co-expiry">Date d'expiration</label><input class="co-input" id="co-expiry" type="text" placeholder="MM / AA" maxlength="7" oninput="fmtExpiry(this)" autocomplete="cc-exp"/></div>
+          <div class="co-field"><label class="co-label" for="co-cvv">CVV</label><input class="co-input" id="co-cvv" type="text" placeholder="123" maxlength="4" autocomplete="cc-csc"/></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:4px;margin-bottom:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span style="font-family:var(--sans);font-size:11px;color:var(--muted)">Paiement sécurisé — vos données ne sont pas stockées</span>
+        </div>
+        <div class="co-actions">
+          <button class="co-btn-back" onclick="coGoStep(1)">← Retour</button>
+          <button class="co-btn-next" onclick="coGoStep(3)">Vérifier la commande →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Review -->
+      <div class="co-panel" id="co-panel-3">
+        <div class="co-h2">Récapitulatif de commande</div>
+        <div class="co-review-block">
+          <div class="co-review-hd">Livraison <span class="co-review-edit" onclick="coGoStep(1)">Modifier</span></div>
+          <div class="co-review-val" id="co-rev-ship"></div>
+        </div>
+        <div class="co-review-block">
+          <div class="co-review-hd">Paiement <span class="co-review-edit" onclick="coGoStep(2)">Modifier</span></div>
+          <div class="co-review-val" id="co-rev-pay"></div>
+        </div>
+        <div id="co-rev-items"></div>
+        <div class="co-actions">
+          <button class="co-btn-back" onclick="coGoStep(2)">← Retour</button>
+          <button class="co-btn-next" onclick="placeOrder()">Confirmer et payer →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Thank you -->
+      <div class="co-panel" id="co-panel-4">
+        <div class="co-thanks">
+          <div class="co-thanks-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="co-thanks-h">Merci pour votre commande !</div>
+          <div class="co-thanks-sub">Vous recevrez un email de confirmation. Votre colis sera expédié sous 24 à 48h.</div>
+          <div class="co-order-box" id="coOrderBox"></div>
+          <div id="coThankItems" style="margin-bottom:28px"></div>
+          <button class="co-btn-next" style="max-width:320px;margin:0 auto;display:block" onclick="closeCheckout();goHome()">Continuer mes achats</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: order summary (hidden on step 4) -->
+    <div class="co-summary" id="coSummaryCol">
+      <div class="co-sum-title">Votre Commande</div>
+      <div id="coSumItems"></div>
+      <div class="co-sum-totals">
+        <div class="co-sum-row"><span>Sous-total</span><span id="coSumSub"></span></div>
+        <div class="co-sum-row"><span>Livraison</span><span id="coSumDel"></span></div>
+        <div class="co-sum-row total"><span>Total</span><span id="coSumTotal"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div class="profile-page" id="profilePage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeProfile()">Accueil</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc">Mon Compte</span>
+      </div>
+      <button class="cp-close" onclick="closeProfile()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
+    </div>
+  </div>
+  <div class="profile-hero">
+    <div class="profile-hero-inner">
+      <div class="profile-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div>
+        <div class="profile-name" id="profileName">—</div>
+        <div class="profile-email" id="profileEmail">—</div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-content">
+    <div class="profile-sec-title">Mes Commandes</div>
+    <div id="profileOrders"></div>
+    <button class="profile-logout" onclick="doLogout()">Se déconnecter</button>
   </div>
 </div>
 
@@ -2940,7 +3224,7 @@ function liveSearch(q){
       </div>`).join('')
     :'<p class="s-hint" style="font-style:normal">Aucun résultat pour "'+q+'"</p>';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closePDP();closeCart();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closePDP();closeCart();closeLogin();closeCheckout();closeProfile();}});
 
 /* ── PDP ── */
 let curP=null, curShade=null, pdpQtyN=1, pdpFromCat=false;
@@ -3113,6 +3397,273 @@ function openCart(){updateCart();document.getElementById('cartPanel').classList.
 function closeCart(){document.getElementById('cartPanel').classList.remove('on');document.getElementById('cMask').classList.remove('on');document.body.style.overflow=document.getElementById('pdpPage').classList.contains('open')||document.getElementById('catPage').classList.contains('open')?'hidden':'';}
 function checkout(){if(!cart.length){showToast('Votre panier est vide');return;}cart=[];updateCart();closeCart();showToast('Commande passée — merci !');}
 
+/* ── CHECKOUT FLOW ── */
+let coStep=1;
+let coData={};
+
+function openCheckout(){
+  if(!cart.length){showToast('Votre panier est vide');return;}
+  closeCart();
+  coStep=1;
+  coData={};
+  document.getElementById('checkoutPage').classList.add('open');
+  document.body.style.overflow='hidden';
+  coRenderStep(1);
+  coRenderSummary();
+  // Pre-fill if logged in
+  if(currentUser){
+    document.getElementById('co-prenom').value=currentUser.prenom||'';
+    document.getElementById('co-nom').value=currentUser.nom||'';
+    document.getElementById('co-email').value=currentUser.email||'';
+  }
+}
+function closeCheckout(){
+  document.getElementById('checkoutPage').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function coRenderStep(n){
+  coStep=n;
+  // Update panels
+  for(let i=1;i<=4;i++){
+    document.getElementById('co-panel-'+i).classList.toggle('on',i===n);
+  }
+  // Update step indicators
+  for(let i=1;i<=3;i++){
+    const el=document.getElementById('csi-'+i);
+    if(!el) continue;
+    el.classList.remove('on','done');
+    if(i<n) el.classList.add('done');
+    else if(i===n) el.classList.add('on');
+  }
+  // Update breadcrumb label
+  const labels={1:'Livraison',2:'Paiement',3:'Récapitulatif',4:'Confirmation'};
+  document.getElementById('coTopLabel').textContent=labels[n]||'';
+  // Hide summary column on thank you step
+  document.getElementById('coSummaryCol').style.display=n===4?'none':'';
+  document.getElementById('checkoutPage').scrollTop=0;
+}
+
+function coRenderSummary(){
+  const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const del=sub>=800?0:50;
+  document.getElementById('coSumItems').innerHTML=cart.map(i=>`
+    <div class="co-sum-item">
+      <div class="co-sum-img-wrap">
+        <img class="co-sum-img" src="${i.p.img}" alt="${i.p.name}"/>
+        <div class="co-sum-qty-badge">${i.qty}</div>
+      </div>
+      <div class="co-sum-info">
+        <div class="co-sum-range">${i.p.range}</div>
+        <div class="co-sum-name">${i.p.name}</div>
+        ${i.shade?`<div style="font-family:var(--sans);font-size:11px;color:var(--cinnamon)">${i.shade.n}</div>`:''}
+        <div class="co-sum-price">${mad(i.p.price*i.qty)}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('coSumSub').textContent=mad(sub);
+  document.getElementById('coSumDel').textContent=del===0?'Gratuite':mad(del);
+  document.getElementById('coSumTotal').textContent=mad(sub+del);
+}
+
+function coGoStep(n){
+  // Validate current step before advancing
+  if(n>coStep){
+    if(coStep===1){
+      const fields=['co-prenom','co-nom','co-email','co-tel','co-addr','co-ville','co-cp'];
+      for(const f of fields){
+        if(!document.getElementById(f).value.trim()){
+          document.getElementById(f).focus();
+          showToast('Veuillez remplir tous les champs obligatoires.');
+          return;
+        }
+      }
+      coData.ship={
+        prenom:document.getElementById('co-prenom').value.trim(),
+        nom:document.getElementById('co-nom').value.trim(),
+        email:document.getElementById('co-email').value.trim(),
+        tel:document.getElementById('co-tel').value.trim(),
+        addr:document.getElementById('co-addr').value.trim(),
+        addr2:document.getElementById('co-addr2').value.trim(),
+        ville:document.getElementById('co-ville').value.trim(),
+        cp:document.getElementById('co-cp').value.trim(),
+        pays:document.getElementById('co-pays').value
+      };
+    }
+    if(coStep===2){
+      const card=document.getElementById('co-card').value.replace(/\s/g,'');
+      const expiry=document.getElementById('co-expiry').value.trim();
+      const cvv=document.getElementById('co-cvv').value.trim();
+      const holder=document.getElementById('co-cardholder').value.trim();
+      if(card.length<15||!expiry||cvv.length<3||!holder){
+        showToast('Veuillez compléter vos informations de paiement.');
+        return;
+      }
+      coData.pay={last4:card.slice(-4),holder,expiry};
+    }
+    if(n===3) coFillReview();
+  }
+  coRenderStep(n);
+}
+
+function coFillReview(){
+  const s=coData.ship||{};
+  document.getElementById('co-rev-ship').innerHTML=
+    `${s.prenom} ${s.nom}<br>${s.addr}${s.addr2?' — '+s.addr2:''}<br>${s.cp} ${s.ville}, ${document.getElementById('co-pays').options[document.getElementById('co-pays').selectedIndex].text}<br>${s.tel}`;
+  const p=coData.pay||{};
+  document.getElementById('co-rev-pay').innerHTML=`Carte se terminant par •••• ${p.last4} — ${p.holder}`;
+  const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const del=sub>=800?0:50;
+  document.getElementById('co-rev-items').innerHTML=`
+    <div style="background:var(--ivory-2);padding:14px 20px;margin-bottom:14px">
+      <div style="font-family:var(--sans);font-size:9.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Articles</div>
+      ${cart.map(i=>`<div style="display:flex;justify-content:space-between;font-family:var(--sans);font-size:13px;padding:5px 0;border-bottom:1px solid var(--border)"><span>${i.p.name}${i.shade?' ('+i.shade.n+')':''} × ${i.qty}</span><span style="font-weight:600">${mad(i.p.price*i.qty)}</span></div>`).join('')}
+      <div style="display:flex;justify-content:space-between;font-family:var(--serif);font-size:17px;font-weight:700;margin-top:12px"><span>Total</span><span>${mad(sub+del)}</span></div>
+    </div>`;
+}
+
+function placeOrder(){
+  const orderId='IF-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  const trackId='TRK'+Date.now().toString(36).toUpperCase();
+  const orderDate=new Date().toLocaleDateString('fr-MA',{day:'2-digit',month:'long',year:'numeric'});
+  const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const del=sub>=800?0:50;
+  const total=sub+del;
+
+  const order={
+    id:orderId, tracking:trackId, date:orderDate, total,
+    items:[...cart.map(i=>({...i}))],
+    ship:coData.ship, userEmail:currentUser?currentUser.email:coData.ship?.email
+  };
+  orders.push(order);
+
+  // Thank you step
+  document.getElementById('coOrderBox').innerHTML=`
+    <div class="co-order-row"><span class="co-order-key">Commande</span><span class="co-order-val">${orderId}</span></div>
+    <div class="co-order-row"><span class="co-order-key">Numéro de suivi</span><span class="co-tracking-val">${trackId}</span></div>
+    <div class="co-order-row"><span class="co-order-key">Date</span><span class="co-order-val">${orderDate}</span></div>
+    <div class="co-order-row"><span class="co-order-key">Total</span><span class="co-order-val">${mad(total)}</span></div>
+    <div class="co-order-row"><span class="co-order-key">Livraison estimée</span><span class="co-order-val">3 – 5 jours ouvrés</span></div>`;
+
+  document.getElementById('coThankItems').innerHTML=`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+      ${cart.map(i=>`<img src="${i.p.img}" alt="${i.p.name}" style="width:64px;height:74px;object-fit:cover;background:var(--ivory-2)">`).join('')}
+    </div>`;
+
+  // Clear cart
+  cart=[];
+  updateCart();
+  coRenderStep(4);
+}
+
+/* ── USER SYSTEM ── */
+let currentUser=null;
+let users=[];
+let orders=[];
+
+function openProfileOrLogin(){
+  if(currentUser) openProfile();
+  else openLogin('login');
+}
+
+function doLogin(){
+  const email=document.getElementById('li-email').value.trim();
+  const pass=document.getElementById('li-pass').value;
+  const err=document.getElementById('li-err');
+  const user=users.find(u=>u.email.toLowerCase()===email.toLowerCase()&&u.password===pass);
+  if(!user){err.classList.add('on');return;}
+  err.classList.remove('on');
+  setCurrentUser(user);
+  closeLogin();
+  showToast(`Bienvenue, ${user.prenom} !`);
+}
+
+function doRegister(){
+  const prenom=document.getElementById('re-prenom').value.trim();
+  const nom=document.getElementById('re-nom').value.trim();
+  const email=document.getElementById('re-email').value.trim();
+  const pass=document.getElementById('re-pass').value;
+  const err=document.getElementById('re-err');
+  if(!prenom||!nom||!email||pass.length<8){err.classList.add('on');return;}
+  err.classList.remove('on');
+  // Check email not already taken
+  if(users.find(u=>u.email.toLowerCase()===email.toLowerCase())){
+    err.textContent='Un compte avec cet email existe déjà.';err.classList.add('on');return;
+  }
+  const user={prenom,nom,email,password:pass};
+  users.push(user);
+  setCurrentUser(user);
+  closeLogin();
+  goHome();
+  showToast(`Bienvenue, ${prenom} !`);
+}
+
+function setCurrentUser(user){
+  currentUser=user;
+  // Swap profile icon to show logged-in state (tinted)
+  const btn=document.getElementById('navProfileBtn');
+  if(btn) btn.style.color='var(--maroon)';
+}
+
+function doLogout(){
+  currentUser=null;
+  const btn=document.getElementById('navProfileBtn');
+  if(btn) btn.style.color='';
+  closeProfile();
+  showToast('Vous avez été déconnecté.');
+}
+
+function openProfile(){
+  if(!currentUser){openLogin('login');return;}
+  document.getElementById('profileName').textContent=currentUser.prenom+' '+currentUser.nom;
+  document.getElementById('profileEmail').textContent=currentUser.email;
+  renderProfileOrders();
+  document.getElementById('profilePage').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeProfile(){
+  document.getElementById('profilePage').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function renderProfileOrders(){
+  const userOrders=orders.filter(o=>o.userEmail===currentUser.email);
+  const el=document.getElementById('profileOrders');
+  if(!userOrders.length){
+    el.innerHTML=`<div class="profile-empty">
+      <div class="profile-empty-icon">🛍</div>
+      <div style="font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:8px">Aucune commande pour l'instant</div>
+      <div style="font-family:var(--sans);font-size:13px;color:var(--muted)">Vos commandes apparaîtront ici.</div>
+    </div>`;
+    return;
+  }
+  el.innerHTML=userOrders.slice().reverse().map(o=>`
+    <div class="order-card">
+      <div class="order-card-hd">
+        <div class="order-card-meta">
+          <div class="order-meta-item"><div class="order-meta-label">Commande</div><div class="order-meta-val">${o.id}</div></div>
+          <div class="order-meta-item"><div class="order-meta-label">Date</div><div class="order-meta-val">${o.date}</div></div>
+          <div class="order-meta-item"><div class="order-meta-label">Total</div><div class="order-meta-val">${mad(o.total)}</div></div>
+          <div class="order-meta-item"><div class="order-meta-label">Suivi</div><div class="order-tracking">${o.tracking}</div></div>
+        </div>
+        <div class="order-status">Expédiée</div>
+      </div>
+      <div class="order-products">
+        ${o.items.map(i=>`<img class="order-prod-img" src="${i.p.img}" alt="${i.p.name}" title="${i.p.name} × ${i.qty}"/>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+/* ── CARD NUMBER FORMAT ── */
+function fmtCard(el){
+  let v=el.value.replace(/\D/g,'').slice(0,16);
+  el.value=v.replace(/(.{4})/g,'$1 ').trim();
+}
+function fmtExpiry(el){
+  let v=el.value.replace(/\D/g,'').slice(0,4);
+  if(v.length>2) v=v.slice(0,2)+' / '+v.slice(2);
+  el.value=v;
+}
+
 /* ── TOAST ── */
 let tT;
 function showToast(msg){
@@ -3127,6 +3678,8 @@ function cartQty(key,d){const item=cart.find(i=>i.key===key);if(!item)return;ite
 /* ── GO HOME ── */
 function goHome(){
   document.querySelectorAll('.info-page').forEach(p=>p.classList.remove('open'));
+  document.getElementById('checkoutPage').classList.remove('open');
+  document.getElementById('profilePage').classList.remove('open');
   if(document.getElementById('pdpPage').classList.contains('open')) closePDP();
   if(document.getElementById('catPage').classList.contains('open')){
     document.getElementById('catPage').classList.remove('open');
@@ -3141,11 +3694,12 @@ function openLogin(tab){
   document.body.style.overflow='hidden';
   if(tab) switchLoginTab(tab);
 }
-function closeLogin(e,force){
-  if(force||!e||e.target===document.getElementById('loginMask')){
-    document.getElementById('loginMask').classList.remove('on');
-    document.body.style.overflow='';
-  }
+function closeLogin(){
+  document.getElementById('loginMask').classList.remove('on');
+  document.body.style.overflow='';
+}
+function loginMaskClick(e){
+  if(e.target===document.getElementById('loginMask')) closeLogin();
 }
 function switchLoginTab(tab){
   document.querySelectorAll('.login-tab').forEach(t=>t.classList.remove('on'));
