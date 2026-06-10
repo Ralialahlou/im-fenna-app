@@ -96,11 +96,10 @@ body::after {
 .nav-left  { display: flex; align-items: center; }
 .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
 .nav-logo {
-  font-family: var(--serif); font-size: 18px; font-weight: 700;
-  letter-spacing: 6px; color: var(--text); text-align: center;
-  cursor: pointer; white-space: nowrap; text-transform: uppercase;
-  user-select: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; user-select: none;
 }
+.nav-logo-img { height: 36px; width: auto; display: block; }
 .nav-logo .heart { color: var(--maroon); letter-spacing: 0; font-size: 16px; }
 .nav-btn {
   width: 40px; height: 40px; border-radius: 50%;
@@ -1197,7 +1196,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         </button>
       </div>
       <div class="nav-logo" onclick="closeCatPage()" role="banner">
-        I<span class="heart">♥</span>M FENNA
+        <img src="images/logo.png" alt="I'm Fenna" class="nav-logo-img" />
       </div>
       <div class="nav-right">
         <button class="nav-btn" onclick="openSearch()" aria-label="Search">
@@ -1383,7 +1382,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 
     <!-- Slide 1 -->
     <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1800&q=85" alt="" loading="eager" />
+      <img src="images/face/hero-banner.png" alt="" loading="eager" />
       <div class="hero__glow"></div>
       <div class="hero__content">
         <div class="hero__eyebrow">New Collection</div>
@@ -1402,7 +1401,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 
     <!-- Slide 2 -->
     <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1800&q=85" alt="" loading="lazy" />
+      <img src="images/face/portrait-glow.png" alt="" loading="lazy" />
       <div class="hero__glow"></div>
       <div class="hero__content">
         <div class="hero__eyebrow">K-Beauty Precision</div>
@@ -1417,7 +1416,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 
     <!-- Slide 3 -->
     <div class="hero__slide">
-      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1800&q=85" alt="" loading="lazy" />
+      <img src="images/face/if-elegance.png" alt="" loading="lazy" />
       <div class="hero__glow"></div>
       <div class="hero__content">
         <div class="hero__eyebrow">Confident Colour</div>
@@ -1481,7 +1480,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
     <div class="ranges-grid">
 
       <div class="range-card fade-up d1" onclick="setF('moroccan',null)">
-        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=80" alt="If Moroccan" loading="lazy" />
+        <img src="images/face/portrait-chignon.png" alt="If Moroccan" loading="lazy" />
         <div class="range-card__ov" style="background:linear-gradient(to top,rgba(28,14,14,.94) 0%,rgba(125,70,60,.15) 55%,transparent 100%)"></div>
         <div class="range-card__body">
           <div class="rc-if">If rooted in heritage…</div>
@@ -1495,7 +1494,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </div>
 
       <div class="range-card fade-up d2" onclick="setF('kbeauty',null)">
-        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80" alt="If K-Beauty" loading="lazy" />
+        <img src="images/face/portrait-skin.png" alt="If K-Beauty" loading="lazy" />
         <div class="range-card__ov" style="background:linear-gradient(to top,rgba(28,14,14,.94) 0%,rgba(50,60,90,.12) 55%,transparent 100%)"></div>
         <div class="range-card__body">
           <div class="rc-if">If skin were glass…</div>
@@ -1509,7 +1508,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </div>
 
       <div class="range-card fade-up d3" onclick="setF('makeup',null)">
-        <img src="https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=700&q=80" alt="If Confident Colour" loading="lazy" />
+        <img src="images/face/portrait-lips.png" alt="If Confident Colour" loading="lazy" />
         <div class="range-card__ov" style="background:linear-gradient(to top,rgba(28,14,14,.94) 0%,rgba(118,20,21,.12) 55%,transparent 100%)"></div>
         <div class="range-card__body">
           <div class="rc-if">If bold were a colour…</div>
@@ -1566,7 +1565,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <!-- Clean Elegance direction: ivory, light, airy -->
 <div class="editorial">
   <div class="ed-img fade-l">
-    <img src="https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=80" alt="Moroccan Rose" loading="lazy" />
+    <img src="images/face/portrait-updo.png" alt="Moroccan Rose" loading="lazy" />
   </div>
   <div class="ed-body light fade-r">
     <div class="ed-eye">Hero Ingredient</div>
@@ -1580,7 +1579,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <!-- Luxurious Femininity direction: dark, dramatic -->
 <div class="editorial editorial--flip">
   <div class="ed-img fade-r">
-    <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=80" alt="K-Beauty" loading="lazy" />
+    <img src="images/face/portrait-touch.png" alt="K-Beauty" loading="lazy" />
   </div>
   <div class="ed-body dark fade-l">
     <div class="ed-eye">K-Beauty Precision</div>
@@ -2120,12 +2119,12 @@ const P = [
   {
     id:1, name:'Great Skin Instant Glow Serum', range:'Moroccan Heritage', cat:'skincare',
     price:680, origPrice:null, r:4.8, rv:247, isNew:false, isBest:true,
-    img:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80',
+    img:'images/products/serum-jar-1.png',
     imgs:[
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
-      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
-      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+      'images/products/serum-jar-1.png',
+      'images/products/serum-jar-2.png',
+      'images/products/skincare-range.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'30ml', skinType:['Tous types de peau','Peau terne','Peau mixte'],
     concerns:['Éclat','Hydratation','Anti-oxydant'],
@@ -2138,12 +2137,12 @@ const P = [
   {
     id:2, name:'Subline Perfection Foundation', range:'Confident Colour', cat:'makeup',
     price:520, origPrice:null, r:4.7, rv:189, isNew:false, isBest:true,
-    img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',
+    img:'images/products/foundation-bottle-1.png',
     imgs:[
-      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
-      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
-      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+      'images/products/foundation-bottle-1.png',
+      'images/products/foundation-range.png',
+      'images/products/face-flatlay.png',
+      'images/products/skincare-range.png',
     ],
     sz:'30ml', skinType:['Tous types de peau','Peau normale','Peau sèche'],
     concerns:['Couvrance','Longue tenue','Hydratation'],
@@ -2156,12 +2155,12 @@ const P = [
   {
     id:3, name:'Moroccan Rose Illuminating Face Oil', range:'Moroccan Heritage', cat:'moroccan',
     price:580, origPrice:720, r:4.9, rv:312, isNew:true, isBest:false,
-    img:'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80',
+    img:'images/products/skincare-tubes.png',
     imgs:[
-      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
-      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=900&q=85',
+      'images/products/skincare-tubes.png',
+      'images/products/skincare-range.png',
+      'images/products/serum-jar-2.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'30ml', skinType:['Peau sèche','Peau mature','Peau terne'],
     concerns:['Éclat','Anti-âge','Nourissement intense'],
@@ -2174,12 +2173,12 @@ const P = [
   {
     id:4, name:'Glass Skin Hydra Essence', range:'K-Beauty Precision', cat:'kbeauty',
     price:440, origPrice:null, r:4.6, rv:156, isNew:true, isBest:false,
-    img:'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',
+    img:'images/products/skincare-range.png',
     imgs:[
-      'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=85',
-      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+      'images/products/skincare-range.png',
+      'images/products/skincare-tubes.png',
+      'images/products/serum-jar-1.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'150ml', skinType:['Tous types de peau','Peau déshydratée','Peau sensible'],
     concerns:['Hydratation 72h','Éclat verre','Repulpage'],
@@ -2192,12 +2191,12 @@ const P = [
   {
     id:5, name:'If Bold Velvet Lip Colour', range:'Confident Colour', cat:'makeup',
     price:320, origPrice:null, r:4.5, rv:203, isNew:false, isBest:true,
-    img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',
+    img:'images/products/lipstick-compact.png',
     imgs:[
-      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
-      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
-      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+      'images/products/lipstick-compact.png',
+      'images/products/lip-gloss-tubes.png',
+      'images/products/blush-compact.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'3,5g', skinType:['Tous types de lèvres'],
     concerns:['Couvrance intense','Longue tenue','Confort'],
@@ -2210,12 +2209,12 @@ const P = [
   {
     id:6, name:'Ghassoul Deep Purifying Mask', range:'Moroccan Heritage', cat:'moroccan',
     price:380, origPrice:null, r:4.7, rv:178, isNew:false, isBest:false,
-    img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+    img:'images/products/skincare-tubes.png',
     imgs:[
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+      'images/products/skincare-tubes.png',
+      'images/products/serum-jar-1.png',
+      'images/products/skincare-range.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'100ml', skinType:['Peau mixte','Peau grasse','Peau à imperfections'],
     concerns:['Purification','Anti-pores','Équilibre sébacé'],
@@ -2228,12 +2227,12 @@ const P = [
   {
     id:7, name:'Velvet Eye Palette — Dusk Edition', range:'Confident Colour', cat:'makeup',
     price:620, origPrice:780, r:4.8, rv:134, isNew:true, isBest:false,
-    img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',
+    img:'images/products/eyeshadow-pots.png',
     imgs:[
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
-      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
-      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
-      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
+      'images/products/eyeshadow-pots.png',
+      'images/products/dark-compact.png',
+      'images/products/multiproduct-sticks.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'9 × 1,2g', skinType:['Tous types de peau'],
     concerns:['Regard intense','Longue tenue','Polyvalence'],
@@ -2246,12 +2245,12 @@ const P = [
   {
     id:8, name:'Vitamin C Glass Glow Serum', range:'K-Beauty Precision', cat:'kbeauty',
     price:560, origPrice:null, r:4.6, rv:98, isNew:false, isBest:false,
-    img:'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&q=80',
+    img:'images/products/skincare-tubes.png',
     imgs:[
-      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
-      'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=85',
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+      'images/products/skincare-tubes.png',
+      'images/products/serum-jar-2.png',
+      'images/products/skincare-range.png',
+      'images/products/face-flatlay.png',
     ],
     sz:'30ml', skinType:['Tous types de peau','Peau terne','Peau hyperpigmentée'],
     concerns:['Éclat','Anti-taches','Uniformisation du teint'],
@@ -2264,12 +2263,12 @@ const P = [
   {
     id:9, name:'Ritual Glow Heritage Gift Set', range:'Moroccan Heritage', cat:'sets',
     price:1100, origPrice:1400, r:5.0, rv:67, isNew:false, isBest:false,
-    img:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',
+    img:'images/products/gift-set-box.png',
     imgs:[
-      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=900&q=85',
-      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
+      'images/products/gift-set-box.png',
+      'images/products/multiproduct-sticks.png',
+      'images/products/face-flatlay.png',
+      'images/products/skincare-range.png',
     ],
     sz:'Coffret 3 produits', skinType:['Tous types de peau'],
     concerns:['Éclat','Nourissement','Purification'],
@@ -2282,12 +2281,12 @@ const P = [
   {
     id:10, name:'Silk Veil Setting Powder', range:'Confident Colour', cat:'makeup',
     price:360, origPrice:null, r:4.4, rv:88, isNew:false, isBest:false,
-    img:'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=600&q=80',
+    img:'images/products/cushion-compact.png',
     imgs:[
-      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
-      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
-      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
+      'images/products/cushion-compact.png',
+      'images/products/blush-compact.png',
+      'images/products/face-flatlay.png',
+      'images/products/multiproduct-sticks.png',
     ],
     sz:'10g', skinType:['Tous types de peau','Peau mixte','Peau grasse'],
     concerns:['Fixation','Anti-brillance','Fini satiné'],
