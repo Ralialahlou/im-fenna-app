@@ -75,37 +75,26 @@ body::after {
 .d3{transition-delay:.24s!important} .d4{transition-delay:.32s!important}
 
 /* ═══════════════════════════════════════════════
-   NAV — Liquid Glass, Ivory base
+   NAV — Two rows: Logo bar + Category bar
 ═══════════════════════════════════════════════ */
 .nav-wrap {
   position: sticky; top: 0; z-index: 400;
   background: var(--glass);
   backdrop-filter: blur(20px) saturate(150%);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
-  border-bottom: 1px solid var(--border);
   transition: box-shadow .3s;
 }
 .nav-wrap.scrolled { box-shadow: 0 2px 32px rgba(118,20,21,.06); }
-.nav-inner {
+
+/* Row 1: Logo centred + utility icons */
+.nav-top { border-bottom: 1px solid var(--border); }
+.nav-top-inner {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px);
   display: grid; grid-template-columns: 1fr auto 1fr;
-  align-items: center; height: 68px;
+  align-items: center; height: 60px;
 }
-.nav-left  { display: flex; align-items: center; gap: 32px; }
+.nav-left  { display: flex; align-items: center; }
 .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
-/* Desktop nav links — Jost, tight tracking, uppercase */
-.nav-link {
-  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
-  color: var(--text-2); text-transform: uppercase;
-  position: relative; padding-bottom: 2px; transition: color .22s;
-}
-.nav-link::after {
-  content:''; position:absolute; bottom:0; left:0; right:100%;
-  height: 1px; background: var(--gold); transition: right .35s var(--ease);
-}
-.nav-link:hover { color: var(--maroon); }
-.nav-link:hover::after { right: 0; }
-/* Logo — Abhaya Libre, heart replaces apostrophe (brand guideline) */
 .nav-logo {
   font-family: var(--serif); font-size: 18px; font-weight: 700;
   letter-spacing: 6px; color: var(--text); text-align: center;
@@ -113,7 +102,6 @@ body::after {
   user-select: none;
 }
 .nav-logo .heart { color: var(--maroon); letter-spacing: 0; font-size: 16px; }
-/* Icon buttons */
 .nav-btn {
   width: 40px; height: 40px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -129,23 +117,84 @@ body::after {
   font-size:8px; font-weight:700;
   display:none; align-items:center; justify-content:center;
 }
-/* Category sub-nav */
-.sub-nav { border-top: 1px solid var(--border); background: rgba(244,240,238,.6); backdrop-filter: blur(10px); }
-.sub-nav-inner {
+
+/* Row 2: Category buttons */
+.nav-cats {
+  border-bottom: 1px solid var(--border);
+  background: rgba(244,240,238,.5);
+  position: relative;
+}
+.nav-cats-inner {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px);
-  display: flex; overflow-x: auto; scrollbar-width: none;
+  display: flex; justify-content: center; overflow-x: auto; scrollbar-width: none;
 }
-.sub-nav-inner::-webkit-scrollbar { display: none; }
-.sub-btn {
-  flex-shrink: 0; padding: 11px 18px;
+.nav-cats-inner::-webkit-scrollbar { display: none; }
+.cat-btn {
+  flex-shrink: 0; padding: 13px 20px;
   font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 2px;
-  color: var(--muted); text-transform: uppercase;
-  border-bottom: 1.5px solid transparent; background: none;
-  transition: all .2s; white-space: nowrap;
-  border-left:none; border-right:none; border-top:none;
+  color: var(--text-2); text-transform: uppercase;
+  border: none; border-bottom: 2px solid transparent;
+  background: none; cursor: pointer; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px; transition: all .2s;
+  position: relative;
 }
-.sub-btn:hover, .sub-btn.on { color: var(--maroon); border-bottom-color: var(--maroon); }
-.hamburger { display:none; flex-direction:column; gap:5px; padding:8px; }
+.cat-btn .arr {
+  display: inline-block; width: 0; height: 0;
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  transition: transform .2s; margin-top: 1px;
+}
+.cat-btn:hover { color: var(--maroon); border-bottom-color: var(--maroon); }
+.cat-btn.active { color: var(--maroon); border-bottom-color: var(--maroon); }
+.cat-btn.active .arr { transform: rotate(180deg); }
+
+/* ── Mega menu ── */
+.mega {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 300;
+  background: var(--ivory);
+  border-top: 2px solid var(--maroon);
+  box-shadow: 0 24px 64px rgba(28,14,14,.12);
+  pointer-events: none; opacity: 0;
+  transform: translateY(-8px); transition: opacity .22s var(--ease), transform .22s var(--ease);
+}
+.mega.open { pointer-events: all; opacity: 1; transform: translateY(0); }
+.mega-inner {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 28px var(--px) 32px;
+  display: grid; grid-template-columns: 220px 1fr;
+  gap: 40px;
+}
+.mega-left {}
+.mega-cat-label {
+  font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.mega-cat-label::before { content:''; width:18px; height:1px; background:var(--gold); }
+.mega-cat-name { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.05; margin-bottom: 8px; }
+.mega-cat-name em { font-style: italic; font-weight: 400; }
+.mega-cat-desc { font-family: var(--sans); font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 18px; max-width: 200px; }
+.mega-va {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 9.5px; font-weight: 600; letter-spacing: 2.5px;
+  color: var(--maroon); text-transform: uppercase; cursor: pointer;
+  padding: 10px 22px; border: 1px solid rgba(118,20,21,.3); transition: all .25s;
+}
+.mega-va:hover { background: var(--maroon); color: var(--ivory); }
+.mega-right {}
+.mega-sub-title { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; }
+.mega-subs { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.mega-sub-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 10px; border-bottom: 1px solid rgba(226,196,186,.2);
+  cursor: pointer; transition: all .18s;
+  font-family: var(--sans); font-size: 12px; font-weight: 400; color: var(--text-2);
+}
+.mega-sub-item:hover { color: var(--maroon); background: rgba(226,196,186,.08); gap: 14px; }
+.mega-sub-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.mega-sub-item .cnt { margin-left: auto; font-size: 10px; color: var(--muted); }
+
+.hamburger { display:none; flex-direction:column; gap:5px; padding:8px; cursor:pointer; }
 .hamburger span { width:20px; height:1.5px; background:var(--text); border-radius:1px; }
 
 /* ═══════════════════════════════════════════════
@@ -586,12 +635,194 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .btab.on svg { stroke:var(--maroon); } .btab.on .btab__l { color:var(--maroon); }
 .pb { display:none; height:70px; }
 @media(max-width:900px) {
-  .nav-left .nav-link { display:none; }
   .hamburger { display:flex; }
-  .sub-nav { display:none; }
+  .nav-cats { display:none; }
   .bnav { display:block; }
   .pb { display:block; }
 }
+
+/* ═══════════════════════════════════════════════
+   CATEGORY PAGE — full-screen layered over content
+═══════════════════════════════════════════════ */
+.cat-page {
+  display: none; position: fixed; inset: 0; z-index: 380;
+  background: var(--ivory); overflow-y: auto;
+  animation: cpIn .3s var(--ease) both;
+}
+.cat-page.open { display: block; }
+@keyframes cpIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+.cp-topbar {
+  background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 10;
+}
+.cp-topbar-inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 12px var(--px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cp-breadcrumb { display: flex; align-items: center; gap: 8px; }
+.cp-bl {
+  font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase; cursor: pointer; transition: color .2s; background: none; border: none;
+}
+.cp-bl:hover { color: var(--maroon); }
+.cp-bs { color: var(--muted); font-size: 12px; }
+.cp-bc { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--text); text-transform: uppercase; }
+.cp-close {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase; cursor: pointer; background: none; border: none;
+  transition: color .2s;
+}
+.cp-close:hover { color: var(--maroon); }
+.cp-close svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+
+.cp-layout {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 32px var(--px) 80px;
+  display: grid; grid-template-columns: 256px 1fr;
+  gap: 36px;
+}
+@media(max-width:900px) { .cp-layout { grid-template-columns: 1fr; padding-top: 18px; } }
+
+/* Filter sidebar */
+.fs {
+  position: relative;
+}
+@media(max-width:900px) {
+  .fs {
+    position: fixed; top: 0; left: 0; bottom: 0; width: min(320px, 92vw); z-index: 500;
+    background: var(--ivory); overflow-y: auto;
+    transform: translateX(-110%); transition: transform .4s var(--ease);
+    box-shadow: 8px 0 40px rgba(28,14,14,.12);
+  }
+  .fs.open { transform: translateX(0); }
+}
+.fs-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 0 14px; margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.fs-hd-title { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.fs-clear-all { font-family: var(--sans); font-size: 9.5px; font-weight: 600; letter-spacing: 1.5px; color: var(--cinnamon); text-transform: uppercase; cursor: pointer; background: none; border: none; transition: color .2s; }
+.fs-clear-all:hover { color: var(--maroon); }
+@media(max-width:900px) { .fs-hd { padding: 18px 20px 14px; } }
+
+.fg { margin-top: 8px; }
+.fg-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 0; cursor: pointer; border-top: 1px solid var(--border);
+  user-select: none;
+}
+@media(max-width:900px) { .fg-hd { padding: 11px 20px; } }
+.fg-hd-lbl { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--text); text-transform: uppercase; }
+.fg-chev {
+  width: 8px; height: 8px;
+  border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg) translate(-1px,-1px); transition: transform .2s; flex-shrink:0;
+}
+.fg.closed .fg-chev { transform: rotate(-135deg) translate(-1px,-1px); }
+.fg-body { padding-bottom: 8px; display: flex; flex-direction: column; gap: 2px; }
+.fg.closed .fg-body { display: none; }
+@media(max-width:900px) { .fg-body { padding: 4px 20px 10px; } }
+
+.fo {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 4px; cursor: pointer; transition: background .12s;
+}
+.fo:hover { background: rgba(226,196,186,.15); }
+@media(max-width:900px) { .fo { padding: 7px 0; } }
+.fo-check {
+  width: 16px; height: 16px; border: 1.5px solid var(--border-2);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.fo.on .fo-check { background: var(--maroon); border-color: var(--maroon); }
+.fo.on .fo-check::after {
+  content:''; display: block;
+  width: 8px; height: 5px;
+  border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg) translate(0px,-1px);
+}
+.fo-lbl { font-family: var(--sans); font-size: 12.5px; font-weight: 400; color: var(--text-2); flex: 1; }
+.fo-cnt { font-family: var(--sans); font-size: 10.5px; color: var(--muted); }
+
+/* Price range inputs */
+.price-rng { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+@media(max-width:900px) { .price-rng { padding: 4px 0; } }
+.pr-input {
+  flex: 1; padding: 9px 10px; border: 1px solid var(--border-2); background: var(--white);
+  font-family: var(--sans); font-size: 12.5px; color: var(--text);
+  outline: none; appearance: none; transition: border-color .2s; -moz-appearance: textfield;
+}
+.pr-input::-webkit-inner-spin-button, .pr-input::-webkit-outer-spin-button { appearance: none; }
+.pr-input:focus { border-color: var(--gold); }
+.pr-dash { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.pr-go {
+  padding: 9px 16px; background: var(--maroon); color: var(--ivory);
+  font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  border: none; cursor: pointer; transition: background .2s;
+}
+.pr-go:hover { background: var(--maroon-2); }
+
+/* Rating stars filter */
+.rating-fo { display: flex; align-items: center; gap: 5px; }
+
+/* Product area */
+.cat-area {}
+.cat-area-hd {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+}
+.cat-area-title { font-family: var(--serif); font-size: clamp(22px,3vw,34px); font-weight: 700; line-height: 1; }
+.cat-area-title em { font-style: italic; font-weight: 400; }
+.cat-area-meta { display: flex; align-items: center; gap: 14px; }
+.cat-result-count { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.cat-sort {
+  appearance: none; -webkit-appearance: none;
+  padding: 9px 32px 9px 14px; border: 1px solid var(--border-2); background: var(--white);
+  font-family: var(--sans); font-size: 11.5px; font-weight: 400; color: var(--text);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239B7E74' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; background-size: 10px;
+  cursor: pointer; outline: none; transition: border-color .2s;
+}
+.cat-sort:focus { border-color: var(--gold); }
+
+/* Active filter chips row */
+.chips-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; min-height: 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px;
+  background: var(--ivory-2); border: 1px solid var(--border-2);
+  font-family: var(--sans); font-size: 10.5px; font-weight: 500; color: var(--text-2);
+  cursor: pointer; transition: all .18s;
+}
+.chip:hover { border-color: var(--maroon); color: var(--maroon); }
+.chip-x { color: var(--muted); font-size: 14px; line-height: 1; margin-top: -1px; }
+
+/* Mobile filter bar */
+.mob-fbar {
+  display: none; overflow-x: auto; scrollbar-width: none;
+  gap: 8px; padding: 10px var(--px); border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+.mob-fbar::-webkit-scrollbar { display: none; }
+@media(max-width:900px) { .mob-fbar { display: flex; } }
+.mob-fbtn {
+  flex-shrink: 0; padding: 8px 16px; border: 1px solid var(--border-2); background: transparent;
+  font-family: var(--sans); font-size: 11px; font-weight: 500; color: var(--text-2);
+  display: flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.mob-fbtn svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; }
+.mob-fbtn:hover { border-color: var(--maroon); color: var(--maroon); }
+.mob-fbtn.on { background: var(--maroon); color: var(--ivory); border-color: var(--maroon); }
+
+/* Filter mask on mobile */
+.fs-mask {
+  display: none; position: fixed; inset: 0; z-index: 499;
+  background: rgba(12,6,6,.4); backdrop-filter: blur(2px);
+}
+.fs-mask.on { display: block; }
 
 /* ═══════════════════════════════════════════════
    SEARCH MODAL
@@ -773,48 +1004,193 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 
 <!-- ══ NAV ═══════════════════════════════════════════ -->
 <header class="nav-wrap" id="navWrap">
-  <div class="nav-inner">
-    <div class="nav-left">
-      <button class="hamburger" onclick="showToast('Navigation')" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <a class="nav-link" href="#" onclick="return setF('skincare',null)">Skincare</a>
-      <a class="nav-link" href="#" onclick="return setF('makeup',null)">Makeup</a>
-      <a class="nav-link" href="#" onclick="return setF('moroccan',null)">Moroccan</a>
-      <a class="nav-link" href="#" onclick="return setF('kbeauty',null)">K-Beauty</a>
-      <a class="nav-link" href="#" onclick="return setF('sets',null)">Gift Sets</a>
-    </div>
-    <!-- Logo with heart replacing apostrophe — brand guideline -->
-    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="banner">
-      I<span class="heart">♥</span>M FENNA
-    </div>
-    <div class="nav-right">
-      <button class="nav-btn" onclick="openSearch()" aria-label="Search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <button class="nav-btn" onclick="showToast('Sign in to your account')" aria-label="Account">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-      <button class="nav-btn" onclick="showToast('Your wishlist')" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <button class="nav-btn" onclick="openCart()" aria-label="Bag">
-        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-dot" id="cartDot">0</span>
-      </button>
+
+  <!-- Row 1: Logo + icons only -->
+  <div class="nav-top">
+    <div class="nav-top-inner">
+      <div class="nav-left">
+        <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-logo" onclick="closeCatPage()" role="banner">
+        I<span class="heart">♥</span>M FENNA
+      </div>
+      <div class="nav-right">
+        <button class="nav-btn" onclick="openSearch()" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="nav-btn" onclick="showToast('Sign in to your account')" aria-label="Account">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <button class="nav-btn" onclick="showToast('Your wishlist')" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="nav-btn" onclick="openCart()" aria-label="Bag">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-dot" id="cartDot">0</span>
+        </button>
+      </div>
     </div>
   </div>
-  <!-- Secondary category nav (desktop) -->
-  <nav class="sub-nav">
-    <div class="sub-nav-inner">
-      <button class="sub-btn on" onclick="setF('all',this)">All Products</button>
-      <button class="sub-btn" onclick="setF('skincare',this)">Skincare</button>
-      <button class="sub-btn" onclick="setF('makeup',this)">Makeup</button>
-      <button class="sub-btn" onclick="setF('moroccan',this)">Moroccan Heritage</button>
-      <button class="sub-btn" onclick="setF('kbeauty',this)">K-Beauty Precision</button>
-      <button class="sub-btn" onclick="setF('sets',this)">Gift Sets</button>
-      <button class="sub-btn" onclick="setF('new',this)">New Arrivals</button>
+
+  <!-- Row 2: Categories with mega menus -->
+  <nav class="nav-cats" id="navCats" onmouseleave="closeMega()">
+    <div class="nav-cats-inner">
+      <button class="cat-btn" data-cat="new" onmouseenter="openMega('new',this)" onclick="openCatPage('new','New Arrivals')">New Arrivals <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="skincare" onmouseenter="openMega('skincare',this)" onclick="openCatPage('skincare','Skincare')">Skincare <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="makeup" onmouseenter="openMega('makeup',this)" onclick="openCatPage('makeup','Makeup')">Makeup <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="moroccan" onmouseenter="openMega('moroccan',this)" onclick="openCatPage('moroccan','Moroccan Heritage')">Moroccan Heritage <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="kbeauty" onmouseenter="openMega('kbeauty',this)" onclick="openCatPage('kbeauty','K-Beauty Precision')">K-Beauty Precision <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="colour" onmouseenter="openMega('colour',this)" onclick="openCatPage('colour','Confident Colour')">Confident Colour <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="sets" onmouseenter="openMega('sets',this)" onclick="openCatPage('sets','Gift Sets')">Gift Sets <span class="arr"></span></button>
+      <button class="cat-btn" data-cat="all" onmouseenter="closeMega()" onclick="openCatPage('all','All Products')">Shop All</button>
     </div>
+
+    <!-- Mega menus (one per category) -->
+    <div class="mega" id="mega-new">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Just Landed</div>
+          <div class="mega-cat-name">New <em>Arrivals</em></div>
+          <div class="mega-cat-desc">The latest additions to the I'm Fenna collection.</div>
+          <div class="mega-va" onclick="openCatPage('new','New Arrivals')">View All New Arrivals →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Latest Drops</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('new','New Arrivals')"><span class="dot"></span>New This Week<span class="cnt">3</span></div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Skincare','new')"><span class="dot"></span>New Skincare<span class="cnt">2</span></div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Makeup','new')"><span class="dot"></span>New Makeup<span class="cnt">1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-skincare">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Clean Elegance</div>
+          <div class="mega-cat-name">Skin<em>care</em></div>
+          <div class="mega-cat-desc">Scientifically backed formulas with Moroccan and Korean actives.</div>
+          <div class="mega-va" onclick="openCatPage('skincare','Skincare')">View All Skincare →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop by Concern</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Serums & Treatments','serums')"><span class="dot"></span>Serums & Treatments</div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Face Oils','oils')"><span class="dot"></span>Face Oils</div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Masks & Exfoliants','masks')"><span class="dot"></span>Masks & Exfoliants</div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Moisturisers','moisturisers')"><span class="dot"></span>Moisturisers</div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Eye Care','eye')"><span class="dot"></span>Eye Care</div>
+            <div class="mega-sub-item" onclick="openCatPage('skincare','Cleansers','cleansers')"><span class="dot"></span>Cleansers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-makeup">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Confident Colour</div>
+          <div class="mega-cat-name">Make<em>up</em></div>
+          <div class="mega-cat-desc">Pigment-rich, long-wearing formulas that celebrate your features.</div>
+          <div class="mega-va" onclick="openCatPage('makeup','Makeup')">View All Makeup →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop by Category</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Foundation & Concealer','foundation')"><span class="dot"></span>Foundation & Concealer</div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Lip Colour','lip')"><span class="dot"></span>Lip Colour</div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Eye Makeup','eyes')"><span class="dot"></span>Eye Makeup</div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Setting & Primers','setting')"><span class="dot"></span>Setting & Primers</div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Blush & Bronzer','blush')"><span class="dot"></span>Blush & Bronzer</div>
+            <div class="mega-sub-item" onclick="openCatPage('makeup','Bestsellers','bestsellers')"><span class="dot"></span>Bestsellers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-moroccan">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Heritage Range</div>
+          <div class="mega-cat-name">Moroccan <em>Heritage</em></div>
+          <div class="mega-cat-desc">Ancient Moroccan rituals reimagined with modern formulation.</div>
+          <div class="mega-va" onclick="openCatPage('moroccan','Moroccan Heritage')">View All Heritage →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop the Range</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('moroccan','Argan & Rose Oils','oils')"><span class="dot"></span>Argan & Rose Oils</div>
+            <div class="mega-sub-item" onclick="openCatPage('moroccan','Ghassoul Clay Masks','masks')"><span class="dot"></span>Ghassoul Clay Masks</div>
+            <div class="mega-sub-item" onclick="openCatPage('moroccan','Ritual Gift Sets','ritual')"><span class="dot"></span>Ritual Gift Sets</div>
+            <div class="mega-sub-item" onclick="openCatPage('moroccan','Serums','serums')"><span class="dot"></span>Serums</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-kbeauty">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">K-Beauty Precision</div>
+          <div class="mega-cat-name">Korean <em>Beauty</em></div>
+          <div class="mega-cat-desc">Glass skin technology inspired by Korean skincare rituals.</div>
+          <div class="mega-va" onclick="openCatPage('kbeauty','K-Beauty Precision')">View All K-Beauty →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop the Range</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('kbeauty','Essences & Toners','essences')"><span class="dot"></span>Essences & Toners</div>
+            <div class="mega-sub-item" onclick="openCatPage('kbeauty','Vitamin C Serums','vitamin-c')"><span class="dot"></span>Vitamin C Serums</div>
+            <div class="mega-sub-item" onclick="openCatPage('kbeauty','Sheet Masks','sheet')"><span class="dot"></span>Sheet Masks</div>
+            <div class="mega-sub-item" onclick="openCatPage('kbeauty','Ampoules','ampoules')"><span class="dot"></span>Ampoules</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-colour">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Colour Range</div>
+          <div class="mega-cat-name">Confident <em>Colour</em></div>
+          <div class="mega-cat-desc">Bold, pigment-rich makeup that celebrates every complexion.</div>
+          <div class="mega-va" onclick="openCatPage('colour','Confident Colour')">View All Colour →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop by Product</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('colour','Lips','lips')"><span class="dot"></span>Lips</div>
+            <div class="mega-sub-item" onclick="openCatPage('colour','Eyes','eyes')"><span class="dot"></span>Eyes</div>
+            <div class="mega-sub-item" onclick="openCatPage('colour','Face','face')"><span class="dot"></span>Face</div>
+            <div class="mega-sub-item" onclick="openCatPage('colour','Velvet Collections','velvet')"><span class="dot"></span>Velvet Collections</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega" id="mega-sets">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <div class="mega-cat-label">Curated Gifting</div>
+          <div class="mega-cat-name">Gift <em>Sets</em></div>
+          <div class="mega-cat-desc">Thoughtfully curated sets in signature ivory gift boxes.</div>
+          <div class="mega-va" onclick="openCatPage('sets','Gift Sets')">View All Gift Sets →</div>
+        </div>
+        <div class="mega-right">
+          <div class="mega-sub-title">Shop by Occasion</div>
+          <div class="mega-subs">
+            <div class="mega-sub-item" onclick="openCatPage('sets','Skincare Sets','skincare-sets')"><span class="dot"></span>Skincare Sets</div>
+            <div class="mega-sub-item" onclick="openCatPage('sets','Colour Sets','colour-sets')"><span class="dot"></span>Colour Sets</div>
+            <div class="mega-sub-item" onclick="openCatPage('sets','Ritual Sets','ritual')"><span class="dot"></span>Ritual Sets</div>
+            <div class="mega-sub-item" onclick="openCatPage('sets','Mini Kits','minis')"><span class="dot"></span>Mini Kits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </nav>
 </header>
 
@@ -1080,6 +1456,201 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   </div>
 </div>
 
+<!-- ══ CATEGORY PAGE ══════════════════════════════════ -->
+<div class="cat-page" id="catPage">
+
+  <!-- Sticky breadcrumb bar -->
+  <div class="cp-topbar">
+    <div class="cp-topbar-inner">
+      <div class="cp-breadcrumb">
+        <button class="cp-bl" onclick="closeCatPage()">Home</button>
+        <span class="cp-bs">›</span>
+        <span class="cp-bc" id="cpBreadLabel">All Products</span>
+      </div>
+      <button class="cp-close" onclick="closeCatPage()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Back to Home
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile filter action bar -->
+  <div class="mob-fbar">
+    <button class="mob-fbtn" onclick="openMobileFilters()">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      Filters <span id="filterCount" style="background:var(--maroon);color:#fff;padding:1px 7px;font-size:9.5px;border-radius:10px;display:none">0</span>
+    </button>
+    <button class="mob-fbtn" id="mobSortBtn">Sort: Best Match</button>
+    <button class="mob-fbtn" onclick="cpToggleFilter('price')">Price</button>
+    <button class="mob-fbtn" onclick="cpToggleFilter('skinType')">Skin Type</button>
+    <button class="mob-fbtn" onclick="cpToggleFilter('concerns')">Concerns</button>
+    <button class="mob-fbtn" onclick="cpToggleFilter('range')">Range</button>
+  </div>
+
+  <div class="cp-layout">
+
+    <!-- Filter sidebar -->
+    <aside class="fs" id="filterSidebar">
+      <div class="fs-hd">
+        <div class="fs-hd-title">Filters</div>
+        <button class="fs-clear-all" onclick="clearAllFilters()">Clear All</button>
+        <button style="display:none" class="mob-close-fs" id="mobCloseFsBtn" onclick="closeMobileFilters()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Sort (sidebar) -->
+      <div class="fg" id="fg-sort">
+        <div class="fg-hd" onclick="toggleFg('fg-sort')">
+          <span class="fg-hd-lbl">Sort By</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo on" data-filter="sort" data-val="best" onclick="cpSetSort('best',this)"><div class="fo-check"></div><span class="fo-lbl">Best Match</span></div>
+          <div class="fo" data-filter="sort" data-val="new" onclick="cpSetSort('new',this)"><div class="fo-check"></div><span class="fo-lbl">Newest First</span></div>
+          <div class="fo" data-filter="sort" data-val="price-asc" onclick="cpSetSort('price-asc',this)"><div class="fo-check"></div><span class="fo-lbl">Price: Low to High</span></div>
+          <div class="fo" data-filter="sort" data-val="price-desc" onclick="cpSetSort('price-desc',this)"><div class="fo-check"></div><span class="fo-lbl">Price: High to Low</span></div>
+          <div class="fo" data-filter="sort" data-val="rating" onclick="cpSetSort('rating',this)"><div class="fo-check"></div><span class="fo-lbl">Top Rated</span></div>
+          <div class="fo" data-filter="sort" data-val="bestselling" onclick="cpSetSort('bestselling',this)"><div class="fo-check"></div><span class="fo-lbl">Bestselling</span></div>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="fg" id="fg-price">
+        <div class="fg-hd" onclick="toggleFg('fg-price')">
+          <span class="fg-hd-lbl">Price</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="price" data-val="0-30" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Under £30</span></div>
+          <div class="fo" data-filter="price" data-val="30-60" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£30 – £60</span></div>
+          <div class="fo" data-filter="price" data-val="60-100" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£60 – £100</span></div>
+          <div class="fo" data-filter="price" data-val="100+" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">£100+</span></div>
+          <div class="price-rng" style="margin-top:10px">
+            <input class="pr-input" type="number" id="prMin" placeholder="£ Min" min="0" max="500" />
+            <span class="pr-dash">—</span>
+            <input class="pr-input" type="number" id="prMax" placeholder="£ Max" min="0" max="500" />
+            <button class="pr-go" onclick="applyPriceRange()">Go</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating -->
+      <div class="fg" id="fg-rating">
+        <div class="fg-hd" onclick="toggleFg('fg-rating')">
+          <span class="fg-hd-lbl">Customer Rating</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="rating" data-val="4.5" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl rating-fo">★★★★★ 4.5 & up</span></div>
+          <div class="fo" data-filter="rating" data-val="4" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl rating-fo">★★★★☆ 4.0 & up</span></div>
+          <div class="fo" data-filter="rating" data-val="3.5" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl rating-fo">★★★½☆ 3.5 & up</span></div>
+        </div>
+      </div>
+
+      <!-- Skin Type -->
+      <div class="fg" id="fg-skinType">
+        <div class="fg-hd" onclick="toggleFg('fg-skinType')">
+          <span class="fg-hd-lbl">Skin Type</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="skinType" data-val="all" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">All Skin Types</span></div>
+          <div class="fo" data-filter="skinType" data-val="dry" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Dry</span></div>
+          <div class="fo" data-filter="skinType" data-val="oily" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Oily</span></div>
+          <div class="fo" data-filter="skinType" data-val="combination" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Combination</span></div>
+          <div class="fo" data-filter="skinType" data-val="sensitive" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Sensitive</span></div>
+          <div class="fo" data-filter="skinType" data-val="normal" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Normal</span></div>
+        </div>
+      </div>
+
+      <!-- Concerns -->
+      <div class="fg" id="fg-concerns">
+        <div class="fg-hd" onclick="toggleFg('fg-concerns')">
+          <span class="fg-hd-lbl">Concerns</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="concerns" data-val="brightening" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Brightening</span></div>
+          <div class="fo" data-filter="concerns" data-val="anti-ageing" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Anti-Ageing</span></div>
+          <div class="fo" data-filter="concerns" data-val="hydration" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Deep Hydration</span></div>
+          <div class="fo" data-filter="concerns" data-val="pores" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Pore Minimising</span></div>
+          <div class="fo" data-filter="concerns" data-val="acne" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Blemish & Acne</span></div>
+          <div class="fo" data-filter="concerns" data-val="glow" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Instant Glow</span></div>
+          <div class="fo" data-filter="concerns" data-val="firming" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Firming</span></div>
+        </div>
+      </div>
+
+      <!-- Formulation -->
+      <div class="fg" id="fg-form">
+        <div class="fg-hd" onclick="toggleFg('fg-form')">
+          <span class="fg-hd-lbl">Formulation</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="form" data-val="serum" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Serum</span></div>
+          <div class="fo" data-filter="form" data-val="oil" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Oil</span></div>
+          <div class="fo" data-filter="form" data-val="mask" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Mask</span></div>
+          <div class="fo" data-filter="form" data-val="essence" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Essence / Toner</span></div>
+          <div class="fo" data-filter="form" data-val="cream" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Cream / Moisturiser</span></div>
+          <div class="fo" data-filter="form" data-val="foundation" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Foundation</span></div>
+          <div class="fo" data-filter="form" data-val="lip" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Lip Colour</span></div>
+          <div class="fo" data-filter="form" data-val="palette" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Palette</span></div>
+          <div class="fo" data-filter="form" data-val="powder" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Setting Powder</span></div>
+          <div class="fo" data-filter="form" data-val="set" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Gift Set</span></div>
+        </div>
+      </div>
+
+      <!-- Range -->
+      <div class="fg" id="fg-range">
+        <div class="fg-hd" onclick="toggleFg('fg-range')">
+          <span class="fg-hd-lbl">Range</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="range" data-val="moroccan" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Moroccan Heritage</span></div>
+          <div class="fo" data-filter="range" data-val="kbeauty" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">K-Beauty Precision</span></div>
+          <div class="fo" data-filter="range" data-val="colour" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Confident Colour</span></div>
+        </div>
+      </div>
+
+      <!-- Availability -->
+      <div class="fg" id="fg-avail">
+        <div class="fg-hd" onclick="toggleFg('fg-avail')">
+          <span class="fg-hd-lbl">Availability</span><span class="fg-chev"></span>
+        </div>
+        <div class="fg-body">
+          <div class="fo" data-filter="avail" data-val="new" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">New Arrivals</span></div>
+          <div class="fo" data-filter="avail" data-val="sale" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">On Sale</span></div>
+          <div class="fo" data-filter="avail" data-val="bestseller" onclick="cpToggleCheckbox(this)"><div class="fo-check"></div><span class="fo-lbl">Bestsellers</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Product grid area -->
+    <div class="cat-area">
+      <div class="cat-area-hd">
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px"><span style="width:18px;height:1px;background:var(--gold);display:inline-block"></span><span id="cpCatEye">Collection</span></div>
+          <div class="cat-area-title" id="cpCatTitle">All <em>Products</em></div>
+        </div>
+        <div class="cat-area-meta">
+          <span class="cat-result-count" id="cpResultCount">10 products</span>
+          <select class="cat-sort" id="cpSort" onchange="cpSortChange(this.value)">
+            <option value="best">Best Match</option>
+            <option value="new">Newest First</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+            <option value="bestselling">Bestselling</option>
+          </select>
+        </div>
+      </div>
+      <!-- Active filter chips -->
+      <div class="chips-row" id="chipsRow"></div>
+      <!-- Product grid -->
+      <div class="prod-grid" id="cpGrid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Filter sidebar mask (mobile) -->
+<div class="fs-mask" id="fsMask" onclick="closeMobileFilters()"></div>
+
 <!-- ══ FOOTER ══════════════════════════════════════════ -->
 <footer>
   <div class="ft-main">
@@ -1280,6 +1851,247 @@ window.addEventListener('scroll', () => {
   document.getElementById('navWrap').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive:true });
 
+/* ── MEGA MENU ── */
+let megaTimer;
+function openMega(cat, btn){
+  clearTimeout(megaTimer);
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.mega').forEach(m=>m.classList.remove('open'));
+  if(btn){ btn.classList.add('active'); }
+  const m=document.getElementById('mega-'+cat);
+  if(m){ m.classList.add('open'); }
+}
+function closeMega(){
+  megaTimer=setTimeout(()=>{
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.mega').forEach(m=>m.classList.remove('open'));
+  },120);
+}
+document.querySelectorAll('.mega').forEach(m=>{
+  m.addEventListener('mouseenter',()=>clearTimeout(megaTimer));
+  m.addEventListener('mouseleave',()=>closeMega());
+});
+
+/* ── MOBILE MENU ── */
+function openMobileMenu(){ showToast('Menu available on desktop'); }
+
+/* ── CATEGORY PAGE ── */
+const cpState={cat:'all',label:'All Products',sort:'best',filters:{}};
+
+// Category meta
+const CAT_META={
+  all:    {eye:'The Full Collection',  title:'All <em>Products</em>'},
+  new:    {eye:'Just Landed',          title:'New <em>Arrivals</em>'},
+  skincare:{eye:'Clean Elegance',      title:'Skin<em>care</em>'},
+  makeup: {eye:'Confident Colour',     title:'Make<em>up</em>'},
+  moroccan:{eye:'Moroccan Heritage',   title:'Moroccan <em>Heritage</em>'},
+  kbeauty:{eye:'K-Beauty Precision',   title:'K-Beauty <em>Precision</em>'},
+  colour: {eye:'Confident Colour',     title:'Confident <em>Colour</em>'},
+  sets:   {eye:'Curated Gifting',      title:'Gift <em>Sets</em>'},
+};
+
+// Map product cat values to nav cats
+function baseProducts(cat){
+  if(cat==='all')    return P;
+  if(cat==='new')    return P.filter(p=>p.isNew);
+  if(cat==='moroccan') return P.filter(p=>p.cat==='moroccan'||p.range==='Moroccan Heritage');
+  if(cat==='kbeauty')  return P.filter(p=>p.cat==='kbeauty');
+  if(cat==='makeup')   return P.filter(p=>p.cat==='makeup');
+  if(cat==='colour')   return P.filter(p=>p.range==='Confident Colour');
+  if(cat==='sets')     return P.filter(p=>p.cat==='sets');
+  if(cat==='skincare') return P.filter(p=>p.cat==='skincare'||p.cat==='moroccan'||p.cat==='kbeauty');
+  return P;
+}
+
+function openCatPage(cat, label){
+  closeMega();
+  cpState.cat=cat; cpState.label=label||cat;
+  cpState.filters={};
+  document.getElementById('cpBreadLabel').textContent=cpState.label;
+  const meta=CAT_META[cat]||{eye:label,title:label};
+  document.getElementById('cpCatEye').textContent=meta.eye;
+  document.getElementById('cpCatTitle').innerHTML=meta.title;
+  document.getElementById('cpSort').value='best';
+  cpState.sort='best';
+  // clear all filter checkboxes
+  document.querySelectorAll('.fo[data-filter]').forEach(f=>{
+    f.classList.remove('on');
+    if(f.dataset.filter==='sort'&&f.dataset.val==='best') f.classList.add('on');
+  });
+  renderCatPage();
+  document.getElementById('catPage').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCatPage(){
+  document.getElementById('catPage').classList.remove('open');
+  document.body.style.overflow='';
+  // scroll home to top
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function cpSortChange(val){
+  cpState.sort=val;
+  renderCatPage();
+}
+
+function cpSetSort(val, el){
+  cpState.sort=val;
+  document.querySelectorAll('.fo[data-filter="sort"]').forEach(f=>f.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('cpSort').value=val;
+  renderCatPage();
+}
+
+function cpToggleCheckbox(el){
+  const isSort=el.dataset.filter==='sort';
+  if(isSort){
+    document.querySelectorAll('.fo[data-filter="sort"]').forEach(f=>f.classList.remove('on'));
+    el.classList.add('on');
+    cpState.sort=el.dataset.val;
+    document.getElementById('cpSort').value=el.dataset.val;
+  } else {
+    el.classList.toggle('on');
+    const f=el.dataset.filter, v=el.dataset.val;
+    if(!cpState.filters[f]) cpState.filters[f]=new Set();
+    if(el.classList.contains('on')) cpState.filters[f].add(v);
+    else cpState.filters[f].delete(v);
+    if(cpState.filters[f].size===0) delete cpState.filters[f];
+  }
+  renderCatPage();
+}
+
+function toggleFg(id){
+  document.getElementById(id).classList.toggle('closed');
+}
+
+function clearAllFilters(){
+  cpState.filters={};
+  cpState.sort='best';
+  document.querySelectorAll('.fo[data-filter]').forEach(f=>{
+    f.classList.remove('on');
+    if(f.dataset.filter==='sort'&&f.dataset.val==='best') f.classList.add('on');
+  });
+  document.getElementById('cpSort').value='best';
+  document.getElementById('prMin').value='';
+  document.getElementById('prMax').value='';
+  renderCatPage();
+}
+
+function applyPriceRange(){
+  const mn=parseInt(document.getElementById('prMin').value)||0;
+  const mx=parseInt(document.getElementById('prMax').value)||9999;
+  if(!cpState.filters.customPrice) cpState.filters.customPrice=new Set();
+  cpState.filters.customPrice=new Set([`${mn}-${mx}`]);
+  renderCatPage();
+}
+
+function cpToggleFilter(key){
+  // on mobile, just toggle the relevant filter group in sidebar
+  openMobileFilters();
+  const el=document.getElementById('fg-'+key);
+  if(el) el.classList.remove('closed');
+}
+
+function openMobileFilters(){
+  document.getElementById('filterSidebar').classList.add('open');
+  document.getElementById('fsMask').classList.add('on');
+  document.getElementById('mobCloseFsBtn').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeMobileFilters(){
+  document.getElementById('filterSidebar').classList.remove('open');
+  document.getElementById('fsMask').classList.remove('on');
+  document.body.style.overflow='hidden'; // catPage keeps scroll locked
+}
+
+function renderCatPage(){
+  let list=baseProducts(cpState.cat);
+
+  // Apply filters
+  const F=cpState.filters;
+  if(F.price){
+    list=list.filter(p=>{
+      return [...F.price].some(r=>{
+        const [mn,mx]=r.split('-').map(x=>x==='+'?Infinity:+x);
+        return p.price>=mn && p.price<=mx;
+      });
+    });
+  }
+  if(F.customPrice){
+    list=list.filter(p=>{
+      return [...F.customPrice].some(r=>{
+        const [mn,mx]=r.split('-').map(x=>+x);
+        return p.price>=mn && p.price<=(mx||9999);
+      });
+    });
+  }
+  if(F.rating){
+    const minR=Math.max(...[...F.rating].map(Number));
+    list=list.filter(p=>p.r>=minR);
+  }
+  if(F.range){
+    const rangeMap={'moroccan':'Moroccan Heritage','kbeauty':'K-Beauty Precision','colour':'Confident Colour'};
+    list=list.filter(p=>[...F.range].some(v=>p.range===rangeMap[v]));
+  }
+  if(F.avail){
+    list=list.filter(p=>{
+      if(F.avail.has('new')&&p.isNew) return true;
+      if(F.avail.has('sale')&&p.origPrice) return true;
+      if(F.avail.has('bestseller')&&p.isBest) return true;
+      return false;
+    });
+  }
+
+  // Sort
+  const s=cpState.sort;
+  if(s==='price-asc')  list=[...list].sort((a,b)=>a.price-b.price);
+  if(s==='price-desc') list=[...list].sort((a,b)=>b.price-a.price);
+  if(s==='rating')     list=[...list].sort((a,b)=>b.r-a.r);
+  if(s==='new')        list=[...list].sort((a,b)=>b.isNew-a.isNew);
+  if(s==='bestselling')list=[...list].sort((a,b)=>b.rv-a.rv);
+
+  // Render grid
+  const grid=document.getElementById('cpGrid');
+  grid.innerHTML=list.length
+    ?list.map(p=>cardHTML(p)).join('')
+    :`<div style="grid-column:1/-1;padding:80px 0;text-align:center">
+        <div style="font-family:var(--serif);font-size:22px;font-style:italic;color:var(--muted);margin-bottom:12px">No products match your filters.</div>
+        <button onclick="clearAllFilters()" style="font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--maroon);padding:10px 24px;border:1px solid rgba(118,20,21,.3);cursor:pointer">Clear Filters</button>
+      </div>`;
+  document.getElementById('cpResultCount').textContent=`${list.length} product${list.length!==1?'s':''}`;
+  grid.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+  // Active chips
+  renderChips();
+
+  // Filter count badge
+  const totalActive=Object.values(cpState.filters).reduce((n,s)=>n+(s instanceof Set?s.size:0),0);
+  const badge=document.getElementById('filterCount');
+  badge.textContent=totalActive;
+  badge.style.display=totalActive?'inline-block':'none';
+}
+
+function renderChips(){
+  const row=document.getElementById('chipsRow');
+  const chips=[];
+  const O=cpState.filters;
+  const priceLabels={'0-30':'Under £30','30-60':'£30–£60','60-100':'£60–£100','100+':'£100+'};
+  const rangeLabels={'moroccan':'Moroccan Heritage','kbeauty':'K-Beauty Precision','colour':'Confident Colour'};
+
+  if(O.price) [...O.price].forEach(v=>chips.push({label:priceLabels[v]||v,rm:()=>{O.price.delete(v);if(!O.price.size)delete O.price;document.querySelectorAll(`.fo[data-filter="price"][data-val="${v}"]`).forEach(f=>f.classList.remove('on'));renderCatPage();}}));
+  if(O.rating) [...O.rating].forEach(v=>chips.push({label:`${v}★ & up`,rm:()=>{O.rating.delete(v);if(!O.rating.size)delete O.rating;document.querySelectorAll(`.fo[data-filter="rating"][data-val="${v}"]`).forEach(f=>f.classList.remove('on'));renderCatPage();}}));
+  if(O.range) [...O.range].forEach(v=>chips.push({label:rangeLabels[v]||v,rm:()=>{O.range.delete(v);if(!O.range.size)delete O.range;document.querySelectorAll(`.fo[data-filter="range"][data-val="${v}"]`).forEach(f=>f.classList.remove('on'));renderCatPage();}}));
+  if(O.skinType) [...O.skinType].forEach(v=>chips.push({label:v,rm:()=>{O.skinType.delete(v);if(!O.skinType.size)delete O.skinType;renderCatPage();}}));
+  if(O.concerns) [...O.concerns].forEach(v=>chips.push({label:v,rm:()=>{O.concerns.delete(v);if(!O.concerns.size)delete O.concerns;renderCatPage();}}));
+  if(O.form) [...O.form].forEach(v=>chips.push({label:v,rm:()=>{O.form.delete(v);if(!O.form.size)delete O.form;renderCatPage();}}));
+  if(O.avail) [...O.avail].forEach(v=>chips.push({label:v,rm:()=>{O.avail.delete(v);if(!O.avail.size)delete O.avail;renderCatPage();}}));
+  if(O.customPrice) chips.push({label:'Custom Price',rm:()=>{delete O.customPrice;renderCatPage();}});
+
+  row.innerHTML=chips.map((c,i)=>`<div class="chip" onclick="chips_rm(${i})">${c.label} <span class="chip-x">×</span></div>`).join('');
+  row.__chipFns=chips.map(c=>c.rm);
+}
+function chips_rm(i){ document.getElementById('chipsRow').__chipFns[i](); }
+
 /* ── HERO ── */
 let hi=0, hTimer;
 function goSlide(i){ hi=i; applyHero(); }
@@ -1342,19 +2154,10 @@ function renderNew(){
 }
 renderGrid(P); renderNew();
 
-/* ── FILTER ── */
+/* ── FILTER (legacy — routes to category page) ── */
 function setF(f,btn){
-  document.querySelectorAll('.sub-btn').forEach(b=>b.classList.remove('on'));
-  if(btn&&btn.classList&&btn.classList.contains('sub-btn')) btn.classList.add('on');
-  document.getElementById('sInput').value='';
-  const map={all:P,new:P.filter(p=>p.isNew)};
-  const list=map[f]||P.filter(p=>p.cat===f);
-  const titles={all:'All <em>Products</em>',new:'New <em>Arrivals</em>',skincare:'<em>Skincare</em>',makeup:'<em>Makeup</em>',moroccan:'Moroccan <em>Heritage</em>',kbeauty:'K-Beauty <em>Precision</em>',sets:'Gift <em>Sets</em>'};
-  const eyes={all:'The Full Collection',new:'Just Arrived',skincare:'Clean Elegance',makeup:'Confident Colour',moroccan:'Moroccan Heritage',kbeauty:'K-Beauty Precision',sets:'Gift Sets'};
-  renderGrid(list);
-  document.getElementById('gridTitle').innerHTML=titles[f]||f;
-  document.getElementById('gridEye').textContent=eyes[f]||'';
-  document.getElementById('shopSection').scrollIntoView({behavior:'smooth',block:'start'});
+  const labels={all:'All Products',new:'New Arrivals',skincare:'Skincare',makeup:'Makeup',moroccan:'Moroccan Heritage',kbeauty:'K-Beauty Precision',sets:'Gift Sets',colour:'Confident Colour'};
+  openCatPage(f, labels[f]||f);
   return false;
 }
 
