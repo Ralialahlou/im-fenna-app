@@ -825,6 +825,189 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .fs-mask.on { display: block; }
 
 /* ═══════════════════════════════════════════════
+   PDP — Full Product Detail Page
+═══════════════════════════════════════════════ */
+.pdp-page {
+  display: none; position: fixed; inset: 0; z-index: 390;
+  background: var(--ivory); overflow-y: auto;
+  animation: cpIn .3s var(--ease) both;
+}
+.pdp-page.open { display: block; }
+
+/* Sticky top bar */
+.pdp-bar {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.pdp-bar-inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 12px var(--px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pdp-back {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted); cursor: pointer;
+  background: none; border: none; transition: color .2s;
+}
+.pdp-back:hover { color: var(--maroon); }
+.pdp-back svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.pdp-bar-actions { display: flex; align-items: center; gap: 8px; }
+
+/* Main body */
+.pdp-body {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: clamp(24px,4vw,52px) var(--px) 80px;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: clamp(28px,5vw,72px);
+}
+@media(max-width:860px) { .pdp-body { grid-template-columns: 1fr; } }
+
+/* ── Image Gallery ── */
+.pdp-gallery { position: sticky; top: 80px; align-self: start; }
+@media(max-width:860px) { .pdp-gallery { position: static; } }
+
+.pdp-main-img-wrap {
+  position: relative; overflow: hidden;
+  background: var(--ivory-2);
+  aspect-ratio: 1;
+}
+.pdp-main-img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.pdp-main-img-wrap:hover .pdp-main-img { transform: scale(1.04); }
+.pdp-img-badges { position: absolute; top: 14px; left: 14px; z-index: 2; display: flex; flex-direction: column; gap: 5px; }
+
+/* Thumbnail strip */
+.pdp-thumbs {
+  display: flex; gap: 8px; margin-top: 10px;
+  overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
+}
+.pdp-thumbs::-webkit-scrollbar { display: none; }
+.pdp-thumb {
+  flex-shrink: 0; width: clamp(60px,8vw,80px); aspect-ratio: 1;
+  overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: border-color .2s;
+  background: var(--ivory-2);
+}
+.pdp-thumb.on { border-color: var(--maroon); }
+.pdp-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.pdp-thumb:hover img { transform: scale(1.08); }
+
+/* ── Info column ── */
+.pdp-info {}
+.pdp-range-lbl {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 9.5px; font-weight: 600; letter-spacing: 3.5px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+}
+.pdp-range-lbl::before { content:''; width:16px; height:1px; background:var(--gold); }
+.pdp-name {
+  font-family: var(--serif); font-size: clamp(26px,3.5vw,42px); font-weight: 700;
+  line-height: 1.05; color: var(--text); margin-bottom: 8px;
+}
+.pdp-tagline { font-family: var(--serif); font-style: italic; font-size: clamp(14px,1.1vw,17px); color: var(--muted); margin-bottom: 18px; }
+
+/* Price */
+.pdp-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.pdp-price { font-family: var(--serif); font-size: clamp(28px,3vw,38px); font-weight: 700; color: var(--text); }
+.pdp-orig { font-family: var(--serif); font-size: 18px; color: var(--muted); text-decoration: line-through; }
+.pdp-badge-sale { background: var(--maroon); color: var(--ivory); font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; padding: 3px 9px; text-transform: uppercase; }
+.pdp-sz { font-family: var(--sans); font-size: 12.5px; color: var(--muted); margin-bottom: 20px; }
+
+/* Shade selector */
+.pdp-shade-sec { margin-bottom: 22px; }
+.pdp-shade-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.pdp-shade-lbl { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-2); }
+.pdp-shade-sel { font-family: var(--serif); font-size: 13px; font-weight: 400; color: var(--cinnamon); }
+.pdp-swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.pdp-swatch {
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  border: 2.5px solid var(--ivory); outline: 2px solid transparent;
+  transition: outline-color .2s, transform .2s; position: relative;
+}
+.pdp-swatch:hover { transform: scale(1.1); }
+.pdp-swatch.on { outline-color: var(--cinnamon); border-color: var(--white); }
+
+/* Size selector */
+.pdp-size-sec { margin-bottom: 22px; }
+.pdp-size-lbl { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-2); margin-bottom: 10px; }
+.pdp-sizes { display: flex; gap: 8px; flex-wrap: wrap; }
+.pdp-size-btn {
+  padding: 8px 18px; border: 1px solid var(--border-2); background: transparent;
+  font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--text-2);
+  cursor: pointer; transition: all .2s;
+}
+.pdp-size-btn.on { border-color: var(--maroon); color: var(--maroon); background: rgba(118,20,21,.04); }
+
+/* Qty + Add to bag */
+.pdp-actions { display: flex; gap: 10px; margin-bottom: 18px; }
+.pdp-qty { display: flex; align-items: center; border: 1px solid var(--border-2); background: var(--white); }
+.pdp-qty button { width: 40px; height: 52px; font-family: var(--sans); font-size: 18px; font-weight: 300; color: var(--text-2); transition: background .15s; }
+.pdp-qty button:hover { background: var(--ivory-2); }
+.pdp-qty span { width: 40px; text-align: center; font-family: var(--sans); font-size: 14px; font-weight: 500; }
+.pdp-add-btn {
+  flex: 1; padding: 0 28px; height: 52px;
+  background: var(--maroon); color: var(--ivory);
+  font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: background .25s; cursor: pointer; border: none;
+}
+.pdp-add-btn:hover { background: var(--maroon-2); }
+.pdp-add-btn svg { width: 16px; height: 16px; stroke: var(--ivory); fill: none; stroke-width: 1.8; }
+.pdp-wish-btn {
+  width: 52px; height: 52px; border: 1px solid var(--border-2); background: var(--white);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s;
+}
+.pdp-wish-btn:hover { border-color: var(--maroon); }
+.pdp-wish-btn svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
+.pdp-wish-btn.on svg { stroke: var(--maroon); fill: var(--maroon); }
+
+/* Trust badges */
+.pdp-trust { display: flex; gap: 22px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+.pdp-trust-item { display: flex; align-items: center; gap: 8px; }
+.pdp-trust-item svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; flex-shrink: 0; }
+.pdp-trust-item span { font-family: var(--sans); font-size: 11px; font-weight: 500; color: var(--text-2); }
+
+/* Accordion */
+.pdp-accordion { border-top: 1px solid var(--border); }
+.acc-item { border-bottom: 1px solid var(--border); }
+.acc-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 17px 0; cursor: pointer; user-select: none;
+}
+.acc-hd-lbl { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text); }
+.acc-icon { width: 20px; height: 20px; position: relative; flex-shrink: 0; }
+.acc-icon::before, .acc-icon::after { content:''; position:absolute; background:var(--text); border-radius:1px; transition:transform .3s,opacity .3s; top:50%; left:50%; }
+.acc-icon::before { width:12px; height:1.5px; transform:translate(-50%,-50%); }
+.acc-icon::after  { width:1.5px; height:12px; transform:translate(-50%,-50%); }
+.acc-item.open .acc-icon::after { opacity:0; transform:translate(-50%,-50%) rotate(90deg); }
+.acc-body { display:none; padding-bottom:20px; }
+.acc-item.open .acc-body { display:block; }
+.acc-body p { font-family: var(--sans); font-size: 13.5px; font-weight: 300; line-height: 1.85; color: var(--muted); }
+
+/* Key ingredients in accordion */
+.pdp-ings { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+@media(max-width:480px) { .pdp-ings { grid-template-columns: 1fr; } }
+.pdp-ing { display: flex; gap: 11px; }
+.pdp-ing-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.pdp-ing-n { font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--text-2); margin-bottom: 2px; }
+.pdp-ing-b { font-family: var(--sans); font-size: 11.5px; font-weight: 300; color: var(--muted); }
+
+/* Skin type tags */
+.pdp-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.pdp-tag {
+  padding: 5px 13px; border: 1px solid var(--border-2);
+  font-family: var(--sans); font-size: 11.5px; font-weight: 400; color: var(--text-2);
+}
+
+/* Full INCI */
+.pdp-inci { font-family: var(--sans); font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+/* Related products */
+.pdp-related { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px) 80px; }
+.pdp-rel-title { font-family: var(--serif); font-size: clamp(22px,3vw,32px); font-weight: 700; margin-bottom: 24px; }
+.pdp-rel-title em { font-style: italic; font-weight: 400; }
+
+/* ═══════════════════════════════════════════════
    SEARCH MODAL
 ═══════════════════════════════════════════════ */
 .s-modal {
@@ -1752,60 +1935,179 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   </div>
 </div>
 
-<!-- DRAWER MASK + PANEL -->
-<div class="d-mask" id="dMask" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer">
-  <div class="d-grip"></div>
-  <div class="d-hd">
-    <span class="d-brand">I<span class="heart" style="color:var(--maroon);letter-spacing:0">♥</span>M FENNA</span>
-    <button class="d-close" onclick="closeDrawer()" aria-label="Close">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <img class="d-img" id="dImg" src="" alt="" />
-  <div class="d-body">
-    <div class="d-range" id="dRange"></div>
-    <div class="d-name" id="dName"></div>
-    <div class="d-stars" id="dStars"></div>
-    <div class="d-price" id="dPrice"></div>
-    <div class="d-size" id="dSize"></div>
-    <div id="dShadesSec" style="display:none">
-      <div class="d-lbl">Shade — <span id="dShadeName" style="font-family:var(--serif);color:var(--cinnamon);font-weight:400;text-transform:none;letter-spacing:0;font-size:14px"></span></div>
-      <div class="d-shades" id="dShadesRow"></div>
+<!-- PDP — Full Product Detail Page -->
+<div class="pdp-page" id="pdpPage">
+
+  <!-- Sticky back bar -->
+  <div class="pdp-bar">
+    <div class="pdp-bar-inner">
+      <button class="pdp-back" id="pdpBackBtn" onclick="closePDP()">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        <span id="pdpBackLabel">Retour</span>
+      </button>
+      <div class="pdp-bar-actions">
+        <button class="nav-btn" onclick="openSearch()" aria-label="Rechercher">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="nav-btn" onclick="openCart()" aria-label="Panier">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+      </div>
     </div>
-    <div class="d-lbl">Description</div>
-    <p class="d-desc" id="dDesc"></p>
-    <div class="d-ings" id="dIngs"></div>
-    <button class="d-add" onclick="addFromDrawer()">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Add to Bag
-    </button>
   </div>
+
+  <!-- Body: gallery + info -->
+  <div class="pdp-body">
+
+    <!-- Left: image gallery -->
+    <div class="pdp-gallery">
+      <div class="pdp-main-img-wrap">
+        <img class="pdp-main-img" id="pdpMainImg" src="" alt="" />
+        <div class="pdp-img-badges" id="pdpBadges"></div>
+      </div>
+      <div class="pdp-thumbs" id="pdpThumbs"></div>
+    </div>
+
+    <!-- Right: product info -->
+    <div class="pdp-info">
+      <div class="pdp-range-lbl" id="pdpRange"></div>
+      <h1 class="pdp-name" id="pdpName"></h1>
+      <p class="pdp-tagline" id="pdpTagline"></p>
+
+      <!-- Price -->
+      <div class="pdp-price-row">
+        <span class="pdp-price" id="pdpPrice"></span>
+        <span class="pdp-orig" id="pdpOrig" style="display:none"></span>
+        <span class="pdp-badge-sale" id="pdpDisc" style="display:none"></span>
+      </div>
+      <p class="pdp-sz" id="pdpSz"></p>
+
+      <!-- Shade selector -->
+      <div class="pdp-shade-sec" id="pdpShadeSec" style="display:none">
+        <div class="pdp-shade-hd">
+          <span class="pdp-shade-lbl">Teinte —</span>
+          <span class="pdp-shade-sel" id="pdpShadeName"></span>
+        </div>
+        <div class="pdp-swatches" id="pdpSwatches"></div>
+      </div>
+
+      <!-- Qty + add -->
+      <div class="pdp-actions">
+        <div class="pdp-qty">
+          <button onclick="pdpQty(-1)">−</button>
+          <span id="pdpQtyVal">1</span>
+          <button onclick="pdpQty(1)">+</button>
+        </div>
+        <button class="pdp-add-btn" onclick="pdpAddToBag()">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Ajouter au Panier
+        </button>
+        <button class="pdp-wish-btn" id="pdpWishBtn" onclick="pdpToggleWish()">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="pdp-trust">
+        <div class="pdp-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Clean & Certifié</span>
+        </div>
+        <div class="pdp-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Sans Cruauté</span>
+        </div>
+        <div class="pdp-trust-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72"/></svg>
+          <span>Livraison Gratuite dès 800 DH</span>
+        </div>
+        <div class="pdp-trust-item">
+          <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          <span>Retours 30 Jours</span>
+        </div>
+      </div>
+
+      <!-- Accordion sections -->
+      <div class="pdp-accordion">
+        <div class="acc-item open">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Description</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body"><p id="pdpDesc"></p></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Mode d'Emploi</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body"><p id="pdpModeEmploi"></p></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Ingrédients Clés</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body"><div class="pdp-ings" id="pdpIngs"></div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Liste Complète INCI</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body"><p class="pdp-inci" id="pdpFullIngs"></p></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Type de Peau</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body" style="padding-top:6px"><div class="pdp-tags" id="pdpSkinTypes"></div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            <span class="acc-hd-lbl">Préoccupations</span>
+            <span class="acc-icon"></span>
+          </div>
+          <div class="acc-body" style="padding-top:6px"><div class="pdp-tags" id="pdpConcerns"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related products -->
+  <div class="pdp-related">
+    <h2 class="pdp-rel-title">Vous aimerez <em>aussi</em></h2>
+    <div class="hrow-outer">
+      <div class="hrow" id="pdpRelated"></div>
+    </div>
+  </div>
+
 </div>
 
 <!-- CART MASK + PANEL -->
 <div class="c-mask" id="cMask" onclick="closeCart()"></div>
 <div class="cart-panel" id="cartPanel">
   <div class="cp-hd">
-    <div class="cp-title">My Bag</div>
+    <div class="cp-title">Mon Panier</div>
     <button onclick="closeCart()" aria-label="Close">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <div class="ship-prog">
     <div class="ship-track"><div class="ship-fill" id="shipFill" style="width:0%"></div></div>
-    <div class="ship-lbl" id="shipLbl">Spend £80 for free delivery</div>
+    <div class="ship-lbl" id="shipLbl">Livraison gratuite dès 800 DH</div>
   </div>
   <div class="cp-body">
     <div class="cart-items" id="cartItems"></div>
   </div>
   <div class="cp-ft">
     <div class="cp-rows">
-      <div class="cp-row"><span>Subtotal</span><span id="cpSub">£0.00</span></div>
-      <div class="cp-row"><span>Delivery</span><span id="cpDel">—</span></div>
-      <div class="cp-row total"><span>Total</span><span id="cpTotal">£0.00</span></div>
+      <div class="cp-row"><span>Sous-total</span><span id="cpSub">0 DH</span></div>
+      <div class="cp-row"><span>Livraison</span><span id="cpDel">—</span></div>
+      <div class="cp-row total"><span>Total</span><span id="cpTotal">0 DH</span></div>
     </div>
-    <button class="cp-checkout" onclick="checkout()">Proceed to Checkout</button>
+    <button class="cp-checkout" onclick="checkout()">Passer la Commande</button>
   </div>
 </div>
 
@@ -1813,18 +2115,188 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── PRODUCTS — brand product names from guidelines ── */
+/* ── PRODUCTS — enriched with MAD prices, multi-images, mode d'emploi, INCI ── */
 const P = [
-  {id:1, name:'Great Skin Instant Glow Serum',     range:'Moroccan Heritage',  cat:'skincare', price:68,              r:4.8, rv:247, isNew:false, isBest:true,  img:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80',  sz:'30ml',     desc:'Our hero serum combines pure Moroccan argan oil with brightening actives to deliver an instant luminous glow. Lightweight yet intensely nourishing.',       ings:[{n:'Argan Oil',b:'Deep nourishment & radiance'},{n:'Vitamin C',b:'Brightens & evens skin tone'},{n:'Hyaluronic Acid',b:'Plumps & hydrates'}],shades:null},
-  {id:2, name:'Subline Perfection Foundation',      range:'Confident Colour',   cat:'makeup',   price:52,              r:4.7, rv:189, isNew:false, isBest:true,  img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',  sz:'30ml',     desc:'A buildable, skin-like foundation infused with Moroccan rose water. Breathable, comfortable wear from morning to night.',                                  ings:[{n:'Rose Water',b:'Soothes & hydrates'},{n:'SPF 20',b:'Daily UV protection'}],shades:[{n:'Porcelain',c:'#F8E8D8'},{n:'Nude Beige',c:'#EDD4B2'},{n:'Golden Sand',c:'#D4A878'},{n:'Warm Honey',c:'#C48B4A'},{n:'Deep Caramel',c:'#8B5E38'},{n:'Rich Espresso',c:'#5C3420'}]},
-  {id:3, name:'Moroccan Rose Illuminating Face Oil', range:'Moroccan Heritage', cat:'moroccan', price:58, origPrice:72, r:4.9, rv:312, isNew:true,  isBest:false, img:'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80',  sz:'30ml',     desc:'A luxurious face oil rich in pure Moroccan rose extract. Silky elixir deeply nourishes and imparts a dewy, lit-from-within glow.',                         ings:[{n:'Rosa Damascena',b:'Antioxidant protection'},{n:'Prickly Pear Oil',b:'Anti-ageing & brightening'},{n:'Marula Oil',b:'Ultra-nourishing'}],shades:null},
-  {id:4, name:'Glass Skin Hydra Essence',           range:'K-Beauty Precision', cat:'kbeauty',  price:44,              r:4.6, rv:156, isNew:true,  isBest:false, img:'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',  sz:'150ml',    desc:'Inspired by Korean glass skin rituals — 72-hour hydration with fermented ingredients and 10 molecular sizes of hyaluronic acid.',                           ings:[{n:'10HA Complex',b:'72-hour deep hydration'},{n:'Fermented Rice',b:'Brightens & refines'},{n:'Centella Asiatica',b:'Calms & repairs'}],shades:null},
-  {id:5, name:'If Bold Velvet Lip Colour',          range:'Confident Colour',   cat:'makeup',   price:32,              r:4.5, rv:203, isNew:false, isBest:true,  img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',  sz:'3.5g',     desc:'A richly pigmented velvet lip colour infused with Moroccan rose oil. Long-wearing comfort in shades inspired by the I\'m Fenna palette.',                  ings:[{n:'Moroccan Rose Oil',b:'Nourishes & conditions'},{n:'Vitamin E',b:'Protects & softens'}],shades:[{n:'If Bold',c:'#761415'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]},
-  {id:6, name:'Ghassoul Deep Purifying Mask',       range:'Moroccan Heritage',  cat:'moroccan', price:38,              r:4.7, rv:178, isNew:false, isBest:false, img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',  sz:'100ml',    desc:'Authentic Moroccan Ghassoul clay from the Atlas Mountains. Deeply purifies pores while maintaining the skin\'s natural moisture balance.',                  ings:[{n:'Ghassoul Clay',b:'Deep pore cleansing'},{n:'Argan Oil',b:'Restores moisture'},{n:'Moroccan Rose',b:'Soothes & tones'}],shades:null},
-  {id:7, name:'Velvet Eye Palette — Dusk Edition',  range:'Confident Colour',   cat:'makeup',   price:62, origPrice:78, r:4.8, rv:134, isNew:true,  isBest:false, img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',  sz:'9 × 1.2g', desc:'Nine curated shades inspired by Moroccan sunsets. Velvet-soft mattes, golden shimmers and rich metallics for limitless artistry.',                         ings:[],shades:null},
-  {id:8, name:'Vitamin C Glass Glow Serum',         range:'K-Beauty Precision', cat:'kbeauty',  price:56,              r:4.6, rv:98,  isNew:false, isBest:false, img:'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&q=80',  sz:'30ml',     desc:'High-potency 20% Vitamin C with Korean niacinamide technology. Visibly brighter, more even skin tone in 4 weeks.',                                         ings:[{n:'Vitamin C 20%',b:'Brightens & protects'},{n:'Niacinamide',b:'Evens skin tone'},{n:'Ferulic Acid',b:'Stabilises Vitamin C'}],shades:null},
-  {id:9, name:'Ritual Glow Heritage Gift Set',      range:'Moroccan Heritage',  cat:'sets',     price:110, origPrice:140, r:5.0, rv:67, isNew:false, isBest:false, img:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80', sz:'Set of 3', desc:'Our most beloved Moroccan skincare trio — Glow Serum, Rose Face Oil and Ghassoul Clay Mask — presented in a signature ivory gift box with gold foil.',      ings:[],shades:null},
-  {id:10,name:'Silk Veil Setting Powder',           range:'Confident Colour',   cat:'makeup',   price:36,              r:4.4, rv:88,  isNew:false, isBest:false, img:'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=600&q=80', sz:'10g',      desc:'An ultra-fine, weightless setting powder with a satin finish. Blurs, smooths, and extends foundation wear all day without caking.',                        ings:[{n:'Silk Powder',b:'Smooths & blurs'},{n:'Argan Oil',b:'Prevents drying'}],shades:[{n:'Translucent',c:'#F5E8DA'},{n:'Warm Peach',c:'#E8C9A0'}]},
+  {
+    id:1, name:'Great Skin Instant Glow Serum', range:'Moroccan Heritage', cat:'skincare',
+    price:680, origPrice:null, r:4.8, rv:247, isNew:false, isBest:true,
+    img:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
+      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+    ],
+    sz:'30ml', skinType:['Tous types de peau','Peau terne','Peau mixte'],
+    concerns:['Éclat','Hydratation','Anti-oxydant'],
+    desc:'Notre sérum héros associe l\'huile d\'argan marocaine pure à des actifs éclaircissants pour offrir un éclat lumineux instantané. Légère mais intensément nourrissante, cette formule transformatrice pénètre rapidement dans la peau pour révéler un teint radieux dès la première application.',
+    modeEmploi:'Appliquer 3 à 4 gouttes sur le visage et le cou propres et secs, matin et soir. Tapoter doucement du bout des doigts jusqu\'à absorption complète. Suivre d\'une crème hydratante si nécessaire. Pour un résultat optimal, utiliser régulièrement pendant 4 semaines.',
+    ings:[{n:'Huile d\'Argan',b:'Nourissement profond & éclat'},{n:'Vitamine C',b:'Illumine & uniformise le teint'},{n:'Acide Hyaluronique',b:'Repulpe & hydrate'}],
+    fullIngs:'Aqua, Argania Spinosa Kernel Oil, Ascorbic Acid, Sodium Hyaluronate, Niacinamide, Rosa Damascena Flower Water, Glycerin, Panthenol, Tocopherol, Citric Acid, Phenoxyethanol, Ethylhexylglycerin.',
+    shades:null
+  },
+  {
+    id:2, name:'Subline Perfection Foundation', range:'Confident Colour', cat:'makeup',
+    price:520, origPrice:null, r:4.7, rv:189, isNew:false, isBest:true,
+    img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
+      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
+      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+    ],
+    sz:'30ml', skinType:['Tous types de peau','Peau normale','Peau sèche'],
+    concerns:['Couvrance','Longue tenue','Hydratation'],
+    desc:'Un fond de teint buildable à la texture peau infusé à l\'eau de rose marocaine. Respirant et confortable, il se porte du matin au soir sans alourdir la peau. Sa formule légère laisse la peau lumineuse et naturelle, avec une finition satin parfaite.',
+    modeEmploi:'Appliquer à l\'aide d\'un pinceau ou d\'une éponge humide sur le visage. Partir du centre du visage vers l\'extérieur pour un résultat naturel. Superposer les couches pour une couvrance accrue. Fixer avec la Silk Veil Setting Powder pour une tenue optimale.',
+    ings:[{n:'Eau de Rose Marocaine',b:'Apaise & hydrate'},{n:'SPF 20',b:'Protection UV quotidienne'},{n:'Acide Hyaluronique',b:'Repulpe & assouplit'}],
+    fullIngs:'Aqua, Cyclopentasiloxane, Titanium Dioxide (CI 77891), Rosa Damascena Flower Water, Sodium Hyaluronate, Glycerin, Dimethicone, Phenyl Trimethicone, Niacinamide, Tocopheryl Acetate, Phenoxyethanol, Ethylhexylglycerin.',
+    shades:[{n:'Porcelaine',c:'#F8E8D8'},{n:'Beige Nude',c:'#EDD4B2'},{n:'Sable Doré',c:'#D4A878'},{n:'Miel Chaud',c:'#C48B4A'},{n:'Caramel Profond',c:'#8B5E38'},{n:'Espresso Intense',c:'#5C3420'}]
+  },
+  {
+    id:3, name:'Moroccan Rose Illuminating Face Oil', range:'Moroccan Heritage', cat:'moroccan',
+    price:580, origPrice:720, r:4.9, rv:312, isNew:true, isBest:false,
+    img:'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
+      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=900&q=85',
+    ],
+    sz:'30ml', skinType:['Peau sèche','Peau mature','Peau terne'],
+    concerns:['Éclat','Anti-âge','Nourissement intense'],
+    desc:'Une huile de soin luxueuse riche en extrait de rose marocaine pure. Ce sérum-huile soyeux nourrit intensément la peau et lui confère un éclat de l\'intérieur. Récoltée à l\'aube dans la vallée des Dadès, la rose marocaine est célébrée depuis des siècles pour ses vertus apaisantes et régénérantes.',
+    modeEmploi:'Appliquer quelques gouttes sur le visage propre, matin et/ou soir. Réchauffer l\'huile dans les paumes, puis presser délicatement sur le visage et le cou. Peut être mélangée à votre crème hydratante habituelle ou appliquée seule. Idéal en massage facial pour stimuler la circulation et l\'éclat.',
+    ings:[{n:'Rosa Damascena',b:'Protection antioxydante'},{n:'Huile de Figue de Barbarie',b:'Anti-âge & éclat'},{n:'Huile de Marula',b:'Ultra-nourrissante'}],
+    fullIngs:'Argania Spinosa Kernel Oil, Rosa Damascena Flower Oil, Opuntia Ficus-Indica Seed Oil, Sclerocarya Birrea Seed Oil, Hippophae Rhamnoides Oil, Tocopherol, Limonene, Linalool, Geraniol, Citronellol, Eugenol.',
+    shades:null
+  },
+  {
+    id:4, name:'Glass Skin Hydra Essence', range:'K-Beauty Precision', cat:'kbeauty',
+    price:440, origPrice:null, r:4.6, rv:156, isNew:true, isBest:false,
+    img:'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=85',
+      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+    ],
+    sz:'150ml', skinType:['Tous types de peau','Peau déshydratée','Peau sensible'],
+    concerns:['Hydratation 72h','Éclat verre','Repulpage'],
+    desc:'Inspirée des rituels de la peau de verre coréenne, cette essence offre 72 heures d\'hydratation grâce à des ingrédients fermentés et 10 tailles moléculaires d\'acide hyaluronique. Sa texture aqueuse ultra-légère pénètre en profondeur, laissant la peau repulpée, lisse et lumineuse.',
+    modeEmploi:'Après nettoyage et tonique, verser quelques gouttes sur les paumes ou appliquer avec un coton-disque. Tapoter délicatement sur l\'ensemble du visage et du cou jusqu\'à absorption. Utiliser matin et soir, avant votre sérum et crème hydratante. Pour un rituel glass skin, appliquer 3 couches successives.',
+    ings:[{n:'Complexe 10HA',b:'Hydratation profonde 72h'},{n:'Riz Fermenté',b:'Illumine & affine le grain de peau'},{n:'Centella Asiatica',b:'Apaise & répare'}],
+    fullIngs:'Aqua, Glycerin, Sodium Hyaluronate (10 Molecular Weights), Saccharomyces Ferment Filtrate, Oryza Sativa (Rice) Ferment Filtrate, Centella Asiatica Extract, Beta-Glucan, Panthenol, Allantoin, Niacinamide, Adenosine, Carbomer, Phenoxyethanol, Ethylhexylglycerin.',
+    shades:null
+  },
+  {
+    id:5, name:'If Bold Velvet Lip Colour', range:'Confident Colour', cat:'makeup',
+    price:320, origPrice:null, r:4.5, rv:203, isNew:false, isBest:true,
+    img:'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
+      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+    ],
+    sz:'3,5g', skinType:['Tous types de lèvres'],
+    concerns:['Couvrance intense','Longue tenue','Confort'],
+    desc:'Un rouge à lèvres velouté richement pigmenté, infusé à l\'huile de rose marocaine. Longue tenue et confort exceptionnel dans des teintes inspirées de la palette I\'m Fenna. Sa formule fondante enveloppe les lèvres d\'une couleur intense et d\'un soin nourrissant.',
+    modeEmploi:'Appliquer directement sur les lèvres en commençant par le centre et en s\'étendant vers les coins. Pour un résultat plus précis, définir d\'abord le contour avec un crayon lèvres. Renouveler l\'application après les repas pour une tenue optimale.',
+    ings:[{n:'Huile de Rose Marocaine',b:'Nourrit & conditionne'},{n:'Vitamine E',b:'Protège & assouplit'},{n:'Cire de Candelilla',b:'Tenue longue durée'}],
+    fullIngs:'Ricinus Communis (Castor) Seed Oil, Cera Carnauba, Candelilla Cera, Rosa Damascena Flower Oil, Tocopherol (Vitamin E), Octyldodecanol, Lanolin, Isopropyl Myristate, Fragrance. [+/- CI 15850, CI 45410, CI 77891, CI 77491].',
+    shades:[{n:'If Bold',c:'#761415'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]
+  },
+  {
+    id:6, name:'Ghassoul Deep Purifying Mask', range:'Moroccan Heritage', cat:'moroccan',
+    price:380, origPrice:null, r:4.7, rv:178, isNew:false, isBest:false,
+    img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
+      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+    ],
+    sz:'100ml', skinType:['Peau mixte','Peau grasse','Peau à imperfections'],
+    concerns:['Purification','Anti-pores','Équilibre sébacé'],
+    desc:'L\'authentique argile ghassoul des montagnes de l\'Atlas marocain, utilisée depuis l\'Antiquité dans les rituels du hammam. Purifie profondément les pores tout en préservant l\'équilibre naturel d\'hydratation de la peau. Révèle un teint lissé, unifié et éclatant.',
+    modeEmploi:'Appliquer une couche généreuse sur le visage propre, en évitant le contour des yeux et des lèvres. Laisser poser 10 à 15 minutes (ou jusqu\'à semi-séchage). Rincer abondamment à l\'eau tiède en massant délicatement en mouvements circulaires. Utiliser 1 à 2 fois par semaine.',
+    ings:[{n:'Argile Ghassoul',b:'Nettoyage profond des pores'},{n:'Huile d\'Argan',b:'Restaure l\'hydratation'},{n:'Eau de Rose Marocaine',b:'Apaise & tonifie'}],
+    fullIngs:'Aqua, Ghassoul (Lava Clay), Argania Spinosa Kernel Oil, Rosa Damascena Flower Water, Kaolin, Glycerin, Aloe Barbadensis Leaf Juice, Panthenol, Allantoin, Citric Acid, Phenoxyethanol, Ethylhexylglycerin.',
+    shades:null
+  },
+  {
+    id:7, name:'Velvet Eye Palette — Dusk Edition', range:'Confident Colour', cat:'makeup',
+    price:620, origPrice:780, r:4.8, rv:134, isNew:true, isBest:false,
+    img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
+      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
+      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
+    ],
+    sz:'9 × 1,2g', skinType:['Tous types de peau'],
+    concerns:['Regard intense','Longue tenue','Polyvalence'],
+    desc:'Neuf teintes curatées inspirées des couchers de soleil marocains. Matières veloutées, scintillements dorés et métalliques riches pour une artiste sans limite. La palette Dusk capture l\'essence dramatique et sensuelle d\'un crépuscule sur les dunes du Sahara.',
+    modeEmploi:'Appliquer les teintes claires sur toute la paupière mobile comme base. Estomper les teintes moyennes dans le creux de l\'œil pour la profondeur. Appliquer les teintes foncées ou métalliques au centre de la paupière ou dans le coin externe pour l\'intensité. Finaliser avec l\'eye-liner intégré pour définir le regard.',
+    ings:[{n:'Poudres Veloutées',b:'Application douce & précise'},{n:'Huile de Jojoba',b:'Confort & tenue'},{n:'Vitamine E',b:'Soin anti-oxydant'}],
+    fullIngs:'Mica, Talc, Magnesium Stearate, Silica, Jojoba Esters, Tocopherol (Vitamin E), Phenoxyethanol. [+/- CI 77891, CI 77491, CI 77492, CI 77499, CI 15850, CI 45410, CI 42090, CI 19140].',
+    shades:null
+  },
+  {
+    id:8, name:'Vitamin C Glass Glow Serum', range:'K-Beauty Precision', cat:'kbeauty',
+    price:560, origPrice:null, r:4.6, rv:98, isNew:false, isBest:false,
+    img:'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=85',
+      'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=85',
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=85',
+    ],
+    sz:'30ml', skinType:['Tous types de peau','Peau terne','Peau hyperpigmentée'],
+    concerns:['Éclat','Anti-taches','Uniformisation du teint'],
+    desc:'Sérum haute concentration en Vitamine C 20% stabilisée, associée à la technologie coréenne au niacinamide. Peau visiblement plus lumineuse et le teint plus uniforme en 4 semaines. Sa texture fluide s\'adapte à tous les types de peau sans laisser de résidu gras.',
+    modeEmploi:'Appliquer 3 à 4 gouttes sur le visage et le cou propres, le matin. Tapoter délicatement jusqu\'à absorption complète avant votre crème hydratante et votre protection solaire. Éviter le contour des yeux. En cas de sensibilité, commencer par une utilisation tous les deux jours.',
+    ings:[{n:'Vitamine C 20%',b:'Illumine & protège'},{n:'Niacinamide',b:'Unifie le teint'},{n:'Acide Férulique',b:'Stabilise & potentialise la Vitamine C'}],
+    fullIngs:'Aqua, Ascorbic Acid (20%), Niacinamide, Ferulic Acid, Sodium Hyaluronate, Glycerin, Propanediol, Panthenol, Allantoin, EDTA, Citric Acid, Phenoxyethanol, Ethylhexylglycerin.',
+    shades:null
+  },
+  {
+    id:9, name:'Ritual Glow Heritage Gift Set', range:'Moroccan Heritage', cat:'sets',
+    price:1100, origPrice:1400, r:5.0, rv:67, isNew:false, isBest:false,
+    img:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=900&q=85',
+      'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=900&q=85',
+      'https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=900&q=85',
+      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=85',
+    ],
+    sz:'Coffret 3 produits', skinType:['Tous types de peau'],
+    concerns:['Éclat','Nourissement','Purification'],
+    desc:'Notre trio de soins marocains le plus emblématique — le Sérum Éclat, l\'Huile de Rose et le Masque Ghassoul — présenté dans un coffret ivoire avec dorure à l\'or fin. Le cadeau parfait pour célébrer une beauté authentique, luxueuse et naturelle.',
+    modeEmploi:'Utiliser le Masque Ghassoul 1 à 2 fois par semaine pour purifier. Appliquer le Sérum Éclat matin et soir après nettoyage. Finir avec l\'Huile de Rose pour sceller l\'hydratation et illuminer. Ce rituel complet révèle un teint radieux en 2 semaines.',
+    ings:[{n:'Sérum Instant Glow',b:'30ml — éclat & luminosité'},{n:'Huile de Rose Marocaine',b:'30ml — nourissement & éclat'},{n:'Masque Ghassoul',b:'100ml — purification & équilibre'}],
+    fullIngs:'Voir les ingrédients détaillés de chaque produit du coffret (Great Skin Instant Glow Serum, Moroccan Rose Illuminating Face Oil, Ghassoul Deep Purifying Mask).',
+    shades:null
+  },
+  {
+    id:10, name:'Silk Veil Setting Powder', range:'Confident Colour', cat:'makeup',
+    price:360, origPrice:null, r:4.4, rv:88, isNew:false, isBest:false,
+    img:'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=600&q=80',
+    imgs:[
+      'https://images.unsplash.com/photo-1631214499378-1ed3a11e8a90?w=900&q=85',
+      'https://images.unsplash.com/photo-1586495777744-4e6232bf3f55?w=900&q=85',
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=85',
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&q=85',
+    ],
+    sz:'10g', skinType:['Tous types de peau','Peau mixte','Peau grasse'],
+    concerns:['Fixation','Anti-brillance','Fini satiné'],
+    desc:'Une poudre libre ultra-fine et sans poids au fini satiné. Estompe, lisse et prolonge la tenue du fond de teint toute la journée sans effet masque. Sa formule enrichie à la poudre de soie et à l\'argan laisse la peau lumineuse et naturelle.',
+    modeEmploi:'Appliquer à l\'aide d\'un pinceau poudre ou d\'une houppette en tapotant sur l\'ensemble du visage après le fond de teint. Pour fixer sans alourdir, utiliser le geste « pressor-sceller » avec la houppette. Renouveler sur les zones brillantes au cours de la journée.',
+    ings:[{n:'Poudre de Soie',b:'Lisse & estompe'},{n:'Huile d\'Argan',b:'Prévient le dessèchement'},{n:'Poudres Illumi-nantes',b:'Éclat naturel'}],
+    fullIngs:'Talc, Mica, Silica, Sericite, Argania Spinosa Kernel Oil, Magnesium Stearate, Zinc Stearate, Tocopherol, Phenoxyethanol. [+/- CI 77891, CI 77492, CI 77491].',
+    shades:[{n:'Translucide',c:'#F5E8DA'},{n:'Pêche Dorée',c:'#E8C9A0'}]
+  },
 ];
 
 /* ── USP TICKER ── */
@@ -2111,33 +2583,35 @@ function stars(r){
   ).join('');
 }
 
+/* ── FORMAT PRICE IN MAD ── */
+function mad(n){ return n.toLocaleString('fr-MA')+' DH'; }
+
 /* ── CARD HTML ── */
 function cardHTML(p){
   const disc=p.origPrice?Math.round((p.origPrice-p.price)/p.origPrice*100):0;
-  return `<div class="card fade-up" onclick="openDrawer(${p.id})">
+  return `<div class="card fade-up" onclick="openPDP(${p.id})">
     <div class="card-img">
       <img src="${p.img}" alt="${p.name}" loading="lazy" />
       <div class="card-badges">
-        ${p.isNew?'<span class="badge b-new">New</span>':''}
+        ${p.isNew?'<span class="badge b-new">Nouveau</span>':''}
         ${p.isBest&&!p.isNew?'<span class="badge b-best">Bestseller</span>':''}
         ${disc?`<span class="badge b-sale">−${disc}%</span>`:''}
       </div>
-      <button class="card-wish" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Add to wishlist">
+      <button class="card-wish" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Ajouter aux favoris">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
       <div class="card-ov">
-        <button class="card-ov-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Quick Add to Bag</button>
+        <button class="card-ov-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Ajouter au Panier</button>
       </div>
     </div>
     <div class="card-body">
       <div class="card-range">${p.range}</div>
       <div class="card-name">${p.name}</div>
-      <div class="card-stars">${stars(p.r)}</div>
       <div class="card-prices">
-        <span class="card-price">£${p.price}</span>
-        ${p.origPrice?`<span class="card-orig">£${p.origPrice}</span>`:''}
+        <span class="card-price">${mad(p.price)}</span>
+        ${p.origPrice?`<span class="card-orig">${mad(p.origPrice)}</span>`:''}
       </div>
-      <button class="card-add" onclick="event.stopPropagation();quickAdd(${p.id})">Add to Bag</button>
+      <button class="card-add" onclick="event.stopPropagation();quickAdd(${p.id})">Ajouter au Panier</button>
     </div>
   </div>`;
 }
@@ -2165,64 +2639,143 @@ function setF(f,btn){
 const wished=new Set();
 function toggleWish(id){
   const btn=document.getElementById(`w${id}`);
-  if(wished.has(id)){wished.delete(id);btn.classList.remove('on');showToast('Removed from wishlist');}
-  else{wished.add(id);btn.classList.add('on');showToast('Added to wishlist ♥');}
+  if(wished.has(id)){wished.delete(id);btn.classList.remove('on');showToast('Retiré des favoris');}
+  else{wished.add(id);btn.classList.add('on');showToast('Ajouté aux favoris ♥');}
 }
 
 /* ── SEARCH ── */
 function openSearch(){document.getElementById('sModal').classList.add('on');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('sInput').focus(),80);}
-function closeSearch(){document.getElementById('sModal').classList.remove('on');document.body.style.overflow='';}
+function closeSearch(){document.getElementById('sModal').classList.remove('on');document.body.style.overflow=document.getElementById('pdpPage').classList.contains('open')?'hidden':'';}
 function liveSearch(q){
   const el=document.getElementById('sResults');
-  if(!q){el.innerHTML='<p class="s-hint">Trending: Glow Serum · Rose Oil · Velvet Lip</p>';return;}
+  if(!q){el.innerHTML='<p class="s-hint">Tendances : Sérum Éclat · Huile de Rose · Rouge Velours</p>';return;}
   const res=P.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.range.toLowerCase().includes(q.toLowerCase()));
   el.innerHTML=res.length
-    ?res.map(p=>`<div class="s-item" onclick="closeSearch();openDrawer(${p.id})">
+    ?res.map(p=>`<div class="s-item" onclick="closeSearch();openPDP(${p.id})">
         <img src="${p.img}" alt="${p.name}"/>
-        <div><div class="s-item-name">${p.name}</div><div class="s-item-meta">£${p.price} · ${p.range}</div></div>
+        <div><div class="s-item-name">${p.name}</div><div class="s-item-meta">${mad(p.price)} · ${p.range}</div></div>
       </div>`).join('')
-    :'<p class="s-hint" style="font-style:normal">No results for "'+q+'"</p>';
+    :'<p class="s-hint" style="font-style:normal">Aucun résultat pour "'+q+'"</p>';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeDrawer();closeCart();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closePDP();closeCart();}});
 
-/* ── DRAWER ── */
-let curP=null,curShade=null;
-function openDrawer(id){
-  const p=P.find(x=>x.id===id);if(!p)return;
-  curP=p;curShade=p.shades?p.shades[0]:null;
-  document.getElementById('dImg').src=p.img;
-  document.getElementById('dRange').textContent=p.range;
-  document.getElementById('dName').textContent=p.name;
-  document.getElementById('dStars').innerHTML=stars(p.r)+`<span class="d-rc">(${p.rv} reviews)</span>`;
-  document.getElementById('dPrice').textContent=`£${p.price}`;
-  document.getElementById('dSize').textContent=p.sz;
-  document.getElementById('dDesc').textContent=p.desc;
-  document.getElementById('dIngs').innerHTML=p.ings.length
-    ?'<div class="d-lbl" style="margin-bottom:10px">Key Ingredients</div>'+p.ings.map(k=>
-        `<div class="d-ing"><div class="d-ing-dot"></div><div><div class="d-ing-name">${k.n}</div><div class="d-ing-ben">${k.b}</div></div></div>`
-      ).join(''):'';
+/* ── PDP ── */
+let curP=null, curShade=null, pdpQtyN=1, pdpFromCat=false;
+
+function openPDP(id){
+  const p=P.find(x=>x.id===id); if(!p) return;
+  curP=p; curShade=p.shades?p.shades[0]:null; pdpQtyN=1;
+  pdpFromCat=document.getElementById('catPage').classList.contains('open');
+
+  // Back label
+  document.getElementById('pdpBackLabel').textContent = pdpFromCat ? curP.range : 'Accueil';
+
+  // Main image
+  document.getElementById('pdpMainImg').src=p.imgs[0];
+  document.getElementById('pdpMainImg').alt=p.name;
+
+  // Thumbnails
+  document.getElementById('pdpThumbs').innerHTML=p.imgs.map((u,i)=>
+    `<div class="pdp-thumb${i===0?' on':''}" onclick="pdpSetImg(${i})">
+       <img src="${u.replace('w=900','w=200')}" alt="" loading="lazy"/>
+     </div>`).join('');
+
+  // Badges
+  const disc=p.origPrice?Math.round((p.origPrice-p.price)/p.origPrice*100):0;
+  document.getElementById('pdpBadges').innerHTML=
+    (p.isNew?'<span class="badge b-new">Nouveau</span>':'')+
+    (p.isBest&&!p.isNew?'<span class="badge b-best">Bestseller</span>':'')+
+    (disc?`<span class="badge b-sale">−${disc}%</span>`:'');
+
+  // Meta
+  document.getElementById('pdpRange').textContent=p.range;
+  document.getElementById('pdpName').textContent=p.name;
+  document.getElementById('pdpTagline').textContent=p.ings[0]?`${p.ings[0].n} · ${p.ings[0].b}`:'beauty is art, be the muse.';
+  document.getElementById('pdpPrice').textContent=mad(p.price);
+  const origEl=document.getElementById('pdpOrig');
+  const discEl=document.getElementById('pdpDisc');
+  if(p.origPrice){ origEl.textContent=mad(p.origPrice); origEl.style.display='inline'; discEl.textContent=`−${disc}%`; discEl.style.display='inline'; }
+  else { origEl.style.display='none'; discEl.style.display='none'; }
+  document.getElementById('pdpSz').textContent=p.sz;
+  document.getElementById('pdpQtyVal').textContent='1';
+
+  // Shades
   if(p.shades){
-    document.getElementById('dShadesSec').style.display='block';
-    document.getElementById('dShadeName').textContent=curShade.n;
-    document.getElementById('dShadesRow').innerHTML=p.shades.map((s,i)=>
-      `<div class="d-shade${i===0?' on':''}" style="background:${s.c}" onclick="pickShade(${i})" title="${s.n}"></div>`).join('');
-  }else{document.getElementById('dShadesSec').style.display='none';}
-  document.getElementById('dMask').classList.add('on');
-  document.getElementById('drawer').classList.add('on');
+    document.getElementById('pdpShadeSec').style.display='block';
+    document.getElementById('pdpShadeName').textContent=curShade.n;
+    document.getElementById('pdpSwatches').innerHTML=p.shades.map((s,i)=>
+      `<div class="pdp-swatch${i===0?' on':''}" style="background:${s.c}" title="${s.n}" onclick="pdpPickShade(${i})"></div>`).join('');
+  } else { document.getElementById('pdpShadeSec').style.display='none'; }
+
+  // Wishlist state
+  document.getElementById('pdpWishBtn').classList.toggle('on', wished.has(p.id));
+
+  // Accordion content
+  document.getElementById('pdpDesc').textContent=p.desc;
+  document.getElementById('pdpModeEmploi').textContent=p.modeEmploi;
+  document.getElementById('pdpIngs').innerHTML=p.ings.map(k=>
+    `<div class="pdp-ing"><div class="pdp-ing-dot"></div><div><div class="pdp-ing-n">${k.n}</div><div class="pdp-ing-b">${k.b}</div></div></div>`).join('');
+  document.getElementById('pdpFullIngs').textContent=p.fullIngs;
+  document.getElementById('pdpSkinTypes').innerHTML=p.skinType.map(t=>`<span class="pdp-tag">${t}</span>`).join('');
+  document.getElementById('pdpConcerns').innerHTML=p.concerns.map(c=>`<span class="pdp-tag">${c}</span>`).join('');
+
+  // Reset first accordion open
+  document.querySelectorAll('.acc-item').forEach((a,i)=>{ a.classList.toggle('open',i===0); });
+
+  // Related products
+  const related=P.filter(q=>q.id!==p.id&&(q.range===p.range||q.cat===p.cat)).slice(0,4);
+  document.getElementById('pdpRelated').innerHTML=related.map(q=>cardHTML(q)).join('');
+  document.querySelectorAll('#pdpRelated .fade-up').forEach(el=>io.observe(el));
+
+  document.getElementById('pdpPage').classList.add('open');
+  document.getElementById('pdpPage').scrollTop=0;
   document.body.style.overflow='hidden';
 }
-function pickShade(i){
-  if(!curP||!curP.shades)return;
+
+function closePDP(){
+  document.getElementById('pdpPage').classList.remove('open');
+  document.body.style.overflow = pdpFromCat?'hidden':'';
+}
+
+function pdpSetImg(i){
+  document.getElementById('pdpMainImg').src=curP.imgs[i];
+  document.querySelectorAll('.pdp-thumb').forEach((t,j)=>t.classList.toggle('on',j===i));
+}
+
+function pdpPickShade(i){
+  if(!curP||!curP.shades) return;
   curShade=curP.shades[i];
-  document.getElementById('dShadeName').textContent=curShade.n;
-  document.querySelectorAll('.d-shade').forEach((s,j)=>s.classList.toggle('on',j===i));
+  document.getElementById('pdpShadeName').textContent=curShade.n;
+  document.querySelectorAll('.pdp-swatch').forEach((s,j)=>s.classList.toggle('on',j===i));
 }
-function closeDrawer(){
-  document.getElementById('dMask').classList.remove('on');
-  document.getElementById('drawer').classList.remove('on');
-  document.body.style.overflow='';
+
+function pdpQty(d){
+  pdpQtyN=Math.max(1,Math.min(10,pdpQtyN+d));
+  document.getElementById('pdpQtyVal').textContent=pdpQtyN;
 }
-function addFromDrawer(){if(curP){addToCart(curP,curShade);closeDrawer();}}
+
+function pdpAddToBag(){
+  if(!curP) return;
+  for(let i=0;i<pdpQtyN;i++) addToCart(curP,curShade);
+  showToast(`${curP.name.split(' ').slice(0,3).join(' ')} ajouté au panier`);
+}
+
+function pdpToggleWish(){
+  if(!curP) return;
+  const btn=document.getElementById('pdpWishBtn');
+  if(wished.has(curP.id)){ wished.delete(curP.id); btn.classList.remove('on'); showToast('Retiré des favoris'); }
+  else { wished.add(curP.id); btn.classList.add('on'); showToast('Ajouté aux favoris ♥'); }
+  const cardBtn=document.getElementById(`w${curP.id}`);
+  if(cardBtn) cardBtn.classList.toggle('on', wished.has(curP.id));
+}
+
+function toggleAcc(hdEl){
+  hdEl.parentElement.classList.toggle('open');
+}
+
+/* legacy redirect */
+function openDrawer(id){ openPDP(id); }
+function closeDrawer(){ closePDP(); }
 
 /* ── CART ── */
 let cart=[];
@@ -2231,22 +2784,23 @@ function addToCart(p,shade){
   const key=shade?`${p.id}-${shade.n}`:`${p.id}`;
   const ex=cart.find(i=>i.key===key);
   if(ex)ex.qty++;else cart.push({key,p,shade,qty:1});
-  updateCart();showToast(`${p.name.split(' ').slice(0,3).join(' ')} added to bag`);
+  updateCart();
 }
 function removeItem(key){cart=cart.filter(i=>i.key!==key);updateCart();}
 function updateCart(){
   const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
   const cnt=cart.reduce((s,i)=>s+i.qty,0);
-  const del=sub>=80?0:sub>0?4.99:0;
+  const FREE_THRESHOLD=800;
+  const del=sub>=FREE_THRESHOLD?0:sub>0?50:0;
   const dot=document.getElementById('cartDot');
-  dot.style.display=cnt>0?'flex':'none';dot.textContent=cnt>9?'9+':cnt;
-  document.getElementById('cpSub').textContent=`£${sub.toFixed(2)}`;
-  document.getElementById('cpDel').textContent=sub===0?'—':del===0?'Free':`£${del.toFixed(2)}`;
-  document.getElementById('cpTotal').textContent=`£${(sub+del).toFixed(2)}`;
-  document.getElementById('shipFill').style.width=`${Math.min(100,(sub/80)*100)}%`;
+  dot.style.display=cnt>0?'flex':'none'; dot.textContent=cnt>9?'9+':cnt;
+  document.getElementById('cpSub').textContent=mad(sub);
+  document.getElementById('cpDel').textContent=sub===0?'—':del===0?'Gratuite':mad(del);
+  document.getElementById('cpTotal').textContent=mad(sub+del);
+  document.getElementById('shipFill').style.width=`${Math.min(100,(sub/FREE_THRESHOLD)*100)}%`;
   const lbl=document.getElementById('shipLbl');
-  lbl.textContent=sub>=80?'Free delivery unlocked!':sub===0?'Spend £80 for free delivery':`Add £${(80-sub).toFixed(2)} for free delivery`;
-  lbl.style.color=sub>=80?'#4A7C59':'var(--cinnamon)';
+  lbl.textContent=sub>=FREE_THRESHOLD?'Livraison gratuite débloquée !':sub===0?'Livraison gratuite dès 800 DH':`Plus que ${mad(FREE_THRESHOLD-sub)} pour la livraison gratuite`;
+  lbl.style.color=sub>=FREE_THRESHOLD?'#4A7C59':'var(--cinnamon)';
   document.getElementById('cartItems').innerHTML=cart.length
     ?cart.map(i=>`<div class="ci">
         <img src="${i.p.img}" alt="${i.p.name}"/>
@@ -2254,22 +2808,22 @@ function updateCart(){
           <div class="ci-range">${i.p.range}</div>
           <div class="ci-name">${i.p.name}</div>
           ${i.shade?`<div class="ci-shade">${i.shade.n}</div>`:''}
-          <div class="ci-meta">${i.p.sz} · Qty ${i.qty}</div>
+          <div class="ci-meta">${i.p.sz} · Qté ${i.qty}</div>
           <div class="ci-bot">
-            <span class="ci-price">£${(i.p.price*i.qty).toFixed(2)}</span>
-            <span class="ci-rm" onclick="removeItem('${i.key}')">Remove</span>
+            <span class="ci-price">${mad(i.p.price*i.qty)}</span>
+            <span class="ci-rm" onclick="removeItem('${i.key}')">Retirer</span>
           </div>
         </div>
       </div>`).join('')
     :`<div class="cart-empty">
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <div style="font-family:var(--serif);font-size:20px;font-weight:700">Your bag is empty</div>
-        <div style="font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;max-width:200px">Discover premium beauty rooted in confidence, crafted with care.</div>
+        <div style="font-family:var(--serif);font-size:20px;font-weight:700">Votre panier est vide</div>
+        <div style="font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;max-width:200px">Découvrez la beauté premium, ancrée dans la confiance.</div>
       </div>`;
 }
 function openCart(){updateCart();document.getElementById('cartPanel').classList.add('on');document.getElementById('cMask').classList.add('on');document.body.style.overflow='hidden';}
-function closeCart(){document.getElementById('cartPanel').classList.remove('on');document.getElementById('cMask').classList.remove('on');document.body.style.overflow='';}
-function checkout(){if(!cart.length){showToast('Your bag is empty');return;}cart=[];updateCart();closeCart();showToast('Order placed — thank you!');}
+function closeCart(){document.getElementById('cartPanel').classList.remove('on');document.getElementById('cMask').classList.remove('on');document.body.style.overflow=document.getElementById('pdpPage').classList.contains('open')||document.getElementById('catPage').classList.contains('open')?'hidden':'';}
+function checkout(){if(!cart.length){showToast('Votre panier est vide');return;}cart=[];updateCart();closeCart();showToast('Commande passée — merci !');}
 
 /* ── TOAST ── */
 let tT;
