@@ -116,7 +116,7 @@
   --white:      #FFFFFF;
   --text:       #1C0E0E;
   --text-2:     #3A2222;
-  --muted:      #9B7E74;
+  --muted:      #7C5B52;
   --border:     rgba(197,176,138,.22);
   --border-2:   rgba(226,196,186,.4);
   /* Glassmorphism */
@@ -179,6 +179,7 @@ body::after {
 .nav-logo {
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; user-select: none;
+  background: none; border: none; padding: 0;
 }
 .nav-logo-img { height: 36px; width: auto; display: block; }
 .nav-logo .heart { color: var(--maroon); letter-spacing: 0; font-size: 16px; }
@@ -674,12 +675,9 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .ft-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:clamp(24px,4vw,64px); }
 @media(max-width:900px) { .ft-grid { grid-template-columns:1fr 1fr; } }
 @media(max-width:480px) { .ft-grid { grid-template-columns:1fr; } }
-/* Abhaya Libre footer logo */
-.ft-logo {
-  font-family:var(--serif); font-size:19px; font-weight:700;
-  letter-spacing:6px; color:var(--ivory); margin-bottom:14px;
-}
-.ft-logo .heart { color:var(--maroon); letter-spacing:0; }
+/* SVG footer logo */
+.ft-logo { margin-bottom:18px; }
+.ft-logo-svg { height:32px; width:auto; display:block; }
 .ft-tagline {
   font-family:var(--serif); font-style:italic; font-weight:400;
   font-size:14px; color:rgba(226,196,186,.5); line-height:1.8;
@@ -1635,6 +1633,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:2px;
   text-transform:uppercase; padding:16px 20px; cursor:pointer; white-space:nowrap;
   border-bottom:2px solid transparent; color:var(--muted); transition:all .2s;
+  background:none; border-top:none; border-left:none; border-right:none;
 }
 .prof-tab.on { color:var(--maroon); border-bottom-color:var(--maroon); }
 .prof-panel { display:none; }
@@ -1837,9 +1836,45 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .social-cell-ov svg { width:28px; height:28px; stroke:var(--ivory); fill:none; stroke-width:1.5; }
 .social-handle { font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-align:center; margin-top:20px; }
 .social-handle a { color:var(--maroon); }
+
+/* ─── ACCESSIBILITY: Skip link (WCAG 2.4.1) ────────────────────────────── */
+.skip-link { position:absolute; top:-100px; left:16px; z-index:9999; padding:10px 18px; background:var(--maroon); color:var(--ivory); font-family:var(--sans); font-size:13px; font-weight:600; text-decoration:none; border-radius:2px; transition:top .2s; }
+.skip-link:focus { top:16px; outline:3px solid var(--gold); outline-offset:2px; }
+
+/* ─── ACCESSIBILITY: Contrast-compliant label text ─────────────────────────
+   Gold (#C5B08A) fails WCAG 1.4.3 on light backgrounds (ratio ~2.1:1).
+   These label classes switch to cinnamon (#7D463C, ratio ~7.5:1) on light bg.
+──────────────────────────────────────────────────────────────────────────── */
+.mega-cat-label,.card-range,.s-pre,.s-stat-l,.ed-eye,
+.pdp-range-lbl,.cp-gifts-sub,.d-range,.ci-range,
+.co-sum-range,.co-review-hd,.order-detail-sec-title,
+.wish-range,.addr-fav-badge,.info-eyebrow,.ab-split-eye,
+.loyalty-tier-eye,.faq-cat-title,.ing-num { color:var(--cinnamon); }
+
+/* ─── ACCESSIBILITY: Visible focus indicators for keyboard navigation ─────
+   WCAG 2.4.7 / 2.4.11 — every focusable element must show focus.
+──────────────────────────────────────────────────────────────────────────── */
+button:focus-visible, [role="button"]:focus-visible,
+[tabindex="0"]:focus-visible, a:focus-visible,
+.nav-btn:focus-visible, .cp-close:focus-visible, .cp-bl:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.lf-input:focus-visible, .co-input:focus-visible, .co-select:focus-visible,
+.pr-input:focus-visible, .cat-sort:focus-visible,
+.lf-input:focus, .co-input:focus, .co-select:focus,
+.pr-input:focus, .cat-sort:focus {
+  outline: 2px solid var(--maroon);
+  outline-offset: 2px;
+  border-color: var(--maroon);
+}
   </style>
 </head>
 <body>
+
+<!-- Skip to main content — keyboard accessibility -->
+<a href="#main-content" class="skip-link">Passer au contenu principal</a>
 
 <!-- ══ NAV ═══════════════════════════════════════════ -->
 <header class="nav-wrap" id="navWrap">
@@ -1852,9 +1887,9 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           <span></span><span></span><span></span>
         </button>
       </div>
-      <div class="nav-logo" onclick="goHome()" role="banner">
-        <img src="images/logo.png" alt="I'm Fenna" class="nav-logo-img" />
-      </div>
+      <button class="nav-logo" onclick="goHome()" aria-label="I'm Fenna — Retour à l'accueil">
+        <img src="images/logo.png" alt="" class="nav-logo-img" role="presentation"/>
+      </button>
       <div class="nav-right">
         <button class="nav-btn" onclick="openSearch()" aria-label="Search">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2034,6 +2069,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 </header>
 
 <!-- ══ HERO — Luxurious Femininity ════════════════════ -->
+<main id="main-content">
 <section class="hero" id="hero">
   <div class="hero__track" id="heroTrack">
 
@@ -2537,13 +2573,17 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   <p class="social-handle">Follow us <a href="https://www.instagram.com" target="_blank" rel="noopener">@imfenna</a> — tag us to be featured</p>
 </section>
 
+</main>
+
 <!-- ══ FOOTER ══════════════════════════════════════════ -->
 <footer>
   <div class="ft-main">
     <div class="ft-grid">
       <div>
-        <!-- Abhaya Libre with heart in footer logo -->
-        <div class="ft-logo">I<span class="heart">♥</span>M FENNA</div>
+        <!-- SVG logo in white -->
+        <div class="ft-logo">
+          <img src="images/logo.svg" alt="I'm Fenna" class="ft-logo-svg" style="filter:brightness(0) invert(1);" />
+        </div>
         <!-- Brand tagline in italic serif -->
         <p class="ft-tagline">Rooted in Confidence,<br>Crafted with Care.</p>
         <div class="ft-social">
@@ -3119,13 +3159,13 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   <!-- Tab nav -->
   <div class="prof-tabs-bar">
     <div class="prof-tabs">
-      <div class="prof-tab on" id="ptab-info"    onclick="openProfTab('info')">Mon Compte</div>
-      <div class="prof-tab"    id="ptab-loyalty"  onclick="openProfTab('loyalty')">Fidélité</div>
-      <div class="prof-tab"    id="ptab-orders"   onclick="openProfTab('orders')">Commandes</div>
-      <div class="prof-tab"    id="ptab-wishlist" onclick="openProfTab('wishlist')">Wishlist</div>
-      <div class="prof-tab"    id="ptab-addresses"onclick="openProfTab('addresses')">Adresses</div>
-      <div class="prof-tab"    id="ptab-conseiller" onclick="openProfTab('conseiller')">Mon Profil Beauté</div>
-      <div class="prof-tab"    id="ptab-faq"      onclick="openProfTab('faq')">FAQ</div>
+      <button class="prof-tab on" id="ptab-info"     onclick="openProfTab('info')" role="tab" aria-selected="true">Mon Compte</button>
+      <button class="prof-tab"    id="ptab-loyalty"  onclick="openProfTab('loyalty')" role="tab" aria-selected="false">Fidélité</button>
+      <button class="prof-tab"    id="ptab-orders"   onclick="openProfTab('orders')" role="tab" aria-selected="false">Commandes</button>
+      <button class="prof-tab"    id="ptab-wishlist" onclick="openProfTab('wishlist')" role="tab" aria-selected="false">Wishlist</button>
+      <button class="prof-tab"    id="ptab-addresses"onclick="openProfTab('addresses')" role="tab" aria-selected="false">Adresses</button>
+      <button class="prof-tab"    id="ptab-conseiller" onclick="openProfTab('conseiller')" role="tab" aria-selected="false">Mon Profil Beauté</button>
+      <button class="prof-tab"    id="ptab-faq"      onclick="openProfTab('faq')" role="tab" aria-selected="false">FAQ</button>
     </div>
   </div>
 
@@ -4881,7 +4921,9 @@ function closeProfile(){
 function openProfTab(tab){
   ['info','loyalty','orders','wishlist','addresses','conseiller','faq'].forEach(t=>{
     document.getElementById('pp-'+t).classList.toggle('on',t===tab);
-    document.getElementById('ptab-'+t).classList.toggle('on',t===tab);
+    const btn=document.getElementById('ptab-'+t);
+    btn.classList.toggle('on',t===tab);
+    btn.setAttribute('aria-selected',t===tab?'true':'false');
   });
   if(tab==='orders')      renderProfileOrders();
   if(tab==='loyalty')     renderProfileLoyalty();
@@ -5003,7 +5045,7 @@ function renderProfileOrders(){
     return;
   }
   el.innerHTML=userOrders.slice().reverse().map(o=>`
-    <div class="order-card" onclick="openOrderDetail('${o.id}')">
+    <div class="order-card" role="button" tabindex="0" onclick="openOrderDetail('${o.id}')">
       <div class="order-card-hd">
         <div class="order-card-meta">
           <div class="order-meta-item"><div class="order-meta-label">Commande</div><div class="order-meta-val">${o.id}</div></div>
@@ -5207,6 +5249,35 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   document.querySelectorAll('.pdp-bar-actions .nav-btn[aria-label="Mon compte"]').forEach(function(b){
     b.addEventListener('click', openProfileOrLogin);
+  });
+
+  /* ── A11Y: Keyboard support for interactive <div> elements ────────────
+     WCAG 2.1.1 — All functionality must be operable via keyboard.
+     Adds role="button" + tabindex="0" to static onclick divs and wires
+     Enter/Space to trigger click. Dynamic elements handled via delegation.
+  ─────────────────────────────────────────────────────────────────────── */
+  const interactiveDivSelectors = [
+    '.mega-sub-item', '.mega-va', '.mega-cat', '.range-card',
+    '.fg-hd', '.bc-chip', '.faq-item .faq-hd', '.prof-faq-hd',
+    '.val-card', '.hero__arr'
+  ];
+  interactiveDivSelectors.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(el.tagName==='BUTTON'||el.tagName==='A') return;
+      if(!el.getAttribute('role')) el.setAttribute('role','button');
+      if(!el.getAttribute('tabindex')) el.setAttribute('tabindex','0');
+    });
+  });
+
+  /* Delegated keydown handler — fires for ALL onclick divs including dynamic ones */
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    var t=e.target;
+    if(t.tagName==='BUTTON'||t.tagName==='A'||t.tagName==='INPUT'||t.tagName==='SELECT'||t.tagName==='TEXTAREA') return;
+    if(t.hasAttribute('onclick')||(typeof t.onclick==='function')){
+      e.preventDefault();
+      t.click();
+    }
   });
 });
 
