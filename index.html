@@ -1,9 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I'm Fenna — Premium Beauty</title>
+
+  <!-- Primary SEO -->
+  <title>I'm Fenna — Beauté de Luxe au Maroc | Soins Naturels Premium</title>
+  <meta name="description" content="I'm Fenna, la maison de beauté marocaine qui célèbre la féminité avec des soins naturels d'exception. Découvrez notre collection de soins du visage, huiles précieuses et parfums de luxe inspirés des trésors naturels du Maroc." />
+  <meta name="keywords" content="beauté marocaine, soins naturels, luxe, huile d'argan, soins visage, parfum, I'm Fenna, cosmétiques naturels, Maroc" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="I'm Fenna" />
+  <link rel="canonical" href="https://ralialahlou.github.io/im-fenna-app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ralialahlou.github.io/im-fenna-app/" />
+  <meta property="og:title" content="I'm Fenna — Beauté de Luxe au Maroc" />
+  <meta property="og:description" content="Soins naturels d'exception inspirés des trésors du Maroc. Découvrez I'm Fenna, la maison de beauté qui sublime chaque femme." />
+  <meta property="og:image" content="https://ralialahlou.github.io/im-fenna-app/images/face/hero-banner.png" />
+  <meta property="og:image:alt" content="I'm Fenna — Beauté de Luxe au Maroc" />
+  <meta property="og:locale" content="fr_MA" />
+  <meta property="og:site_name" content="I'm Fenna" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="I'm Fenna — Beauté de Luxe au Maroc" />
+  <meta name="twitter:description" content="Soins naturels d'exception inspirés des trésors du Maroc. Découvrez I'm Fenna, la maison de beauté qui sublime chaque femme." />
+  <meta name="twitter:image" content="https://ralialahlou.github.io/im-fenna-app/images/face/hero-banner.png" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://ralialahlou.github.io/im-fenna-app/#organization",
+        "name": "I'm Fenna",
+        "url": "https://ralialahlou.github.io/im-fenna-app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ralialahlou.github.io/im-fenna-app/images/logo.png",
+          "width": 200,
+          "height": 60
+        },
+        "description": "Maison de beauté marocaine proposant des soins naturels de luxe inspirés des trésors botaniques du Maroc.",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "Maroc"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ralialahlou.github.io/im-fenna-app/#website",
+        "url": "https://ralialahlou.github.io/im-fenna-app/",
+        "name": "I'm Fenna",
+        "description": "Beauté de luxe naturelle au Maroc",
+        "publisher": {
+          "@id": "https://ralialahlou.github.io/im-fenna-app/#organization"
+        },
+        "inLanguage": "fr"
+      },
+      {
+        "@type": "Store",
+        "name": "I'm Fenna",
+        "url": "https://ralialahlou.github.io/im-fenna-app/",
+        "description": "Boutique en ligne de soins naturels de luxe inspirés du Maroc",
+        "currenciesAccepted": "MAD",
+        "paymentAccepted": "Carte bancaire",
+        "areaServed": ["MA", "FR", "BE", "CH"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Collection I'm Fenna",
+          "itemListElement": [
+            {"@type": "OfferCatalog", "name": "Soin Visage"},
+            {"@type": "OfferCatalog", "name": "Corps & Bain"},
+            {"@type": "OfferCatalog", "name": "Parfum & Senteur"},
+            {"@type": "OfferCatalog", "name": "Soin Cheveux"}
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Abhaya Libre = brand serif display | Jost = closest free match to Brother 1816 -->
@@ -733,6 +814,18 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .fg.closed .fg-body { display: none; }
 @media(max-width:900px) { .fg-body { padding: 4px 20px 10px; } }
 
+.fg-chips { display:flex; flex-wrap:wrap; gap:6px; padding:4px 0 10px; }
+.fg.closed .fg-chips { display:none; }
+@media(max-width:900px) { .fg-chips { padding:4px 20px 10px; } }
+.fg-chip {
+  font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:1.2px;
+  text-transform:uppercase; padding:6px 14px; border-radius:20px;
+  border:1px solid var(--border-2); cursor:pointer; transition:all .18s;
+  color:var(--muted); background:transparent;
+}
+.fg-chip:hover { border-color:var(--cinnamon); color:var(--cinnamon); }
+.fg-chip.on { background:var(--maroon); border-color:var(--maroon); color:var(--ivory); }
+
 .fo {
   display: flex; align-items: center; gap: 10px;
   padding: 7px 4px; cursor: pointer; transition: background .12s;
@@ -849,6 +942,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .pdp-bar-inner {
   max-width: var(--wrap); margin: 0 auto; padding: 12px var(--px);
   display: flex; align-items: center; justify-content: space-between;
+  position: relative;
 }
 .pdp-back {
   display: flex; align-items: center; gap: 8px;
@@ -876,7 +970,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .pdp-main-img-wrap {
   position: relative; overflow: hidden;
   background: var(--ivory-2);
-  aspect-ratio: 1;
+  aspect-ratio: 3/4;
 }
 .pdp-main-img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
 .pdp-main-img-wrap:hover .pdp-main-img { transform: scale(1.04); }
@@ -1008,6 +1102,141 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 /* Full INCI */
 .pdp-inci { font-family: var(--sans); font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.8; }
 
+/* Brand heart — overrides default wish icons */
+.card-wish svg path, .pdp-wish-btn svg path { d: path("M12 20.5C12 20.5 3 13.5 3 8C3 5.24 5.24 3 8 3C9.5 3 10.8 3.75 12 5C13.2 3.75 14.5 3 16 3C18.76 3 21 5.24 21 8C21 13.5 12 20.5 12 20.5Z"); }
+
+/* PDP cinematic quote strip */
+.pdp-quote {
+  background:var(--text); color:var(--ivory);
+  padding:clamp(48px,7vw,96px) var(--px);
+  text-align:center; position:relative; overflow:hidden;
+}
+.pdp-quote::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"); pointer-events:none; }
+.pdp-quote-mark { font-family:var(--serif); font-size:clamp(52px,8vw,100px); font-weight:700; color:var(--gold); line-height:.6; margin-bottom:12px; opacity:.4; }
+.pdp-quote-text { font-family:var(--serif); font-size:clamp(20px,3vw,36px); font-weight:400; font-style:italic; line-height:1.35; max-width:760px; margin:0 auto 20px; color:var(--ivory); }
+.pdp-quote-attr { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+
+/* PDP savoir-faire stats */
+.pdp-savoir {
+  background:var(--ivory-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:clamp(36px,5vw,64px) var(--px);
+}
+.pdp-savoir-inner { max-width:var(--wrap); margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+@media(max-width:600px){ .pdp-savoir-inner { grid-template-columns:1fr; gap:24px; } }
+.pdp-stat { text-align:center; }
+.pdp-stat-num { font-family:var(--serif); font-size:clamp(36px,5vw,56px); font-weight:700; color:var(--maroon); line-height:1; margin-bottom:8px; }
+.pdp-stat-label { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); }
+
+/* PDP dispatch / shipping section */
+.pdp-dispatch { border-top:1px solid var(--border); }
+.pdp-dispatch-inner { max-width:var(--wrap); margin:0 auto; padding:0 var(--px); }
+.pdp-disp-item { border-bottom:1px solid var(--border); }
+.pdp-disp-hd {
+  display:flex; align-items:center; gap:14px; padding:20px 0; cursor:pointer; user-select:none;
+}
+.pdp-disp-hd svg { width:18px; height:18px; stroke:var(--gold); fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
+.pdp-disp-hd-text { flex:1; font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text); }
+.pdp-disp-chev { width:8px; height:8px; border-right:1.5px solid var(--muted); border-bottom:1.5px solid var(--muted); transform:rotate(45deg); transition:transform .2s; flex-shrink:0; }
+.pdp-disp-item.open .pdp-disp-chev { transform:rotate(-135deg); }
+.pdp-disp-body { display:none; padding:0 0 20px 32px; font-family:var(--sans); font-size:13px; line-height:1.8; color:var(--muted); }
+.pdp-disp-item.open .pdp-disp-body { display:block; }
+
+/* For You badge */
+.badge-foryou {
+  background:var(--gold); color:var(--ivory);
+  font-family:var(--sans); font-size:7.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:3px 8px; display:inline-block;
+}
+
+/* ─── CART GIFTS SECTION ─── */
+.cp-gifts {
+  padding:16px 24px; border-top:1px solid var(--border);
+  background:var(--ivory-2);
+}
+.cp-gifts-hd {
+  display:flex; align-items:baseline; justify-content:space-between; margin-bottom:4px;
+}
+.cp-gifts-title {
+  font-family:var(--serif); font-size:13px; font-weight:700; color:var(--text);
+}
+.cp-gifts-sub {
+  font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--gold);
+}
+.cp-gifts-hint { font-family:var(--sans); font-size:11px; color:var(--muted); margin-bottom:12px; }
+.gift-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
+.gift-item {
+  position:relative; cursor:pointer; border:1.5px solid var(--border);
+  background:var(--white); transition:border-color .18s;
+  display:flex; flex-direction:column;
+}
+.gift-item.on { border-color:var(--maroon); }
+.gift-item.disabled { opacity:.38; pointer-events:none; }
+.gift-img-wrap { aspect-ratio:1; overflow:hidden; background:var(--ivory-2); }
+.gift-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.gift-name { font-family:var(--sans); font-size:9px; font-weight:600; line-height:1.3; padding:6px 7px 7px; color:var(--text); }
+.gift-check {
+  position:absolute; top:5px; right:5px; width:16px; height:16px;
+  background:var(--maroon); border-radius:50%;
+  display:none; align-items:center; justify-content:center;
+}
+.gift-item.on .gift-check { display:flex; }
+.gift-check svg { width:9px; height:9px; stroke:#fff; fill:none; stroke-width:2.5; }
+
+/* Gift wrap toggle */
+.cp-wrap-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:11px 0; border-top:1px solid var(--border);
+}
+.cp-wrap-label { font-family:var(--sans); font-size:12px; font-weight:500; color:var(--text); }
+.cp-wrap-label span { display:block; font-size:10px; color:var(--muted); font-weight:400; }
+.cp-wrap-toggle {
+  position:relative; width:40px; height:22px; cursor:pointer;
+}
+.cp-wrap-toggle input { opacity:0; width:0; height:0; }
+.cp-wrap-slider {
+  position:absolute; inset:0; background:var(--border-2); border-radius:22px; transition:background .2s;
+}
+.cp-wrap-slider::before {
+  content:''; position:absolute; width:16px; height:16px; border-radius:50%;
+  background:#fff; top:3px; left:3px; transition:transform .2s;
+}
+.cp-wrap-toggle input:checked+.cp-wrap-slider { background:var(--maroon); }
+.cp-wrap-toggle input:checked+.cp-wrap-slider::before { transform:translateX(18px); }
+
+/* ─── BEAUTY CONSEILLER ─── */
+.bc-intro { font-family:var(--sans); font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:28px; max-width:500px; }
+.bc-section { margin-bottom:28px; }
+.bc-q { font-family:var(--serif); font-size:17px; font-weight:700; margin-bottom:14px; }
+.bc-chips { display:flex; flex-wrap:wrap; gap:8px; }
+.bc-chip {
+  font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+  padding:8px 16px; border:1px solid var(--border-2); cursor:pointer; transition:all .18s; color:var(--muted); background:transparent;
+}
+.bc-chip.on { background:var(--maroon); border-color:var(--maroon); color:var(--ivory); }
+.bc-chip.radio.on { background:var(--text); border-color:var(--text); color:var(--ivory); }
+.bc-save-btn {
+  padding:13px 36px; background:var(--maroon); color:var(--ivory);
+  border:none; font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  cursor:pointer; transition:background .2s; margin-top:8px;
+}
+.bc-save-btn:hover { background:var(--cinnamon); }
+.bc-recs { margin-top:32px; padding-top:32px; border-top:1px solid var(--border); }
+.bc-recs-title { font-family:var(--serif); font-size:20px; font-weight:700; margin-bottom:20px; }
+.bc-recs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; }
+
+/* PDP Editorial section */
+.pdp-editorial { margin: 0; }
+.pdp-editorial .editorial { min-height: clamp(320px,38vw,560px); }
+.pdp-editorial .editorial + .editorial { margin-top: 2px; }
+.pdp-ed-cta {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--gold);
+  padding-bottom:3px; cursor:pointer; text-decoration:none; transition:opacity .2s;
+}
+.pdp-ed-cta:hover { opacity:.7; }
+.dark .pdp-ed-cta { color:var(--gold); }
+
 /* Related products */
 .pdp-related { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px) 80px; }
 .pdp-rel-title { font-family: var(--serif); font-size: clamp(22px,3vw,32px); font-weight: 700; margin-bottom: 24px; }
@@ -1132,11 +1361,11 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 }
 .c-mask.on { opacity:1; pointer-events:all; }
 .cart-panel {
-  position:fixed; top:0; left:0; bottom:0;
+  position:fixed; top:0; right:0; bottom:0;
   width:min(440px,100vw); z-index:601;
   background:var(--ivory); display:flex; flex-direction:column;
-  transform:translateX(-100%); transition:transform .4s var(--ease);
-  box-shadow:16px 0 48px rgba(12,6,6,.1);
+  transform:translateX(100%); transition:transform .4s var(--ease);
+  box-shadow:-16px 0 48px rgba(12,6,6,.1);
 }
 .cart-panel.on { transform:translateX(0); }
 .ci-qty { display:flex; align-items:center; gap:8px; }
@@ -1232,6 +1461,8 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .checkout-page.open { display:block; }
 .co-body { max-width:1060px; margin:0 auto; padding:40px var(--px) 100px; display:grid; grid-template-columns:1fr 360px; gap:clamp(32px,5vw,72px); }
 @media(max-width:860px) { .co-body { grid-template-columns:1fr; } }
+.co-body.co-thanks-mode { display:flex; justify-content:center; max-width:none; padding-top:60px; }
+.co-body.co-thanks-mode > div { max-width:560px; width:100%; }
 .co-steps { display:flex; align-items:center; margin-bottom:36px; }
 .co-step { display:flex; align-items:center; gap:8px; font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
 .co-step.on { color:var(--maroon); }
@@ -1292,9 +1523,8 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .profile-page {
   display:none; position:fixed; inset:0; z-index:440;
   background:var(--ivory); overflow-y:auto;
-  animation:cpIn .3s var(--ease) both;
 }
-.profile-page.open { display:block; }
+.profile-page.open { display:block; animation:cpIn .3s var(--ease) both; }
 .profile-hero { background:linear-gradient(135deg,var(--maroon) 0%,var(--cinnamon) 100%); padding:clamp(32px,5vw,60px) var(--px) clamp(28px,4vw,52px); }
 .profile-hero-inner { max-width:var(--wrap); margin:0 auto; display:flex; align-items:center; gap:24px; }
 .profile-avatar { width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
@@ -1303,7 +1533,8 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .profile-email { font-family:var(--sans); font-size:12px; color:rgba(244,240,238,.7); letter-spacing:.5px; }
 .profile-content { max-width:var(--wrap); margin:0 auto; padding:clamp(32px,4vw,56px) var(--px) 100px; }
 .profile-sec-title { font-family:var(--serif); font-size:20px; font-weight:700; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
-.order-card { border:1px solid var(--border); margin-bottom:16px; }
+.order-card { border:1px solid var(--border); margin-bottom:16px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.order-card:hover { border-color:var(--cinnamon); box-shadow:0 2px 12px rgba(0,0,0,.07); }
 .order-card-hd { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:var(--ivory-2); flex-wrap:wrap; gap:10px; }
 .order-card-meta { display:flex; gap:24px; flex-wrap:wrap; }
 .order-meta-item { }
@@ -1311,12 +1542,186 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .order-meta-val { font-family:var(--sans); font-size:13px; font-weight:600; color:var(--text); }
 .order-tracking { font-family:var(--sans); font-size:12px; font-weight:700; color:var(--maroon); letter-spacing:1.5px; }
 .order-status { display:inline-block; padding:4px 12px; font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; background:rgba(74,124,89,.12); color:#4A7C59; }
-.order-products { padding:16px 20px; display:flex; gap:12px; flex-wrap:wrap; }
+.order-products { padding:16px 20px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
 .order-prod-img { width:56px; height:64px; object-fit:cover; background:var(--ivory-2); }
+.order-card-cta { font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--cinnamon); margin-left:auto; padding-right:4px; }
+/* Order detail overlay */
+.order-detail-overlay { display:none; position:absolute; inset:0; background:var(--white); z-index:10; overflow-y:auto; }
+.order-detail-overlay.open { display:block; animation:cpIn .25s var(--ease) both; }
+.order-detail-back { display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; padding:24px var(--px) 0; transition:color .2s; background:none; border:none; }
+.order-detail-back:hover { color:var(--text); }
+.order-detail-back svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; }
+.order-detail-body { max-width:760px; margin:0 auto; padding:32px var(--px) 80px; }
+.order-detail-id { font-family:var(--serif); font-size:26px; font-weight:700; margin-bottom:6px; }
+.order-detail-date { font-family:var(--sans); font-size:12px; color:var(--muted); margin-bottom:32px; }
+.order-detail-section { margin-bottom:32px; }
+.order-detail-sec-title { font-family:var(--sans); font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+.order-detail-timeline { display:flex; flex-direction:column; gap:0; }
+.order-timeline-step { display:flex; gap:16px; align-items:flex-start; }
+.order-timeline-dot-col { display:flex; flex-direction:column; align-items:center; width:20px; flex-shrink:0; }
+.order-timeline-dot { width:12px; height:12px; border-radius:50%; background:var(--maroon); flex-shrink:0; margin-top:3px; }
+.order-timeline-dot.pending { background:var(--border-2); }
+.order-timeline-line { width:2px; flex:1; min-height:24px; background:var(--border); margin:2px 0; }
+.order-timeline-info { padding-bottom:24px; }
+.order-timeline-label { font-family:var(--sans); font-size:13px; font-weight:600; color:var(--text); }
+.order-timeline-sub { font-family:var(--sans); font-size:11px; color:var(--muted); margin-top:2px; }
+.order-detail-items { display:flex; flex-direction:column; gap:16px; }
+.order-detail-item { display:flex; gap:16px; align-items:flex-start; }
+.order-detail-item-img { width:72px; height:84px; object-fit:cover; background:var(--ivory-2); flex-shrink:0; }
+.order-detail-item-info { flex:1; }
+.order-detail-item-name { font-family:var(--serif); font-size:16px; font-weight:700; margin-bottom:4px; }
+.order-detail-item-meta { font-family:var(--sans); font-size:11px; color:var(--muted); margin-bottom:6px; }
+.order-detail-item-price { font-family:var(--sans); font-size:14px; font-weight:600; color:var(--text); }
+.order-detail-ship-box { background:var(--ivory-2); padding:16px 20px; font-family:var(--sans); font-size:13px; line-height:1.8; color:var(--text-2); }
+.order-detail-totals { background:var(--ivory-2); padding:16px 20px; }
+.order-detail-total-row { display:flex; justify-content:space-between; font-family:var(--sans); font-size:13px; padding:4px 0; }
+.order-detail-total-row.final { font-family:var(--serif); font-size:17px; font-weight:700; border-top:1px solid var(--border); margin-top:8px; padding-top:12px; }
 .profile-empty { text-align:center; padding:60px 20px; }
 .profile-empty-icon { font-family:var(--serif); font-size:48px; opacity:.3; margin-bottom:16px; }
 .profile-logout { margin-top:40px; padding:12px 28px; background:transparent; border:1px solid var(--border-2); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; }
 .profile-logout:hover { border-color:var(--maroon); color:var(--maroon); }
+
+/* Member badge */
+.pi-member-badge { display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,var(--maroon) 0%,#A01E1E 50%,#761415 100%); color:var(--ivory); padding:12px 20px; border-radius:3px; margin-bottom:28px; }
+.pi-member-badge svg { width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:1.5; flex-shrink:0; }
+.pi-member-badge-text { font-family:var(--serif); font-size:13px; font-weight:700; letter-spacing:.3px; }
+.pi-member-since { font-family:var(--sans); font-size:10px; letter-spacing:1px; opacity:.75; margin-left:4px; }
+.pi-member-since::before { content:'· '; }
+
+/* Modify / save / cancel buttons */
+.pi-edit-btn { padding:10px 24px; background:transparent; border:1px solid var(--cinnamon); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--cinnamon); cursor:pointer; transition:all .2s; }
+.pi-edit-btn:hover { background:var(--cinnamon); color:var(--ivory); }
+.pi-save-btn { padding:10px 24px; background:var(--maroon); border:1px solid var(--maroon); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--ivory); cursor:pointer; transition:all .2s; }
+.pi-save-btn:hover { background:#9a1718; }
+.pi-cancel-btn { padding:10px 24px; background:transparent; border:1px solid var(--border-2); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; }
+.pi-cancel-btn:hover { border-color:var(--text); color:var(--text); }
+.pi-edit-form { margin-top:8px; }
+.pi-btn-row { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+
+/* Nav initials bubble */
+.nav-initials {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--maroon); color:var(--ivory);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--sans); font-size:9px; font-weight:700; letter-spacing:.5px;
+  flex-shrink:0;
+}
+.nav-btn--user { background:rgba(118,20,21,.08) !important; }
+
+/* Profile avatar initials */
+.profile-avatar-initials {
+  font-family:var(--sans); font-size:22px; font-weight:700;
+  color:var(--ivory); letter-spacing:1px;
+}
+.prof-loyalty-hero-badge {
+  display:inline-flex; align-items:center; gap:6px; margin-top:8px;
+  font-family:var(--sans); font-size:9px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; padding:4px 12px; border-radius:20px;
+  background:rgba(255,255,255,.18); color:var(--ivory);
+}
+.prof-loyalty-hero-badge .lbdot { width:6px; height:6px; border-radius:50%; }
+
+/* Profile tabs bar */
+.prof-tabs-bar {
+  background:var(--ivory); border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:5;
+}
+.prof-tabs {
+  max-width:var(--wrap); margin:0 auto; padding:0 var(--px);
+  display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+}
+.prof-tabs::-webkit-scrollbar { display:none; }
+.prof-tab {
+  font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; padding:16px 20px; cursor:pointer; white-space:nowrap;
+  border-bottom:2px solid transparent; color:var(--muted); transition:all .2s;
+}
+.prof-tab.on { color:var(--maroon); border-bottom-color:var(--maroon); }
+.prof-panel { display:none; }
+.prof-panel.on { display:block; }
+
+/* Mon Info */
+.prof-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px 40px; margin-bottom:40px; }
+@media(max-width:540px){ .prof-info-grid { grid-template-columns:1fr; } }
+.prof-info-label { font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+.prof-info-val { font-family:var(--sans); font-size:15px; color:var(--text); padding-bottom:10px; border-bottom:1px solid var(--border); }
+
+/* Loyalty card */
+.loyalty-wrap { margin-bottom:40px; }
+.loyalty-card {
+  padding:clamp(24px,4vw,40px); position:relative; overflow:hidden;
+  margin-bottom:24px;
+}
+.loyalty-card::before { content:''; position:absolute; inset:0; opacity:.06; background-image:radial-gradient(circle at 70% 50%, #fff 0%, transparent 60%); pointer-events:none; }
+.loyalty-tier-eye { font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; opacity:.7; }
+.loyalty-tier-name { font-family:var(--serif); font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1; margin-bottom:4px; }
+.loyalty-powered { font-family:var(--sans); font-size:10px; opacity:.6; margin-top:6px; }
+.loyalty-progress-wrap { margin-top:24px; }
+.loyalty-prog-labels { display:flex; justify-content:space-between; font-family:var(--sans); font-size:10px; margin-bottom:6px; }
+.loyalty-prog-bar { height:4px; background:rgba(255,255,255,.2); border-radius:2px; overflow:hidden; }
+.loyalty-prog-fill { height:100%; border-radius:2px; background:#fff; transition:width .8s var(--ease); }
+.loyalty-spend-info { font-family:var(--sans); font-size:11px; margin-top:6px; opacity:.7; }
+.loyalty-perks { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:16px; }
+.loyalty-perk {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:14px 16px; background:var(--ivory-2); border:1px solid var(--border);
+}
+.loyalty-perk-icon { width:20px; height:20px; flex-shrink:0; stroke:var(--gold); fill:none; stroke-width:1.5; stroke-linecap:round; }
+.loyalty-perk-text { font-family:var(--sans); font-size:12px; line-height:1.5; color:var(--text-2); }
+
+/* Wishlist */
+.wishlist-empty { text-align:center; padding:60px 20px; }
+.wishlist-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+.wish-card { border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; }
+.wish-img { aspect-ratio:3/4; overflow:hidden; background:var(--ivory-2); position:relative; cursor:pointer; }
+.wish-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.wish-card:hover .wish-img img { transform:scale(1.04); }
+.wish-remove { position:absolute; top:8px; right:8px; width:28px; height:28px; border-radius:50%; background:rgba(244,240,238,.9); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.wish-remove svg { width:12px; height:12px; stroke:var(--maroon); fill:none; stroke-width:2; }
+.wish-body { padding:14px; flex:1; display:flex; flex-direction:column; }
+.wish-range { font-family:var(--sans); font-size:8.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+.wish-name { font-family:var(--serif); font-size:14px; font-weight:600; line-height:1.3; margin-bottom:6px; color:var(--text); flex:1; }
+.wish-price { font-family:var(--sans); font-size:13px; font-weight:600; color:var(--maroon); margin-bottom:12px; }
+.wish-add-btn {
+  width:100%; padding:9px; background:var(--maroon); color:var(--ivory);
+  border:none; font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; cursor:pointer; transition:background .2s;
+}
+.wish-add-btn:hover { background:var(--cinnamon); }
+
+/* Addresses */
+.addr-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin-bottom:24px; }
+.addr-card { border:1px solid var(--border); padding:20px; position:relative; }
+.addr-card.favorite { border-color:var(--gold); }
+.addr-fav-badge { font-family:var(--sans); font-size:8px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; display:flex; align-items:center; gap:5px; }
+.addr-fav-badge svg { width:11px; height:11px; fill:var(--gold); stroke:none; }
+.addr-line { font-family:var(--sans); font-size:13px; line-height:1.6; color:var(--text-2); }
+.addr-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.addr-del-btn { padding:6px 14px; background:transparent; border:1px solid var(--border); font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; }
+.addr-del-btn:hover { border-color:var(--maroon); color:var(--maroon); }
+.addr-fav-btn { padding:6px 14px; background:transparent; border:1px solid var(--border); font-family:var(--sans); font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:5px; }
+.addr-fav-btn svg { width:11px; height:11px; fill:none; stroke:currentColor; stroke-width:2; transition:fill .2s; }
+.addr-fav-btn.on { color:var(--gold); border-color:var(--gold); }
+.addr-fav-btn.on svg { fill:var(--gold); stroke:var(--gold); }
+.addr-fav-btn:hover { border-color:var(--gold); color:var(--gold); }
+.addr-add-form { border:1px dashed var(--border-2); padding:24px; }
+.addr-add-title { font-family:var(--serif); font-size:16px; font-weight:700; margin-bottom:16px; }
+.addr-save-btn { padding:10px 28px; background:var(--text); color:var(--ivory); border:none; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+.addr-save-btn:hover { background:var(--maroon); }
+/* Aksal Black points on thank-you */
+.co-aksal-box { margin:28px 0; background:linear-gradient(135deg,#0a0a0a 0%,#1a1210 100%); color:var(--ivory); padding:24px 28px; text-align:center; }
+.co-aksal-eye { font-family:var(--sans); font-size:8px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.co-aksal-pts { font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); margin-bottom:6px; }
+.co-aksal-sub { font-family:var(--sans); font-size:12px; line-height:1.7; color:rgba(255,255,255,.7); }
+
+/* Profile FAQ */
+.prof-faq-item { border-top:1px solid var(--border); }
+.prof-faq-hd { display:flex; align-items:center; justify-content:space-between; padding:18px 0; cursor:pointer; user-select:none; }
+.prof-faq-q { font-family:var(--sans); font-size:13px; font-weight:600; color:var(--text); }
+.prof-faq-chev { width:10px; height:10px; border-right:1.5px solid var(--muted); border-bottom:1.5px solid var(--muted); transform:rotate(45deg); transition:transform .2s; flex-shrink:0; }
+.prof-faq-item.open .prof-faq-chev { transform:rotate(-135deg); }
+.prof-faq-body { display:none; padding-bottom:16px; font-family:var(--sans); font-size:13px; line-height:1.75; color:var(--muted); }
+.prof-faq-item.open .prof-faq-body { display:block; }
 
 /* ── INFO PAGES (About, FAQ, CGU, Privacy) ── */
 .info-page {
@@ -1327,6 +1732,9 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .info-page.open { display:block; }
 .info-topbar { background:var(--glass); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; }
 .info-topbar-inner { max-width:var(--wrap); margin:0 auto; padding:12px var(--px); display:flex; align-items:center; justify-content:space-between; }
+.tbar-logo { height:26px; width:auto; display:block; cursor:pointer; opacity:.88; transition:opacity .2s; flex-shrink:0; }
+.tbar-logo:hover { opacity:1; }
+.tbar-left { display:flex; align-items:center; gap:20px; }
 .info-content { max-width:820px; margin:0 auto; padding:clamp(40px,6vw,80px) var(--px) 100px; }
 .info-eyebrow { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
 .info-eyebrow span { width:24px; height:1px; background:var(--gold); display:inline-block; }
@@ -1343,6 +1751,79 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 .faq-item.open .faq-q svg { transform:rotate(45deg); }
 .faq-a { font-family:var(--sans); font-size:14px; line-height:1.75; color:var(--text-2); max-height:0; overflow:hidden; transition:max-height .35s var(--ease), padding .35s; }
 .faq-item.open .faq-a { max-height:400px; padding-bottom:18px; }
+
+/* ── Notre Histoire editorial ── */
+.ab-hero { position:relative; height:clamp(380px,55vw,680px); overflow:hidden; }
+.ab-hero img { width:100%; height:100%; object-fit:cover; }
+.ab-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,.08) 65%); }
+.ab-hero-content { position:absolute; bottom:clamp(32px,5vw,64px); left:0; right:0; padding:0 var(--px); max-width:var(--wrap); margin:0 auto; }
+.ab-hero-h1 { font-family:var(--serif); font-size:clamp(34px,6vw,76px); font-weight:700; color:var(--ivory); line-height:1.05; }
+.ab-hero-h1 em { font-style:italic; font-weight:400; }
+.ab-intro { padding:clamp(48px,7vw,96px) var(--px); max-width:860px; margin:0 auto; }
+.ab-lead { font-family:var(--serif); font-size:clamp(17px,2vw,22px); line-height:1.72; color:var(--text); }
+.ab-split { display:grid; grid-template-columns:1fr 1fr; }
+@media(max-width:680px){ .ab-split { grid-template-columns:1fr; } }
+.ab-split-img { overflow:hidden; min-height:clamp(280px,45vw,580px); }
+.ab-split-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.ab-split-text { padding:clamp(40px,6vw,80px) clamp(28px,5vw,72px); display:flex; flex-direction:column; justify-content:center; }
+.ab-split-text.dark { background:var(--ivory-2); }
+.ab-split-eye { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.ab-split-h2 { font-family:var(--serif); font-size:clamp(22px,3vw,36px); font-weight:700; line-height:1.15; margin-bottom:18px; }
+.ab-split-h2 em { font-style:italic; font-weight:400; color:var(--cinnamon); }
+.ab-split-body { font-family:var(--sans); font-size:14px; line-height:1.85; color:var(--text-2); }
+.ab-full-img { overflow:hidden; height:clamp(240px,32vw,460px); }
+.ab-full-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.ab-values { background:var(--maroon); padding:clamp(52px,7vw,96px) var(--px); }
+.ab-values-inner { max-width:var(--wrap); margin:0 auto; }
+.ab-values-title { font-family:var(--serif); font-size:clamp(26px,4vw,48px); font-weight:700; color:var(--ivory); margin-bottom:clamp(32px,5vw,60px); line-height:1.1; }
+.ab-values-title em { font-style:italic; font-weight:400; color:var(--rose); }
+.ab-values-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(20px,3vw,48px); }
+@media(max-width:540px){ .ab-values-grid { grid-template-columns:1fr; } }
+.ab-val-item { border-top:1px solid rgba(244,240,238,.18); padding-top:20px; }
+.ab-val-label { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.ab-val-body { font-family:var(--sans); font-size:14px; line-height:1.75; color:rgba(244,240,238,.8); }
+.ab-closing { text-align:center; padding:clamp(64px,9vw,120px) var(--px); }
+.ab-closing-quote { font-family:var(--serif); font-size:clamp(19px,2.8vw,32px); font-style:italic; line-height:1.45; color:var(--text); max-width:620px; margin:0 auto 20px; }
+.ab-closing-attr { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+
+/* ── FAQ editorial ── */
+.faq-hero { background:var(--maroon); padding:clamp(56px,8vw,100px) var(--px); text-align:center; }
+.faq-hero-eye { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--rose); margin-bottom:16px; }
+.faq-hero-h1 { font-family:var(--serif); font-size:clamp(30px,5vw,60px); font-weight:700; color:var(--ivory); line-height:1.1; }
+.faq-hero-h1 em { font-style:italic; font-weight:400; color:var(--gold); }
+.faq-body { max-width:760px; margin:0 auto; padding:clamp(48px,6vw,80px) var(--px) 100px; }
+.faq-cat-title { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:52px 0 0; padding-bottom:14px; border-bottom:2px solid var(--gold); }
+.faq-cat-title:first-child { margin-top:0; }
+
+/* ── Nos Ingrédients editorial ── */
+.ing-hero { position:relative; height:clamp(340px,50vw,640px); overflow:hidden; }
+.ing-hero img { width:100%; height:100%; object-fit:cover; display:block; }
+.ing-hero-overlay { position:absolute; inset:0; background:linear-gradient(to right,rgba(0,0,0,.58) 0%,rgba(0,0,0,.08) 65%); }
+.ing-hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(32px,5vw,64px) var(--px); max-width:700px; }
+.ing-hero-h1 { font-family:var(--serif); font-size:clamp(36px,6vw,76px); font-weight:700; color:var(--ivory); line-height:1.05; }
+.ing-hero-h1 em { font-style:italic; font-weight:400; color:var(--gold); }
+.ing-hero-sub { font-family:var(--sans); font-size:13px; color:rgba(244,240,238,.78); letter-spacing:.5px; margin-top:12px; line-height:1.6; max-width:460px; }
+.ing-section { display:grid; grid-template-columns:1fr 1fr; }
+@media(max-width:700px){ .ing-section { grid-template-columns:1fr; } }
+.ing-section.flip > *:first-child { order:2; }
+.ing-section.flip > *:last-child { order:1; }
+@media(max-width:700px){ .ing-section.flip > * { order:unset; } }
+.ing-img { overflow:hidden; min-height:clamp(300px,44vw,580px); }
+.ing-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.ing-text { padding:clamp(40px,6vw,80px) clamp(28px,5vw,64px); display:flex; flex-direction:column; justify-content:center; }
+.ing-num { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.ing-name { font-family:var(--serif); font-size:clamp(24px,3.5vw,42px); font-weight:700; color:var(--text); line-height:1.1; margin-bottom:4px; }
+.ing-latin { font-family:var(--sans); font-size:12px; color:var(--muted); font-style:italic; margin-bottom:16px; }
+.ing-origin { display:inline-flex; align-items:center; gap:6px; font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--cinnamon); margin-bottom:20px; }
+.ing-origin svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; }
+.ing-desc { font-family:var(--sans); font-size:14px; line-height:1.85; color:var(--text-2); margin-bottom:20px; }
+.ing-benefits { list-style:none; padding:0; margin:0; }
+.ing-benefits li { font-family:var(--sans); font-size:13px; color:var(--text-2); padding:7px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.ing-benefits li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.ing-closing { background:var(--ivory-2); text-align:center; padding:clamp(60px,8vw,100px) var(--px); }
+.ing-closing-title { font-family:var(--serif); font-size:clamp(22px,3.5vw,40px); font-weight:700; margin-bottom:16px; }
+.ing-closing-title em { font-style:italic; font-weight:400; color:var(--cinnamon); }
+.ing-closing-body { font-family:var(--sans); font-size:14px; line-height:1.85; color:var(--text-2); max-width:560px; margin:0 auto; }
 
 /* ── AS SEEN ON SOCIAL ── */
 .social-sec { padding:clamp(60px,8vw,100px) 0; background:var(--white); }
@@ -1638,7 +2119,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </a>
     </div>
   </div>
-  <div class="hrow-outer">
+  <div class="hrow-outer" style="max-width:var(--wrap);margin:0 auto;padding:0 var(--px) 8px">
     <div class="hrow g" id="newRow"></div>
   </div>
 </section>
@@ -1777,6 +2258,9 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       <span style="font-family:var(--sans);font-size:12px;color:var(--muted)" id="gridCount">10 products</span>
     </div>
     <div class="prod-grid" id="prodGrid"></div>
+    <div style="text-align:center;margin-top:clamp(32px,5vw,56px)">
+      <button onclick="openCatPage('all','All Products')" style="font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;padding:14px 40px;background:transparent;border:1px solid var(--maroon);color:var(--maroon);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--maroon)';this.style.color='var(--ivory)'" onmouseout="this.style.background='transparent';this.style.color='var(--maroon)'">Voir toute la collection</button>
+    </div>
   </div>
 </section>
 
@@ -1820,15 +2304,25 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   <!-- Sticky breadcrumb bar -->
   <div class="cp-topbar">
     <div class="cp-topbar-inner">
-      <div class="cp-breadcrumb">
-        <button class="cp-bl" onclick="closeCatPage()">Home</button>
-        <span class="cp-bs">›</span>
-        <span class="cp-bc" id="cpBreadLabel">All Products</span>
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc" id="cpBreadLabel">All Products</span>
+        </div>
       </div>
-      <button class="cp-close" onclick="closeCatPage()">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        Back to Home
-      </button>
+      <div style="display:flex;align-items:center;gap:6px">
+        <button class="nav-btn" id="cpProfileBtn" onclick="openProfileOrLogin()" aria-label="Mon compte">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <button class="nav-btn" onclick="openCart()" aria-label="Panier">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+        <button class="cp-close" onclick="closeCatPage()">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Fermer
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1855,6 +2349,15 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         <button style="display:none" class="mob-close-fs" id="mobCloseFsBtn" onclick="closeMobileFilters()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
+      </div>
+
+      <!-- Sub-categories (populated dynamically by openCatPage) -->
+      <div class="fg" id="fg-subcat" style="display:none">
+        <div class="fg-hd" onclick="toggleFg('fg-subcat')">
+          <span class="fg-hd-lbl" id="fgSubcatLabel">Catégorie</span>
+          <span class="fg-chev"></span>
+        </div>
+        <div class="fg-chips" id="fgSubcatChips"></div>
       </div>
 
       <!-- Sort (sidebar) -->
@@ -2080,8 +2583,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         <div class="ft-links">
           <a href="#" onclick="openInfoPage('aboutPage');return false">Notre Histoire</a>
           <a href="#" onclick="openInfoPage('faqPage');return false">Questions Fréquentes</a>
-          <a href="#">Nos Ingrédients</a>
-          <a href="#">Presse</a>
+          <a href="#" onclick="openInfoPage('ingredientsPage');return false">Nos Ingrédients</a>
         </div>
       </div>
     </div>
@@ -2113,9 +2615,9 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <span class="btab__l">Bag</span>
     </div>
-    <div class="btab" onclick="activateTab(4);showToast('Sign in to your account')">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="btab__l">Profile</span>
+    <div class="btab" id="bnavProfileTab" onclick="activateTab(4);openProfileOrLogin()">
+      <svg viewBox="0 0 24 24" id="bnavProfileIcon"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="btab__l" id="bnavProfileLabel">Profile</span>
     </div>
   </div>
 </nav>
@@ -2144,9 +2646,13 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
         <span id="pdpBackLabel">Retour</span>
       </button>
+      <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil" style="position:absolute;left:50%;transform:translateX(-50%)"/>
       <div class="pdp-bar-actions">
         <button class="nav-btn" onclick="openSearch()" aria-label="Rechercher">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="nav-btn" onclick="openProfileOrLogin()" aria-label="Mon compte">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
         <button class="nav-btn" onclick="openCart()" aria-label="Panier">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -2202,7 +2708,7 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           Ajouter au Panier
         </button>
         <button class="pdp-wish-btn" id="pdpWishBtn" onclick="pdpToggleWish()">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 20.5C12 20.5 3 13.5 3 8C3 5.24 5.24 3 8 3C9.5 3 10.8 3.75 12 5C13.2 3.75 14.5 3 16 3C18.76 3 21 5.24 21 8C21 13.5 12 20.5 12 20.5Z"/></svg>
         </button>
       </div>
 
@@ -2230,45 +2736,41 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       <div class="pdp-accordion">
         <div class="acc-item open">
           <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Description</span>
+            <span class="acc-hd-lbl">L'Essentiel</span>
             <span class="acc-icon"></span>
           </div>
           <div class="acc-body"><p id="pdpDesc"></p></div>
         </div>
         <div class="acc-item">
           <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Mode d'Emploi</span>
+            <span class="acc-hd-lbl">Le Rituel</span>
             <span class="acc-icon"></span>
           </div>
           <div class="acc-body"><p id="pdpModeEmploi"></p></div>
         </div>
         <div class="acc-item">
           <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Ingrédients Clés</span>
+            <span class="acc-hd-lbl">Les Actifs</span>
             <span class="acc-icon"></span>
           </div>
           <div class="acc-body"><div class="pdp-ings" id="pdpIngs"></div></div>
         </div>
         <div class="acc-item">
           <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Liste Complète INCI</span>
+            <span class="acc-hd-lbl">La Formule Complète</span>
             <span class="acc-icon"></span>
           </div>
           <div class="acc-body"><p class="pdp-inci" id="pdpFullIngs"></p></div>
         </div>
         <div class="acc-item">
           <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Type de Peau</span>
+            <span class="acc-hd-lbl">Peau & Profil</span>
             <span class="acc-icon"></span>
           </div>
-          <div class="acc-body" style="padding-top:6px"><div class="pdp-tags" id="pdpSkinTypes"></div></div>
-        </div>
-        <div class="acc-item">
-          <div class="acc-hd" onclick="toggleAcc(this)">
-            <span class="acc-hd-lbl">Préoccupations</span>
-            <span class="acc-icon"></span>
+          <div class="acc-body" style="padding-top:6px">
+            <div class="pdp-tags" id="pdpSkinTypes" style="margin-bottom:10px"></div>
+            <div class="pdp-tags" id="pdpConcerns"></div>
           </div>
-          <div class="acc-body" style="padding-top:6px"><div class="pdp-tags" id="pdpConcerns"></div></div>
         </div>
       </div>
     </div>
@@ -2278,9 +2780,63 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   <div class="pdp-related">
     <h2 class="pdp-rel-title">Vous aimerez <em>aussi</em></h2>
     <div class="hrow-outer">
-      <div class="hrow" id="pdpRelated"></div>
+      <div class="hrow g" id="pdpRelated"></div>
     </div>
   </div>
+
+  <!-- Dispatch & Returns -->
+  <div class="pdp-dispatch">
+    <div class="pdp-dispatch-inner">
+      <div class="pdp-disp-item">
+        <div class="pdp-disp-hd" onclick="this.closest('.pdp-disp-item').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          <span class="pdp-disp-hd-text">Expédition</span>
+          <span class="pdp-disp-chev"></span>
+        </div>
+        <div class="pdp-disp-body">
+          <p><strong>Maroc :</strong> Livraison standard sous 24–48h. Gratuite dès 800 DH, sinon 50 DH.</p>
+          <p><strong>International :</strong> France, Belgique, Suisse — 5 à 7 jours ouvrés. À partir de 120 DH.</p>
+          <p>Toutes les commandes sont expédiées dans un emballage sécurisé. Vous recevez un email de suivi dès l'expédition.</p>
+        </div>
+      </div>
+      <div class="pdp-disp-item">
+        <div class="pdp-disp-hd" onclick="this.closest('.pdp-disp-item').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          <span class="pdp-disp-hd-text">Retours & Échanges</span>
+          <span class="pdp-disp-chev"></span>
+        </div>
+        <div class="pdp-disp-body">
+          <p>Vous disposez de <strong>30 jours</strong> à compter de la réception pour retourner tout produit non ouvert dans son emballage d'origine.</p>
+          <p>Les retours sont <strong>gratuits</strong>. Contactez-nous à retours@imfenna.ma pour initier votre retour et recevoir votre étiquette prépayée.</p>
+        </div>
+      </div>
+      <div class="pdp-disp-item">
+        <div class="pdp-disp-hd" onclick="this.closest('.pdp-disp-item').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="pdp-disp-hd-text">Formule & Certification</span>
+          <span class="pdp-disp-chev"></span>
+        </div>
+        <div class="pdp-disp-body">
+          <p>Tous les produits I'm Fenna sont formulés sans parabènes, sans sulfates et sans huiles minérales. Certifiés <strong>cruelty-free</strong>. Testés dermatologiquement sous contrôle médical.</p>
+          <p>Les ingrédients actifs sont tracés et sourcés directement auprès de coopératives féminines marocaines ou de laboratoires certifiés.</p>
+        </div>
+      </div>
+      <div class="pdp-disp-item">
+        <div class="pdp-disp-hd" onclick="this.closest('.pdp-disp-item').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="pdp-disp-hd-text">Origine & Savoir-Faire</span>
+          <span class="pdp-disp-chev"></span>
+        </div>
+        <div class="pdp-disp-body">
+          <p>Fondée au Maroc, I'm Fenna puise ses racines dans les traditions de la beauté marocaine. Nos formules sont développées par des experts cosmétiques en collaboration avec des productrices locales.</p>
+          <p>Chaque produit est le fruit d'un équilibre entre <strong>tradition ancestrale</strong> et <strong>innovation scientifique</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editorial images -->
+  <div id="pdpEditorial" class="pdp-editorial"></div>
 
 </div>
 
@@ -2300,6 +2856,8 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
   <div class="cp-body">
     <div class="cart-items" id="cartItems"></div>
   </div>
+
+
   <div class="cp-ft">
     <div class="cp-rows">
       <div class="cp-row"><span>Sous-total</span><span id="cpSub">0 DH</span></div>
@@ -2366,10 +2924,12 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <div class="checkout-page" id="checkoutPage">
   <div class="info-topbar">
     <div class="info-topbar-inner">
-      <div class="cp-breadcrumb">
-        <button class="cp-bl" onclick="closeCheckout()">Panier</button>
-        <span class="cp-bs">›</span>
-        <span class="cp-bc" id="coTopLabel">Livraison</span>
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc" id="coTopLabel">Livraison</span>
+        </div>
       </div>
       <button class="cp-close" onclick="closeCheckout()">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -2385,9 +2945,11 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       <div class="co-steps" id="coStepIndicator">
         <div class="co-step on" id="csi-1"><div class="co-step-n">1</div><span>Livraison</span></div>
         <div class="co-sep"></div>
-        <div class="co-step" id="csi-2"><div class="co-step-n">2</div><span>Paiement</span></div>
+        <div class="co-step" id="csi-2"><div class="co-step-n">2</div><span>Cadeaux</span></div>
         <div class="co-sep"></div>
-        <div class="co-step" id="csi-3"><div class="co-step-n">3</div><span>Récapitulatif</span></div>
+        <div class="co-step" id="csi-3"><div class="co-step-n">3</div><span>Paiement</span></div>
+        <div class="co-sep"></div>
+        <div class="co-step" id="csi-4"><div class="co-step-n">4</div><span>Récapitulatif</span></div>
       </div>
 
       <!-- Step 1: Shipping -->
@@ -2418,12 +2980,36 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           </select>
         </div>
         <div class="co-actions">
-          <button class="co-btn-next" onclick="coGoStep(2)">Continuer vers le paiement →</button>
+          <button class="co-btn-next" onclick="coGoStep(2)">Choisir mes cadeaux →</button>
         </div>
       </div>
 
-      <!-- Step 2: Payment -->
+      <!-- Step 2: Gifts -->
       <div class="co-panel" id="co-panel-2">
+        <div class="co-h2">Vos cadeaux offerts</div>
+        <p style="font-family:var(--sans);font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">Choisissez jusqu'à 2 miniatures en cadeau avec votre commande.</p>
+        <div class="cp-gifts-hd" style="margin-bottom:12px">
+          <div class="cp-gifts-sub" id="cpGiftsSub" style="font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--muted)">0/2 sélectionnés</div>
+        </div>
+        <div class="gift-grid" id="cpGiftGrid"></div>
+        <div class="cp-wrap-row" style="margin-top:24px">
+          <div class="cp-wrap-label">
+            Emballage cadeau
+            <span>Ruban, papier de soie & carte personnalisée</span>
+          </div>
+          <label class="cp-wrap-toggle">
+            <input type="checkbox" id="cpWrapCheck" onchange="wantGiftWrap=this.checked"/>
+            <span class="cp-wrap-slider"></span>
+          </label>
+        </div>
+        <div class="co-actions">
+          <button class="co-btn-back" onclick="coGoStep(1)">← Retour</button>
+          <button class="co-btn-next" onclick="coGoStep(3)">Continuer vers le paiement →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="co-panel" id="co-panel-3">
         <div class="co-h2">Informations de Paiement</div>
         <div class="co-field">
           <label class="co-label" for="co-card">Numéro de carte</label>
@@ -2442,31 +3028,35 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
           <span style="font-family:var(--sans);font-size:11px;color:var(--muted)">Paiement sécurisé — vos données ne sont pas stockées</span>
         </div>
         <div class="co-actions">
-          <button class="co-btn-back" onclick="coGoStep(1)">← Retour</button>
-          <button class="co-btn-next" onclick="coGoStep(3)">Vérifier la commande →</button>
+          <button class="co-btn-back" onclick="coGoStep(2)">← Retour</button>
+          <button class="co-btn-next" onclick="coGoStep(4)">Vérifier la commande →</button>
         </div>
       </div>
 
-      <!-- Step 3: Review -->
-      <div class="co-panel" id="co-panel-3">
+      <!-- Step 4: Review -->
+      <div class="co-panel" id="co-panel-4">
         <div class="co-h2">Récapitulatif de commande</div>
         <div class="co-review-block">
           <div class="co-review-hd">Livraison <span class="co-review-edit" onclick="coGoStep(1)">Modifier</span></div>
           <div class="co-review-val" id="co-rev-ship"></div>
         </div>
         <div class="co-review-block">
-          <div class="co-review-hd">Paiement <span class="co-review-edit" onclick="coGoStep(2)">Modifier</span></div>
+          <div class="co-review-hd">Cadeaux <span class="co-review-edit" onclick="coGoStep(2)">Modifier</span></div>
+          <div class="co-review-val" id="co-rev-gifts"></div>
+        </div>
+        <div class="co-review-block">
+          <div class="co-review-hd">Paiement <span class="co-review-edit" onclick="coGoStep(3)">Modifier</span></div>
           <div class="co-review-val" id="co-rev-pay"></div>
         </div>
         <div id="co-rev-items"></div>
         <div class="co-actions">
-          <button class="co-btn-back" onclick="coGoStep(2)">← Retour</button>
+          <button class="co-btn-back" onclick="coGoStep(3)">← Retour</button>
           <button class="co-btn-next" onclick="placeOrder()">Confirmer et payer →</button>
         </div>
       </div>
 
-      <!-- Step 4: Thank you -->
-      <div class="co-panel" id="co-panel-4">
+      <!-- Step 5: Thank you -->
+      <div class="co-panel" id="co-panel-5">
         <div class="co-thanks">
           <div class="co-thanks-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="co-thanks-h">Merci pour votre commande !</div>
@@ -2495,10 +3085,12 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <div class="profile-page" id="profilePage">
   <div class="info-topbar">
     <div class="info-topbar-inner">
-      <div class="cp-breadcrumb">
-        <button class="cp-bl" onclick="closeProfile()">Accueil</button>
-        <span class="cp-bs">›</span>
-        <span class="cp-bc">Mon Compte</span>
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc">Mon Compte</span>
+        </div>
       </div>
       <button class="cp-close" onclick="closeProfile()">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -2506,19 +3098,181 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </button>
     </div>
   </div>
+
+  <!-- Hero -->
   <div class="profile-hero">
     <div class="profile-hero-inner">
-      <div class="profile-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="profile-avatar" id="profileAvatar">
+        <span class="profile-avatar-initials" id="profileAvatarInitials"></span>
+      </div>
       <div>
         <div class="profile-name" id="profileName">—</div>
         <div class="profile-email" id="profileEmail">—</div>
+        <div class="prof-loyalty-hero-badge" id="profileLoyaltyBadge" style="display:none">
+          <span class="lbdot" id="profileLoyaltyDot"></span>
+          <span id="profileLoyaltyTierName"></span> — Aksal Black
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Tab nav -->
+  <div class="prof-tabs-bar">
+    <div class="prof-tabs">
+      <div class="prof-tab on" id="ptab-info"    onclick="openProfTab('info')">Mon Compte</div>
+      <div class="prof-tab"    id="ptab-loyalty"  onclick="openProfTab('loyalty')">Fidélité</div>
+      <div class="prof-tab"    id="ptab-orders"   onclick="openProfTab('orders')">Commandes</div>
+      <div class="prof-tab"    id="ptab-wishlist" onclick="openProfTab('wishlist')">Wishlist</div>
+      <div class="prof-tab"    id="ptab-addresses"onclick="openProfTab('addresses')">Adresses</div>
+      <div class="prof-tab"    id="ptab-conseiller" onclick="openProfTab('conseiller')">Mon Profil Beauté</div>
+      <div class="prof-tab"    id="ptab-faq"      onclick="openProfTab('faq')">FAQ</div>
+    </div>
+  </div>
+
+  <!-- Panels -->
   <div class="profile-content">
-    <div class="profile-sec-title">Mes Commandes</div>
-    <div id="profileOrders"></div>
-    <button class="profile-logout" onclick="doLogout()">Se déconnecter</button>
+
+    <!-- Mon Compte -->
+    <div class="prof-panel on" id="pp-info">
+      <div class="profile-sec-title">Mes Informations</div>
+
+      <!-- Member badge -->
+      <div class="pi-member-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span class="pi-member-badge-text">I am Fenna Member</span>
+        <span class="pi-member-since" id="piJoinDate"></span>
+      </div>
+
+      <!-- View mode -->
+      <div id="piViewMode">
+        <div class="prof-info-grid">
+          <div><div class="prof-info-label">Prénom</div><div class="prof-info-val" id="piPrenom">—</div></div>
+          <div><div class="prof-info-label">Nom</div><div class="prof-info-val" id="piNom">—</div></div>
+          <div><div class="prof-info-label">Email</div><div class="prof-info-val" id="piEmail">—</div></div>
+          <div><div class="prof-info-label">Anniversaire</div><div class="prof-info-val" id="piBirthday">—</div></div>
+        </div>
+        <div class="pi-btn-row">
+          <button class="pi-edit-btn" onclick="openEditInfo()">Modifier</button>
+        </div>
+      </div>
+
+      <!-- Edit mode -->
+      <div class="pi-edit-form" id="piEditForm" style="display:none">
+        <div class="prof-info-grid">
+          <div class="co-field"><label class="prof-info-label" for="piEPrenom">Prénom</label><input class="co-input" id="piEPrenom" type="text" autocomplete="given-name"/></div>
+          <div class="co-field"><label class="prof-info-label" for="piENom">Nom</label><input class="co-input" id="piENom" type="text" autocomplete="family-name"/></div>
+          <div class="co-field"><label class="prof-info-label" for="piEEmail">Email</label><input class="co-input" id="piEEmail" type="email" autocomplete="email"/></div>
+          <div class="co-field"><label class="prof-info-label" for="piEBirthday">Anniversaire</label><input class="co-input" id="piEBirthday" type="date"/></div>
+        </div>
+        <div class="pi-btn-row">
+          <button class="pi-save-btn" onclick="saveEditInfo()">Enregistrer</button>
+          <button class="pi-cancel-btn" onclick="closeEditInfo()">Annuler</button>
+        </div>
+      </div>
+
+      <button class="profile-logout" onclick="doLogout()">Se déconnecter</button>
+    </div>
+
+    <!-- Fidélité -->
+    <div class="prof-panel" id="pp-loyalty">
+      <div class="profile-sec-title">Programme Fidélité — <em style="font-family:var(--serif);font-style:italic;font-weight:400">Aksal Black</em></div>
+      <div id="profileLoyalty"></div>
+    </div>
+
+    <!-- Commandes -->
+    <div class="prof-panel" id="pp-orders">
+      <div class="profile-sec-title">Mes Commandes</div>
+      <div id="profileOrders"></div>
+    </div>
+
+    <!-- Wishlist -->
+    <div class="prof-panel" id="pp-wishlist">
+      <div class="profile-sec-title">Ma Wishlist</div>
+      <div id="profileWishlist"></div>
+    </div>
+
+    <!-- Adresses -->
+    <div class="prof-panel" id="pp-addresses">
+      <div class="profile-sec-title">Mes Adresses</div>
+      <div id="profileAddresses"></div>
+      <div class="addr-add-form" id="addrAddForm" style="display:none">
+        <div class="addr-add-title">Nouvelle adresse</div>
+        <div class="co-row2" style="margin-bottom:12px">
+          <div class="co-field"><label class="co-label" for="aAddr">Adresse</label><input class="co-input" id="aAddr" placeholder="Rue, numéro…"/></div>
+          <div class="co-field"><label class="co-label" for="aVille">Ville</label><input class="co-input" id="aVille" placeholder="Casablanca"/></div>
+        </div>
+        <div class="co-row2" style="margin-bottom:16px">
+          <div class="co-field"><label class="co-label" for="aCp">Code postal</label><input class="co-input" id="aCp" placeholder="20000"/></div>
+          <div class="co-field"><label class="co-label" for="aPays">Pays</label>
+            <select class="co-input co-select" id="aPays">
+              <option>Maroc</option><option>France</option><option>Belgique</option><option>Suisse</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px">
+          <button class="addr-save-btn" onclick="saveAddress()">Sauvegarder</button>
+          <button class="addr-del-btn" onclick="document.getElementById('addrAddForm').style.display='none'">Annuler</button>
+        </div>
+      </div>
+      <button class="addr-save-btn" style="margin-top:20px;display:block" onclick="document.getElementById('addrAddForm').style.display=document.getElementById('addrAddForm').style.display==='none'?'block':'none'">+ Ajouter une adresse</button>
+    </div>
+
+    <!-- Beauty Conseiller -->
+    <div class="prof-panel" id="pp-conseiller">
+      <div class="profile-sec-title">Mon Profil Beauté</div>
+      <p class="bc-intro">Répondez à quelques questions pour que nous puissions vous recommander les produits qui correspondent le mieux à votre peau. Vos recommandations seront marquées <strong>"Pour Vous"</strong> sur la boutique.</p>
+      <div class="bc-section">
+        <div class="bc-q">Quel est votre type de peau ?</div>
+        <div class="bc-chips" id="bcSkinType">
+          <div class="bc-chip radio" data-val="dry" onclick="bcSelectSkin(this)">Sèche</div>
+          <div class="bc-chip radio" data-val="oily" onclick="bcSelectSkin(this)">Grasse</div>
+          <div class="bc-chip radio" data-val="combination" onclick="bcSelectSkin(this)">Mixte</div>
+          <div class="bc-chip radio" data-val="sensitive" onclick="bcSelectSkin(this)">Sensible</div>
+          <div class="bc-chip radio" data-val="normal" onclick="bcSelectSkin(this)">Normale</div>
+        </div>
+      </div>
+      <div class="bc-section">
+        <div class="bc-q">Quelles sont vos préoccupations ? <span style="font-family:var(--sans);font-size:12px;font-weight:400;color:var(--muted)">(plusieurs choix)</span></div>
+        <div class="bc-chips" id="bcConcerns">
+          <div class="bc-chip" data-val="brightening" onclick="bcToggleConcern(this)">Éclat</div>
+          <div class="bc-chip" data-val="anti-ageing" onclick="bcToggleConcern(this)">Anti-âge</div>
+          <div class="bc-chip" data-val="hydration" onclick="bcToggleConcern(this)">Hydratation</div>
+          <div class="bc-chip" data-val="pores" onclick="bcToggleConcern(this)">Pores</div>
+          <div class="bc-chip" data-val="acne" onclick="bcToggleConcern(this)">Acné</div>
+          <div class="bc-chip" data-val="glow" onclick="bcToggleConcern(this)">Teint Parfait</div>
+          <div class="bc-chip" data-val="firming" onclick="bcToggleConcern(this)">Fermeté</div>
+        </div>
+      </div>
+      <div class="bc-section">
+        <div class="bc-q">Quelle routine préférez-vous ?</div>
+        <div class="bc-chips" id="bcRoutine">
+          <div class="bc-chip radio" data-val="minimal" onclick="bcSelectRoutine(this)">Minimaliste — 2 à 3 étapes</div>
+          <div class="bc-chip radio" data-val="complete" onclick="bcSelectRoutine(this)">Complète — 5 étapes +</div>
+          <div class="bc-chip radio" data-val="natural" onclick="bcSelectRoutine(this)">Naturelle — ingrédients purs</div>
+        </div>
+      </div>
+      <button class="bc-save-btn" onclick="saveBeautyProfile()">Enregistrer mon profil</button>
+      <div class="bc-recs" id="bcRecs" style="display:none">
+        <div class="bc-recs-title">Vos Recommandations</div>
+        <div class="bc-recs-grid" id="bcRecsGrid"></div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="prof-panel" id="pp-faq">
+      <div class="profile-sec-title">Questions Fréquentes</div>
+      <div id="profileFaq"></div>
+    </div>
+
+  </div>
+
+  <!-- Order detail overlay (sits above profile content) -->
+  <div class="order-detail-overlay" id="orderDetailOverlay">
+    <button class="order-detail-back" onclick="closeOrderDetail()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Retour aux commandes
+    </button>
+    <div class="order-detail-body" id="orderDetailContent"></div>
   </div>
 </div>
 
@@ -2526,10 +3280,12 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <div class="info-page" id="aboutPage">
   <div class="info-topbar">
     <div class="info-topbar-inner">
-      <div class="cp-breadcrumb">
-        <button class="cp-bl" onclick="closeInfoPage('aboutPage')">Accueil</button>
-        <span class="cp-bs">›</span>
-        <span class="cp-bc">Notre Histoire</span>
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc">Notre Histoire</span>
+        </div>
       </div>
       <button class="cp-close" onclick="closeInfoPage('aboutPage')">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -2537,36 +3293,99 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </button>
     </div>
   </div>
-  <div class="info-content">
-    <div class="info-eyebrow"><span></span>Notre Histoire</div>
-    <h1 class="info-h1">Rooted in <em>Confidence,</em><br>Crafted with Care.</h1>
-    <div class="info-body">
-      <p>I'm Fenna est née d'une conviction simple : la beauté authentique mérite des soins exceptionnels. Fondée au Maroc, notre marque puise ses racines dans les traditions millénaires de la beauté marocaine — l'huile d'argan, l'eau de rose de Dadès, l'argile ghassoul de l'Atlas — tout en embrassant les innovations de la K-beauty coréenne.</p>
-      <h3>Notre Vision</h3>
-      <p>Nous croyons que chaque femme porte en elle une beauté singulière, unique et puissante. I'm Fenna est un espace de célébration de cette beauté — pas de transformation, pas de masque, mais une révélation. Nos formules nourrissent, protègent et révèlent la meilleure version de votre peau.</p>
-      <h3>Nos Valeurs</h3>
-      <ul>
-        <li><strong>Authenticité</strong> — Des ingrédients vrais, tracés et certifiés, issus de coopératives féminines marocaines.</li>
-        <li><strong>Innovation</strong> — Fusion de la sagesse traditionnelle et de la science cosmétique contemporaine.</li>
-        <li><strong>Inclusivité</strong> — Des soins pensés pour toutes les peaux, toutes les carnations, toutes les femmes.</li>
-        <li><strong>Éthique</strong> — Jamais testé sur les animaux. Sans parabènes, sans sulfates, sans compromis.</li>
-      </ul>
-      <h3>Nos Ingrédients Héros</h3>
-      <p>Chaque produit I'm Fenna est formulé autour d'ingrédients d'exception : l'huile d'argan pure du Souss, la rose damascena de la Vallée des Dadès, l'argile ghassoul des montagnes du Moyen Atlas, et les actifs fermentés de la K-beauty. Ces ingrédients ne sont pas de simples ajouts — ils sont l'âme de notre marque.</p>
-      <h3>Notre Engagement</h3>
-      <p>I'm Fenna s'engage à proposer une beauté propre, responsable et luxueuse. Tous nos emballages sont conçus pour être recyclables. Nous travaillons directement avec les productrices locales pour garantir un commerce équitable et des pratiques durables.</p>
+
+  <!-- Hero -->
+  <div class="ab-hero">
+    <img src="images/face/hero-banner.png" alt="I'm Fenna — Notre Histoire" loading="eager"/>
+    <div class="ab-hero-overlay"></div>
+    <div class="ab-hero-content">
+      <div style="font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:14px">Notre Histoire</div>
+      <h1 class="ab-hero-h1">Née au Maroc,<br><em>pour toutes les femmes.</em></h1>
     </div>
   </div>
+
+  <!-- Introduction -->
+  <div class="ab-intro">
+    <p class="ab-lead">I'm Fenna est née d'une conviction simple : la beauté authentique mérite des soins exceptionnels. Fondée au Maroc, notre marque puise ses racines dans les traditions millénaires de la beauté marocaine — tout en embrassant les innovations de la K-beauty coréenne.</p>
+  </div>
+
+  <!-- Split: Vision (image left, text right) -->
+  <div class="ab-split">
+    <div class="ab-split-img">
+      <img src="images/face/portrait-glow.png" alt="Notre Vision" loading="lazy"/>
+    </div>
+    <div class="ab-split-text">
+      <div class="ab-split-eye">Notre Vision</div>
+      <h2 class="ab-split-h2">La beauté comme<br><em>révélation.</em></h2>
+      <p class="ab-split-body">Nous croyons que chaque femme porte en elle une beauté singulière, unique et puissante. I'm Fenna est un espace de célébration de cette beauté — pas de transformation, pas de masque, mais une révélation. Nos formules nourrissent, protègent et révèlent la meilleure version de votre peau.</p>
+    </div>
+  </div>
+
+  <!-- Values — dark maroon section -->
+  <div class="ab-values">
+    <div class="ab-values-inner">
+      <div class="ab-values-title">Ce qui nous<br><em>définit.</em></div>
+      <div class="ab-values-grid">
+        <div class="ab-val-item">
+          <div class="ab-val-label">Authenticité</div>
+          <div class="ab-val-body">Des ingrédients vrais, tracés et certifiés, issus de coopératives féminines marocaines.</div>
+        </div>
+        <div class="ab-val-item">
+          <div class="ab-val-label">Innovation</div>
+          <div class="ab-val-body">Fusion de la sagesse traditionnelle et de la science cosmétique contemporaine.</div>
+        </div>
+        <div class="ab-val-item">
+          <div class="ab-val-label">Inclusivité</div>
+          <div class="ab-val-body">Des soins pensés pour toutes les peaux, toutes les carnations, toutes les femmes.</div>
+        </div>
+        <div class="ab-val-item">
+          <div class="ab-val-label">Éthique</div>
+          <div class="ab-val-body">Jamais testé sur les animaux. Sans parabènes, sans sulfates, sans compromis.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-bleed image -->
+  <div class="ab-full-img">
+    <img src="images/face/portrait-updo.png" alt="" loading="lazy"/>
+  </div>
+
+  <!-- Split: Engagement (image right, text left) -->
+  <div class="ab-split">
+    <div class="ab-split-text dark">
+      <div class="ab-split-eye">Notre Engagement</div>
+      <h2 class="ab-split-h2">Beauté propre,<br><em>avenir durable.</em></h2>
+      <p class="ab-split-body">I'm Fenna s'engage à proposer une beauté propre, responsable et luxueuse. Tous nos emballages sont conçus pour être recyclables. Nous travaillons directement avec les productrices locales pour garantir un commerce équitable et des pratiques durables.</p>
+    </div>
+    <div class="ab-split-img">
+      <img src="images/face/portrait-touch.png" alt="Notre Engagement" loading="lazy"/>
+    </div>
+  </div>
+
+  <!-- Full-bleed image -->
+  <div class="ab-full-img">
+    <img src="images/face/if-elegance.png" alt="" loading="lazy"/>
+  </div>
+
+  <!-- Closing -->
+  <div class="ab-closing">
+    <p class="ab-closing-quote">« La vraie beauté ne se cache pas — elle se révèle, se nourrit, et se célèbre. »</p>
+    <div class="ab-closing-attr">— Philosophie I'm Fenna</div>
+  </div>
+
 </div>
 
 <!-- FAQ PAGE -->
 <div class="info-page" id="faqPage">
   <div class="info-topbar">
     <div class="info-topbar-inner">
-      <div class="cp-breadcrumb">
-        <button class="cp-bl" onclick="closeInfoPage('faqPage')">Accueil</button>
-        <span class="cp-bs">›</span>
-        <span class="cp-bc">FAQ</span>
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc">FAQ</span>
+        </div>
       </div>
       <button class="cp-close" onclick="closeInfoPage('faqPage')">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -2574,40 +3393,193 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
       </button>
     </div>
   </div>
-  <div class="info-content">
-    <div class="info-eyebrow"><span></span>Questions Fréquentes</div>
-    <h1 class="info-h1">Tout ce que vous<br><em>voulez savoir.</em></h1>
-    <div class="info-body">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Quels sont les délais de livraison ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">La livraison standard est effectuée sous 3 à 5 jours ouvrés. La livraison express (24h) est disponible pour les commandes passées avant 14h. La livraison est offerte dès 800 DH d'achat.</div>
+
+  <!-- Hero -->
+  <div class="faq-hero">
+    <div class="faq-hero-eye">Questions Fréquentes</div>
+    <h1 class="faq-hero-h1">Tout ce que vous<br><em>voulez savoir.</em></h1>
+  </div>
+
+  <div class="faq-body">
+
+    <div class="faq-cat-title">Livraison & Commandes</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Quels sont les délais de livraison ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">La livraison standard est effectuée sous 3 à 5 jours ouvrés. La livraison express (24h) est disponible pour les commandes passées avant 14h. La livraison est offerte dès 800 DH d'achat.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Comment suivre ma commande ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Un email de confirmation avec un numéro de suivi vous sera envoyé dès l'expédition de votre commande. Vous pouvez suivre votre colis directement via le lien fourni dans l'email.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Livrez-vous à l'international ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Oui, nous livrons en France, Belgique, Suisse et Canada. Les délais sont de 5 à 7 jours ouvrés pour l'international, à partir de 120 DH de frais de port.</div>
+    </div>
+
+    <div class="faq-cat-title">Retours & Service Client</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Puis-je retourner un produit ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Oui, les retours sont acceptés dans les 30 jours suivant la réception, pour tout produit non ouvert et dans son emballage d'origine. Pour initier un retour, contactez notre service client à retours@imfenna.ma.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Comment contacter le service client ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Notre équipe est disponible par email à contact@imfenna.ma du lundi au vendredi, de 9h à 18h. Nous répondons dans les 24 à 48h ouvrées.</div>
+    </div>
+
+    <div class="faq-cat-title">Nos Produits</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils adaptés aux peaux sensibles ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">La majorité de nos formules sont conçues pour toutes les peaux, y compris les peaux sensibles. Chaque fiche produit indique les types de peau recommandés. En cas de doute, effectuez toujours un test sur une petite zone.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils cruelty-free et vegan ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Tous nos produits sont certifiés cruelty-free et ne sont jamais testés sur les animaux. Notre gamme principale est 100% vegan. Quelques produits de maquillage contiennent des dérivés d'abeille — vérifiez la liste INCI pour plus de détails.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Quelle est la durée de conservation des produits ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">La durée de conservation est indiquée sur chaque produit (symbole PAO — période après ouverture). En général, nos sérums se conservent 12 mois après ouverture, nos crèmes 6 à 12 mois, et nos produits de maquillage 12 à 24 mois.</div>
+    </div>
+
+    <div class="faq-cat-title">Programme de Fidélité</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Proposez-vous un programme de fidélité ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Oui — le programme Aksal Black récompense chaque achat avec des points convertibles en remises, accès aux ventes privées et cadeaux exclusifs. Créez votre compte pour commencer à cumuler.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Comment fonctionne le programme Aksal Black ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a">Chaque dirham dépensé vous rapporte des points. Quatre niveaux : Silver, Gold, Diamond et Platinum. Plus votre niveau est élevé, plus vos avantages sont exclusifs — livraison prioritaire, accès anticipé aux nouveautés, cadeaux anniversaire et consultations beauté personnalisées.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NOS INGRÉDIENTS PAGE -->
+<div class="info-page" id="ingredientsPage">
+  <div class="info-topbar">
+    <div class="info-topbar-inner">
+      <div class="tbar-left">
+        <img src="images/logo.png" alt="I'm Fenna" class="tbar-logo" onclick="goHome()" title="Retour à l'accueil"/>
+        <div class="cp-breadcrumb">
+          <span class="cp-bs" style="opacity:.4">›</span>
+          <span class="cp-bc">Nos Ingrédients</span>
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Puis-je retourner un produit ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Oui, les retours sont acceptés dans les 30 jours suivant la réception, pour tout produit non ouvert et dans son emballage d'origine. Pour initier un retour, contactez notre service client à contact@imfenna.ma.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils adaptés aux peaux sensibles ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">La majorité de nos formules sont conçues pour toutes les peaux, y compris les peaux sensibles. Chaque fiche produit indique les types de peau recommandés. En cas de doute, effectuez toujours un test sur une petite zone.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Vos produits sont-ils cruelty-free et vegan ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Tous nos produits sont certifiés cruelty-free et ne sont jamais testés sur les animaux. Notre gamme principale est 100% vegan. Quelques produits de maquillage contiennent des dérivés d'abeille — vérifiez la liste INCI pour plus de détails.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Comment suivre ma commande ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Un email de confirmation avec un numéro de suivi vous sera envoyé dès l'expédition de votre commande. Vous pouvez suivre votre colis directement via le lien fourni dans l'email.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Proposez-vous un programme de fidélité ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Notre programme Fenna Loyauté est en cours de lancement. Inscrivez-vous à notre newsletter pour être informée en avant-première et bénéficier d'avantages exclusifs dès l'ouverture.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Quelle est la durée de conservation des produits ?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">La durée de conservation est indiquée sur chaque produit (symbole PAO — période après ouverture). En général, nos sérums se conservent 12 mois après ouverture, nos crèmes 6 à 12 mois, et nos produits de maquillage 12 à 24 mois.</div>
-      </div>
+      <button class="cp-close" onclick="closeInfoPage('ingredientsPage')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fermer
+      </button>
     </div>
   </div>
+
+  <!-- Hero -->
+  <div class="ing-hero">
+    <img src="images/face/portrait-skin.png" alt="Nos Ingrédients" loading="eager"/>
+    <div class="ing-hero-overlay"></div>
+    <div class="ing-hero-content">
+      <div style="font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Nos Ingrédients Héros</div>
+      <h1 class="ing-hero-h1">La nature,<br><em>à l'état pur.</em></h1>
+      <p class="ing-hero-sub">Des ingrédients d'exception, sourcés directement auprès de coopératives féminines marocaines et de laboratoires certifiés.</p>
+    </div>
+  </div>
+
+  <!-- Ingrédient 01 — Huile d'Argan -->
+  <div class="ing-section">
+    <div class="ing-img">
+      <img src="images/face/portrait-glow.png" alt="Huile d'Argan" loading="lazy"/>
+    </div>
+    <div class="ing-text">
+      <div class="ing-num">Ingrédient 01</div>
+      <div class="ing-name">Huile d'Argan</div>
+      <div class="ing-latin">Argania spinosa kernel oil</div>
+      <div class="ing-origin">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Souss-Massa, Maroc
+      </div>
+      <p class="ing-desc">Surnommée « or liquide du Maroc », l'huile d'argan est extraite à la main par des coopératives féminines du Souss. Riche en acides gras essentiels et en vitamine E, elle nourrit, répare et protège la peau en profondeur.</p>
+      <ul class="ing-benefits">
+        <li>Nourrit et répare la barrière cutanée</li>
+        <li>Antioxydant puissant — neutralise les radicaux libres</li>
+        <li>Texture sèche — absorbe sans laisser de film gras</li>
+        <li>Certifié bio, extraction à froid</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ingrédient 02 — Rose de Dadès -->
+  <div class="ing-section flip" style="background:var(--ivory-2)">
+    <div class="ing-img">
+      <img src="images/face/if-dream.png" alt="Rose de Dadès" loading="lazy"/>
+    </div>
+    <div class="ing-text">
+      <div class="ing-num">Ingrédient 02</div>
+      <div class="ing-name">Rose de Dadès</div>
+      <div class="ing-latin">Rosa damascena flower water</div>
+      <div class="ing-origin">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Vallée des Dadès, Maroc
+      </div>
+      <p class="ing-desc">Récoltée à l'aube dans la Vallée des Roses, la rose damascena est distillée à la vapeur pour en extraire une eau florale aux propriétés apaisantes, hydratantes et anti-inflammatoires incomparables.</p>
+      <ul class="ing-benefits">
+        <li>Apaise les rougeurs et irritations</li>
+        <li>Hydratation intense et durable</li>
+        <li>Resserre les pores naturellement</li>
+        <li>Parfum naturel délicat, sans synthétique</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ingrédient 03 — Ghassoul -->
+  <div class="ing-section">
+    <div class="ing-img">
+      <img src="images/face/portrait-chignon.png" alt="Ghassoul" loading="lazy"/>
+    </div>
+    <div class="ing-text">
+      <div class="ing-num">Ingrédient 03</div>
+      <div class="ing-name">Argile Ghassoul</div>
+      <div class="ing-latin">Rhassoul clay</div>
+      <div class="ing-origin">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Moyen Atlas, Maroc
+      </div>
+      <p class="ing-desc">Extraite des gisements exclusifs du Moyen Atlas, l'argile ghassoul est utilisée depuis des siècles dans les hammams marocains. Sa composition unique en silice et magnésium lui confère un pouvoir absorbant et purifiant exceptionnel.</p>
+      <ul class="ing-benefits">
+        <li>Purifie et détoxifie sans agresser</li>
+        <li>Réduit les pores et régule le sébum</li>
+        <li>Douceur incomparable — respecte le microbiome</li>
+        <li>Idéale pour tous types de peau</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ingrédient 04 — Actifs K-Beauty -->
+  <div class="ing-section flip" style="background:var(--ivory-2)">
+    <div class="ing-img">
+      <img src="images/face/if-elegance.png" alt="Actifs K-Beauty" loading="lazy"/>
+    </div>
+    <div class="ing-text">
+      <div class="ing-num">Ingrédient 04</div>
+      <div class="ing-name">Actifs Fermentés</div>
+      <div class="ing-latin">Galactomyces & Bifida ferment lysate</div>
+      <div class="ing-origin">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Laboratoires certifiés K-Beauty
+      </div>
+      <p class="ing-desc">Au cœur de la K-beauty, la fermentation biotechnologique permet de démultiplier l'efficacité des actifs naturels. Galactomyces et Bifida ferment lysate nourrissent le microbiome cutané, unissent le teint et réduisent visiblement les pores.</p>
+      <ul class="ing-benefits">
+        <li>Teint unifié et lumineux dès 2 semaines</li>
+        <li>Renforce la barrière cutanée</li>
+        <li>Propriétés probiotiques — équilibre le microbiome</li>
+        <li>Cliniquement testé, 98% de satisfaction</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="ing-closing">
+    <h2 class="ing-closing-title">Des ingrédients vrais,<br><em>des résultats réels.</em></h2>
+    <p class="ing-closing-body">Chaque ingrédient I'm Fenna est sélectionné pour son efficacité prouvée, tracé de sa source à votre peau, et formulé en partenariat avec des expert(e)s cosmétiques. La transparence n'est pas une option — c'est notre engagement.</p>
+  </div>
+
 </div>
 
 <!-- CGU PAGE -->
@@ -2692,10 +3664,24 @@ footer { background: #0F0707; color:rgba(244,240,238,.5); }
 <div class="toast" id="toast"></div>
 
 <script>
+/* ── STATE — declared first so renderGrid and all handlers can access them ── */
+const wished=new Set();
+let cart=[];
+let selectedGifts=new Set();
+let wantGiftWrap=false;
+let beautyProfile={skinType:null,concerns:[],routine:null};
+let currentUser=null;
+let users=[];
+let orders=[];
+let coStep=1;
+let coData={};
+let savedAddresses=[];
+let curP=null, curShade=null, pdpQtyN=1, pdpFromCat=false;
+
 /* ── PRODUCTS — enriched with MAD prices, multi-images, mode d'emploi, INCI ── */
 const P = [
   {
-    id:1, name:'Great Skin Instant Glow Serum', range:'Moroccan Heritage', cat:'skincare',
+    id:1, name:'Great Skin Instant Glow Serum', range:'Moroccan Heritage', cat:'skincare', form:'serum',
     price:680, origPrice:null, r:4.8, rv:247, isNew:false, isBest:true,
     img:'images/products/serum-jar-1.png',
     imgs:[
@@ -2713,7 +3699,7 @@ const P = [
     shades:null
   },
   {
-    id:2, name:'Subline Perfection Foundation', range:'Confident Colour', cat:'makeup',
+    id:2, name:'Subline Perfection Foundation', range:'Confident Colour', cat:'makeup', form:'foundation',
     price:520, origPrice:null, r:4.7, rv:189, isNew:false, isBest:true,
     img:'images/products/foundation-bottle-1.png',
     imgs:[
@@ -2731,7 +3717,7 @@ const P = [
     shades:[{n:'Porcelaine',c:'#F8E8D8'},{n:'Beige Nude',c:'#EDD4B2'},{n:'Sable Doré',c:'#D4A878'},{n:'Miel Chaud',c:'#C48B4A'},{n:'Caramel Profond',c:'#8B5E38'},{n:'Espresso Intense',c:'#5C3420'}]
   },
   {
-    id:3, name:'Moroccan Rose Illuminating Face Oil', range:'Moroccan Heritage', cat:'moroccan',
+    id:3, name:'Moroccan Rose Illuminating Face Oil', range:'Moroccan Heritage', cat:'moroccan', form:'oil',
     price:580, origPrice:720, r:4.9, rv:312, isNew:true, isBest:false,
     img:'images/products/skincare-tubes.png',
     imgs:[
@@ -2749,7 +3735,7 @@ const P = [
     shades:null
   },
   {
-    id:4, name:'Glass Skin Hydra Essence', range:'K-Beauty Precision', cat:'kbeauty',
+    id:4, name:'Glass Skin Hydra Essence', range:'K-Beauty Precision', cat:'kbeauty', form:'essence',
     price:440, origPrice:null, r:4.6, rv:156, isNew:true, isBest:false,
     img:'images/products/skincare-range.png',
     imgs:[
@@ -2767,7 +3753,7 @@ const P = [
     shades:null
   },
   {
-    id:5, name:'If Bold Velvet Lip Colour', range:'Confident Colour', cat:'makeup',
+    id:5, name:'If Bold Velvet Lip Colour', range:'Confident Colour', cat:'makeup', form:'lip',
     price:320, origPrice:null, r:4.5, rv:203, isNew:false, isBest:true,
     img:'images/products/lipstick-compact.png',
     imgs:[
@@ -2785,7 +3771,7 @@ const P = [
     shades:[{n:'If Bold',c:'#761415'},{n:'If Brave',c:'#9B2335'},{n:'If Nude',c:'#C4907A'},{n:'If Soft',c:'#E2AFA0'},{n:'If Dark',c:'#4A1520'}]
   },
   {
-    id:6, name:'Ghassoul Deep Purifying Mask', range:'Moroccan Heritage', cat:'moroccan',
+    id:6, name:'Ghassoul Deep Purifying Mask', range:'Moroccan Heritage', cat:'moroccan', form:'mask',
     price:380, origPrice:null, r:4.7, rv:178, isNew:false, isBest:false,
     img:'images/products/skincare-tubes.png',
     imgs:[
@@ -2803,7 +3789,7 @@ const P = [
     shades:null
   },
   {
-    id:7, name:'Velvet Eye Palette — Dusk Edition', range:'Confident Colour', cat:'makeup',
+    id:7, name:'Velvet Eye Palette — Dusk Edition', range:'Confident Colour', cat:'makeup', form:'palette',
     price:620, origPrice:780, r:4.8, rv:134, isNew:true, isBest:false,
     img:'images/products/eyeshadow-pots.png',
     imgs:[
@@ -2821,7 +3807,7 @@ const P = [
     shades:null
   },
   {
-    id:8, name:'Vitamin C Glass Glow Serum', range:'K-Beauty Precision', cat:'kbeauty',
+    id:8, name:'Vitamin C Glass Glow Serum', range:'K-Beauty Precision', cat:'kbeauty', form:'serum',
     price:560, origPrice:null, r:4.6, rv:98, isNew:false, isBest:false,
     img:'images/products/skincare-tubes.png',
     imgs:[
@@ -2839,7 +3825,7 @@ const P = [
     shades:null
   },
   {
-    id:9, name:'Ritual Glow Heritage Gift Set', range:'Moroccan Heritage', cat:'sets',
+    id:9, name:'Ritual Glow Heritage Gift Set', range:'Moroccan Heritage', cat:'sets', form:'set',
     price:1100, origPrice:1400, r:5.0, rv:67, isNew:false, isBest:false,
     img:'images/products/gift-set-box.png',
     imgs:[
@@ -2857,7 +3843,7 @@ const P = [
     shades:null
   },
   {
-    id:10, name:'Silk Veil Setting Powder', range:'Confident Colour', cat:'makeup',
+    id:10, name:'Silk Veil Setting Powder', range:'Confident Colour', cat:'makeup', form:'powder',
     price:360, origPrice:null, r:4.4, rv:88, isNew:false, isBest:false,
     img:'images/products/cushion-compact.png',
     imgs:[
@@ -2925,7 +3911,7 @@ document.querySelectorAll('.mega').forEach(m=>{
 function openMobileMenu(){ showToast('Menu available on desktop'); }
 
 /* ── CATEGORY PAGE ── */
-const cpState={cat:'all',label:'All Products',sort:'best',filters:{}};
+const cpState={cat:'all',label:'All Products',sort:'best',filters:{},subcat:null};
 
 // Category meta
 const CAT_META={
@@ -2952,10 +3938,31 @@ function baseProducts(cat){
   return P;
 }
 
+const SUBCAT_MAP = {
+  makeup:   [{l:'Fond de Teint',v:'foundation'},{l:'Lèvres',v:'lip'},{l:'Yeux',v:'palette'},{l:'Poudre',v:'powder'}],
+  colour:   [{l:'Fond de Teint',v:'foundation'},{l:'Lèvres',v:'lip'},{l:'Yeux',v:'palette'},{l:'Poudre',v:'powder'}],
+  skincare: [{l:'Sérums',v:'serum'},{l:'Huiles',v:'oil'},{l:'Masques',v:'mask'},{l:'Essences',v:'essence'},{l:'Crèmes',v:'cream'}],
+  moroccan: [{l:'Huiles',v:'oil'},{l:'Masques',v:'mask'},{l:'Sérums',v:'serum'},{l:'Coffrets',v:'set'}],
+  kbeauty:  [{l:'Essences',v:'essence'},{l:'Sérums',v:'serum'},{l:'Masques',v:'mask'}],
+  sets:     [{l:'Coffrets Heritage',v:'set'}],
+  new:      [{l:'Sérums',v:'serum'},{l:'Masques',v:'mask'},{l:'Huiles',v:'oil'},{l:'Essences',v:'essence'}],
+};
+
 function openCatPage(cat, label){
   closeMega();
   cpState.cat=cat; cpState.label=label||cat;
-  cpState.filters={};
+  cpState.filters={}; cpState.subcat=null;
+  // Populate sub-cat chips
+  const subcats=SUBCAT_MAP[cat]||[];
+  const fgSubcat=document.getElementById('fg-subcat');
+  if(subcats.length){
+    document.getElementById('fgSubcatLabel').textContent=cat==='sets'?'Type':'Sous-catégorie';
+    document.getElementById('fgSubcatChips').innerHTML=subcats.map(s=>
+      `<button class="fg-chip" data-subval="${s.v}" onclick="cpToggleSubcat('${s.v}',this)">${s.l}</button>`).join('');
+    fgSubcat.style.display='';
+  } else {
+    fgSubcat.style.display='none';
+  }
   document.getElementById('cpBreadLabel').textContent=cpState.label;
   const meta=CAT_META[cat]||{eye:label,title:label};
   document.getElementById('cpCatEye').textContent=meta.eye;
@@ -3013,13 +4020,24 @@ function toggleFg(id){
   document.getElementById(id).classList.toggle('closed');
 }
 
+function cpToggleSubcat(val, el){
+  if(cpState.subcat===val){ cpState.subcat=null; el.classList.remove('on'); }
+  else {
+    cpState.subcat=val;
+    document.querySelectorAll('#fgSubcatChips .fg-chip').forEach(c=>c.classList.remove('on'));
+    el.classList.add('on');
+  }
+  renderCatPage();
+}
+
 function clearAllFilters(){
-  cpState.filters={};
+  cpState.filters={}; cpState.subcat=null;
   cpState.sort='best';
   document.querySelectorAll('.fo[data-filter]').forEach(f=>{
     f.classList.remove('on');
     if(f.dataset.filter==='sort'&&f.dataset.val==='best') f.classList.add('on');
   });
+  document.querySelectorAll('#fgSubcatChips .fg-chip').forEach(c=>c.classList.remove('on'));
   document.getElementById('cpSort').value='best';
   document.getElementById('prMin').value='';
   document.getElementById('prMax').value='';
@@ -3089,6 +4107,12 @@ function renderCatPage(){
       if(F.avail.has('bestseller')&&p.isBest) return true;
       return false;
     });
+  }
+  if(F.form){
+    list=list.filter(p=>[...F.form].some(v=>p.form===v));
+  }
+  if(cpState.subcat){
+    list=list.filter(p=>p.form===cpState.subcat);
   }
 
   // Sort
@@ -3173,9 +4197,10 @@ function cardHTML(p){
         ${p.isNew?'<span class="badge b-new">Nouveau</span>':''}
         ${p.isBest&&!p.isNew?'<span class="badge b-best">Bestseller</span>':''}
         ${disc?`<span class="badge b-sale">−${disc}%</span>`:''}
+        ${isForYou(p)?'<span class="badge-foryou" style="margin-top:4px">Pour Vous</span>':''}
       </div>
-      <button class="card-wish" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Ajouter aux favoris">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <button class="card-wish${wished.has(p.id)?' on':''}" id="w${p.id}" onclick="event.stopPropagation();toggleWish(${p.id})" aria-label="Ajouter aux favoris">
+        <svg viewBox="0 0 24 24"><path d="M12 20.5C12 20.5 3 13.5 3 8C3 5.24 5.24 3 8 3C9.5 3 10.8 3.75 12 5C13.2 3.75 14.5 3 16 3C18.76 3 21 5.24 21 8C21 13.5 12 20.5 12 20.5Z"/></svg>
       </button>
     </div>
     <div class="card-body">
@@ -3210,11 +4235,17 @@ function setF(f,btn){
 }
 
 /* ── WISHLIST ── */
-const wished=new Set();
 function toggleWish(id){
-  const btn=document.getElementById(`w${id}`);
-  if(wished.has(id)){wished.delete(id);btn.classList.remove('on');showToast('Retiré des favoris');}
-  else{wished.add(id);btn.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  if(wished.has(id)){
+    wished.delete(id);
+    document.querySelectorAll(`#w${id}`).forEach(b=>b.classList.remove('on'));
+    showToast('Retiré des favoris');
+  } else {
+    wished.add(id);
+    document.querySelectorAll(`#w${id}`).forEach(b=>b.classList.add('on'));
+    showToast('Ajouté aux favoris ♥');
+  }
+  saveState();
 }
 
 /* ── SEARCH ── */
@@ -3234,7 +4265,6 @@ function liveSearch(q){
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closePDP();closeCart();closeLogin();closeCheckout();closeProfile();}});
 
 /* ── PDP ── */
-let curP=null, curShade=null, pdpQtyN=1, pdpFromCat=false;
 
 function openPDP(id){
   const p=P.find(x=>x.id===id); if(!p) return;
@@ -3296,6 +4326,46 @@ function openPDP(id){
   // Reset first accordion open
   document.querySelectorAll('.acc-item').forEach((a,i)=>{ a.classList.toggle('open',i===0); });
 
+  // Editorial hero
+  const editorialMap = {
+    'Moroccan Heritage': [
+      { img:'images/face/if-elegance.png', eye:'Heritage Ingredient', ifLine:'If beauty had a heritage…', title:'Moroccan Rose,<br><em>Timeless Ritual.</em>', body:'From the Dadès Valley to your skin — centuries of Moroccan botanical wisdom, distilled into every drop. Crafted for those who believe beauty is a ritual, not a routine.', dark:true },
+      { img:'images/face/portrait-glow.png', eye:'Glow Ritual', ifLine:'If radiance were a feeling…', title:'Your Skin,<br><em>but Luminous.</em>', body:'Ghassoul, Argan & Moroccan Rose work in harmony to purify, nourish and illuminate. The ancient beauty secret of the Moroccan hammam, re-imagined for modern skin.', dark:false }
+    ],
+    'K-Beauty Precision': [
+      { img:'images/face/portrait-skin.png', eye:'K-Beauty Science', ifLine:'If skin were glass…', title:'Glass Skin<br><em>is a Science.</em>', body:'Inspired by the 10-step rituals of Seoul, our K-Beauty range harnesses fermentation technology and barrier-first formulation for skin that reflects light from within.', dark:false },
+      { img:'images/face/portrait-touch.png', eye:'Barrier First', ifLine:'If care went deeper…', title:'Hydration,<br><em>Layer by Layer.</em>', body:'Each formula is built around skin-barrier science — locking in moisture, reinforcing resilience and revealing a complexion that is dewy, plump and impossibly smooth.', dark:true }
+    ],
+    'Confident Colour': [
+      { img:'images/face/portrait-lips.png', eye:'Colour Story', ifLine:'If bold were a colour…', title:'Wear Your<br><em>Confidence.</em>', body:'Pigment-rich, long-wear and endlessly wearable — I\'m Fenna colour is designed to express the woman you already are. Shade your story. Own every room you walk into.', dark:true },
+      { img:'images/face/portrait-updo.png', eye:'Clean Colour', ifLine:'If beauty had no limits…', title:'Flawless Finish,<br><em>Clean Formula.</em>', body:'We refuse to compromise. Our Confident Colour range delivers full pigment payoff with clean, skin-loving ingredients — because looking good and feeling good should never be mutually exclusive.', dark:false }
+    ]
+  };
+  const slides = editorialMap[p.range] || [
+    { img:'images/face/if-dream.png', eye:'I\'m Fenna', ifLine:'If you dream it…', title:'Beauty is Art,<br><em>Be the Muse.</em>', body:'I\'m Fenna was born from a single belief: that every woman deserves to feel extraordinary. Clean ingredients, purposeful ritual, unapologetic colour — beauty, as it should be.', dark:true }
+  ];
+  document.getElementById('pdpEditorial').innerHTML = slides.map((s, idx) => `
+    <div class="editorial${idx%2===1?' editorial--flip':''}">
+      <div class="ed-img fade-${idx%2===0?'l':'r'}">
+        <img src="${s.img}" alt="${s.eye}" style="width:100%;object-fit:cover;" loading="lazy"/>
+      </div>
+      <div class="ed-body ${s.dark?'dark':'light'} fade-${idx%2===0?'r':'l'}">
+        <div class="ed-eye">${s.eye}</div>
+        <div class="ed-if"${s.dark?' style="color:rgba(226,196,186,.6)"':''}>${s.ifLine}</div>
+        <h2 class="ed-title">${s.title}</h2>
+        <p class="ed-body-text">${s.body}</p>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('#pdpEditorial .fade-l, #pdpEditorial .fade-r').forEach(el=>io.observe(el));
+
+  // "For You" badge on PDP range label
+  const forYouBadge=document.getElementById('pdpRange');
+  const existingBadge=forYouBadge.querySelector('.badge-foryou');
+  if(existingBadge) existingBadge.remove();
+  if(isForYou(p)){
+    forYouBadge.insertAdjacentHTML('beforeend','<span class="badge-foryou" style="margin-left:10px">Pour Vous</span>');
+  }
+
   // Related products
   const related=P.filter(q=>q.id!==p.id&&(q.range===p.range||q.cat===p.cat)).slice(0,4);
   document.getElementById('pdpRelated').innerHTML=related.map(q=>cardHTML(q)).join('');
@@ -3339,8 +4409,8 @@ function pdpToggleWish(){
   const btn=document.getElementById('pdpWishBtn');
   if(wished.has(curP.id)){ wished.delete(curP.id); btn.classList.remove('on'); showToast('Retiré des favoris'); }
   else { wished.add(curP.id); btn.classList.add('on'); showToast('Ajouté aux favoris ♥'); }
-  const cardBtn=document.getElementById(`w${curP.id}`);
-  if(cardBtn) cardBtn.classList.toggle('on', wished.has(curP.id));
+  document.querySelectorAll(`#w${curP.id}`).forEach(b=>b.classList.toggle('on', wished.has(curP.id)));
+  saveState();
 }
 
 function toggleAcc(hdEl){
@@ -3352,7 +4422,6 @@ function openDrawer(id){ openPDP(id); }
 function closeDrawer(){ closePDP(); }
 
 /* ── CART ── */
-let cart=[];
 function quickAdd(id){const p=P.find(x=>x.id===id);if(p){addToCart(p,null);openCart();}}
 function addToCart(p,shade){
   const key=shade?`${p.id}-${shade.n}`:`${p.id}`;
@@ -3361,6 +4430,100 @@ function addToCart(p,shade){
   updateCart();
 }
 function removeItem(key){cart=cart.filter(i=>i.key!==key);updateCart();}
+/* ─── GIFT / WRAP STATE ─── */
+const GIFTS=[
+  {id:'g1',name:'Sérum Éclat Miniature',img:'images/products/serum-jar-1.png',desc:'5ml · Moroccan Heritage'},
+  {id:'g2',name:'Huile de Rose Miniature',img:'images/products/skincare-tubes.png',desc:'5ml · Moroccan Heritage'},
+  {id:'g3',name:'Essence K-Beauty Mini',img:'images/products/skincare-range.png',desc:'5ml · K-Beauty Precision'},
+  {id:'g4',name:'Rouge à Lèvres Mini',img:'images/products/lipstick-compact.png',desc:'Mini · Confident Colour'},
+  {id:'g5',name:'Masque Ghassoul Dose',img:'images/products/face-flatlay.png',desc:'Dose · Moroccan Heritage'},
+  {id:'g6',name:'Poudre Libre Mini',img:'images/products/cushion-compact.png',desc:'Mini · Confident Colour'},
+];
+function toggleGift(id){
+  if(selectedGifts.has(id)){ selectedGifts.delete(id); }
+  else if(selectedGifts.size<2){ selectedGifts.add(id); }
+  renderGiftGrid();
+}
+function renderGiftGrid(){
+  const grid=document.getElementById('cpGiftGrid');
+  if(!grid) return;
+  grid.innerHTML=GIFTS.map(g=>{
+    const on=selectedGifts.has(g.id);
+    const disabled=!on&&selectedGifts.size>=2;
+    return `<div class="gift-item${on?' on':''}${disabled?' disabled':''}" onclick="toggleGift('${g.id}')">
+      <div class="gift-img-wrap"><img src="${g.img}" alt="${g.name}" loading="lazy"/></div>
+      <div class="gift-name">${g.name}</div>
+      <div class="gift-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    </div>`;
+  }).join('');
+  document.getElementById('cpGiftsSub').textContent=`${selectedGifts.size}/2 sélectionnés`;
+}
+
+/* ─── BEAUTY PROFILE ─── */
+function bcSelectSkin(el){
+  document.querySelectorAll('#bcSkinType .bc-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  beautyProfile.skinType=el.dataset.val;
+}
+function bcToggleConcern(el){
+  el.classList.toggle('on');
+  beautyProfile.concerns=Array.from(document.querySelectorAll('#bcConcerns .bc-chip.on')).map(c=>c.dataset.val);
+}
+function bcSelectRoutine(el){
+  document.querySelectorAll('#bcRoutine .bc-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  beautyProfile.routine=el.dataset.val;
+}
+function saveBeautyProfile(){
+  if(!beautyProfile.skinType){showToast('Veuillez choisir votre type de peau.');return;}
+  const recs=P.filter(p=>{
+    const skinMatch=!beautyProfile.skinType||p.skinType.some(s=>s.toLowerCase().includes(beautyProfile.skinType)||beautyProfile.skinType==='normal'||beautyProfile.skinType==='combination');
+    const concernMatch=beautyProfile.concerns.length===0||p.concerns.some(c=>beautyProfile.concerns.some(bc=>c.toLowerCase().includes(bc)||bc.includes(c.toLowerCase())));
+    return skinMatch&&concernMatch;
+  });
+  const recsEl=document.getElementById('bcRecs');
+  const grid=document.getElementById('bcRecsGrid');
+  if(recs.length){
+    grid.innerHTML=recs.map(p=>`
+      <div class="wish-card" style="cursor:pointer" onclick="closeProfile();openPDP(${p.id})">
+        <div class="wish-img"><img src="${p.img}" alt="${p.name}" loading="lazy"/></div>
+        <div class="wish-body">
+          <div class="wish-range">${p.range}</div>
+          <div class="wish-name">${p.name}</div>
+          <div class="wish-price">${mad(p.price)}</div>
+          <button class="wish-add-btn" onclick="event.stopPropagation();addToCart(p,null);showToast('Ajouté au panier');closeProfile();openCart()">Ajouter au Panier</button>
+        </div>
+      </div>`).join('');
+    // Rebind
+    grid.querySelectorAll('.wish-add-btn').forEach((btn,i)=>{
+      btn.onclick=(e)=>{e.stopPropagation();addToCart(recs[i],null);showToast(recs[i].name+' ajouté');closeProfile();openCart();};
+    });
+    recsEl.style.display='block';
+  } else {
+    recsEl.style.display='none';
+  }
+  showToast('Profil enregistré — vos recommandations sont prêtes !');
+  if(currentUser) currentUser.beautyProfile={...beautyProfile};
+}
+function restoreBeautyProfile(){
+  document.querySelectorAll('#bcSkinType .bc-chip').forEach(c=>{
+    c.classList.toggle('on',c.dataset.val===beautyProfile.skinType);
+  });
+  document.querySelectorAll('#bcConcerns .bc-chip').forEach(c=>{
+    c.classList.toggle('on',beautyProfile.concerns.includes(c.dataset.val));
+  });
+  document.querySelectorAll('#bcRoutine .bc-chip').forEach(c=>{
+    c.classList.toggle('on',c.dataset.val===beautyProfile.routine);
+  });
+  if(beautyProfile.skinType) saveBeautyProfile();
+}
+function isForYou(p){
+  if(!beautyProfile.skinType&&beautyProfile.concerns.length===0) return false;
+  const skinMatch=!beautyProfile.skinType||p.skinType.some(s=>s.toLowerCase().includes(beautyProfile.skinType)||beautyProfile.skinType==='normal');
+  const concernMatch=beautyProfile.concerns.length===0||p.concerns.some(c=>beautyProfile.concerns.some(bc=>c.toLowerCase().includes(bc)));
+  return skinMatch&&concernMatch;
+}
+
 function updateCart(){
   const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
   const cnt=cart.reduce((s,i)=>s+i.qty,0);
@@ -3405,14 +4568,13 @@ function closeCart(){document.getElementById('cartPanel').classList.remove('on')
 function checkout(){if(!cart.length){showToast('Votre panier est vide');return;}cart=[];updateCart();closeCart();showToast('Commande passée — merci !');}
 
 /* ── CHECKOUT FLOW ── */
-let coStep=1;
-let coData={};
 
 function openCheckout(){
   if(!cart.length){showToast('Votre panier est vide');return;}
   closeCart();
   coStep=1;
   coData={};
+  selectedGifts=new Set(); wantGiftWrap=false;
   document.getElementById('checkoutPage').classList.add('open');
   document.body.style.overflow='hidden';
   coRenderStep(1);
@@ -3422,6 +4584,20 @@ function openCheckout(){
     document.getElementById('co-prenom').value=currentUser.prenom||'';
     document.getElementById('co-nom').value=currentUser.nom||'';
     document.getElementById('co-email').value=currentUser.email||'';
+    const favAddr=savedAddresses.find(a=>a.favorite);
+    if(favAddr){
+      document.getElementById('co-addr').value=favAddr.addr||'';
+      document.getElementById('co-ville').value=favAddr.ville||'';
+      document.getElementById('co-cp').value=favAddr.cp||'';
+      const paysEl=document.getElementById('co-pays');
+      if(paysEl&&favAddr.pays){
+        for(let i=0;i<paysEl.options.length;i++){
+          if(paysEl.options[i].text===favAddr.pays||paysEl.options[i].value===favAddr.pays){
+            paysEl.selectedIndex=i; break;
+          }
+        }
+      }
+    }
   }
 }
 function closeCheckout(){
@@ -3432,11 +4608,13 @@ function closeCheckout(){
 function coRenderStep(n){
   coStep=n;
   // Update panels
-  for(let i=1;i<=4;i++){
+  for(let i=1;i<=5;i++){
     document.getElementById('co-panel-'+i).classList.toggle('on',i===n);
   }
-  // Update step indicators
-  for(let i=1;i<=3;i++){
+  // Update step indicators (steps 1-4; hide bar on confirmation)
+  const bar=document.getElementById('coStepIndicator');
+  if(bar) bar.style.display=n===5?'none':'';
+  for(let i=1;i<=4;i++){
     const el=document.getElementById('csi-'+i);
     if(!el) continue;
     el.classList.remove('on','done');
@@ -3444,11 +4622,14 @@ function coRenderStep(n){
     else if(i===n) el.classList.add('on');
   }
   // Update breadcrumb label
-  const labels={1:'Livraison',2:'Paiement',3:'Récapitulatif',4:'Confirmation'};
+  const labels={1:'Livraison',2:'Cadeaux',3:'Paiement',4:'Récapitulatif',5:'Confirmation'};
   document.getElementById('coTopLabel').textContent=labels[n]||'';
-  // Hide summary column on thank you step
-  document.getElementById('coSummaryCol').style.display=n===4?'none':'';
+  // Hide summary column on thank you step and center layout
+  document.getElementById('coSummaryCol').style.display=n===5?'none':'';
+  document.querySelector('.co-body').classList.toggle('co-thanks-mode', n===5);
   document.getElementById('checkoutPage').scrollTop=0;
+  // Render gift grid when entering gift step
+  if(n===2) renderGiftGrid();
 }
 
 function coRenderSummary(){
@@ -3496,7 +4677,8 @@ function coGoStep(n){
         pays:document.getElementById('co-pays').value
       };
     }
-    if(coStep===2){
+    // Step 2 (gifts) — no validation, selection is optional
+    if(coStep===3){
       const card=document.getElementById('co-card').value.replace(/\s/g,'');
       const expiry=document.getElementById('co-expiry').value.trim();
       const cvv=document.getElementById('co-cvv').value.trim();
@@ -3507,7 +4689,7 @@ function coGoStep(n){
       }
       coData.pay={last4:card.slice(-4),holder,expiry};
     }
-    if(n===3) coFillReview();
+    if(n===4) coFillReview();
   }
   coRenderStep(n);
 }
@@ -3516,6 +4698,16 @@ function coFillReview(){
   const s=coData.ship||{};
   document.getElementById('co-rev-ship').innerHTML=
     `${s.prenom} ${s.nom}<br>${s.addr}${s.addr2?' — '+s.addr2:''}<br>${s.cp} ${s.ville}, ${document.getElementById('co-pays').options[document.getElementById('co-pays').selectedIndex].text}<br>${s.tel}`;
+  // Gifts review
+  const giftListRev=[...selectedGifts].map(id=>GIFTS.find(g=>g.id===id)).filter(Boolean);
+  const revGiftsEl=document.getElementById('co-rev-gifts');
+  if(revGiftsEl){
+    if(giftListRev.length||wantGiftWrap){
+      revGiftsEl.innerHTML=(giftListRev.length?giftListRev.map(g=>g.name).join(', '):'Aucun cadeau sélectionné')+(wantGiftWrap?' + Emballage cadeau':'');
+    } else {
+      revGiftsEl.innerHTML='Aucun cadeau sélectionné';
+    }
+  }
   const p=coData.pay||{};
   document.getElementById('co-rev-pay').innerHTML=`Carte se terminant par •••• ${p.last4} — ${p.holder}`;
   const sub=cart.reduce((s,i)=>s+i.p.price*i.qty,0);
@@ -3536,36 +4728,48 @@ function placeOrder(){
   const del=sub>=800?0:50;
   const total=sub+del;
 
+  const giftList=[...selectedGifts].map(id=>GIFTS.find(g=>g.id===id)).filter(Boolean);
   const order={
     id:orderId, tracking:trackId, date:orderDate, total,
     items:[...cart.map(i=>({...i}))],
+    gifts:giftList, giftWrap:wantGiftWrap,
     ship:coData.ship, userEmail:currentUser?currentUser.email:coData.ship?.email
   };
   orders.push(order);
 
   // Thank you step
+  const giftWrapLine=wantGiftWrap?'<div class="co-order-row"><span class="co-order-key">Emballage cadeau</span><span class="co-order-val" style="color:var(--gold)">Inclus</span></div>':'';
+  const giftsLine=giftList.length?`<div class="co-order-row"><span class="co-order-key">Cadeaux offerts</span><span class="co-order-val" style="color:var(--gold)">${giftList.map(g=>g.name).join(', ')}</span></div>`:'';
   document.getElementById('coOrderBox').innerHTML=`
     <div class="co-order-row"><span class="co-order-key">Commande</span><span class="co-order-val">${orderId}</span></div>
     <div class="co-order-row"><span class="co-order-key">Numéro de suivi</span><span class="co-tracking-val">${trackId}</span></div>
     <div class="co-order-row"><span class="co-order-key">Date</span><span class="co-order-val">${orderDate}</span></div>
     <div class="co-order-row"><span class="co-order-key">Total</span><span class="co-order-val">${mad(total)}</span></div>
+    ${giftWrapLine}${giftsLine}
     <div class="co-order-row"><span class="co-order-key">Livraison estimée</span><span class="co-order-val">3 – 5 jours ouvrés</span></div>`;
 
+  const aksalPoints=Math.round(total*0.05);
   document.getElementById('coThankItems').innerHTML=`
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:20px">
       ${cart.map(i=>`<img src="${i.p.img}" alt="${i.p.name}" style="width:64px;height:74px;object-fit:cover;background:var(--ivory-2)">`).join('')}
+      ${giftList.map(g=>`<img src="${g.img}" alt="${g.name}" title="Cadeau: ${g.name}" style="width:64px;height:74px;object-fit:cover;background:var(--ivory-2);border:2px solid var(--gold)">`).join('')}
+    </div>
+    <div class="co-aksal-box">
+      <div class="co-aksal-eye">Aksal Black</div>
+      <div class="co-aksal-pts">+${aksalPoints} points</div>
+      <div class="co-aksal-sub">Vous venez de gagner ${aksalPoints} points sur cette commande.<br>Retrouvez-les dans l'application <strong style="color:var(--gold)">Aksal Black</strong> et regardez votre statut progresser.</div>
     </div>`;
 
-  // Clear cart
-  cart=[];
+  // Clear cart & gifts
+  cart=[]; selectedGifts=new Set(); wantGiftWrap=false;
+  const wrapCheck=document.getElementById('cpWrapCheck');
+  if(wrapCheck) wrapCheck.checked=false;
   updateCart();
-  coRenderStep(4);
+  saveState();
+  coRenderStep(5);
 }
 
 /* ── USER SYSTEM ── */
-let currentUser=null;
-let users=[];
-let orders=[];
 
 function openProfileOrLogin(){
   if(currentUser) openProfile();
@@ -3579,9 +4783,14 @@ function doLogin(){
   const user=users.find(u=>u.email.toLowerCase()===email.toLowerCase()&&u.password===pass);
   if(!user){err.classList.add('on');return;}
   err.classList.remove('on');
+  // Restore user's saved data
+  if(user.savedAddresses) savedAddresses=user.savedAddresses;
+  if(user.wishlist) user.wishlist.forEach(id=>wished.add(id));
   setCurrentUser(user);
   closeLogin();
+  saveState();
   showToast(`Bienvenue, ${user.prenom} !`);
+  setTimeout(openProfile, 80);
 }
 
 function doRegister(){
@@ -3596,34 +4805,71 @@ function doRegister(){
   if(users.find(u=>u.email.toLowerCase()===email.toLowerCase())){
     err.textContent='Un compte avec cet email existe déjà.';err.classList.add('on');return;
   }
-  const user={prenom,nom,email,password:pass};
+  const joinDate=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const user={prenom,nom,email,password:pass,joinDate,birthday:'',savedAddresses:[],wishlist:[]};
   users.push(user);
+  savedAddresses=[];
+  wished.clear();
   setCurrentUser(user);
   closeLogin();
-  goHome();
+  saveState();
   showToast(`Bienvenue, ${prenom} !`);
+  setTimeout(openProfile, 80);
 }
+
+const PROFILE_SVG = `<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
 
 function setCurrentUser(user){
   currentUser=user;
-  // Swap profile icon to show logged-in state (tinted)
-  const btn=document.getElementById('navProfileBtn');
-  if(btn) btn.style.color='var(--maroon)';
+  const initials=(user.prenom[0]+user.nom[0]).toUpperCase();
+  ['navProfileBtn','cpProfileBtn'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b){ b.innerHTML=`<span class="nav-initials">${initials}</span>`; b.classList.add('nav-btn--user'); }
+  });
+  document.querySelectorAll('.pdp-bar-actions .nav-btn[aria-label="Mon compte"]').forEach(b=>{
+    b.innerHTML=`<span class="nav-initials">${initials}</span>`; b.classList.add('nav-btn--user');
+  });
+  // Bottom nav profile tab
+  const bi=document.getElementById('bnavProfileIcon');
+  const bl=document.getElementById('bnavProfileLabel');
+  if(bi) bi.outerHTML=`<span class="nav-initials" id="bnavProfileIcon" style="font-size:13px">${initials}</span>`;
+  if(bl) bl.textContent=user.prenom;
 }
 
 function doLogout(){
   currentUser=null;
-  const btn=document.getElementById('navProfileBtn');
-  if(btn) btn.style.color='';
+  wished.clear();
+  savedAddresses=[];
+  saveState();
+  ['navProfileBtn','cpProfileBtn'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b){ b.innerHTML=PROFILE_SVG; b.classList.remove('nav-btn--user'); }
+  });
+  document.querySelectorAll('.pdp-bar-actions .nav-btn[aria-label="Mon compte"]').forEach(b=>{
+    b.innerHTML=PROFILE_SVG; b.classList.remove('nav-btn--user');
+  });
+  // Reset bottom nav profile tab
+  const tab=document.getElementById('bnavProfileTab');
+  if(tab){ tab.innerHTML=`<svg viewBox="0 0 24 24" id="bnavProfileIcon"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="btab__l" id="bnavProfileLabel">Profile</span>`; }
   closeProfile();
   showToast('Vous avez été déconnecté.');
 }
 
 function openProfile(){
   if(!currentUser){openLogin('login');return;}
+  const initials=(currentUser.prenom[0]+currentUser.nom[0]).toUpperCase();
+  // Hero
+  document.getElementById('profileAvatarInitials').textContent=initials;
   document.getElementById('profileName').textContent=currentUser.prenom+' '+currentUser.nom;
   document.getElementById('profileEmail').textContent=currentUser.email;
-  renderProfileOrders();
+  // Loyalty badge in hero
+  const tier=getLoyaltyTier(currentUser);
+  const badge=document.getElementById('profileLoyaltyBadge');
+  badge.style.display='inline-flex';
+  document.getElementById('profileLoyaltyDot').style.background=tier.color;
+  document.getElementById('profileLoyaltyTierName').textContent=tier.name;
+  // Default tab
+  openProfTab('info');
   document.getElementById('profilePage').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -3632,31 +4878,253 @@ function closeProfile(){
   document.body.style.overflow='';
 }
 
+function openProfTab(tab){
+  ['info','loyalty','orders','wishlist','addresses','conseiller','faq'].forEach(t=>{
+    document.getElementById('pp-'+t).classList.toggle('on',t===tab);
+    document.getElementById('ptab-'+t).classList.toggle('on',t===tab);
+  });
+  if(tab==='orders')      renderProfileOrders();
+  if(tab==='loyalty')     renderProfileLoyalty();
+  if(tab==='wishlist')    renderProfileWishlist();
+  if(tab==='addresses')   renderProfileAddresses();
+  if(tab==='faq')         renderProfileFaq();
+  if(tab==='conseiller')  restoreBeautyProfile();
+  if(tab==='info') renderInfoTab();
+}
+
+function renderInfoTab(){
+  if(!currentUser) return;
+  document.getElementById('piPrenom').textContent=currentUser.prenom;
+  document.getElementById('piNom').textContent=currentUser.nom;
+  document.getElementById('piEmail').textContent=currentUser.email;
+  // Birthday
+  const bd=currentUser.birthday;
+  if(bd){
+    const [y,m,d]=bd.split('-');
+    document.getElementById('piBirthday').textContent=new Date(+y,+m-1,+d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  } else {
+    document.getElementById('piBirthday').textContent='—';
+  }
+  // Join date
+  const jd=document.getElementById('piJoinDate');
+  if(jd) jd.textContent=currentUser.joinDate||'';
+  // Ensure view mode visible
+  document.getElementById('piViewMode').style.display='';
+  document.getElementById('piEditForm').style.display='none';
+}
+function openEditInfo(){
+  if(!currentUser) return;
+  document.getElementById('piEPrenom').value=currentUser.prenom;
+  document.getElementById('piENom').value=currentUser.nom;
+  document.getElementById('piEEmail').value=currentUser.email;
+  document.getElementById('piEBirthday').value=currentUser.birthday||'';
+  document.getElementById('piViewMode').style.display='none';
+  document.getElementById('piEditForm').style.display='';
+}
+function closeEditInfo(){
+  document.getElementById('piViewMode').style.display='';
+  document.getElementById('piEditForm').style.display='none';
+}
+function saveEditInfo(){
+  const prenom=document.getElementById('piEPrenom').value.trim();
+  const nom=document.getElementById('piENom').value.trim();
+  const email=document.getElementById('piEEmail').value.trim();
+  const birthday=document.getElementById('piEBirthday').value;
+  if(!prenom||!nom||!email){showToast('Veuillez remplir tous les champs obligatoires.');return;}
+  currentUser.prenom=prenom;
+  currentUser.nom=nom;
+  currentUser.email=email;
+  currentUser.birthday=birthday;
+  // Refresh hero name + initials
+  const initials=(prenom[0]+nom[0]).toUpperCase();
+  document.getElementById('profileName').textContent=prenom+' '+nom;
+  document.getElementById('profileAvatarInitials').textContent=initials;
+  setCurrentUser(currentUser);
+  renderInfoTab();
+  saveState();
+  showToast('Informations mises à jour.');
+}
+
+/* ─── LOYALTY ─── */
+const LOYALTY_TIERS=[
+  {name:'Silver',  min:0,    max:2000,  next:'Gold',     color:'#A8A8A8', bg:'linear-gradient(135deg,#6B6B6B 0%,#9B9B9B 100%)'},
+  {name:'Gold',    min:2000, max:5000,  next:'Diamond',  color:'#C5A028', bg:'linear-gradient(135deg,#B8871A 0%,#E8C84A 100%)'},
+  {name:'Diamond', min:5000, max:10000, next:'Platinum', color:'#4A9BE8', bg:'linear-gradient(135deg,#2A6BAE 0%,#7AC4F4 100%)'},
+  {name:'Platinum',min:10000,max:null,  next:null,       color:'#C5A87A', bg:'linear-gradient(135deg,#8B6914 0%,#D4A850 50%,#8B6914 100%)'},
+];
+function getLoyaltyTier(user){
+  const spend=orders.filter(o=>o.userEmail===user.email).reduce((s,o)=>s+o.total,0);
+  const tier=LOYALTY_TIERS.slice().reverse().find(t=>spend>=t.min)||LOYALTY_TIERS[0];
+  return {...tier,spend};
+}
+function renderProfileLoyalty(){
+  const t=getLoyaltyTier(currentUser);
+  const progress=t.max?Math.min(100,Math.round((t.spend-t.min)/(t.max-t.min)*100)):100;
+  const perks={
+    Silver: ['5% de réduction sur chaque commande','Livraison offerte dès 600 DH','Accès aux ventes privées'],
+    Gold:   ['10% de réduction permanente','Livraison offerte dès 400 DH','Accès anticipé aux nouvelles collections','Cadeau anniversaire'],
+    Diamond:['15% de réduction permanente','Livraison offerte sans minimum','Accès VIP aux lancements exclusifs','Service beauté personnalisé','Double points sur toutes les commandes'],
+    Platinum:['20% de réduction permanente','Livraison express offerte','Conciergerie beauté dédiée','Invitations événements Aksal Black','Cadeaux exclusifs chaque trimestre'],
+  };
+  document.getElementById('profileLoyalty').innerHTML=`
+    <div class="loyalty-card" style="background:${t.bg};color:#fff">
+      <div class="loyalty-tier-eye">Aksal Black</div>
+      <div class="loyalty-tier-name">${t.name}</div>
+      <div class="loyalty-powered">Powered by Aksal Black Universe</div>
+      ${t.max?`
+      <div class="loyalty-progress-wrap">
+        <div class="loyalty-prog-labels">
+          <span>${mad(t.spend)} dépensés</span>
+          <span>${t.next} à ${mad(t.max)}</span>
+        </div>
+        <div class="loyalty-prog-bar"><div class="loyalty-prog-fill" style="width:${progress}%"></div></div>
+        <div class="loyalty-spend-info">Plus que ${mad(t.max-t.spend)} pour passer ${t.next}</div>
+      </div>`:'<div class="loyalty-spend-info" style="margin-top:16px;opacity:.8">Vous avez atteint le niveau le plus élevé.</div>'}
+    </div>
+    <div class="loyalty-perks">
+      ${(perks[t.name]||[]).map(p=>`
+        <div class="loyalty-perk">
+          <svg class="loyalty-perk-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="loyalty-perk-text">${p}</span>
+        </div>`).join('')}
+    </div>`;
+}
+
+/* ─── ORDERS ─── */
 function renderProfileOrders(){
   const userOrders=orders.filter(o=>o.userEmail===currentUser.email);
   const el=document.getElementById('profileOrders');
   if(!userOrders.length){
     el.innerHTML=`<div class="profile-empty">
-      <div class="profile-empty-icon">🛍</div>
+      <div class="profile-empty-icon" style="font-size:36px;margin-bottom:16px">○</div>
       <div style="font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:8px">Aucune commande pour l'instant</div>
-      <div style="font-family:var(--sans);font-size:13px;color:var(--muted)">Vos commandes apparaîtront ici.</div>
+      <div style="font-family:var(--sans);font-size:13px;color:var(--muted)">Vos commandes apparaîtront ici après votre premier achat.</div>
     </div>`;
     return;
   }
   el.innerHTML=userOrders.slice().reverse().map(o=>`
-    <div class="order-card">
+    <div class="order-card" onclick="openOrderDetail('${o.id}')">
       <div class="order-card-hd">
         <div class="order-card-meta">
           <div class="order-meta-item"><div class="order-meta-label">Commande</div><div class="order-meta-val">${o.id}</div></div>
           <div class="order-meta-item"><div class="order-meta-label">Date</div><div class="order-meta-val">${o.date}</div></div>
           <div class="order-meta-item"><div class="order-meta-label">Total</div><div class="order-meta-val">${mad(o.total)}</div></div>
-          <div class="order-meta-item"><div class="order-meta-label">Suivi</div><div class="order-tracking">${o.tracking}</div></div>
+          <div class="order-meta-item"><div class="order-meta-label">Numéro de suivi</div><div class="order-tracking">${o.tracking}</div></div>
         </div>
         <div class="order-status">Expédiée</div>
       </div>
       <div class="order-products">
         ${o.items.map(i=>`<img class="order-prod-img" src="${i.p.img}" alt="${i.p.name}" title="${i.p.name} × ${i.qty}"/>`).join('')}
+        <span class="order-card-cta">Voir le détail →</span>
       </div>
+    </div>`).join('');
+}
+
+/* ─── WISHLIST ─── */
+function renderProfileWishlist(){
+  const el=document.getElementById('profileWishlist');
+  const items=P.filter(p=>wished.has(p.id));
+  if(!items.length){
+    el.innerHTML=`<div class="wishlist-empty">
+      <div style="font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:8px">Votre wishlist est vide</div>
+      <div style="font-family:var(--sans);font-size:13px;color:var(--muted)">Ajoutez des produits à vos favoris en cliquant sur le cœur.</div>
+    </div>`;
+    return;
+  }
+  el.innerHTML=`<div class="wishlist-grid">${items.map(p=>`
+    <div class="wish-card">
+      <div class="wish-img" onclick="closeProfile();openPDP(${p.id})">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"/>
+        <button class="wish-remove" onclick="event.stopPropagation();removeWish(${p.id})" aria-label="Retirer">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="wish-body">
+        <div class="wish-range">${p.range}</div>
+        <div class="wish-name">${p.name}</div>
+        <div class="wish-price">${mad(p.price)}</div>
+        <button class="wish-add-btn" onclick="addToCart(p,null);showToast('${p.name} ajouté au panier');openCart()">Ajouter au Panier</button>
+      </div>
+    </div>`).join('')}</div>`;
+  // Fix onclick closure — rebind add-to-cart buttons
+  el.querySelectorAll('.wish-add-btn').forEach((btn,i)=>{
+    btn.onclick=()=>{addToCart(items[i],null);showToast(items[i].name+' ajouté au panier');closeProfile();openCart();};
+  });
+}
+function removeWish(id){
+  wished.delete(id);
+  const cardBtn=document.getElementById('w'+id);
+  if(cardBtn) cardBtn.classList.remove('on');
+  if(document.getElementById('pdpWishBtn')&&window.curP&&curP.id===id)
+    document.getElementById('pdpWishBtn').classList.remove('on');
+  renderProfileWishlist();
+  saveState();
+}
+
+/* ─── ADDRESSES ─── */
+function renderProfileAddresses(){
+  const el=document.getElementById('profileAddresses');
+  if(!savedAddresses.length){
+    el.innerHTML=`<div style="font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:20px">Aucune adresse sauvegardée. Ajoutez votre première adresse ci-dessous.</div>`;
+    return;
+  }
+  const starSVG=`<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+  el.innerHTML=`<div class="addr-grid">${savedAddresses.map((a,i)=>`
+    <div class="addr-card${a.favorite?' favorite':''}">
+      ${a.favorite?`<div class="addr-fav-badge">${starSVG} Adresse favorite</div>`:''}
+      <div class="addr-line">${a.addr}</div>
+      <div class="addr-line">${a.cp} ${a.ville}</div>
+      <div class="addr-line">${a.pays}</div>
+      <div class="addr-actions">
+        <button class="addr-fav-btn${a.favorite?' on':''}" onclick="toggleFavoriteAddress(${i})" title="${a.favorite?'Retirer des favoris':'Marquer comme favorite'}">${starSVG} ${a.favorite?'Favorite':'Marquer favorite'}</button>
+        <button class="addr-del-btn" onclick="deleteAddress(${i})">Supprimer</button>
+      </div>
+    </div>`).join('')}</div>`;
+}
+function saveAddress(){
+  const addr=document.getElementById('aAddr').value.trim();
+  const ville=document.getElementById('aVille').value.trim();
+  const cp=document.getElementById('aCp').value.trim();
+  const pays=document.getElementById('aPays').value;
+  if(!addr||!ville){showToast('Merci de remplir l\'adresse et la ville.');return;}
+  savedAddresses.push({addr,ville,cp,pays,favorite:false});
+  document.getElementById('addrAddForm').style.display='none';
+  ['aAddr','aVille','aCp'].forEach(id=>document.getElementById(id).value='');
+  renderProfileAddresses();
+  saveState();
+  showToast('Adresse sauvegardée.');
+}
+function deleteAddress(i){
+  savedAddresses.splice(i,1);
+  renderProfileAddresses();
+  saveState();
+}
+function toggleFavoriteAddress(i){
+  const isFav=savedAddresses[i].favorite;
+  savedAddresses.forEach(a=>a.favorite=false);
+  if(!isFav) savedAddresses[i].favorite=true;
+  renderProfileAddresses();
+  saveState();
+  showToast(savedAddresses[i]&&savedAddresses[i].favorite?'Adresse favorite définie.':'Favoris retiré.');
+}
+
+/* ─── PROFILE FAQ ─── */
+const PROF_FAQ=[
+  {q:'Comment suivre ma commande ?',a:'Une fois votre commande confirmée, vous recevrez un email avec votre numéro de suivi. Vous pouvez aussi retrouver ce numéro dans l\'onglet Commandes de votre profil.'},
+  {q:'Quels sont les délais de livraison ?',a:'Livraison au Maroc sous 24–48h ouvrés. Pour la France, Belgique et Suisse : 5–7 jours ouvrés. Livraison gratuite dès 800 DH au Maroc.'},
+  {q:'Comment fonctionne le programme Aksal Black ?',a:'Aksal Black est le programme de fidélité de l\'univers Aksal. Vos achats I\'m Fenna sont comptabilisés dans votre solde global. Selon votre niveau (Silver, Gold, Diamond, Platinum), vous bénéficiez de réductions, de livraisons offertes et d\'avantages exclusifs.'},
+  {q:'Puis-je retourner un produit ?',a:'Oui, vous disposez de 30 jours à compter de la réception de votre commande pour retourner tout produit non ouvert et dans son emballage d\'origine. Les retours sont gratuits.'},
+  {q:'Comment modifier mes informations personnelles ?',a:'Pour le moment, pour modifier votre email ou mot de passe, veuillez nous contacter à contact@imfenna.ma. La modification en ligne sera disponible prochainement.'},
+  {q:'Vos produits sont-ils testés sur les animaux ?',a:'Jamais. Tous les produits I\'m Fenna sont 100% cruelty-free et certifiés sans tests sur les animaux.'},
+];
+function renderProfileFaq(){
+  document.getElementById('profileFaq').innerHTML=PROF_FAQ.map(f=>`
+    <div class="prof-faq-item">
+      <div class="prof-faq-hd" onclick="this.closest('.prof-faq-item').classList.toggle('open')">
+        <span class="prof-faq-q">${f.q}</span>
+        <span class="prof-faq-chev"></span>
+      </div>
+      <div class="prof-faq-body">${f.a}</div>
     </div>`).join('');
 }
 
@@ -3730,6 +5198,128 @@ function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}
 
 /* ── MOBILE TABS ── */
 function activateTab(n){document.querySelectorAll('.btab').forEach((t,i)=>t.classList.toggle('on',i===n));}
+
+/* ── PROFILE BUTTON INIT — belt-and-suspenders ── */
+document.addEventListener('DOMContentLoaded',function(){
+  ['navProfileBtn','cpProfileBtn'].forEach(function(id){
+    var b=document.getElementById(id);
+    if(b) b.addEventListener('click', openProfileOrLogin);
+  });
+  document.querySelectorAll('.pdp-bar-actions .nav-btn[aria-label="Mon compte"]').forEach(function(b){
+    b.addEventListener('click', openProfileOrLogin);
+  });
+});
+
+/* ── LOCALSTORAGE PERSISTENCE ── */
+function saveState(){
+  try {
+    if(currentUser){
+      // Persist per-user data back onto the user object in the users array
+      const u=users.find(x=>x.email===currentUser.email);
+      if(u){
+        u.savedAddresses=savedAddresses;
+        u.wishlist=[...wished];
+      }
+      currentUser.savedAddresses=savedAddresses;
+      currentUser.wishlist=[...wished];
+    }
+    localStorage.setItem('fennaState',JSON.stringify({
+      users,
+      currentUserEmail:currentUser?currentUser.email:null,
+      orders
+    }));
+  } catch(e){}
+}
+function loadState(){
+  try {
+    const raw=localStorage.getItem('fennaState');
+    if(!raw) return;
+    const state=JSON.parse(raw);
+    if(state.users) users=state.users;
+    if(state.orders) orders=state.orders;
+    if(state.currentUserEmail){
+      const u=users.find(x=>x.email===state.currentUserEmail);
+      if(u){
+        if(u.savedAddresses) savedAddresses=u.savedAddresses;
+        if(u.wishlist) u.wishlist.forEach(id=>wished.add(id));
+        setCurrentUser(u);
+      }
+    }
+  } catch(e){}
+}
+loadState();
+
+/* ── ORDER DETAIL ── */
+function openOrderDetail(orderId){
+  const o=orders.find(x=>x.id===orderId);
+  if(!o) return;
+  const sub=o.items.reduce((s,i)=>s+i.p.price*i.qty,0);
+  const del=o.total-sub;
+  const statuses=[
+    {label:'Commande confirmée',sub:o.date,done:true},
+    {label:'En préparation',sub:'Votre commande est en cours de préparation',done:true},
+    {label:'Expédiée',sub:'Numéro de suivi : '+o.tracking,done:true},
+    {label:'Livraison en cours',sub:'3–5 jours ouvrés',done:false},
+    {label:'Livrée',sub:'',done:false}
+  ];
+  const timelineHTML=statuses.map((s,i)=>`
+    <div class="order-timeline-step">
+      <div class="order-timeline-dot-col">
+        <div class="order-timeline-dot${s.done?'':' pending'}"></div>
+        ${i<statuses.length-1?'<div class="order-timeline-line"></div>':''}
+      </div>
+      <div class="order-timeline-info">
+        <div class="order-timeline-label" style="${s.done?'':'color:var(--muted)'}">${s.label}</div>
+        ${s.sub?`<div class="order-timeline-sub">${s.sub}</div>`:''}
+      </div>
+    </div>`).join('');
+  const itemsHTML=o.items.map(i=>`
+    <div class="order-detail-item">
+      <img class="order-detail-item-img" src="${i.p.img}" alt="${i.p.name}"/>
+      <div class="order-detail-item-info">
+        <div class="order-detail-item-name">${i.p.name}</div>
+        <div class="order-detail-item-meta">${i.shade?i.shade.n+' · ':''} Qté : ${i.qty}</div>
+        <div class="order-detail-item-price">${mad(i.p.price*i.qty)}</div>
+      </div>
+    </div>`).join('');
+  const giftsHTML=(o.gifts&&o.gifts.length)?o.gifts.map(g=>`
+    <div class="order-detail-item">
+      <img class="order-detail-item-img" src="${g.img}" alt="${g.name}" style="border:2px solid var(--gold)"/>
+      <div class="order-detail-item-info">
+        <div class="order-detail-item-name">${g.name}</div>
+        <div class="order-detail-item-meta" style="color:var(--gold)">Cadeau offert${o.giftWrap?' · Emballage cadeau inclus':''}</div>
+      </div>
+    </div>`).join(''):'';
+  const ship=o.ship||{};
+  const shipHTML=`<div class="order-detail-ship-box">${ship.prenom||''} ${ship.nom||''}<br>${ship.addr||''}${ship.addr2?' — '+ship.addr2:''}<br>${ship.cp||''} ${ship.ville||''}<br>${ship.tel||''}</div>`;
+  document.getElementById('orderDetailContent').innerHTML=`
+    <div class="order-detail-id">Commande ${o.id}</div>
+    <div class="order-detail-date">Passée le ${o.date}</div>
+    <div class="order-detail-section">
+      <div class="order-detail-sec-title">Suivi de livraison</div>
+      <div class="order-detail-timeline">${timelineHTML}</div>
+    </div>
+    <div class="order-detail-section">
+      <div class="order-detail-sec-title">Articles commandés</div>
+      <div class="order-detail-items">${itemsHTML}${giftsHTML}</div>
+    </div>
+    <div class="order-detail-section">
+      <div class="order-detail-sec-title">Adresse de livraison</div>
+      ${shipHTML}
+    </div>
+    <div class="order-detail-section">
+      <div class="order-detail-sec-title">Récapitulatif</div>
+      <div class="order-detail-totals">
+        <div class="order-detail-total-row"><span>Sous-total</span><span>${mad(sub)}</span></div>
+        <div class="order-detail-total-row"><span>Livraison</span><span>${del===0?'Offerte':mad(del)}</span></div>
+        <div class="order-detail-total-row final"><span>Total</span><span>${mad(o.total)}</span></div>
+      </div>
+    </div>`;
+  document.getElementById('orderDetailOverlay').classList.add('open');
+}
+function closeOrderDetail(){
+  document.getElementById('orderDetailOverlay').classList.remove('open');
+}
 </script>
 </body>
 </html>
